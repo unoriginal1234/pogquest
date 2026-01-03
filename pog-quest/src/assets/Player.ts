@@ -5,11 +5,21 @@ export default class Player {
   name: string;
   pogs: Pog[];
   inventory: Item[];
+  hitpoints: number;
 
-  constructor(name: string, pogs: Pog[], inventory: Item[]) {
+  constructor(name: string, pogs: Pog[], inventory: Item[], hitpoints: number) {
     this.name = name;
     this.pogs = pogs;
     this.inventory = inventory;
+    this.hitpoints = hitpoints;
+  }
+
+  getHitpoints() {
+    return this.hitpoints;
+  }
+
+  setHitpoints(hitpoints: number) {
+    this.hitpoints = hitpoints;
   }
 
   getInventory() {
