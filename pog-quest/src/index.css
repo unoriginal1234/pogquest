@@ -1,0 +1,262 @@
+/* 90s Pogs-inspired lofi roguelike aesthetic */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+:root {
+  /* 90s Pogs color palette - Flaming Skulls inspired */
+  --pog-black: #0a0a0a;
+  --pog-dark-purple: #1a0a2e;
+  --pog-neon-pink: #ff00ff;
+  --pog-hot-pink: #ff1493;
+  --pog-electric-blue: #00ffff;
+  --pog-cyan: #00d9ff;
+  --pog-lime-green: #39ff14;
+  --pog-yellow: #ffff00;
+  --pog-orange: #ff6600;
+  --pog-red: #ff0000;
+  --pog-white: #ffffff;
+  --pog-gray: #808080;
+  
+  font-family: 'VT323', 'Courier New', monospace;
+  line-height: 1.4;
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: 1px;
+
+  color-scheme: dark;
+  color: var(--pog-lime-green);
+  background-color: var(--pog-black);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: none; /* Pixelated look */
+  -moz-osx-font-smoothing: unset;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--pog-black);
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 255, 0.03) 2px,
+      rgba(0, 255, 255, 0.03) 4px
+    );
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--pog-black);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* CRT scanline effect */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: overlay;
+}
+
+a {
+  font-weight: 400;
+  color: var(--pog-electric-blue);
+  text-decoration: none;
+  text-shadow: 
+    0 0 5px var(--pog-electric-blue),
+    0 0 10px var(--pog-electric-blue);
+  transition: all 0.2s;
+}
+a:hover {
+  color: var(--pog-cyan);
+  text-shadow: 
+    0 0 8px var(--pog-cyan),
+    0 0 15px var(--pog-cyan),
+    0 0 20px var(--pog-cyan);
+}
+
+h1 {
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  font-size: 2.5em;
+  line-height: 1.2;
+  color: var(--pog-hot-pink);
+  text-shadow: 
+    0 0 10px var(--pog-hot-pink),
+    0 0 20px var(--pog-hot-pink),
+    0 0 30px var(--pog-hot-pink),
+    2px 2px 0px var(--pog-black),
+    4px 4px 0px var(--pog-neon-pink);
+  letter-spacing: 3px;
+  margin: 0.5em 0;
+  text-transform: uppercase;
+  filter: drop-shadow(0 0 5px var(--pog-hot-pink));
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  color: var(--pog-yellow);
+  text-shadow: 
+    0 0 5px var(--pog-yellow),
+    2px 2px 0px var(--pog-black);
+  letter-spacing: 2px;
+}
+
+button {
+  border-radius: 0;
+  border: 3px solid var(--pog-electric-blue);
+  padding: 0.8em 1.5em;
+  font-size: 1em;
+  font-weight: 400;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  background-color: var(--pog-black);
+  color: var(--pog-electric-blue);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 
+    0 0 10px var(--pog-electric-blue),
+    inset 0 0 10px rgba(0, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+button:hover {
+  border-color: var(--pog-cyan);
+  color: var(--pog-cyan);
+  box-shadow: 
+    0 0 20px var(--pog-cyan),
+    0 0 30px var(--pog-cyan),
+    inset 0 0 15px rgba(0, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 0 5px var(--pog-electric-blue),
+    inset 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 3px solid var(--pog-lime-green);
+  outline-offset: 2px;
+}
+
+/* Retro input styling */
+input, textarea, select {
+  background-color: var(--pog-black);
+  border: 2px solid var(--pog-electric-blue);
+  color: var(--pog-lime-green);
+  font-family: 'VT323', 'Courier New', monospace;
+  font-size: 1em;
+  padding: 0.5em;
+  box-shadow: 
+    0 0 5px var(--pog-electric-blue),
+    inset 0 0 5px rgba(0, 255, 255, 0.1);
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--pog-cyan);
+  box-shadow: 
+    0 0 10px var(--pog-cyan),
+    inset 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--pog-black);
+  border: 1px solid var(--pog-electric-blue);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--pog-electric-blue);
+  box-shadow: 0 0 5px var(--pog-electric-blue);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--pog-cyan);
+  box-shadow: 0 0 10px var(--pog-cyan);
+}
+
+/* Selection styling */
+::selection {
+  background-color: var(--pog-hot-pink);
+  color: var(--pog-black);
+  text-shadow: none;
+}
+
+/* Utility classes for roguelike elements */
+.pog-glow-pink {
+  text-shadow: 
+    0 0 10px var(--pog-hot-pink),
+    0 0 20px var(--pog-hot-pink);
+}
+
+.pog-glow-blue {
+  text-shadow: 
+    0 0 10px var(--pog-electric-blue),
+    0 0 20px var(--pog-electric-blue);
+}
+
+.pog-glow-green {
+  text-shadow: 
+    0 0 10px var(--pog-lime-green),
+    0 0 20px var(--pog-lime-green);
+}
+
+.pog-border {
+  border: 3px solid var(--pog-electric-blue);
+  box-shadow: 
+    0 0 10px var(--pog-electric-blue),
+    inset 0 0 10px rgba(0, 255, 255, 0.1);
+}
