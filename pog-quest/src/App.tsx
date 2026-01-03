@@ -12,6 +12,12 @@ function App() {
       </header>
 
       <main>
+      <section className="demo-section">
+        <p>Pog</p>
+        <p>Attack: 10</p>
+        <p>Defense: 5</p>
+        <p>Level: 1</p>
+      </section>
         <section className="demo-section">
           <h2>Action Buttons</h2>
           <div className="button-group">
