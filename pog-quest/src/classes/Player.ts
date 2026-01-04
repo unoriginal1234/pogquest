@@ -8,7 +8,8 @@ export default class Player {
   inventory: Item[];
   hitpoints: number;
   archetype: Archetype;
-  
+  // boons: Boon[];
+  // nerfs: Nerf[];
 
   constructor(name: string, archetype: Archetype) {
     

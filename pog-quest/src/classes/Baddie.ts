@@ -24,4 +24,9 @@ export default class Baddie {
     getLevel() {
         return this.level;
     }
+
+    fight(){
+        // choose available pogs and maximize damage
+        console.log("Baddie is fighting!");
+    }
 }

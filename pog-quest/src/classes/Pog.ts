@@ -12,7 +12,6 @@ export default class Pog {
     this.defense = defense;
     this.gold = gold;
     this.level = level;
-    
   }
 
   attack() {
@@ -29,5 +28,14 @@ export default class Pog {
 
   getLevel() {
     return this.level;
+  }
+
+  levelUp() {
+    if (this.level < 3) {  // max level is 10
+    this.level++;
+    this.strength++;
+    this.defense++;
+    this.gold++;
+    }
   }
 }
