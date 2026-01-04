@@ -8,7 +8,7 @@ function App() {
     <div className="app-container">
       <header>
         <h1>Pog Quest</h1>
-        <p className="subtitle pog-glow-blue">A 90s-Inspired Roguelike Adventure</p>
+        <p className="subtitle pog-glow-blue">A Roguelike Adventure</p>
       </header>
 
       <main>
