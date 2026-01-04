@@ -1,17 +1,27 @@
 import Pog from './Pog';
 import Item from './Item';
+import Archetype from './Archetype';
 
 export default class Player {
   name: string;
   pogs: Pog[];
   inventory: Item[];
   hitpoints: number;
+  archetype: Archetype;
+  
 
-  constructor(name: string, pogs: Pog[], inventory: Item[], hitpoints: number) {
+  constructor(name: string, archetype: Archetype) {
+    
     this.name = name;
-    this.pogs = pogs;
-    this.inventory = inventory;
-    this.hitpoints = hitpoints;
+    this.pogs = archetype.basepogs;
+    this.inventory =[];
+    this.hitpoints = archetype.basehitpoints;
+    this.archetype = archetype;
+  }
+
+  
+  getArchetype() {
+    return this.archetype;
   }
 
   getHitpoints() {
