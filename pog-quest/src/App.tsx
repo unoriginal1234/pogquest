@@ -2,15 +2,16 @@ import { useState, useEffect } from 'react';
 import Player from './classes/Player';
 import MainMenu from './classes/controls/MainMenu';
 import CharacterSelect from './classes/controls/CharacterSelect';
+import nameGenerator from './helperFunctions/nameGenerator'; 
 import './App.css'
 
 function App() {
-  useEffect(() => {
-    const player = new Player('John', CharacterSelect.getSkater());
-    console.log(player);
-  }, []);
-
   const [selectedButton, setSelectedButton] = useState<string | null>(null);
+  const [player, setPlayer] = useState<Player | null>(null);
+
+  useEffect(() => {
+    console.log(player);
+  }, [player]);
 
   return (
     <div className="app-container">
@@ -88,16 +89,22 @@ function App() {
         <section className="demo-section">
           <h2>Character Selection</h2>
           <div className="button-group">
+            
             <button onClick={() => {
               console.log(CharacterSelect.getBully());
              setSelectedButton(CharacterSelect.getBully().type);
+             setPlayer(new Player(nameGenerator(), CharacterSelect.getBully()));
               }}>Bully</button>
+
             <button onClick={() => {
               console.log(CharacterSelect.getSkater());
               setSelectedButton(CharacterSelect.getSkater().type);
+              setPlayer(new Player(nameGenerator(), CharacterSelect.getSkater()));
               }}>Skater</button>
+
             <button onClick={() => {
               console.log(CharacterSelect.getFireworker());
+              setPlayer(new Player(nameGenerator(), CharacterSelect.getFireworker()));
               setSelectedButton(CharacterSelect.getFireworker().type);
               }}>Fireworker</button>
           </div>
