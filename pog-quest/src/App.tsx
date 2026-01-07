@@ -1,9 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Player from './classes/Player';
 import MainMenu from './classes/controls/MainMenu';
 import CharacterSelect from './classes/controls/CharacterSelect';
 import './App.css'
 
 function App() {
+  useEffect(() => {
+    const player = new Player('John', CharacterSelect.getSkater());
+    console.log(player);
+  }, []);
+
   const [selectedButton, setSelectedButton] = useState<string | null>(null);
 
   return (
@@ -84,15 +90,15 @@ function App() {
           <div className="button-group">
             <button onClick={() => {
               console.log(CharacterSelect.getBully());
-             setSelectedButton(CharacterSelect.getBully());
+             setSelectedButton(CharacterSelect.getBully().type);
               }}>Bully</button>
             <button onClick={() => {
               console.log(CharacterSelect.getSkater());
-              setSelectedButton(CharacterSelect.getSkater());
+              setSelectedButton(CharacterSelect.getSkater().type);
               }}>Skater</button>
             <button onClick={() => {
               console.log(CharacterSelect.getFireworker());
-              setSelectedButton(CharacterSelect.getFireworker());
+              setSelectedButton(CharacterSelect.getFireworker().type);
               }}>Fireworker</button>
           </div>
         </section>
