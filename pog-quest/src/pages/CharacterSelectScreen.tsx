@@ -3,6 +3,7 @@ import Player from '../classes/Player';
 
 import CharacterSelect from '../classes/controls/CharacterSelect';
 import nameGenerator from '../helperFunctions/nameGenerator'; 
+import { Link } from 'react-router-dom';
 
 function CharacterSelectScreen() {
 
@@ -16,7 +17,7 @@ function CharacterSelectScreen() {
     return (
         <div>
             <section className="demo-section">
-              <h2>Character Selection</h2>
+              <h1>Character Selection</h1>
               <div className="button-group">
                 
                 <button onClick={() => {
@@ -42,21 +43,57 @@ function CharacterSelectScreen() {
             <main>
             {selectedButton !== null && (
               <div className="message-box pog-border">
-                <p className="pog-glow-yellow">
-                  You clicked: <strong>{selectedButton}</strong>
-                </p>
+                <section className="pog-glow-yellow">
+                  <h2>{selectedButton}</h2>
+                  <p>{player?.getArchetype().description}</p>
+                </section>
+                <StatusDisplay player={player} />
                 <button onClick={() => setSelectedButton(null)}>Close</button>
+                <button>Start Game</button>
               </div>
             )}
-
-            <section className="demo-section">
-              
-            </section>
-
-                     
           </main>
+          
+          <section className="demo-section">
+            <Link to="/"><button>Main Menu</button></Link> 
+          </section>
+             
+          
+
         </div>
     );
+}
+
+function StatusDisplay({player}: {player: Player | null}) {
+  return (
+    <section className="demo-section">
+      <section className="demo-section">
+              <strong>Starting Stats</strong>
+              <div className="status-panel pog-border">
+                <div className="status-item">
+                  <span className="pog-glow-green">Health:</span>
+                  <span className="pog-glow-pink">{player?.getHitpoints()}</span>
+                </div>
+                <div className="status-item">
+                  <span className="pog-glow-green">Level:</span>
+                  <span className="pog-glow-blue">{player?.getLevel()}</span>
+                </div>
+                <div className="status-item">
+                  <span className="pog-glow-green">Pogs:</span>
+                  <span className="pog-glow-blue">0</span>
+                </div>
+                <div className="status-item">
+                  <span className="pog-glow-green">Slammers:</span>
+                  <span className="pog-glow-blue">0</span>
+                </div>
+                <div className="status-item">
+                  <span className="pog-glow-green">Inventory:</span>
+                  <span className="pog-glow-blue">Link</span>
+                </div>
+              </div>
+            </section>
+    </section>
+  );
 }
 
 export default CharacterSelectScreen;

@@ -1,13 +1,16 @@
 import Pog from './Pog';
 import Item from './Item';
 import Archetype from './Archetype';
+import Slammer from './Slammer';
 
 export default class Player {
   name: string;
   pogs: Pog[];
+  slammers: Slammer[];
   inventory: Item[];
   hitpoints: number;
   archetype: Archetype;
+  level: number;
   // boons: Boon[];
   // nerfs: Nerf[];
 
@@ -18,6 +21,8 @@ export default class Player {
     this.inventory =[];
     this.hitpoints = archetype.basehitpoints;
     this.archetype = archetype;
+    this.level = 1;
+    this.slammers = archetype.baseSlammers;
   }
 
   
@@ -47,5 +52,9 @@ export default class Player {
 
   getPogCount() {
     return this.pogs.length;
+  }
+
+  getLevel() {
+    return this.level;
   }
 }

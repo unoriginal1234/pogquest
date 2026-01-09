@@ -1,13 +1,15 @@
 import Archetype from "../Archetype";
 import Pog from "../Pog";
+import Slammer from "../Slammer";
 
 export default class CharacterSelect {
 
     static skater = new Archetype(
         "Skater", 
-        "A skater is a character that can skate and jump.", 
-        100, 
-        [new Pog("Skate", 10, 10, 10, 1)]
+        "Gnarly shredder.", 
+        90, 
+        [new Pog("Kick Flip", 10, 10, 10, 1)],
+        [new Slammer("Skate", "Flips up.", 1)],
     );
 
     static getSkater(): Archetype {
@@ -16,9 +18,10 @@ export default class CharacterSelect {
 
     static fireworker = new Archetype(
         "Fireworker", 
-        "A fireworker is a character that can fire and jump.", 
-        100, 
-        [new Pog("Fire", 10, 10, 10, 1)]
+        "Master of pop and awe.", 
+        80, 
+        [new Pog("Bottle Rocket", 10, 10, 10, 1)],
+        [new Slammer("Firework", "Throws a firework.", 1)]
     );
 
     static getFireworker(): Archetype {
@@ -27,9 +30,10 @@ export default class CharacterSelect {
 
     static bully = new Archetype(
         "Bully", 
-        "A bully is a character that can bully and jump.", 
+        "Steals lunch money.", 
         100, 
-        [new Pog("Bully", 10, 10, 10, 1)]
+        [new Pog("Tease", 10, 10, 10, 1)],
+        [new Slammer("Bully", "Pushes someone down.", 1)]
     );
 
     static getBully(): Archetype {
