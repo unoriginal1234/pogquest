@@ -11,6 +11,7 @@ export default class Player {
   hitpoints: number;
   archetype: Archetype;
   level: number;
+  _id: string;
   // boons: Boon[];
   // nerfs: Nerf[];
 
@@ -23,9 +24,17 @@ export default class Player {
     this.archetype = archetype;
     this.level = 1;
     this.slammers = archetype.baseSlammers;
+    this._id = "";
+  } 
+
+  setId(id: string) {
+    this._id = id;
   }
 
-  
+  getId() {
+    return this._id;
+  }
+
   getArchetype() {
     return this.archetype;
   }
@@ -44,6 +53,10 @@ export default class Player {
 
   removeItem(item: Item) {
     this.inventory = this.inventory.filter(i => i !== item);
+  }
+
+  getPogs() {
+    return this.pogs;
   }
 
   getPog(index: number) {

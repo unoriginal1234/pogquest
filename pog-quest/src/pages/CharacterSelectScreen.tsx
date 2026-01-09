@@ -4,11 +4,17 @@ import Player from '../classes/Player';
 import CharacterSelect from '../classes/controls/CharacterSelect';
 import nameGenerator from '../helperFunctions/nameGenerator'; 
 import { Link } from 'react-router-dom';
+import PogCollection from '../components/PogCollection';
 
 function CharacterSelectScreen() {
 
     const [selectedButton, setSelectedButton] = useState<string | null>(null);
     const [player, setPlayer] = useState<Player | null>(null);
+    const [isPogCollectionOpen, setIsPogCollectionOpen] = useState(false);
+
+    function togglePogCollection() {
+      setIsPogCollectionOpen(!isPogCollectionOpen);
+    }
 
     useEffect(() => {
       console.log(player);
@@ -47,24 +53,31 @@ function CharacterSelectScreen() {
                   <h2>{selectedButton}</h2>
                   <p>{player?.getArchetype().description}</p>
                 </section>
-                <StatusDisplay player={player} />
+                {
+                  isPogCollectionOpen ? 
+                  <PogCollection player={player} togglePogCollection={togglePogCollection} /> : 
+                  <StatusDisplay player={player} 
+                  togglePogCollection={togglePogCollection} />
+                }
                 <button onClick={() => setSelectedButton(null)}>Close</button>
                 <button>Start Game</button>
+                
               </div>
             )}
           </main>
           
           <section className="demo-section">
             <Link to="/"><button>Main Menu</button></Link> 
+            
           </section>
-             
-          
-
         </div>
     );
 }
 
-function StatusDisplay({player}: {player: Player | null}) {
+function StatusDisplay(
+  {player, togglePogCollection}: {player: Player | null, togglePogCollection: () => void}
+) {
+
   return (
     <section className="demo-section">
       <section className="demo-section">
@@ -80,7 +93,7 @@ function StatusDisplay({player}: {player: Player | null}) {
                 </div>
                 <div className="status-item">
                   <span className="pog-glow-green">Pogs:</span>
-                  <span className="pog-glow-blue">0</span>
+                  <span className="pog-glow-blue" onClick={togglePogCollection}>View</span>
                 </div>
                 <div className="status-item">
                   <span className="pog-glow-green">Slammers:</span>
