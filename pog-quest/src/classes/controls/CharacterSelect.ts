@@ -1,7 +1,6 @@
 import Archetype from "../Archetype";
 import Pog from "../Pog";
 
-
 export default class CharacterSelect {
 
     static skater = new Archetype(
