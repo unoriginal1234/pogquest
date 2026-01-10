@@ -107,6 +107,63 @@ main {
     0 0 20px var(--pog-hot-pink);
 }
 
+.pog-component {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 4px solid var(--pog-electric-blue);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  background-color: var(--pog-dark-purple);
+  padding: 8px;
+  text-align: center;
+  box-shadow: 
+    0 0 10px var(--pog-electric-blue),
+    inset 0 0 10px rgba(0, 255, 255, 0.2);
+  user-select: none;
+  overflow: hidden;
+  position: relative;
+}
+
+.pog-component:hover {
+  transform: scale(1.05);
+  box-shadow: 
+    0 0 15px var(--pog-cyan),
+    inset 0 0 15px rgba(0, 255, 255, 0.3);
+  border-color: var(--pog-cyan);
+}
+
+.pog-component.selected {
+  border-color: var(--pog-hot-pink);
+  box-shadow: 
+    0 0 20px var(--pog-hot-pink),
+    inset 0 0 15px rgba(255, 20, 147, 0.4);
+  background-color: rgba(255, 20, 147, 0.1);
+}
+
+.pog-name {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 8px;
+  color: var(--pog-yellow);
+  margin-bottom: 4px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pog-subtitle {
+  font-family: 'VT323', monospace;
+  font-size: 16px;
+  color: var(--pog-lime-green);
+  text-shadow: 0 0 5px var(--pog-lime-green);
+}
+
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .app-container {

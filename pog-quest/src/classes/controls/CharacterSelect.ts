@@ -1,6 +1,7 @@
 import Archetype from "../Archetype";
 import Pog from "../Pog";
 import Slammer from "../Slammer";
+import { startingPogs } from "../../resources/startingPogs";
 
 export default class CharacterSelect {
 
@@ -8,7 +9,7 @@ export default class CharacterSelect {
         "Skater", 
         "Gnarly shredder.", 
         90, 
-        [new Pog("Kick Flip", 10, 10, 10, 1)],
+        [...startingPogs, new Pog("Kick Flip", 5, 5, 5, 1)],
         [new Slammer("Skate", "Flips up.", 1)],
     );
 
@@ -20,7 +21,7 @@ export default class CharacterSelect {
         "Fireworker", 
         "Master of pop and awe.", 
         80, 
-        [new Pog("Bottle Rocket", 10, 10, 10, 1)],
+        [...startingPogs, new Pog("Bottle Rocket", 10, 10, 10, 1)],
         [new Slammer("Firework", "Throws a firework.", 1)]
     );
 
@@ -32,7 +33,7 @@ export default class CharacterSelect {
         "Bully", 
         "Steals lunch money.", 
         100, 
-        [new Pog("Tease", 10, 10, 10, 1)],
+        [...startingPogs, new Pog("Tease", 10, 10, 10, 1)],
         [new Slammer("Bully", "Pushes someone down.", 1)]
     );
 

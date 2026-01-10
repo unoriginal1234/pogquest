@@ -1,4 +1,5 @@
 export default class Pog {
+  _id: string;
   name: string;
   strength: number;
   defense: number;
@@ -7,11 +8,20 @@ export default class Pog {
   
 
   constructor(name: string, strength: number, defense: number, gold: number, level: number) {
+    this._id = crypto.randomUUID();
     this.name = name;
     this.strength = strength;
     this.defense = defense;
     this.gold = gold;
     this.level = level;
+  }
+
+  generateNewId() {
+    this._id = crypto.randomUUID();
+  }
+
+  getId() {
+    return this._id;
   }
 
   attack() {
