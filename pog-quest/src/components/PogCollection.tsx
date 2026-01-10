@@ -47,7 +47,7 @@ function PogDetails({pog}: {pog: PogClass | undefined}) {
 
     return (
         <div className="pog-details demo-section">
-            <h3>{name} Details</h3>
+            <h3>{name}</h3>
             {typeof strength === "number" && strength > 0 ? <p>Strength: {strength}</p> : null}
             {typeof defense === "number" && defense > 0 ? <p>Defense: {defense}</p> : null}
         </div>
