@@ -10,4 +10,24 @@ export default class Story {
         this.description = description;
         this.chapters = chapters;
     }
+
+    getTitle() {
+        return this.title;
+    }
+
+    getDescription() {
+        return this.description;
+    }
+
+    getChapters() {
+        return this.chapters;
+    }
+
+    getChapter(index: number) {
+        return this.chapters[index];
+    }
+
+    getChapterCount() {
+        return this.chapters.length;
+    }
 }

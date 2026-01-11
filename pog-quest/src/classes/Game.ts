@@ -5,15 +5,15 @@ import Match from './Match';
 
 export default class Game {
     player: Player;
-    chapter: Chapter;
     story: Story;
+    chapter: Chapter;
     chapterNumber: number;
     match: Match | null;
 
-    constructor(player: Player, chapter: Chapter, story: Story) {
+    constructor(player: Player, story: Story) {
         this.player = player;
-        this.chapter = chapter;
         this.story = story;
+        this.chapter = story.getChapter(0);
         this.chapterNumber = 1;
         this.match = null;
     }
@@ -49,6 +49,4 @@ export default class Game {
     setChapterNumber(chapterNumber: number) {
         this.chapterNumber = chapterNumber;
     }
-    
-    
 }

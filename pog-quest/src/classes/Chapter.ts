@@ -10,6 +10,7 @@ export default class Chapter {
         this.title = title;
         this.description = description;
         this.chapterNumber = chapterNumber;
+        // honestly chapter rewards should be on the Archetype class
         this.chapterReward = [
             new Pog("Chapter Reward 1", 0, 0, 0, 0), 
             new Pog("Chapter Reward 2", 0, 0, 0, 0)

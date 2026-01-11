@@ -6,19 +6,33 @@ import nameGenerator from '../helperFunctions/nameGenerator';
 import { Link } from 'react-router-dom';
 import PogCollection from '../components/PogCollection';
 
+import demoStory from '../resources/demoStory';
+import Story from '../classes/Story';
+import Game from '../classes/Game';
+
+
 function CharacterSelectScreen() {
 
     const [selectedButton, setSelectedButton] = useState<string | null>(null);
     const [player, setPlayer] = useState<Player | null>(null);
     const [isPogCollectionOpen, setIsPogCollectionOpen] = useState(false);
+    const [game, setGame] = useState<Game | null>(null);
 
     function togglePogCollection() {
       setIsPogCollectionOpen(!isPogCollectionOpen);
     }
 
+    function startGame(player: Player, story: Story) {
+      setGame(new Game(player, story));
+    }
+
     useEffect(() => {
       console.log(player);
     }, [player]);
+
+    useEffect(() => {
+      console.log(game);
+    }, [game]);
 
     return (
         <div>
@@ -60,7 +74,15 @@ function CharacterSelectScreen() {
                   togglePogCollection={togglePogCollection} />
                 }
                 <button onClick={() => setSelectedButton(null)}>Close</button>
-                <button>Start Game</button>
+                
+                {player ? <button onClick={() => {
+                  if (player) {
+                    startGame(player, demoStory);
+                  }
+                  else {
+                    console.log("No player selected");
+                  }
+                }}>Start Game</button> : <button disabled>Start Game</button>}
                 
               </div>
             )}
