@@ -8,10 +8,6 @@ export default class Game {
     chapter: Chapter;
     story: Story;
     chapterNumber: number;
-    chapterTitle: string;
-    chapterDescription: string;
-    chapterReward: number;
-    chapterRewardDescription: string;
     match: Match | null;
 
     constructor(player: Player, chapter: Chapter, story: Story) {
@@ -19,10 +15,6 @@ export default class Game {
         this.chapter = chapter;
         this.story = story;
         this.chapterNumber = 1;
-        this.chapterTitle = "";
-        this.chapterDescription = "";
-        this.chapterReward = 0;
-        this.chapterRewardDescription = "";
         this.match = null;
     }
 
@@ -43,19 +35,15 @@ export default class Game {
     }
     
     getChapterTitle() {
-        return this.chapterTitle;
+        return this.chapter.getTitle();
     }
 
     getChapterDescription() {
-        return this.chapterDescription;
+        return this.chapter.getDescription();
     }
 
     getChapterReward() {
-        return this.chapterReward;
-    }
-
-    getChapterRewardDescription() {
-        return this.chapterRewardDescription;
+        return this.chapter.getChapterReward();
     }
 
     setChapterNumber(chapterNumber: number) {
