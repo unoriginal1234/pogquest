@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { useContext } from 'react';
-import { UserContext } from '../App';
+
+import { UserContext } from '../context/UserContext';
+import User from '../classes/User';
 
 function Settings() {
-    const user = useContext(UserContext);
+    const user = useContext<User | null>(UserContext);
 
     return (
         <div>

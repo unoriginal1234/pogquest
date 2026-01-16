@@ -1,24 +1,22 @@
-import { useState, createContext } from 'react';
 import CharacterSelectScreen from './pages/CharacterSelectScreen';
 // import nameGenerator from './helperFunctions/nameGenerator'; 
 import './App.css'
 import { Routes, Route } from "react-router-dom";
 import Settings from "./pages/Settings";
-import User from './classes/User';
 import MainMenuScreen from './pages/MainMenuScreen';
+import GameScreen from './pages/GameScreen';
+import { UserProvider } from './context/UserProvider';
+// import Game from './classes/Game';
 
-const UserContext = createContext<User | null>(null);
-// Export UserContext so other components can import it
-export { UserContext };
+// const GameContext = createContext<Game | null>(null);
+
+// const [game, setGame] = useState<Game | null>(null);
 
 function App() {
  
-  // User state management
-  const tempUser = new User("temp", "temp", ["temp@temp.com"]);
-  const [user, setUser] = useState<User | null>(tempUser);
-
   return (
-    <UserContext.Provider value={user}>  
+    <UserProvider>  
+      {/* <GameContext.Provider value={game}> */}
 
         <div className="app-container">
         <Routes>
@@ -28,13 +26,16 @@ function App() {
 
           <Route path="/character-select" element={<CharacterSelectScreen/>} />
           
+          <Route path="/game" element={<GameScreen />}/>
+
+          
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes> 
         </div>
-    </UserContext.Provider>
+        {/* </GameContext.Provider> */}
+    </UserProvider>
   )
 }
-
 
 
 export default App

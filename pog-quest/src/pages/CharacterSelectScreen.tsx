@@ -75,14 +75,9 @@ function CharacterSelectScreen() {
                 }
                 <button onClick={() => setSelectedButton(null)}>Close</button>
                 
-                {player ? <button onClick={() => {
-                  if (player) {
-                    startGame(player, demoStory);
-                  }
-                  else {
-                    console.log("No player selected");
-                  }
-                }}>Start Game</button> : <button disabled>Start Game</button>}
+                {player ? <Link to="/game" state={{game: game}}><button onClick={() => {
+                  startGame(player, demoStory);
+                }}>Start Game</button></Link> : <button disabled>Start Game</button>}
                 
               </div>
             )}
@@ -90,7 +85,6 @@ function CharacterSelectScreen() {
           
           <section className="demo-section">
             <Link to="/"><button>Main Menu</button></Link> 
-            
           </section>
         </div>
     );
