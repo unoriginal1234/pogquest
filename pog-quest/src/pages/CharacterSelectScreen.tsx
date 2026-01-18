@@ -1,14 +1,20 @@
 import { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import Player from '../classes/Player';
 
 import CharacterSelect from '../classes/controls/CharacterSelect';
 import nameGenerator from '../helperFunctions/nameGenerator'; 
-import { Link } from 'react-router-dom';
+
+
 import PogCollection from '../components/PogCollection';
+import MainMenuButton from '../components/MainMenuButton';
 
 import demoStory from '../resources/demoStory';
 import Story from '../classes/Story';
 import Game from '../classes/Game';
+import { useGame } from '../context/GameContext';
+
+
 
 
 function CharacterSelectScreen() {
@@ -16,23 +22,20 @@ function CharacterSelectScreen() {
     const [selectedButton, setSelectedButton] = useState<string | null>(null);
     const [player, setPlayer] = useState<Player | null>(null);
     const [isPogCollectionOpen, setIsPogCollectionOpen] = useState(false);
-    const [game, setGame] = useState<Game | null>(null);
+    const { dispatch } = useGame();
 
     function togglePogCollection() {
       setIsPogCollectionOpen(!isPogCollectionOpen);
     }
 
     function startGame(player: Player, story: Story) {
-      setGame(new Game(player, story));
+      const newGame = new Game(player, story);
+      dispatch({ type: 'START_GAME', game: newGame });
     }
 
     useEffect(() => {
       console.log(player);
     }, [player]);
-
-    useEffect(() => {
-      console.log(game);
-    }, [game]);
 
     return (
         <div>
@@ -75,7 +78,7 @@ function CharacterSelectScreen() {
                 }
                 <button onClick={() => setSelectedButton(null)}>Close</button>
                 
-                {player ? <Link to="/game" state={{game: game}}><button onClick={() => {
+                {player ? <Link to="/game"><button onClick={() => {
                   startGame(player, demoStory);
                 }}>Start Game</button></Link> : <button disabled>Start Game</button>}
                 
@@ -83,9 +86,7 @@ function CharacterSelectScreen() {
             )}
           </main>
           
-          <section className="demo-section">
-            <Link to="/"><button>Main Menu</button></Link> 
-          </section>
+          <MainMenuButton />
         </div>
     );
 }
