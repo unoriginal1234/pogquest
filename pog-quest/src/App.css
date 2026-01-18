@@ -107,6 +107,19 @@ main {
     0 0 20px var(--pog-hot-pink);
 }
 
+.game-menu-row {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.game-menu-row > .demo-section {
+  flex: 1 1 280px;
+  max-width: 420px;
+}
+
 .pog-component {
   width: 100px;
   height: 100px;
