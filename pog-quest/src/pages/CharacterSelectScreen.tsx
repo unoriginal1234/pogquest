@@ -35,9 +35,10 @@ function CharacterSelectScreen() {
     }, [player]);
 
     return (
-        <div>
+        <div className="page-layout">
+          {selectedButton === null ? <header><h1>Character Selection</h1></header> : null}
             <section className="demo-section">
-              <h1>Character Selection</h1>
+              
               <div className="button-group">
                 
                 <button onClick={() => {
@@ -79,12 +80,11 @@ function CharacterSelectScreen() {
                   startGame(player, demoStory);
                 }}>Start Game</button></Link> : <button disabled>Start Game</button>}
                 <button onClick={() => setSelectedButton(null)}>Close</button>
-                
+
               </div>
             )}
           </main>
-          
-          <MainMenuButton />
+          <footer className="footer-wrapper"><MainMenuButton /></footer>
         </div>
     );
 }

@@ -14,6 +14,7 @@ function MainMenuScreen() {
                 <p className="subtitle pog-glow-blue">A Roguelike Adventure</p>
             </header>
             
+            <div className="button-group">
                 <Link to="/character-select"><button>New Game</button></Link>
                 {game !== null ? 
                 <Link to="/game"><button className="pog-glow-blue" 
@@ -22,6 +23,7 @@ function MainMenuScreen() {
                 }}>Continue</button></Link> : 
                 <button disabled>Continue</button>}
                 <Link to="/settings"><button>Settings</button></Link>
+            </div>
             
         </div>
     );

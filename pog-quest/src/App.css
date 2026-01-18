@@ -107,6 +107,19 @@ main {
     0 0 20px var(--pog-hot-pink);
 }
 
+.page-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.footer-wrapper {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+}
+
 .game-menu-row {
   display: flex;
   gap: 2rem;
