@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import { useGame } from '../context/GameContext';
 
 function MainMenuScreen() {
+
+    const { state } = useGame();
+    const game = state.game;
+    const { dispatch } = useGame();
 
     return (
         <div>
@@ -10,7 +15,11 @@ function MainMenuScreen() {
             </header>
             
                 <Link to="/character-select"><button>Start Game</button></Link>
-                <button>Continue</button>
+                {game !== null ? 
+                <Link to="/game"><button className="pog-glow-blue" onClick={() => {
+                    dispatch({ type: 'SET_GAME', game: null });
+                }}>Continue</button></Link> : 
+                <button disabled>Continue</button>}
                 <Link to="/settings"><button>Settings</button></Link>
                 <button>Quit</button>
             

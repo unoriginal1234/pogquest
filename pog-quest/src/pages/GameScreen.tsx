@@ -1,4 +1,5 @@
 import { useGame } from '../context/GameContext';
+import MainMenuButton from '../components/MainMenuButton';
 
 export default function GameScreen() {
   const { state } = useGame();
@@ -15,6 +16,8 @@ export default function GameScreen() {
         Chapter {game.getChapterNumber()}: {game.getChapterTitle()} —{" "}
         {game.getChapterDescription()}
       </p>
+
+      <MainMenuButton />
     </div>
   );
 }

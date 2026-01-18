@@ -144,6 +144,14 @@ button {
   overflow: hidden;
 }
 
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: var(--pog-gray);
+  color: var(--pog-gray);
+  box-shadow: none;
+}
+
 button::before {
   content: '';
   position: absolute;
