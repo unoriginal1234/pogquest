@@ -21,7 +21,7 @@ export default class CharacterSelect {
         "Fireworker", 
         "Master of pop and awe.", 
         80, 
-        [...startingPogs, new Pog("Bottle Rocket", 10, 10, 10, 1)],
+        [...startingPogs, new Pog("Bottle Rocket", 10, 0, 10, 1)],
         [new Slammer("Firework", "Throws a firework.", 1)]
     );
 

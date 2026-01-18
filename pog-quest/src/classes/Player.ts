@@ -27,6 +27,10 @@ export default class Player {
     this._id = "";
   } 
 
+  getName() {
+    return this.name;
+  }
+
   setId(id: string) {
     this._id = id;
   }

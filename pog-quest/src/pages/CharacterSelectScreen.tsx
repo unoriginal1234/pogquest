@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import Player from '../classes/Player';
 
 import CharacterSelect from '../classes/controls/CharacterSelect';
 import nameGenerator from '../helperFunctions/nameGenerator'; 
-
 
 import PogCollection from '../components/PogCollection';
 import MainMenuButton from '../components/MainMenuButton';
@@ -12,10 +10,9 @@ import MainMenuButton from '../components/MainMenuButton';
 import demoStory from '../resources/demoStory';
 import Story from '../classes/Story';
 import Game from '../classes/Game';
+import Player from '../classes/Player';
+
 import { useGame } from '../context/GameContext';
-
-
-
 
 function CharacterSelectScreen() {
 
@@ -76,11 +73,12 @@ function CharacterSelectScreen() {
                   <StatusDisplay player={player} 
                   togglePogCollection={togglePogCollection} />
                 }
-                <button onClick={() => setSelectedButton(null)}>Close</button>
+                
                 
                 {player ? <Link to="/game"><button onClick={() => {
                   startGame(player, demoStory);
                 }}>Start Game</button></Link> : <button disabled>Start Game</button>}
+                <button onClick={() => setSelectedButton(null)}>Close</button>
                 
               </div>
             )}
@@ -103,10 +101,6 @@ function StatusDisplay(
                 <div className="status-item">
                   <span className="pog-glow-green">Health:</span>
                   <span className="pog-glow-pink">{player?.getHitpoints()}</span>
-                </div>
-                <div className="status-item">
-                  <span className="pog-glow-green">Level:</span>
-                  <span className="pog-glow-blue">{player?.getLevel()}</span>
                 </div>
                 <div className="status-item">
                   <span className="pog-glow-green">Pogs:</span>

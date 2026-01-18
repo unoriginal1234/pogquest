@@ -14,14 +14,14 @@ function MainMenuScreen() {
                 <p className="subtitle pog-glow-blue">A Roguelike Adventure</p>
             </header>
             
-                <Link to="/character-select"><button>Start Game</button></Link>
+                <Link to="/character-select"><button>New Game</button></Link>
                 {game !== null ? 
-                <Link to="/game"><button className="pog-glow-blue" onClick={() => {
-                    dispatch({ type: 'SET_GAME', game: null });
+                <Link to="/game"><button className="pog-glow-blue" 
+                    onClick={() => {
+                    dispatch({ type: 'SET_GAME', game: game });
                 }}>Continue</button></Link> : 
                 <button disabled>Continue</button>}
                 <Link to="/settings"><button>Settings</button></Link>
-                <button>Quit</button>
             
         </div>
     );
