@@ -18,4 +18,7 @@ export default class Archetype {
         this.baseSlammers = baseSlammers;
         this.baseInventory = baseInventory;
     }
+
+    // honestly chapter rewards should be on the Archetype class
+
 }

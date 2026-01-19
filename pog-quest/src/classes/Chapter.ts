@@ -1,20 +1,29 @@
-import Pog from './Pog';
+import Baddie from './Baddie';
+import Shop from './Shop';
+import Adventure from './Adventure';
 
 export default class Chapter {
+    _id: string;
     title: string;
     chapterNumber: number;
     description: string;
-    chapterReward: Pog[];
+    completionType: Baddie | Shop | Adventure;
 
-    constructor(title: string, description: string, chapterNumber: number) {
+    constructor(
+        title: string, 
+        description: string, 
+        chapterNumber: number,
+        completionType: Baddie | Shop | Adventure
+    ) {
+        this._id = crypto.randomUUID();
         this.title = title;
         this.description = description;
         this.chapterNumber = chapterNumber;
-        // honestly chapter rewards should be on the Archetype class
-        this.chapterReward = [
-            new Pog("Chapter Reward 1", 0, 0, 0, 0), 
-            new Pog("Chapter Reward 2", 0, 0, 0, 0)
-        ];
+        this.completionType = completionType;
+    }
+
+    getId() {
+        return this._id;
     }
 
     getTitle() {
@@ -29,7 +38,7 @@ export default class Chapter {
         return this.chapterNumber;
     }   
     
-    getChapterReward() {
-        return this.chapterReward;
+    getCompletionType() {
+        return this.completionType;
     }
 }
