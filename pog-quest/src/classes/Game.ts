@@ -2,6 +2,7 @@ import Player from './Player';
 import Chapter from './Chapter';
 import Story from './Story';
 import Match from './Match';
+import Baddie from './Baddie';
 
 export default class Game {
     _id: string;
@@ -43,6 +44,7 @@ export default class Game {
         return this.story;
     }
 
+    // want to handle this at the story level
     getChapterNumber() {
         return this.chapterNumber;
     }
@@ -55,11 +57,11 @@ export default class Game {
         return this.chapter.getDescription();
     }
 
-    getChapterReward() {
-        return this.chapter.getChapterReward();
-    }
-
     setChapterNumber(chapterNumber: number) {
         this.chapterNumber = chapterNumber;
+    }
+
+    setMatch(player: Player, baddie: Baddie) {
+        this.match = new Match(player, baddie);
     }
 }
