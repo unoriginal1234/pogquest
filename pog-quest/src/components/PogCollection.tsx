@@ -1,9 +1,13 @@
 import { useState } from 'react';
+
 import Player from '../classes/Player';
 import PogClass from '../classes/Pog';
+
 import Pog from './Pog';
 
-function PogCollection({player, togglePogCollection }: {player: Player | null, togglePogCollection: () => void}) {
+function PogCollection(
+    {player, togglePogCollection }: 
+    {player: Player | null, togglePogCollection: () => void}) {
     
     const [selectedPog, setSelectedPog] = useState<string | null>(null);
 

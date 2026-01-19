@@ -5,7 +5,8 @@ import GameMenuButtons from '../components/GameMenuButtons';
 import GameStoryPanel from '../components/GameStoryPanel';
 import PlayerStats from '../components/PlayerStats';
 import PogCollection from '../components/PogCollection';
-
+import SlammersCollection from '../components/SlammersCollection';
+import Inventory from '../components/Inventory';    
 
 export default function GameScreen() {
   const { state } = useGame();
@@ -15,6 +16,14 @@ export default function GameScreen() {
   const player = game?.getPlayer();
 
   function togglePogCollection(){
+    setMenuScreen(null);
+  }
+
+  function toggleSlammersCollection(){
+    setMenuScreen(null);
+  }
+
+  function toggleInventory(){
     setMenuScreen(null);
   }
 
@@ -38,11 +47,11 @@ export default function GameScreen() {
     if (menuScreen === "pog-collection"){
       return <PogCollection player={player!} togglePogCollection={togglePogCollection} />;
     } else if (menuScreen === "inventory"){
-      return <Inventory player={player!} />;
+      return <Inventory player={player!} toggleInventory={toggleInventory} />;
     } else if (menuScreen === "stats"){
       return <PlayerStats player={player!} />;
     } else if (menuScreen === "slammers"){
-      return <Slammers player={player!} />;
+      return <SlammersCollection player={player!} toggleSlammersCollection={toggleSlammersCollection} />;
     }
   
     return (

@@ -5,6 +5,9 @@ import CharacterSelect from '../classes/controls/CharacterSelect';
 import nameGenerator from '../helperFunctions/nameGenerator'; 
 
 import PogCollection from '../components/PogCollection';
+import SlammersCollection from '../components/SlammersCollection';
+import Inventory from '../components/Inventory';
+
 import MainMenuButton from '../components/MainMenuButton';
 
 import demoStory from '../resources/demoStory';
@@ -19,10 +22,21 @@ function CharacterSelectScreen() {
     const [selectedButton, setSelectedButton] = useState<string | null>(null);
     const [player, setPlayer] = useState<Player | null>(null);
     const [isPogCollectionOpen, setIsPogCollectionOpen] = useState(false);
+    const [isSlammersCollectionOpen, setIsSlammersCollectionOpen] = useState(false);
+    const [isInventoryOpen, setIsInventoryOpen] = useState(false);
+
+    function toggleInventory() {
+      setIsInventoryOpen(!isInventoryOpen);
+    }
+
     const { dispatch } = useGame();
 
     function togglePogCollection() {
       setIsPogCollectionOpen(!isPogCollectionOpen);
+    }
+
+    function toggleSlammersCollection() {
+      setIsSlammersCollectionOpen(!isSlammersCollectionOpen);
     }
 
     function startGame(player: Player, story: Story) {
@@ -68,13 +82,8 @@ function CharacterSelectScreen() {
                   <h2>{selectedButton}</h2>
                   <p>{player?.getArchetype().description}</p>
                 </section>
-                {
-                  isPogCollectionOpen ? 
-                  <PogCollection player={player} togglePogCollection={togglePogCollection} /> : 
-                  <StatusDisplay player={player} 
-                  togglePogCollection={togglePogCollection} />
-                }
-                
+
+                <OpenCollection />
                 
                 {player ? <Link to="/game"><button onClick={() => {
                   startGame(player, demoStory);
@@ -87,10 +96,30 @@ function CharacterSelectScreen() {
           <footer className="footer-wrapper"><MainMenuButton /></footer>
         </div>
     );
+
+  function OpenCollection() {
+    if (isPogCollectionOpen) {
+      return <PogCollection player={player} togglePogCollection={togglePogCollection} />;
+    } else if (isSlammersCollectionOpen) {
+      return <SlammersCollection player={player} toggleSlammersCollection={toggleSlammersCollection} />;
+    } else if (isInventoryOpen) {
+      return <Inventory player={player!} toggleInventory={toggleInventory} />;
+    }
+
+    return <StatusDisplay player={player} 
+    togglePogCollection={togglePogCollection} 
+    toggleSlammersCollection={toggleSlammersCollection} 
+    toggleInventory={toggleInventory} />;
+  }
 }
 
 function StatusDisplay(
-  {player, togglePogCollection}: {player: Player | null, togglePogCollection: () => void}
+  {player, togglePogCollection, toggleSlammersCollection, toggleInventory}: 
+  {player: Player | null, 
+    togglePogCollection?: () => void, 
+    toggleSlammersCollection?: () => void
+    toggleInventory?: () => void
+  }
 ) {
 
   return (
@@ -104,20 +133,25 @@ function StatusDisplay(
                 </div>
                 <div className="status-item">
                   <span className="pog-glow-green">Pogs:</span>
-                  <span className="pog-glow-blue" onClick={togglePogCollection}>View</span>
+                  <span className="pog-glow-blue" 
+                  onClick={togglePogCollection}>View</span>
                 </div>
                 <div className="status-item">
                   <span className="pog-glow-green">Slammers:</span>
-                  <span className="pog-glow-blue">0</span>
+                  <span className="pog-glow-blue" 
+                  onClick={toggleSlammersCollection}>View</span>
                 </div>
                 <div className="status-item">
                   <span className="pog-glow-green">Inventory:</span>
-                  <span className="pog-glow-blue">Link</span>
+                  <span className="pog-glow-blue" 
+                  onClick={toggleInventory}>View</span>
                 </div>
               </div>
             </section>
     </section>
   );
 }
+
+
 
 export default CharacterSelectScreen;

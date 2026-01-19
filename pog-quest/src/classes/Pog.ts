@@ -17,6 +17,10 @@ export default class Pog {
     this.startTime = new Date();
   }
 
+  getName() {
+    return this.name;
+  }
+
   getStartTime() {
     return this.startTime;
   }

@@ -16,8 +16,8 @@ const Pog: React.FC<PogProps> = ({ pog, isSelected, onClick }) => {
       className={`pog-component ${isSelected ? 'selected' : ''}`} 
       onClick={onClick}
     >
-      <div className="pog-name">{pog.name}</div>
-      <div className="pog-subtitle">LVL {pog.level}</div>
+      <div className="pog-name">{pog.getName()}</div>
+      <div className="pog-subtitle">LVL {pog.getLevel()}</div>
     </div>
   );
 };

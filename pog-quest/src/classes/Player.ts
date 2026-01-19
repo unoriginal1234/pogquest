@@ -19,7 +19,7 @@ export default class Player {
     
     this.name = name;
     this.pogs = archetype.basepogs;
-    this.inventory =[];
+    this.inventory = archetype.baseInventory;
     this.hitpoints = archetype.basehitpoints;
     this.archetype = archetype;
     this.level = 1;
@@ -73,5 +73,17 @@ export default class Player {
 
   getLevel() {
     return this.level;
+  }
+
+  getSlammers() {
+    return this.slammers;
+  }
+
+  getSlammer(index: number) {
+    return this.slammers[index];
+  }
+
+  getSlammerCount() {
+    return this.slammers.length;
   }
 }
