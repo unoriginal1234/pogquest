@@ -86,4 +86,12 @@ export default class Player {
   getSlammerCount() {
     return this.slammers.length;
   }
+
+  getInventoryCount() {
+    return this.inventory.length;
+  }
+
+  getInventoryItem(index: number) {
+    return this.inventory[index];
+  }
 }
