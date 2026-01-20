@@ -57,9 +57,7 @@ export default class Game {
         return this.chapter.getDescription();
     }
 
-    setChapterNumber(chapterNumber: number) {
-        this.chapterNumber = chapterNumber;
-    }
+    
 
     setMatch(player: Player, baddie: Baddie) {
         this.match = new Match(player, baddie);

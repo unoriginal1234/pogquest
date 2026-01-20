@@ -11,9 +11,15 @@ const demoStory = new Story(
     "Demo Story",
     "This is a demo story.",
     [
-        new Chapter("Chapter 1", "This is a demo chapter.", 1, new Baddie("Baddie 1", [new Pog("Pog 1", 1, 1, 1, 1)], 100, 1)),
-        new Chapter("Chapter 2", "This is a demo chapter.", 2, new Shop("Shop 1", "This is a demo shop.", [new Item("Item 1", "This is a demo item.", 1)], [new Pog("Pog 1", 1, 1, 1, 1)], [new Slammer("Slammer 1", "This is a demo slammer.", 1)])),
-        new Chapter("Chapter 3", "This is a demo chapter.", 3, new Adventure("Adventure 1", "This is a demo adventure.", "This is a demo effect."))
+        new Chapter("The beginning", "This is a demo chapter.", new Baddie("Baddie 1", [new Pog("Pog 1", 1, 1, 1, 1)], 100, 1)),
+        new Chapter("The middle", "This is a demo chapter.", new Shop("Shop 1", "This is a demo shop.", [new Item("Item 1", "This is a demo item.", 1)], [new Pog("Pog 1", 1, 1, 1, 1)], [new Slammer("Slammer 1", "This is a demo slammer.", 1)])),
+        new Chapter("The end", "This is a demo chapter.", new Adventure("Adventure 1", "This is a demo adventure.", "This is a demo effect.")),
+        new Chapter("Oh wait this is the beginning again", "This is a demo chapter.", new Baddie("Baddie 1", [new Pog("Pog 1", 1, 1, 1, 1)], 100, 1)),
+        new Chapter("The middle again", "This is a demo chapter.", new Shop("Shop 1", "This is a demo shop.", [new Item("Item 1", "This is a demo item.", 1)], [new Pog("Pog 1", 1, 1, 1, 1)], [new Slammer("Slammer 1", "This is a demo slammer.", 1)])),
+        new Chapter("The end again", "This is a demo chapter.", new Adventure("Adventure 1", "This is a demo adventure.", "This is a demo effect.")),
+        new Chapter("Oh wait this is the beginning again", "This is a demo chapter.", new Baddie("Baddie 1", [new Pog("Pog 1", 1, 1, 1, 1)], 100, 1)),
+        new Chapter("The middle again", "This is a demo chapter.", new Shop("Shop 1", "This is a demo shop.", [new Item("Item 1", "This is a demo item.", 1)], [new Pog("Pog 1", 1, 1, 1, 1)], [new Slammer("Slammer 1", "This is a demo slammer.", 1)])),
+        new Chapter("The end again", "This is a demo chapter.", new Adventure("Adventure 1", "This is a demo adventure.", "This is a demo effect.")),
     ]
 );
 
