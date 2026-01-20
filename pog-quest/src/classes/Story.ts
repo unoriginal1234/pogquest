@@ -6,7 +6,7 @@ export default class Story {
     chapters: Chapter[];
     unlockedChapters: number[];
     currentChapter: Chapter;
-    
+
     constructor(title: string, description: string, chapters: Chapter[]) {
         this.title = title;
         this.description = description;
@@ -16,7 +16,6 @@ export default class Story {
     }
 
     // story should handle the chapter progression and completion
-    // should track
 
     getCurrentChapter() {
         return this.chapters[this.unlockedChapters[this.unlockedChapters.length - 1]];

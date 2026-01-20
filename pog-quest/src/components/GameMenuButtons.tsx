@@ -7,15 +7,18 @@ export default function GameMenuButtons({getMenuButtonSelection}: {getMenuButton
             <h2>Game Menu</h2>
             <div className="button-group">
                 <button onClick={() => getMenuButtonSelection("pog-collection")}>
-                    Pog Collection</button>
+                    Pogs</button>
                 <button onClick={() => getMenuButtonSelection("slammers")}>
                     Slammers</button>
                 <button onClick={() => getMenuButtonSelection("inventory")}>
                     Inventory</button>
                 <button onClick={() => getMenuButtonSelection("stats")}>
                     Stats</button>
-                <Link to="/"><button>Main Menu</button></Link>
+                
             </div>
+            <footer className="footer-wrapper">
+                <Link to="/"><button>Main Menu</button></Link>
+            </footer>
         </section>
     );
 }

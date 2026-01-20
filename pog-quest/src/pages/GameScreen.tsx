@@ -15,15 +15,7 @@ export default function GameScreen() {
   const game = state.game;
   const player = game?.getPlayer();
 
-  function togglePogCollection(){
-    setMenuScreen(null);
-  }
-
-  function toggleSlammersCollection(){
-    setMenuScreen(null);
-  }
-
-  function toggleInventory(){
+  function toggleScreen(){
     setMenuScreen(null);
   }
 
@@ -32,7 +24,7 @@ export default function GameScreen() {
   }
 
   return (
-    <div>
+    <div className="page-layout">
       <h1>Game Screen</h1>
       <GameStoryPanel game={game} />
       <div className="game-menu-row">
@@ -45,18 +37,18 @@ export default function GameScreen() {
   function GameMenuScreen() {
 
     if (menuScreen === "pog-collection"){
-      return <PogCollection player={player!} togglePogCollection={togglePogCollection} />;
+      return <PogCollection player={player!} togglePogCollection={toggleScreen} />;
     } else if (menuScreen === "inventory"){
-      return <Inventory player={player!} toggleInventory={toggleInventory} />;
+      return <Inventory player={player!} toggleInventory={toggleScreen} />;
     } else if (menuScreen === "stats"){
-      return <PlayerStats player={player!} />;
+      return <PlayerStats player={player!} togglePlayerStats={toggleScreen} />;
     } else if (menuScreen === "slammers"){
-      return <SlammersCollection player={player!} toggleSlammersCollection={toggleSlammersCollection} />;
+      return <SlammersCollection player={player!} toggleSlammersCollection={toggleScreen} />;
     }
   
     return (
       <div>
-        <PlayerStats player={game!.getPlayer()} />
+        <PlayerStats player={game!.getPlayer()} togglePlayerStats={toggleScreen} />
       </div>
     );
   }

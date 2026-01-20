@@ -3,9 +3,8 @@ import { useGame } from '../context/GameContext';
 
 function MainMenuScreen() {
 
-    const { state } = useGame();
+    const { state, dispatch } = useGame();
     const game = state.game;
-    const { dispatch } = useGame();
 
     return (
         <div>

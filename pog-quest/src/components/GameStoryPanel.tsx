@@ -13,7 +13,7 @@ export default function GameStoryPanel({ game }: { game: Game }) {
     const totalChapterCount = story.getChapterCount();
 
     return (
-        <section className="demo-section">
+        <section className="demo-section pog-border">
             <h2>Story</h2>
             <p className="pog-glow-blue">
                 Chapter {chapterNumber}: {chapterTitle} —{" "}
