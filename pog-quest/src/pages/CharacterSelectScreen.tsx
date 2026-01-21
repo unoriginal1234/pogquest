@@ -10,7 +10,7 @@ import Inventory from '../components/Inventory';
 
 import MainMenuButton from '../components/MainMenuButton';
 
-import demoStoryProps from '../resources/demoStory';
+import createDemoStory from '../resources/demoStory';
 import Story from '../classes/Story';
 import Game from '../classes/Game';
 import Player from '../classes/Player';
@@ -27,7 +27,7 @@ function CharacterSelectScreen() {
     const [ currentStory, setCurrentStory ] = useState<Story | null>(null);
 
     useEffect(() => {
-      setCurrentStory(new Story(demoStoryProps.title, demoStoryProps.description, demoStoryProps.chapters, demoStoryProps.floors));
+      setCurrentStory(createDemoStory());
     }, []);
 
     function toggleInventory() {

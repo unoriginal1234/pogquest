@@ -19,8 +19,8 @@ export default class Game {
         this.startTime = new Date();
         this.player = player;
         this.story = story;
-        this.chapter = story.getChapter(0);
-        this.chapterNumber = 1;
+        this.chapter = story.getCurrentFloor().getCurrentChapter();
+        this.chapterNumber = 1; //can get rid of this
         this.match = null;
     }
 
