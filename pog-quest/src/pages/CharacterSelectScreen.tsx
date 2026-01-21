@@ -27,7 +27,7 @@ function CharacterSelectScreen() {
     const [ currentStory, setCurrentStory ] = useState<Story | null>(null);
 
     useEffect(() => {
-      setCurrentStory(new Story(demoStoryProps.title, demoStoryProps.description, demoStoryProps.chapters));
+      setCurrentStory(new Story(demoStoryProps.title, demoStoryProps.description, demoStoryProps.chapters, demoStoryProps.floors));
     }, []);
 
     function toggleInventory() {

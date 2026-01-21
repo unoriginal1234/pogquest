@@ -6,8 +6,6 @@ function MainMenuScreen() {
     const { state, dispatch } = useGame();
     const game = state.game;
 
-    console.log("Game", game);
-
     return (
         <div>
             <header>
