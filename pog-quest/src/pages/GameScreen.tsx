@@ -15,6 +15,8 @@ export default function GameScreen() {
   const game = state.game;
   const player = game?.getPlayer();
 
+  console.log("Game", game);
+
   function toggleScreen(){
     setMenuScreen(null);
   }

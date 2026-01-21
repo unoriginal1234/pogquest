@@ -10,7 +10,7 @@ import Inventory from '../components/Inventory';
 
 import MainMenuButton from '../components/MainMenuButton';
 
-import demoStory from '../resources/demoStory';
+import demoStoryProps from '../resources/demoStory';
 import Story from '../classes/Story';
 import Game from '../classes/Game';
 import Player from '../classes/Player';
@@ -24,6 +24,11 @@ function CharacterSelectScreen() {
     const [isPogCollectionOpen, setIsPogCollectionOpen] = useState(false);
     const [isSlammersCollectionOpen, setIsSlammersCollectionOpen] = useState(false);
     const [isInventoryOpen, setIsInventoryOpen] = useState(false);
+    const [ currentStory, setCurrentStory ] = useState<Story | null>(null);
+
+    useEffect(() => {
+      setCurrentStory(new Story(demoStoryProps.title, demoStoryProps.description, demoStoryProps.chapters));
+    }, []);
 
     function toggleInventory() {
       setIsInventoryOpen(!isInventoryOpen);
@@ -43,10 +48,6 @@ function CharacterSelectScreen() {
       const newGame = new Game(player, story);
       dispatch({ type: 'START_GAME', game: newGame });
     }
-
-    useEffect(() => {
-      console.log(player);
-    }, [player]);
 
     return (
         <div className="page-layout">
@@ -86,7 +87,7 @@ function CharacterSelectScreen() {
                 <OpenCollection />
                 
                 {player ? <Link to="/game"><button onClick={() => {
-                  startGame(player, demoStory);
+                  startGame(player, currentStory!);
                 }}>Start Game</button></Link> : <button disabled>Start Game</button>}
                 <button onClick={() => setSelectedButton(null)}>Close</button>
 

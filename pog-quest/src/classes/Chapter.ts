@@ -5,12 +5,12 @@ import Adventure from './Adventure';
 export default class Chapter {
     _id: string;
     title: string;
-    description: string;
+    description: string[];
     completionType: Baddie | Shop | Adventure;
 
     constructor(
         title: string, 
-        description: string, 
+        description: string[], 
         completionType: Baddie | Shop | Adventure
     ) {
         this._id = crypto.randomUUID();

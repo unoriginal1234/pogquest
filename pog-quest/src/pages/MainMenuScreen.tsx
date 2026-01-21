@@ -6,6 +6,8 @@ function MainMenuScreen() {
     const { state, dispatch } = useGame();
     const game = state.game;
 
+    console.log("Game", game);
+
     return (
         <div>
             <header>
@@ -14,6 +16,7 @@ function MainMenuScreen() {
             </header>
             
             <div className="button-group">
+                {/* could make a warning message if there is a game in progress */}
                 <Link to="/character-select"><button>New Game</button></Link>
                 {game !== null ? 
                 <Link to="/game"><button className="pog-glow-blue" 
