@@ -17,6 +17,7 @@ export default function GameStoryPanel({ game }: { game: Game }) {
     const [chapterDescription, setChapterDescription] = useState<string>(currentChapter.getDescription()[0]);
     const [chapterTitle, setChapterTitle] = useState<string>(currentChapter.getTitle());
     const [chapterDescriptionIndex, setChapterDescriptionIndex] = useState<number>(0);
+    const [isFinalChpaterOpen, setIsFinalChpaterOpen] = useState<boolean>(false);
 
     function handleChapterClick(chapterNumber: number) {
         currentFloor.setCurrentChapter(chapterNumber);
@@ -46,6 +47,13 @@ export default function GameStoryPanel({ game }: { game: Game }) {
         setCurrentFloor(currentFloor);
         setStory(story);
         setChapterDescriptionIndex(0);
+    }
+
+    if (
+        chapterNumber === currentFloor.getChapterCount() - 1 && 
+        (chapterDescriptionIndex === currentChapter.getDescription().length - 1) &&
+        !isFinalChpaterOpen) {
+            setIsFinalChpaterOpen(true);
     }
 
     // need to handle the case where the current chapter is the last chapter
@@ -79,6 +87,7 @@ export default function GameStoryPanel({ game }: { game: Game }) {
                 disabled={chapterNumber === currentFloor.getChapterCount() - 1}>
                     Close Current Chapter
             </button>
+            {isFinalChpaterOpen ? <button>Next Level</button> : null}
         </section>
     );
 
