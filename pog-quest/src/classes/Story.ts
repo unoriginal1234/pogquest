@@ -31,7 +31,6 @@ export default class Story {
         return this.floors;
     }
 
-
     getFloorCount() {
         return this.floors.length;
     }
