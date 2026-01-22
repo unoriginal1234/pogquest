@@ -15,7 +15,7 @@ export default class Story {
         this.currentFloorIndex = 0;
     }
 
-    setCurrentFloor(floorNumber: number) {
+    setCurrentFloorByIndex(floorNumber: number) {
         this.currentFloorIndex = floorNumber;
     }
 
@@ -46,19 +46,5 @@ export default class Story {
 
     getDescription() {
         return this.description;
-    }
-
-    // getChapters() {
-    //     return this.chapters;
-    // }
-
-    // getChapter(index: number) {
-    //     return this.chapters[index];
-    // }
-
-    // getChapterCount() {
-    //     return this.chapters.length;
-    // }
-
-    
+    }    
 }

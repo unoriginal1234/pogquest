@@ -1,12 +1,12 @@
 import { useState } from "react";
 import Game from "../classes/Game";
-import Story from "../classes/Story";
+
 import Chapter from "../classes/Chapter";
 import Floor from "../classes/Floor";
 
 export default function GameStoryPanel({ game }: { game: Game }) {
 
-    const [story, setStory ] = useState<Story>(game.getStory());
+    const story = game.getStory();
 
     const [currentFloor, setCurrentFloor] = useState<Floor>(story.getCurrentFloor());
 
@@ -28,8 +28,8 @@ export default function GameStoryPanel({ game }: { game: Game }) {
         setCompletionType(nextChapter.getCompletionType());
         setChapterDescription(nextChapter.getDescription()[0]);
         setChapterTitle(nextChapter.getTitle());
-        setCurrentFloor(currentFloor);
-        setStory(story);
+        // setCurrentFloor(currentFloor);
+        
         setChapterDescriptionIndex(0);
     }
 
@@ -42,11 +42,28 @@ export default function GameStoryPanel({ game }: { game: Game }) {
         setCurrentChapter(nextChapter);
         setCompletionType(nextChapter.getCompletionType());
         setChapterDescription(nextChapter.getDescription()[0]);
-       
         setChapterTitle(nextChapter.getTitle());
-        setCurrentFloor(currentFloor);
-        setStory(story);
+        // setCurrentFloor(currentFloor);
         setChapterDescriptionIndex(0);
+    }
+
+    function handleNextFloor() {
+        console.log("next floor");
+        
+        story.setCurrentFloorByIndex(story.getCurrentFloorIndex() + 1);
+        
+        const nextFloor = story.getCurrentFloor();
+        console.log(nextFloor, "next floor");
+
+        setCurrentFloor(nextFloor);
+        setChapterNumber(nextFloor.getChapterNumber());
+        setCurrentChapter(nextFloor.getCurrentChapter());
+        setCompletionType(nextFloor.getCurrentChapter().getCompletionType());
+        setChapterDescription(nextFloor.getCurrentChapter().getDescription()[0]);
+        setChapterTitle(nextFloor.getCurrentChapter().getTitle());
+        setUnlockedChapters(nextFloor.getUnlockedChapters());
+        setChapterDescriptionIndex(0);
+        setIsFinalChpaterOpen(false);
     }
 
     if (
@@ -56,8 +73,7 @@ export default function GameStoryPanel({ game }: { game: Game }) {
             setIsFinalChpaterOpen(true);
     }
 
-    // need to handle the case where the current chapter is the last chapter
-    // for now, we'll just disable the button if the current chapter is the last chapter
+
    
     return (
         <section className="demo-section pog-border">
@@ -71,7 +87,6 @@ export default function GameStoryPanel({ game }: { game: Game }) {
                     <button onClick={() => 
                         {
                             const nextChapterIndex = chapterDescriptionIndex + 1;
-                            console.log(nextChapterIndex, "next chapter index");
                             setChapterDescriptionIndex(nextChapterIndex);
                             setChapterDescription(currentChapter.getDescription()[nextChapterIndex])}}>
                         Next
@@ -87,7 +102,9 @@ export default function GameStoryPanel({ game }: { game: Game }) {
                 disabled={chapterNumber === currentFloor.getChapterCount() - 1}>
                     Close Current Chapter
             </button>
-            {isFinalChpaterOpen ? <button>Next Level</button> : null}
+            {isFinalChpaterOpen ? <button  
+                disabled={story.getCurrentFloorIndex() === story.getFloorCount() - 1}
+                onClick={handleNextFloor}>Next Floor</button> : null}
         </section>
     );
 
