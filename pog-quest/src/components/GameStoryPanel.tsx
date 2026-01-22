@@ -16,6 +16,7 @@ export default function GameStoryPanel({ game }: { game: Game }) {
     const [unlockedChapters, setUnlockedChapters] = useState<number[]>(currentFloor.getUnlockedChapters());
     const [chapterDescription, setChapterDescription] = useState<string>(currentChapter.getDescription()[0]);
     const [chapterTitle, setChapterTitle] = useState<string>(currentChapter.getTitle());
+    const [chapterDescriptionIndex, setChapterDescriptionIndex] = useState<number>(0);
 
     function handleChapterClick(chapterNumber: number) {
         currentFloor.setCurrentChapter(chapterNumber);
@@ -28,7 +29,7 @@ export default function GameStoryPanel({ game }: { game: Game }) {
         setChapterTitle(nextChapter.getTitle());
         setCurrentFloor(currentFloor);
         setStory(story);
-        
+        setChapterDescriptionIndex(0);
     }
 
     function handleCloseCurrentChapter() {
@@ -44,6 +45,7 @@ export default function GameStoryPanel({ game }: { game: Game }) {
         setChapterTitle(nextChapter.getTitle());
         setCurrentFloor(currentFloor);
         setStory(story);
+        setChapterDescriptionIndex(0);
     }
 
     // need to handle the case where the current chapter is the last chapter
@@ -57,18 +59,21 @@ export default function GameStoryPanel({ game }: { game: Game }) {
                 Chapter {chapterNumber} :
                 <p className="pog-glow-green">{chapterTitle}</p>
                 <p className="pog-glow-blue">{chapterDescription}</p>
-                <button onClick={() => setChapterDescription(currentChapter.getDescription()[1])}>Next</button>
+                {chapterDescriptionIndex < currentChapter.getDescription().length - 1  && (
+                    <button onClick={() => 
+                        {
+                            const nextChapterIndex = chapterDescriptionIndex + 1;
+                            console.log(nextChapterIndex, "next chapter index");
+                            setChapterDescriptionIndex(nextChapterIndex);
+                            setChapterDescription(currentChapter.getDescription()[nextChapterIndex])}}>
+                        Next
+                    </button>)}
             </span>
            
             <p className="pog-glow-blue">Completion Type: {completionType.constructor.name}</p>
 
-            <div className="button-group">
-                {unlockedChapters.map((chapterNumber: number) => (
-                    <button key={chapterNumber} onClick={() => handleChapterClick(chapterNumber)}>
-                        {chapterNumber}
-                    </button>
-                ))}
-            </div>
+            {chapterDescriptionIndex === 0 ? <ChapterNavigator /> : null}
+
             <button 
                 onClick={handleCloseCurrentChapter}
                 disabled={chapterNumber === currentFloor.getChapterCount() - 1}>
@@ -76,4 +81,16 @@ export default function GameStoryPanel({ game }: { game: Game }) {
             </button>
         </section>
     );
+
+    function ChapterNavigator(){
+        return (
+            <div className="button-group">
+                {unlockedChapters.map((chapterNumber: number) => (
+                    <button key={chapterNumber} onClick={() => handleChapterClick(chapterNumber)}>
+                        {chapterNumber}
+                    </button>
+                ))}
+            </div>
+        )
+    }
 }
