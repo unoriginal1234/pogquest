@@ -24,15 +24,11 @@ export default class Player {
     this.archetype = archetype;
     this.level = 1;
     this.slammers = archetype.baseSlammers;
-    this._id = "";
+    this._id = crypto.randomUUID();
   } 
 
   getName() {
     return this.name;
-  }
-
-  setId(id: string) {
-    this._id = id;
   }
 
   getId() {

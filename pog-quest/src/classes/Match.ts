@@ -8,6 +8,7 @@ export default class Match {
     pogs: Pog[];
     stack: Pog[];
     playedPogs: Pog[];
+    pogOwners: Map<string,string>;
 
     constructor(player: Player, baddie: Baddie)
     {
@@ -16,10 +17,44 @@ export default class Match {
         this.pogs = player.getPogs().concat(baddie.getPogs()).slice();
         this.stack = [];
         this.playedPogs = [];
+        this.pogOwners = new Map();
     }
 
     startMatch() {
+        this.setStack();
+        this.setPogOwners();
+    }
+
+    setPogOwners() {
+        const playerId = this.player.getId();
+        const baddieId = this.baddie.getId();
+        
+        this.player.getPogs().forEach(pog => {
+            this.pogOwners.set(pog.getId(), playerId);
+        });
+        this.baddie.getPogs().forEach(pog => {
+            this.pogOwners.set(pog.getId(), baddieId);
+        });
+    }
+
+    getPogOwner(pogId: string) {
+        return this.pogOwners.get(pogId);
+    }
+
+    getPogOwners() {
+        return this.pogOwners;
+    }
+
+    setStack() {
         this.stack = this.pogs.slice();
+        // sort the stack by the pog's id a silly way to randomize
+        // TODO: use a better randomization method
+        this.stack.sort((a, b) => a.getId().localeCompare(b.getId()));
+    }
+
+    getStack() {
+        console.log('hiiiii')
+        return this.stack;
     }
 
     getPlayer() {
