@@ -6,12 +6,20 @@ export default class Match {
     player: Player;
     baddie: Baddie;
     pogs: Pog[];
+    stack: Pog[];
+    playedPogs: Pog[];
 
     constructor(player: Player, baddie: Baddie)
     {
         this.player = player;
         this.baddie = baddie;
-        this.pogs = player.getPogs().concat(baddie.getPogs());
+        this.pogs = player.getPogs().concat(baddie.getPogs()).slice();
+        this.stack = [];
+        this.playedPogs = [];
+    }
+
+    startMatch() {
+        this.stack = this.pogs.slice();
     }
 
     getPlayer() {

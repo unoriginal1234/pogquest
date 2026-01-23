@@ -3,10 +3,13 @@ import Game from "../classes/Game";
 
 import Chapter from "../classes/Chapter";
 import Floor from "../classes/Floor";
+import Baddie from "../classes/Baddie";
 
 import MatchComponent from "./MatchComponent";
 import ShopComponent from "./ShopComponent";
 import AdventureComponent from "./AdventureComponent";
+
+import matchFactory from "../resources/matchFactory";
 
 export default function GameStoryPanel({ game }: { game: Game }) {
 
@@ -137,7 +140,7 @@ export default function GameStoryPanel({ game }: { game: Game }) {
 
     function CompletionTypeComponent() {
         if (completionType.constructor.name === "Baddie") {
-            return <MatchComponent />;
+            return <MatchComponent match={matchFactory(game.getPlayer(), completionType as Baddie)} />;
         } else if (completionType.constructor.name === "Shop") {
             return <ShopComponent />;
         } else if (completionType.constructor.name === "Adventure") {

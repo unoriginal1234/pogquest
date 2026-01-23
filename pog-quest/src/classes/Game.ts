@@ -1,17 +1,11 @@
 import Player from './Player';
-import Chapter from './Chapter';
 import Story from './Story';
-import Match from './Match';
-import Baddie from './Baddie';
 
 export default class Game {
     _id: string;
     startTime: Date;
     player: Player;
     story: Story;
-    chapter: Chapter;
-    chapterNumber: number;
-    match: Match | null;
     endTime: Date | null;
 
     constructor(player: Player, story: Story) {
@@ -19,9 +13,6 @@ export default class Game {
         this.startTime = new Date();
         this.player = player;
         this.story = story;
-        this.chapter = story.getCurrentFloor().getCurrentChapter();
-        this.chapterNumber = 1; //can get rid of this
-        this.match = null;
         this.endTime = null;
     }
 
@@ -36,30 +27,9 @@ export default class Game {
     getPlayer() {
         return this.player;
     }
-    
-    getChapter() {
-        return this.chapter;
-    }
 
     getStory() {
         return this.story;
-    }
-
-    // want to handle this at the story level
-    getChapterNumber() {
-        return this.chapterNumber;
-    }
-    
-    getChapterTitle() {
-        return this.chapter.getTitle();
-    }
-
-    getChapterDescription() {
-        return this.chapter.getDescription();
-    }
-
-    setMatch(player: Player, baddie: Baddie) {
-        this.match = new Match(player, baddie);
     }
 
     endGame() {
