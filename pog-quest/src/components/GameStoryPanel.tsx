@@ -4,6 +4,10 @@ import Game from "../classes/Game";
 import Chapter from "../classes/Chapter";
 import Floor from "../classes/Floor";
 
+import MatchComponent from "./MatchComponent";
+import ShopComponent from "./ShopComponent";
+import AdventureComponent from "./AdventureComponent";
+
 export default function GameStoryPanel({ game }: { game: Game }) {
 
     const story = game.getStory();
@@ -97,11 +101,13 @@ export default function GameStoryPanel({ game }: { game: Game }) {
             {chapterDescriptionIndex === 0 ? <ChapterNavigator /> : null}
 
             {/* I like this but might want to not check for development purposes */}
-            {isLastChapterDescription ? <button 
+            {isLastChapterDescription ? <>
+            <button 
                 onClick={handleCloseCurrentChapter}
                 disabled={chapterNumber === currentFloor.getChapterCount() - 1}>
                     Close Current Chapter
-            </button> : null}
+            </button>
+            <CompletionTypeComponent /> </> : null}
 
             
             {isFinalChapterOpen ? <button  
@@ -128,4 +134,15 @@ export default function GameStoryPanel({ game }: { game: Game }) {
             </div>
         )
     }
+
+    function CompletionTypeComponent() {
+        if (completionType.constructor.name === "Baddie") {
+            return <MatchComponent />;
+        } else if (completionType.constructor.name === "Shop") {
+            return <ShopComponent />;
+        } else if (completionType.constructor.name === "Adventure") {
+            return <AdventureComponent />;
+        }
+    }
+
 }
