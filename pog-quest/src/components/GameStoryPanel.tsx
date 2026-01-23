@@ -19,6 +19,7 @@ export default function GameStoryPanel({ game }: { game: Game }) {
     const [chapterDescriptionIndex, setChapterDescriptionIndex] = useState<number>(0);
     const [isFinalChapterOpen, setIsFinalChapterOpen] = useState<boolean>(false);
 
+
     function handleChapterClick(chapterNumber: number) {
         currentFloor.setCurrentChapter(chapterNumber);
         const nextChapter = currentFloor.getChapter(chapterNumber);
@@ -56,9 +57,17 @@ export default function GameStoryPanel({ game }: { game: Game }) {
         setIsFinalChapterOpen(false);
     }
 
+    function handleCompleteStory() {
+        console.log("complete story");
+        game.endGame();
+        console.log(game, "game after endGame");
+    }
+
     const atLastChapter = chapterNumber === currentFloor.getChapterCount() - 1;
     const atLastChapterDescription = chapterDescriptionIndex === currentChapter.getDescription().length - 1;
-
+    const isLastFloor = story.getCurrentFloorIndex() === story.getFloorCount() - 1;
+    const isLastChapterDescription = chapterDescriptionIndex === currentChapter.getDescription().length - 1;
+    
     if (
         atLastChapter && 
         atLastChapterDescription &&
@@ -87,14 +96,24 @@ export default function GameStoryPanel({ game }: { game: Game }) {
 
             {chapterDescriptionIndex === 0 ? <ChapterNavigator /> : null}
 
-            <button 
+            {/* I like this but might want to not check for development purposes */}
+            {isLastChapterDescription ? <button 
                 onClick={handleCloseCurrentChapter}
                 disabled={chapterNumber === currentFloor.getChapterCount() - 1}>
                     Close Current Chapter
-            </button>
+            </button> : null}
+
+            
             {isFinalChapterOpen ? <button  
-                disabled={story.getCurrentFloorIndex() === story.getFloorCount() - 1}
+                disabled={isLastFloor}
                 onClick={handleNextFloor}>Next Floor</button> : null}
+            
+            {isLastFloor && 
+            isFinalChapterOpen &&
+            atLastChapterDescription && 
+            isLastChapterDescription ? 
+            <button onClick={handleCompleteStory}>End Game</button> : null}
+
         </section>
     );
 

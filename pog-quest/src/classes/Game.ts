@@ -12,7 +12,7 @@ export default class Game {
     chapter: Chapter;
     chapterNumber: number;
     match: Match | null;
-
+    endTime: Date | null;
 
     constructor(player: Player, story: Story) {
         this._id = crypto.randomUUID();
@@ -22,6 +22,7 @@ export default class Game {
         this.chapter = story.getCurrentFloor().getCurrentChapter();
         this.chapterNumber = 1; //can get rid of this
         this.match = null;
+        this.endTime = null;
     }
 
     getId() {
@@ -57,9 +58,11 @@ export default class Game {
         return this.chapter.getDescription();
     }
 
-    
-
     setMatch(player: Player, baddie: Baddie) {
         this.match = new Match(player, baddie);
+    }
+
+    endGame() {
+        this.endTime = new Date();
     }
 }
