@@ -32,8 +32,6 @@ export default class Slammer {
     }
 
     slam(stack: Pog[]) {
-        this.slamAbility(stack);
+        return this.slamAbility(stack);
     }
-
-    
 }

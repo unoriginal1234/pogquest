@@ -9,6 +9,7 @@ export default class Player {
   slammers: Slammer[];
   inventory: Item[];
   hitpoints: number;
+  currentHitpoints: number;
   archetype: Archetype;
   level: number;
   _id: string;
@@ -21,6 +22,7 @@ export default class Player {
     this.pogs = archetype.basepogs;
     this.inventory = archetype.baseInventory;
     this.hitpoints = archetype.basehitpoints;
+    this.currentHitpoints = this.hitpoints;
     this.archetype = archetype;
     this.level = 1;
     this.slammers = archetype.baseSlammers;
@@ -45,6 +47,14 @@ export default class Player {
 
   setHitpoints(hitpoints: number) {
     this.hitpoints = hitpoints;
+  }
+
+  getCurrentHitpoints() {
+    return this.currentHitpoints;
+  }
+
+  setCurrentHitpoints(currentHitpoints: number) {
+    this.currentHitpoints = currentHitpoints;
   }
 
   getInventory() {

@@ -12,6 +12,7 @@ export default class CharacterSelect {
         "Gnarly shredder.", 
         90, 
         [...startingPogs, new Pog("Kick Flip", 5, 5, 5, 1)],
+        // I should return the in game copy as part of the demo slammer ability
         [new Slammer("Radical Style", "Flips up 3 Pogs.", 1, demoSlammerAbility)],
         [new Item("Camera", "Replay last turn.", 100)]
     );
