@@ -6,6 +6,7 @@ export default class Pog {
   gold: number;
   level: number;
   startTime: Date;
+  ownerId: string | undefined;
 
   constructor(name: string, strength: number, defense: number, gold: number, level: number) {
     this._id = crypto.randomUUID();
@@ -15,6 +16,7 @@ export default class Pog {
     this.gold = gold;
     this.level = level;
     this.startTime = new Date();
+    this.ownerId = undefined;
   }
 
   getName() {

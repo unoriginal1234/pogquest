@@ -8,6 +8,7 @@ export default class Match {
     pogs: Pog[];
     stack: Pog[];
     playedPogs: Pog[];
+    inPlayPogs: Pog[];
     pogOwners: Map<string,string>;
 
     constructor(player: Player, baddie: Baddie)
@@ -16,13 +17,14 @@ export default class Match {
         this.baddie = baddie;
         this.pogs = player.getPogs().concat(baddie.getPogs()).slice();
         this.stack = [];
+        this.inPlayPogs = [];
         this.playedPogs = [];
         this.pogOwners = new Map();
     }
 
     startMatch() {
-        this.setStack();
         this.setPogOwners();
+        this.setStack();
     }
 
     setPogOwners() {
@@ -38,6 +40,10 @@ export default class Match {
     }
 
     getPogOwner(pogId: string) {
+        if (!this.pogOwners.has(pogId)) {
+            return null;
+            console.log('pog not found');
+        }
         return this.pogOwners.get(pogId);
     }
 

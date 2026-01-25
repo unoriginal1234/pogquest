@@ -19,6 +19,10 @@ export default class Baddie {
         return this._id;
     }
 
+    getName() {
+        return this.name;
+    }
+
     getPogs() {
         return this.pogs;
     }

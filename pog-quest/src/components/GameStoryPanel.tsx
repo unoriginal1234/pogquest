@@ -18,6 +18,7 @@ export default function GameStoryPanel({ game }: { game: Game }) {
     const [currentFloor, setCurrentFloor] = useState<Floor>(story.getCurrentFloor());
 
     const [currentChapter, setCurrentChapter] = useState<Chapter>(currentFloor.getCurrentChapter());
+    
     const [chapterNumber, setChapterNumber] = useState<number>(currentFloor.getChapterNumber());
     const [completionType, setCompletionType] = useState(currentChapter.getCompletionType());
     const [unlockedChapters, setUnlockedChapters] = useState<number[]>(currentFloor.getUnlockedChapters());
