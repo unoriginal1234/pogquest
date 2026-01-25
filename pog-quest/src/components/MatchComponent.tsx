@@ -1,5 +1,8 @@
 
 import MatchClass from "../classes/Match";
+import BaddieComponent from "./BaddieComponent";
+import PlayerComponent from "./PlayerComponent";
+import StackComponent from "./StackComponent";
 
 
 export default function MatchComponent({ match }: { match: MatchClass }) {
@@ -12,12 +15,18 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     const pogOwners = match.getPogOwners();
 
     console.log(match);
+    console.log(baddie, 'baddie');
+    console.log(player, 'player');
+    console.log(pogOwners, 'pogOwners');
+    console.log(stack, 'stack');
 
-    console.log(player, baddie, stack, pogOwners);
+    const stackPreview = stack.slice(0, 4);
 
     return (
-        <div>
-            <h1>Match</h1>
+        <div className="match-layout">
+            <BaddieComponent baddie={baddie} />
+            <StackComponent stack={stackPreview} />
+            <PlayerComponent player={player} />
         </div>
     );
 }
