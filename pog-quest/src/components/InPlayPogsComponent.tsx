@@ -5,7 +5,9 @@ export default function InPlayPogsComponent({ inPlayPogs }: { inPlayPogs: PogCla
     return (
         <div>
             {inPlayPogs.map((pog) => (
-                <Pog pog={pog} />
+                <div key={pog.getId()}>
+                    <Pog pog={pog} />
+                </div>
             ))}
         </div>
     );
