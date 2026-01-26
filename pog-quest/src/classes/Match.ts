@@ -10,6 +10,7 @@ export default class Match {
     playedPogs: Pog[];
     inPlayPogs: Pog[];
     pogOwners: Map<string,string>;
+    inProgress: boolean;
 
     constructor(player: Player, baddie: Baddie)
     {
@@ -20,11 +21,13 @@ export default class Match {
         this.inPlayPogs = [];
         this.playedPogs = [];
         this.pogOwners = new Map();
+        this.inProgress = false;
     }
 
     startMatch() {
         this.setPogOwners();
         this.setStack();
+        this.inProgress = true;
     }
 
     setPogOwners() {
@@ -73,5 +76,13 @@ export default class Match {
 
     getPogs() {
         return this.pogs;
+    }
+
+    getInProgress() {
+        return this.inProgress;
+    }
+
+    endMatch() {
+        this.inProgress = false;
     }
 }

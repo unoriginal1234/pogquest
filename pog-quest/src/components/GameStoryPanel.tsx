@@ -11,7 +11,7 @@ import AdventureComponent from "./AdventureComponent";
 
 import matchFactory from "../resources/matchFactory";
 
-export default function GameStoryPanel({ game }: { game: Game }) {
+export default function GameStoryPanel({ game }: { game: Game}) {
 
     const story = game.getStory();
 
@@ -146,7 +146,7 @@ export default function GameStoryPanel({ game }: { game: Game }) {
             return <ShopComponent />;
         } else if (completionType.constructor.name === "Adventure") {
             return <AdventureComponent />;
-        }
+        } 
     }
 
 }

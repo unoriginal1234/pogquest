@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 export default function GameMenuButtons({getMenuButtonSelection}: {getMenuButtonSelection: (selection: string) => void}) {
 
     return (
@@ -16,9 +14,7 @@ export default function GameMenuButtons({getMenuButtonSelection}: {getMenuButton
                     Stats</button>
                 
             </div>
-            <footer className="footer-wrapper">
-                <Link to="/"><button>Main Menu</button></Link>
-            </footer>
+            
         </section>
     );
 }

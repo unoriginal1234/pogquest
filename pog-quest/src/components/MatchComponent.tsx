@@ -8,6 +8,7 @@ import InPlayPogsComponent from "./InPlayPogsComponent";
 import PogClass from "../classes/Pog";
 
 export default function MatchComponent({ match }: { match: MatchClass }) {
+
     match.startMatch();
 
     const player = match.getPlayer();
@@ -41,9 +42,6 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
         setVisualStack(stack.slice());
         setInPlayPogs([]);
     }
-
-
-
 
     return (
         <div className="match-layout">

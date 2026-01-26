@@ -7,6 +7,7 @@ import PlayerStats from '../components/PlayerStats';
 import PogCollection from '../components/PogCollection';
 import SlammersCollection from '../components/SlammersCollection';
 import Inventory from '../components/Inventory';    
+import { Link } from 'react-router-dom';
 
 export default function GameScreen() {
   const { state } = useGame();
@@ -31,6 +32,9 @@ export default function GameScreen() {
         <GameMenuButtons getMenuButtonSelection={getMenuButtonSelection}/>
         {menuScreen !== null ? <GameMenuScreen /> : null}
       </div>
+      <footer className="footer-wrapper">
+          <Link to="/"><button>Main Menu</button></Link>
+      </footer>
     </div>
   );
 
