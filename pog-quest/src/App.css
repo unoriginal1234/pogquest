@@ -212,7 +212,7 @@ main {
 
 .match-arena {
   width: 100%;
-  min-height: 220px;
+  min-height: 400px;
   padding: 16px 20px;
   margin: 24px 0;
   border: 3px solid var(--pog-electric-blue);
