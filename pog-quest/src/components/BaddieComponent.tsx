@@ -20,7 +20,10 @@ export default function BaddieComponent({ baddie }: { baddie: BaddieClass }) {
             <p>Gold: {baddie.getGold()}</p>
             <p>Pogs: {baddie.getPogs().length}</p>
             <p>Current Hitpoints: {currentHitpoints}</p>
-            <button onClick={handleTakeDamageClick}>Take Damage</button>
+            <button 
+                disabled={currentHitpoints <= 0} 
+                onClick={handleTakeDamageClick}>Take Damage
+            </button>
         </div>
     );
 }

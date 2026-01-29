@@ -15,6 +15,8 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     // const pogs = match.getPogs();
     const stack = match.getStack();
     const pogOwners = match.getPogOwners();
+
+    const [openMenuPogId, setOpenMenuPogId] = useState<string | null>(null);
     
     console.log(pogOwners);
 
@@ -36,12 +38,32 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
         setInPlayPogs([]);
     }
 
+    function handleInPlayPogClick(pog: PogClass) {
+        setOpenMenuPogId((current) => (current === pog.getId() ? null : pog.getId()));
+    }
+
+    function handleUseClick(pog: PogClass) {
+        console.log("use", pog);
+        setOpenMenuPogId(null);
+    }
+
+    function handleFlipUpClick(pog: PogClass) {
+        console.log("flip up", pog);
+        setOpenMenuPogId(null);
+    }
+
     return (
-        <div className="match-layout">
+        <div className="match-layout" >
             <BaddieComponent baddie={baddie} />
             <div className="match-arena">
                 <StackComponent stack={visualStack} onClick={handleStackClick} />
-                <InPlayPogsComponent inPlayPogs={inPlayPogs} />
+                <InPlayPogsComponent 
+                inPlayPogs={inPlayPogs}
+                openMenuPogId={openMenuPogId}
+                handleInPlayPogClick={handleInPlayPogClick}
+                handleUseClick={handleUseClick}
+                handleFlipUpClick={handleFlipUpClick}
+                />
                 <button onClick={handleReStackClick}>
                     Re-stack
                 </button>

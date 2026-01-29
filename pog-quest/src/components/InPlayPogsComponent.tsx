@@ -1,24 +1,18 @@
-import { useState } from "react";
 import PogClass from "../classes/Pog";
 import Pog from "./Pog";
 
-export default function InPlayPogsComponent({ inPlayPogs }: { inPlayPogs: PogClass[] }) {
-    const [openMenuPogId, setOpenMenuPogId] = useState<string | null>(null);
-
-    function handleInPlayPogClick(pog: PogClass) {
-        setOpenMenuPogId((current) => (current === pog.getId() ? null : pog.getId()));
-    }
-
-    function handleUseClick(pog: PogClass) {
-        console.log("use", pog);
-        setOpenMenuPogId(null);
-    }
-
-    function handleFlipUpClick(pog: PogClass) {
-        console.log("flip up", pog);
-        setOpenMenuPogId(null);
-    }
-
+export default function InPlayPogsComponent(
+    { inPlayPogs, 
+        openMenuPogId, 
+        handleInPlayPogClick, 
+        handleUseClick, 
+        handleFlipUpClick }: 
+        { inPlayPogs: PogClass[], 
+            openMenuPogId: string | null, 
+            handleInPlayPogClick: (pog: PogClass) => void, 
+            handleUseClick: (pog: PogClass) => void, 
+            handleFlipUpClick: (pog: PogClass) => void }
+) {
     
     
     return (
