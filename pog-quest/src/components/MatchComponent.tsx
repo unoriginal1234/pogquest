@@ -25,6 +25,8 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     const [ inPlayPogs, setInPlayPogs ] = useState<PogClass[]>( match.getInPlayPogs() );
     const [ visualStack, setVisualStack ] = useState<PogClass[]>( match.getStack() );   
 
+    const [currentBaddieHitpoints, setCurrentBaddieHitpoints] = useState(baddie.getCurrentHitpoints());
+
     function handleStackClick() {
         const { flippedStack, remainingStack } = playerSlammer.slam(visualStack);
         setInPlayPogs(flippedStack);
@@ -39,12 +41,22 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     }
 
     function handleInPlayPogClick(pog: PogClass) {
-        setOpenMenuPogId((current) => (current === pog.getId() ? null : pog.getId()));
+        if (pogOwners.get(pog.getId()) === player.getId()) {
+            setOpenMenuPogId(pog.getId());
+        } else {
+            setOpenMenuPogId(null);
+        }
     }
 
     function handleUseClick(pog: PogClass) {
         console.log("use", pog);
+        const pogStrength = (pog.getStrength());
+        const pogDefense = (pog.getDefense());
+        console.log(pogDefense, 'pogDefense');
+        setCurrentBaddieHitpoints(currentBaddieHitpoints - pogStrength);
         setOpenMenuPogId(null);
+
+
     }
 
     function handleFlipUpClick(pog: PogClass) {
@@ -54,7 +66,7 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
 
     return (
         <div className="match-layout" >
-            <BaddieComponent baddie={baddie} />
+            <BaddieComponent baddie={baddie} currentBaddieHitpoints={currentBaddieHitpoints} />
             <div className="match-arena">
                 <StackComponent stack={visualStack} onClick={handleStackClick} />
                 <InPlayPogsComponent 

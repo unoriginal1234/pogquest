@@ -35,11 +35,11 @@ export default class Pog {
     return this._id;
   }
 
-  attack() {
+  getStrength() {
     return this.strength;
   }
   
-  defend() {
+  getDefense() {
     return this.defense;
   }
 

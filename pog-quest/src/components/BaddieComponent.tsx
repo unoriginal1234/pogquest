@@ -1,29 +1,14 @@
-import { useState,useEffect } from "react";
 import BaddieClass from "../classes/Baddie";
 
-export default function BaddieComponent({ baddie }: { baddie: BaddieClass }) {
-
-    const [currentHitpoints, setCurrentHitpoints] = useState(baddie.getCurrentHitpoints());
-
-    useEffect(() => {
-        console.log(baddie);
-    }, []);
-
-    function handleTakeDamageClick() {
-        setCurrentHitpoints(currentHitpoints - 2);
-    }
-
+export default function BaddieComponent({ baddie, currentBaddieHitpoints }: { baddie: BaddieClass, currentBaddieHitpoints: number }) {
+   
     return (
         <div>
             <h2>{baddie.getName()}</h2>
             <p>Level: {baddie.getLevel()}</p>
             <p>Gold: {baddie.getGold()}</p>
             <p>Pogs: {baddie.getPogs().length}</p>
-            <p>Current Hitpoints: {currentHitpoints}</p>
-            <button 
-                disabled={currentHitpoints <= 0} 
-                onClick={handleTakeDamageClick}>Take Damage
-            </button>
+            <p>Current Hitpoints: {currentBaddieHitpoints}</p>
         </div>
     );
 }
