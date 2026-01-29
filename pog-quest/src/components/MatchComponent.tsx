@@ -33,6 +33,8 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     }
 
     function handleReStackClick() {
+
+        match.setNewStack();
         setVisualStack(match.getStack().slice());
         setInPlayPogs([]);
     }
