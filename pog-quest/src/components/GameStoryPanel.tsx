@@ -141,6 +141,7 @@ export default function GameStoryPanel({ game }: { game: Game}) {
 
     function CompletionTypeComponent() {
         if (completionType.constructor.name === "Baddie") {
+            // TODO: remove the matchFactory call from the component
             return <MatchComponent match={matchFactory(game.getPlayer(), completionType as Baddie)} />;
         } else if (completionType.constructor.name === "Shop") {
             return <ShopComponent />;

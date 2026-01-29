@@ -6,6 +6,8 @@ export default class Baddie {
     pogs: Pog[];
     gold: number;
     level: number; // could have two levels for each "floor"
+    maxHitpoints: number;
+    currentHitpoints: number;
 
     constructor(name: string, pogs: Pog[], gold: number, level: number) {
         this._id = crypto.randomUUID();
@@ -13,6 +15,24 @@ export default class Baddie {
         this.pogs = pogs;
         this.gold = gold;
         this.level = level;
+        this.maxHitpoints = 10;
+        this.currentHitpoints = this.maxHitpoints;
+    }
+
+    getMaxHitpoints() {
+        return this.maxHitpoints;
+    }
+
+    getCurrentHitpoints() {
+        return this.currentHitpoints;
+    }
+
+    setCurrentHitpoints(currentHitpoints: number) {
+        this.currentHitpoints = currentHitpoints;
+    }
+
+    takeDamage(damage: number) {
+        this.currentHitpoints -= damage;
     }
 
     getId() {
@@ -33,10 +53,5 @@ export default class Baddie {
 
     getLevel() {
         return this.level;
-    }
-
-    fight(){
-        // choose available pogs and maximize damage
-        console.log("Baddie is fighting!");
     }
 }
