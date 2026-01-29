@@ -73,6 +73,10 @@ export default class Match {
         this.playedPogs = playedPogs;
     }
 
+    addToPlayedPogs(pog: Pog) {
+        this.playedPogs.push(pog);
+    }
+
     getInPlayPogs() {
         return this.inPlayPogs;
     }

@@ -10,13 +10,10 @@ import PogClass from "../classes/Pog";
 export default function MatchComponent({ match }: { match: MatchClass }) {
     const player = match.getPlayer();
     const baddie = match.getBaddie();
-    // const pogs = match.getPogs();
     const pogOwners = match.getPogOwners();
 
     const [openMenuPogId, setOpenMenuPogId] = useState<string | null>(null);
     
-    console.log(pogOwners);
-
     const playerSlammer = player.getSlammers()[0];
     
     const [ inPlayPogs, setInPlayPogs ] = useState<PogClass[]>(() => match.getInPlayPogs().slice());
@@ -33,8 +30,8 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     }
 
     function handleReStackClick() {
-
         match.setNewStack();
+        match.setInPlayPogs([]);
         setVisualStack(match.getStack().slice());
         setInPlayPogs([]);
     }
@@ -50,8 +47,15 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     function handleUseClick(pog: PogClass) {
         console.log("use", pog);
         const pogStrength = (pog.getStrength());
+        
         const pogDefense = (pog.getDefense());
         console.log(pogDefense, 'pogDefense');
+
+        match.addToPlayedPogs(pog);
+        const newInPlayPogs = match.getInPlayPogs().filter(pogs => pogs.getId() !== pog.getId());
+        match.setInPlayPogs(newInPlayPogs);
+        setInPlayPogs(match.getInPlayPogs().slice());
+
         setCurrentBaddieHitpoints(currentBaddieHitpoints - pogStrength);
         setOpenMenuPogId(null);
     }
