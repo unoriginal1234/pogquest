@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Game from "../classes/Game";
 
 import Chapter from "../classes/Chapter";
 import Floor from "../classes/Floor";
 import Baddie from "../classes/Baddie";
+import MatchClass from "../classes/Match";
 
 import MatchComponent from "./MatchComponent";
 import ShopComponent from "./ShopComponent";
@@ -14,6 +15,7 @@ import matchFactory from "../resources/matchFactory";
 export default function GameStoryPanel({ game }: { game: Game}) {
 
     const story = game.getStory();
+    const player = game.getPlayer();
 
     const [currentFloor, setCurrentFloor] = useState<Floor>(story.getCurrentFloor());
 
@@ -26,6 +28,17 @@ export default function GameStoryPanel({ game }: { game: Game}) {
     const [chapterTitle, setChapterTitle] = useState<string>(currentChapter.getTitle());
     const [chapterDescriptionIndex, setChapterDescriptionIndex] = useState<number>(0);
     const [isFinalChapterOpen, setIsFinalChapterOpen] = useState<boolean>(false);
+    const [match, setMatch] = useState<MatchClass | null>(null);
+
+    useEffect(() => {
+        if (completionType instanceof Baddie) {
+            const nextMatch = matchFactory(player, completionType);
+            nextMatch.startMatch();
+            setMatch(nextMatch);
+        } else {
+            setMatch(null);
+        }
+    }, [completionType, player]);
 
 
     function handleChapterClick(chapterNumber: number) {
@@ -140,9 +153,11 @@ export default function GameStoryPanel({ game }: { game: Game}) {
     }
 
     function CompletionTypeComponent() {
-        if (completionType.constructor.name === "Baddie") {
-            // TODO: remove the matchFactory call from the component
-            return <MatchComponent match={matchFactory(game.getPlayer(), completionType as Baddie)} />;
+        if (completionType instanceof Baddie) {
+            if (!match) {
+                return null;
+            }
+            return <MatchComponent key={match.getBaddie().getId()} match={match} />;
         } else if (completionType.constructor.name === "Shop") {
             return <ShopComponent />;
         } else if (completionType.constructor.name === "Adventure") {

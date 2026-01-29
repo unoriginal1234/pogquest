@@ -8,12 +8,9 @@ import InPlayPogsComponent from "./InPlayPogsComponent";
 import PogClass from "../classes/Pog";
 
 export default function MatchComponent({ match }: { match: MatchClass }) {
-
-    match.startMatch();
     const player = match.getPlayer();
     const baddie = match.getBaddie();
     // const pogs = match.getPogs();
-    const stack = match.getStack();
     const pogOwners = match.getPogOwners();
 
     const [openMenuPogId, setOpenMenuPogId] = useState<string | null>(null);
@@ -22,8 +19,8 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
 
     const playerSlammer = player.getSlammers()[0];
     
-    const [ inPlayPogs, setInPlayPogs ] = useState<PogClass[]>( match.getInPlayPogs() );
-    const [ visualStack, setVisualStack ] = useState<PogClass[]>( match.getStack() );   
+    const [ inPlayPogs, setInPlayPogs ] = useState<PogClass[]>(() => match.getInPlayPogs().slice());
+    const [ visualStack, setVisualStack ] = useState<PogClass[]>(() => match.getStack().slice());   
 
     const [currentBaddieHitpoints, setCurrentBaddieHitpoints] = useState(baddie.getCurrentHitpoints());
 
@@ -36,7 +33,7 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     }
 
     function handleReStackClick() {
-        setVisualStack(stack.slice());
+        setVisualStack(match.getStack().slice());
         setInPlayPogs([]);
     }
 
