@@ -4,7 +4,7 @@ export default function BaddieComponent({ baddie, currentBaddieHitpoints }: { ba
    
     return (
         <div>
-            <h2>{baddie.getName()}</h2>
+            {currentBaddieHitpoints > 0 ? <h2>{baddie.getName()}</h2> : <h2>Baddie Defeated</h2>}
             <p>Level: {baddie.getLevel()}</p>
             <p>Gold: {baddie.getGold()}</p>
             <p>Pogs: {baddie.getPogs().length}</p>

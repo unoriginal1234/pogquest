@@ -55,8 +55,6 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
         console.log(pogDefense, 'pogDefense');
         setCurrentBaddieHitpoints(currentBaddieHitpoints - pogStrength);
         setOpenMenuPogId(null);
-
-
     }
 
     function handleFlipUpClick(pog: PogClass) {
