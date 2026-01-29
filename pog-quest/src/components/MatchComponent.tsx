@@ -9,7 +9,9 @@ import PogClass from "../classes/Pog";
 
 export default function MatchComponent({ match }: { match: MatchClass }) {
 
+
     match.startMatch();
+
 
     const player = match.getPlayer();
     const baddie = match.getBaddie();
@@ -22,20 +24,18 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     console.log(player, 'player');
     console.log(pogOwners, 'pogOwners');
     console.log(stack, 'stack');
-    console.log(player.getSlammers(), 'slammers');
 
     const playerSlammer = player.getSlammers()[0];
-    console.log(playerSlammer, 'playerSlammer');
-
     
-    const [ inPlayPogs, setInPlayPogs ] = useState<PogClass[]>([]);
-    const [ visualStack, setVisualStack ] = useState<PogClass[]>(stack);
+    const [ inPlayPogs, setInPlayPogs ] = useState<PogClass[]>( match.getInPlayPogs() );
+    const [ visualStack, setVisualStack ] = useState<PogClass[]>( match.getStack() );
 
     function handleStackClick() {
         const { flippedStack, remainingStack } = playerSlammer.slam(visualStack);
         setInPlayPogs(flippedStack);
         setVisualStack(remainingStack);
-        
+        match.setInPlayPogs(flippedStack);
+        match.setStack(remainingStack);
     }
 
     function handleReStackClick() {

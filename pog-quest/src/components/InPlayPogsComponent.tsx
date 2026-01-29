@@ -41,7 +41,7 @@ export default function InPlayPogsComponent({ inPlayPogs }: { inPlayPogs: PogCla
                                 className="btn btn-ghost btn-sm justify-start"
                                 onClick={() => handleFlipUpClick(pog)}
                             >
-                                Flip up
+                                Flip
                             </button>
                         </div>
                     )}

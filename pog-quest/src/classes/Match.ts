@@ -26,7 +26,7 @@ export default class Match {
 
     startMatch() {
         this.setPogOwners();
-        this.setStack();
+        this.setNewStack();
         this.inProgress = true;
     }
 
@@ -54,11 +54,27 @@ export default class Match {
         return this.pogOwners;
     }
 
-    setStack() {
+    setNewStack() {
         this.stack = this.pogs.slice();
         // sort the stack by the pog's id a silly way to randomize
         // TODO: use a better randomization method
         this.stack.sort((a, b) => a.getId().localeCompare(b.getId()));
+    }
+
+    setStack(stack: Pog[]) {
+        this.stack = stack;
+    }
+
+    setInPlayPogs(inPlayPogs: Pog[]) {
+        this.inPlayPogs = inPlayPogs;
+    }
+
+    setPlayedPogs(playedPogs: Pog[]) {
+        this.playedPogs = playedPogs;
+    }
+
+    getInPlayPogs() {
+        return this.inPlayPogs;
     }
 
     getStack() {
