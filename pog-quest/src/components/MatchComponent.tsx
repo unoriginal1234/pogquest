@@ -21,6 +21,10 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
 
     const [currentBaddieHitpoints, setCurrentBaddieHitpoints] = useState(baddie.getCurrentHitpoints());
 
+    const [currentPlayerDefense, setCurrentPlayerDefense] = useState(player.getDefense());
+    // will handle this in a minute
+    // const [currentBaddieDefense, setCurrentBaddieDefense] = useState(baddie.getDefense());
+
     function handleStackClick() {
         const { flippedStack, remainingStack } = playerSlammer.slam(visualStack);
         setInPlayPogs(flippedStack);
@@ -45,7 +49,6 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     }
 
     function handleUseClick(pog: PogClass) {
-        console.log("use", pog);
         const pogStrength = (pog.getStrength());
         
         const pogDefense = (pog.getDefense());
@@ -54,8 +57,11 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
         match.addToPlayedPogs(pog);
         const newInPlayPogs = match.getInPlayPogs().filter(pogs => pogs.getId() !== pog.getId());
         match.setInPlayPogs(newInPlayPogs);
-        setInPlayPogs(match.getInPlayPogs().slice());
 
+        setInPlayPogs(match.getInPlayPogs().slice());
+        
+        // it doesn't look like we're setting the baddie logic here, so need to do that
+        setCurrentPlayerDefense(currentPlayerDefense + pogDefense);
         setCurrentBaddieHitpoints(currentBaddieHitpoints - pogStrength);
         setOpenMenuPogId(null);
     }
@@ -81,7 +87,7 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
                     Re-stack
                 </button>
             </div>
-            <PlayerComponent player={player} />
+            <PlayerComponent player={player} currentPlayerDefense={currentPlayerDefense} />
         </div>
     );
 }
