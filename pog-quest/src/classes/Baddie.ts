@@ -8,6 +8,7 @@ export default class Baddie {
     level: number; // could have two levels for each "floor"
     maxHitpoints: number;
     currentHitpoints: number;
+    defense: number;
 
     constructor(name: string, pogs: Pog[], gold: number, level: number) {
         this._id = crypto.randomUUID();
@@ -17,6 +18,7 @@ export default class Baddie {
         this.level = level;
         this.maxHitpoints = 10;
         this.currentHitpoints = this.maxHitpoints;
+        this.defense = 0;
     }
 
     getMaxHitpoints() {
@@ -53,5 +55,13 @@ export default class Baddie {
 
     getLevel() {
         return this.level;
+    }
+
+    getDefense() {
+        return this.defense;
+    }
+
+    setDefense(defense: number) {
+        this.defense = defense;
     }
 }
