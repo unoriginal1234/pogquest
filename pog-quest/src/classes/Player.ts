@@ -80,6 +80,10 @@ export default class Player {
     return this.pogs.length;
   }
 
+  addPog(pog: Pog) {
+    this.pogs.push(pog);
+  }
+
   getLevel() {
     return this.level;
   }
