@@ -23,6 +23,8 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
 
     const isVictoryScreenOpen = currentBaddieHitpoints <= 0;
 
+
+
     function handleStackClick() {
         const { flippedStack, remainingStack } = playerSlammer.slam(visualStack);
         setInPlayPogs(flippedStack);
@@ -69,9 +71,14 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
         setOpenMenuPogId(null);
     }
 
+    const baddieGold = baddie.getGold();
+    const playerGold = player.getGold();
+
+
     return (
         <div className="match-layout" >
-            {isVictoryScreenOpen ? <VictoryScreen player={player} /> : null}
+            {isVictoryScreenOpen ? 
+            <VictoryScreen player={player} baddieGold={baddieGold} playerGold={playerGold} /> : null}
             <BaddieComponent baddie={baddie} currentBaddieHitpoints={currentBaddieHitpoints} />
             <div className="match-arena">
                 <StackComponent stack={visualStack} onClick={handleStackClick} />
