@@ -1,6 +1,7 @@
 import Player from "../classes/Player";
 
-export default function GameMenuView({ player, togglePlayerStats }: { player: Player, togglePlayerStats: () => void }) {
+export default function GameMenuView({ player, togglePlayerStats }: 
+    { player: Player, togglePlayerStats: () => void }) {
 
     
 
@@ -16,6 +17,10 @@ export default function GameMenuView({ player, togglePlayerStats }: { player: Pl
                 <div className="status-item">
                     <span className="pog-glow-green">Hitpoints:</span>
                     <span className="pog-glow-pink">{player.getHitpoints()}</span>
+                </div>
+                <div className="status-item">
+                    <span className="pog-glow-green">Gold:</span>
+                    <span className="pog-glow-pink">{player.getGold()}</span>
                 </div>
             </div>
             <button onClick={togglePlayerStats}>Back</button>

@@ -71,6 +71,8 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
         setOpenMenuPogId(null);
     }
 
+    
+
     return (
         <div className="match-layout" >
             <BaddieComponent baddie={baddie} currentBaddieHitpoints={currentBaddieHitpoints} />
@@ -79,6 +81,8 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
                 <InPlayPogsComponent 
                 inPlayPogs={inPlayPogs}
                 openMenuPogId={openMenuPogId}
+                pogOwners={pogOwners}
+                playerId={player.getId()}
                 handleInPlayPogClick={handleInPlayPogClick}
                 handleUseClick={handleUseClick}
                 handleFlipUpClick={handleFlipUpClick}

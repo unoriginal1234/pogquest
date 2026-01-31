@@ -16,9 +16,10 @@ export default class Player {
   // boons: Boon[];
   // nerfs: Nerf[];
   defense: number;
+  gold: number;
 
   constructor(name: string, archetype: Archetype) {
-    
+    this._id = crypto.randomUUID();
     this.name = name;
     this.pogs = archetype.basepogs;
     this.inventory = archetype.baseInventory;
@@ -27,8 +28,8 @@ export default class Player {
     this.archetype = archetype;
     this.level = 1;
     this.slammers = archetype.baseSlammers;
-    this._id = crypto.randomUUID();
     this.defense = 0;
+    this.gold = 0;
   } 
 
   getName() {
@@ -109,5 +110,13 @@ export default class Player {
 
   setDefense(defense: number) {
     this.defense = defense;
+  }
+
+  getGold() {
+    return this.gold;
+  }  
+
+  setGold(gold: number) {
+    this.gold = gold;
   }
 }

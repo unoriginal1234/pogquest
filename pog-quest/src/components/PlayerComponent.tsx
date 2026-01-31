@@ -1,7 +1,11 @@
 import PlayerClass from "../classes/Player";
 
-export default function PlayerComponent({ player, currentPlayerDefense }: { player: PlayerClass, currentPlayerDefense: number }) {
-    return (
+export default function PlayerComponent({ player, currentPlayerDefense }: 
+    
+    { player: PlayerClass, currentPlayerDefense: number }) {
+    
+    
+        return (
         <div>
             <h2>{player.getName()}</h2>
             <p>Defense: {currentPlayerDefense}</p>
