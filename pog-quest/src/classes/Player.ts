@@ -17,6 +17,7 @@ export default class Player {
   // nerfs: Nerf[];
   defense: number;
   gold: number;
+  experiencePoints: number;
 
   constructor(name: string, archetype: Archetype) {
     this._id = crypto.randomUUID();
@@ -30,6 +31,7 @@ export default class Player {
     this.slammers = archetype.baseSlammers;
     this.defense = 0;
     this.gold = 0;
+    this.experiencePoints = 0;
   } 
 
   getName() {
@@ -88,6 +90,10 @@ export default class Player {
     return this.level;
   }
 
+  _setLevel(level: number) {
+    this.level = level;
+  }
+
   getSlammers() {
     return this.slammers;
   }
@@ -123,4 +129,31 @@ export default class Player {
   setGold(gold: number) {
     this.gold = gold;
   }
+
+  getExperiencePoints() {
+    return this.experiencePoints;
+  }
+
+  addExperiencePoints(experiencePoints: number) {
+    this.experiencePoints += experiencePoints;
+  }
+
+  _levelsByExperiencePoints: { [key: number]: number } = {
+    4: 1,
+    8: 2,
+    16: 3,
+    32: 4,
+    64: 5,
+    128: 6,
+    256: 7,
+    512: 8,
+    1024: 9,
+  };
+
+  _getLevelFromExperiencePoints(experiencePoints: number) {
+    return this._levelsByExperiencePoints[experiencePoints];
+  }
+
+  
+
 }

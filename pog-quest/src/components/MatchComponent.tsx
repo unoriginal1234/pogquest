@@ -71,7 +71,7 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
 
     return (
         <div className="match-layout" >
-            {isVictoryScreenOpen ? <VictoryScreen /> : null}
+            {isVictoryScreenOpen ? <VictoryScreen player={player} /> : null}
             <BaddieComponent baddie={baddie} currentBaddieHitpoints={currentBaddieHitpoints} />
             <div className="match-arena">
                 <StackComponent stack={visualStack} onClick={handleStackClick} />

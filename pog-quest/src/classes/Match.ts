@@ -1,6 +1,7 @@
 import Player from './Player';
 import Baddie from './Baddie';
 import Pog from './Pog';
+import shuffleArray from '../helperFunctions/shuffle';
 
 export default class Match {
     player: Player;
@@ -55,10 +56,9 @@ export default class Match {
     }
 
     setNewStack() {
-        this.stack = this.pogs.slice();
-        // sort the stack by the pog's id a silly way to randomize
-        // TODO: use a better randomization method
-        this.stack.sort((a, b) => a.getId().localeCompare(b.getId()));
+        this.stack = this.pogs.slice(); 
+        // shuffle the stack
+        shuffleArray(this.stack);
     }
 
     setStack(stack: Pog[]) {
