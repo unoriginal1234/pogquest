@@ -37,6 +37,20 @@ export default class Baddie {
         this.currentHitpoints -= damage;
     }
 
+    getXPbyLevel() {
+        return {
+            1: 3, 
+            2: 6, 
+            3: 12, 
+            4: 24, 
+            5: 48, 
+            6: 96, 
+            7: 192, 
+            8: 384, 
+            9: 768, 
+            10: 1536}[this.level];
+    }
+
     getId() {
         return this._id;
     }

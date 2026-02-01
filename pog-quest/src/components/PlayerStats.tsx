@@ -22,6 +22,10 @@ export default function GameMenuView({ player, togglePlayerStats }:
                     <span className="pog-glow-green">Gold:</span>
                     <span className="pog-glow-pink">{player.getGold()}</span>
                 </div>
+                <div className="status-item">
+                    <span className="pog-glow-green">Experience Points:</span>
+                    <span className="pog-glow-pink">{player.getExperiencePoints()}</span>
+                </div>
             </div>
             <button onClick={togglePlayerStats}>Back</button>
         </section>

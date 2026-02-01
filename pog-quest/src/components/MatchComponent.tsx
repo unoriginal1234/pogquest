@@ -14,6 +14,7 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     const pogOwners = match.getPogOwners();
     const playerSlammer = player.getSlammers()[0];
     const awardGold = baddie.getGold() + player.getGold();
+    const awardXP = baddie.getXPbyLevel() || 0;
 
     const [openMenuPogId, setOpenMenuPogId] = useState<string | null>(null);    
     const [ inPlayPogs, setInPlayPogs ] = useState<PogClass[]>(() => match.getInPlayPogs().slice());
@@ -27,8 +28,9 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
         if (isVictoryScreenOpen && match.getStatus() !== 'completed') {
             match.endMatch();
             player.setGold(awardGold);
+            player.addExperiencePoints(awardXP);
         }
-    }, [isVictoryScreenOpen, match, awardGold, player]);
+    }, [isVictoryScreenOpen, match, awardGold, player, awardXP]);
     
 
     function handleStackClick() {
@@ -82,10 +84,16 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
 
 
 
+    if (isVictoryScreenOpen) {
+        return (
+            <VictoryScreen baddieGold={baddie.getGold()} awardXP={awardXP} />
+        );
+    }
+
     return (
-        <div className="match-layout" >
-            {isVictoryScreenOpen ? 
-            <VictoryScreen player={player} baddieGold={baddie.getGold()} /> : null}
+            
+            
+            <div className="match-layout">
             <BaddieComponent baddie={baddie} currentBaddieHitpoints={currentBaddieHitpoints} />
             <div className="match-arena">
                 <StackComponent stack={visualStack} onClick={handleStackClick} />
@@ -103,6 +111,9 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
                 </button>
             </div>
             <PlayerComponent player={player} currentPlayerDefense={currentPlayerDefense} />
-        </div>
+            </div>
+            
+            
+        
     );
 }
