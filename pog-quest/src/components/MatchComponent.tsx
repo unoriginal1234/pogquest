@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import MatchClass from "../classes/Match";
 import BaddieComponent from "./BaddieComponent";
@@ -13,7 +13,7 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     const baddie = match.getBaddie();
     const pogOwners = match.getPogOwners();
     const playerSlammer = player.getSlammers()[0];
-    
+    const awardGold = baddie.getGold() + player.getGold();
 
     const [openMenuPogId, setOpenMenuPogId] = useState<string | null>(null);    
     const [ inPlayPogs, setInPlayPogs ] = useState<PogClass[]>(() => match.getInPlayPogs().slice());
@@ -21,9 +21,15 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     const [currentBaddieHitpoints, setCurrentBaddieHitpoints] = useState(baddie.getCurrentHitpoints());
     const [currentPlayerDefense, setCurrentPlayerDefense] = useState(player.getDefense());
 
-    const isVictoryScreenOpen = currentBaddieHitpoints <= 0;
+    const isVictoryScreenOpen = baddie.getCurrentHitpoints() <= 0;
 
-
+    useEffect(() => {
+        if (isVictoryScreenOpen && match.getStatus() !== 'completed') {
+            match.endMatch();
+            player.setGold(awardGold);
+        }
+    }, [isVictoryScreenOpen, match, awardGold, player]);
+    
 
     function handleStackClick() {
         const { flippedStack, remainingStack } = playerSlammer.slam(visualStack);
@@ -62,6 +68,7 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
         
         // it doesn't look like we're setting the baddie logic here, so need to do that
         setCurrentPlayerDefense(currentPlayerDefense + pogDefense);
+        baddie.setCurrentHitpoints(currentBaddieHitpoints - pogStrength);
         setCurrentBaddieHitpoints(currentBaddieHitpoints - pogStrength);
         setOpenMenuPogId(null);
     }
@@ -71,14 +78,14 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
         setOpenMenuPogId(null);
     }
 
-    const baddieGold = baddie.getGold();
-    const playerGold = player.getGold();
+    
+
 
 
     return (
         <div className="match-layout" >
             {isVictoryScreenOpen ? 
-            <VictoryScreen player={player} baddieGold={baddieGold} playerGold={playerGold} /> : null}
+            <VictoryScreen player={player} baddieGold={baddie.getGold()} /> : null}
             <BaddieComponent baddie={baddie} currentBaddieHitpoints={currentBaddieHitpoints} />
             <div className="match-arena">
                 <StackComponent stack={visualStack} onClick={handleStackClick} />

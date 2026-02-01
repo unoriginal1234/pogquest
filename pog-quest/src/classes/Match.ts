@@ -12,6 +12,7 @@ export default class Match {
     inPlayPogs: Pog[];
     pogOwners: Map<string,string>;
     inProgress: boolean;
+    status: string;
 
     constructor(player: Player, baddie: Baddie)
     {
@@ -23,12 +24,14 @@ export default class Match {
         this.playedPogs = [];
         this.pogOwners = new Map();
         this.inProgress = false;
+        this.status = 'pending';
     }
 
     startMatch() {
         this.setPogOwners();
         this.setNewStack();
         this.inProgress = true;
+        this.status = 'in progress';
     }
 
     setPogOwners() {
@@ -102,7 +105,12 @@ export default class Match {
         return this.inProgress;
     }
 
+    getStatus() {
+        return this.status;
+    }
+
     endMatch() {
         this.inProgress = false;
+        this.status = 'completed';
     }
 }
