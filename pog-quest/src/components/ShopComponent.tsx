@@ -41,19 +41,22 @@ export default function ShopComponent({ shop, player }: { shop: ShopClass, playe
             <p>Items</p>
             <div className="button-group">
                 {inventory.map((item: ItemClass) => (
-                    <ItemComponent key={item.getId()} item={item} onClick={() => handleItemClick(item.getId())} isSelected={selectedItem === item.getId()} />
+                    <><ItemComponent key={item.getId()} item={item} onClick={() => handleItemClick(item.getId())} isSelected={selectedItem === item.getId()} />
+                    <p>Cost: {item.getValue()}</p></>
                 ))}
             </div>
             <p>Pogs</p>
             <div className="button-group">
                 {pogs.map((pog: PogClass) => (
-                    <PogComponent key={pog.getId()} pog={pog} onClick={() => handlePogClick(pog.getId())} isSelected={selectedPog === pog.getId()} />
+                    <><PogComponent key={pog.getId()} pog={pog} onClick={() => handlePogClick(pog.getId())} isSelected={selectedPog === pog.getId()} />
+                    <p>Cost: {pog.getGold()}</p></>
                 ))}
             </div>
             <p>Slammers</p>
             <div className="button-group">
                 {slammers.map((slammer: SlammerClass) => (
-                    <SlammerComponent key={slammer.getId()} slammer={slammer} onClick={() => handleSlammerClick(slammer.getId())} isSelected={selectedSlammer === slammer.getId()} />
+                    <><SlammerComponent key={slammer.getId()} slammer={slammer} onClick={() => handleSlammerClick(slammer.getId())} isSelected={selectedSlammer === slammer.getId()} />
+                    <p>Cost: {slammer.getGold()}</p></>
                 ))}
             </div>
         </div>

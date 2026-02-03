@@ -5,6 +5,7 @@ export default class Slammer {
     name: string;
     description: string;
     level: number;
+    gold: number;
     slamAbility: (stack: Pog[]) => { flippedStack: Pog[], remainingStack: Pog[] };
 
     constructor(name: string, description: string, level: number, slamAbility: (stack: Pog[]) => { flippedStack: Pog[], remainingStack: Pog[] }) {
@@ -13,10 +14,18 @@ export default class Slammer {
         this.description = description;
         this.level = level;
         this.slamAbility = slamAbility;
+        // TO DO: Add gold to the constructor
+        this.gold = 10;
     }
+
+
 
     getId() {
         return this._id;
+    }
+
+    getGold() {
+        return this.gold;
     }
 
     getLevel() {
