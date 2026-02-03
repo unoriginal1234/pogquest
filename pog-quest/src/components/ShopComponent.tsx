@@ -52,33 +52,84 @@ export default function ShopComponent({ shop, player }: { shop: ShopClass, playe
         }
     }
 
-    
-
     return (
-        <div>
-            <h1>Shop</h1>
-            <p>Gold: {gold}</p>
-            <p>Items</p>
-            <div className="button-group">
-                {inventory.map((item: ItemClass) => (
-                    <><ItemComponent key={item.getId()} item={item} onClick={() => handleItemClick(item.getId())} isSelected={selectedItem === item.getId()} />
-                    <p>Cost: {item.getValue()}</p></>
-                ))}
+        <div className="shop-container">
+            <div className="shop-header">
+                <h1>Shop</h1>
+                <div className="gold-display">
+                    <span className="gold-icon">🪙</span>
+                    <span className="gold-amount">{gold}</span>
+                </div>
             </div>
-            <p>Pogs</p>
-            <div className="button-group">
-                {pogs.map((pog: PogClass) => (
-                    <><PogComponent key={pog.getId()} pog={pog} onClick={() => handlePogClick(pog.getId())} isSelected={selectedPog === pog.getId()} />
-                    <p>Cost: {pog.getGold()}</p></>
-                ))}
-            </div>
-            <p>Slammers</p>
-            <div className="button-group">
-                {slammers.map((slammer: SlammerClass) => (
-                    <><SlammerComponent key={slammer.getId()} slammer={slammer} onClick={() => handleSlammerClick(slammer.getId())} isSelected={selectedSlammer === slammer.getId()} />
-                    <p>Cost: {slammer.getGold()}</p></>
-                ))}
-            </div>
+
+            <section className="shop-section">
+                <h2>Items</h2>
+                <div className="shop-grid">
+                    {inventory.length === 0 ? (
+                        <p className="empty-message">No items available</p>
+                    ) : (
+                        inventory.map((item: ItemClass) => (
+                            <div key={item.getId()} className="shop-card">
+                                <ItemComponent 
+                                    item={item} 
+                                    onClick={() => handleItemClick(item.getId())} 
+                                    isSelected={selectedItem === item.getId()} 
+                                />
+                                <div className="price-tag">
+                                    <span className="price-icon">🪙</span>
+                                    <span>{item.getValue()}</span>
+                                </div>
+                            </div>
+                        ))
+                    )}
+                </div>
+            </section>
+
+            <section className="shop-section">
+                <h2>Pogs</h2>
+                <div className="shop-grid">
+                    {pogs.length === 0 ? (
+                        <p className="empty-message">No pogs available</p>
+                    ) : (
+                        pogs.map((pog: PogClass) => (
+                            <div key={pog.getId()} className="shop-card">
+                                <PogComponent 
+                                    pog={pog} 
+                                    onClick={() => handlePogClick(pog.getId())} 
+                                    isSelected={selectedPog === pog.getId()} 
+                                />
+                                <div className="price-tag">
+                                    <span className="price-icon">🪙</span>
+                                    <span>{pog.getGold()}</span>
+                                </div>
+                            </div>
+                        ))
+                    )}
+                </div>
+            </section>
+
+            <section className="shop-section">
+                <h2>Slammers</h2>
+                <div className="shop-grid">
+                    {slammers.length === 0 ? (
+                        <p className="empty-message">No slammers available</p>
+                    ) : (
+                        slammers.map((slammer: SlammerClass) => (
+                            <div key={slammer.getId()} className="shop-card">
+                                <SlammerComponent 
+                                    slammer={slammer} 
+                                    onClick={() => handleSlammerClick(slammer.getId())} 
+                                    isSelected={selectedSlammer === slammer.getId()} 
+                                />
+                                <div className="price-tag">
+                                    <span className="price-icon">🪙</span>
+                                    <span>{slammer.getGold()}</span>
+                                </div>
+                            </div>
+                        ))
+                    )}
+                </div>
+            </section>
         </div>
     );
 }
