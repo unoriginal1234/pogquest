@@ -50,4 +50,16 @@ export default class Shop {
     getSlammer(index: number) {
         return this.slammers[index];
     }
+
+    setInventory(inventory: Item[]) {
+        this.inventory = inventory;
+    }
+
+    setPogs(pogs: Pog[]) {
+        this.pogs = pogs;
+    }
+
+    setSlammers(slammers: Slammer[]) {
+        this.slammers = slammers;
+    }
 }

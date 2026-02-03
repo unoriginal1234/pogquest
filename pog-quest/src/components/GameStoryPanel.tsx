@@ -5,6 +5,7 @@ import Chapter from "../classes/Chapter";
 import Floor from "../classes/Floor";
 import Baddie from "../classes/Baddie";
 import MatchClass from "../classes/Match";
+import ShopClass from "../classes/Shop";
 
 import MatchComponent from "./MatchComponent";
 import ShopComponent from "./ShopComponent";
@@ -29,6 +30,7 @@ export default function GameStoryPanel({ game }: { game: Game}) {
     const [chapterDescriptionIndex, setChapterDescriptionIndex] = useState<number>(0);
     const [isFinalChapterOpen, setIsFinalChapterOpen] = useState<boolean>(false);
     const [match, setMatch] = useState<MatchClass | null>(null);
+    const [shop, setShop] = useState<ShopClass | null>(null);
 
     useEffect(() => {
         if (completionType instanceof Baddie) {
@@ -39,6 +41,14 @@ export default function GameStoryPanel({ game }: { game: Game}) {
             setMatch(null);
         }
     }, [completionType, player]);
+
+    useEffect(() => {
+        if (completionType instanceof ShopClass) {
+            setShop(completionType);
+        } else {
+            setShop(null);
+        }
+    }, [completionType]);
 
 
     function handleChapterClick(chapterNumber: number) {
@@ -159,7 +169,10 @@ export default function GameStoryPanel({ game }: { game: Game}) {
             }
             return <MatchComponent key={match.getBaddie().getId()} match={match} />;
         } else if (completionType.constructor.name === "Shop") {
-            return <ShopComponent />;
+            if (!shop) {
+                return null;
+            }
+            return <ShopComponent shop={shop} player={player} />;
         } else if (completionType.constructor.name === "Adventure") {
             return <AdventureComponent />;
         } 
