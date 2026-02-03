@@ -24,15 +24,35 @@ export default function ShopComponent({ shop, player }: { shop: ShopClass, playe
 
     function handleItemClick(id: string) {
         setSelectedItem(id);
+        if (selectedPog) {
+            setSelectedPog(null);
+        }
+        if (selectedSlammer) {
+            setSelectedSlammer(null);
+        }
     }
 
     function handlePogClick(id: string) {
         setSelectedPog(id);
+        if (selectedItem) {
+            setSelectedItem(null);
+        }
+        if (selectedSlammer) {
+            setSelectedSlammer(null);
+        }
     }
     
     function handleSlammerClick(id: string) {
         setSelectedSlammer(id);
+        if (selectedItem) {
+            setSelectedItem(null);
+        }
+        if (selectedPog) {
+            setSelectedPog(null);
+        }
     }
+
+    
 
     return (
         <div>
