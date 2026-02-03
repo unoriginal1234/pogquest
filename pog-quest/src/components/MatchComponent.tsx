@@ -60,7 +60,6 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
         const pogStrength = (pog.getStrength());
         
         const pogDefense = (pog.getDefense());
-        console.log(pogDefense, 'pogDefense');
 
         match.addToPlayedPogs(pog);
         const newInPlayPogs = match.getInPlayPogs().filter(pogs => pogs.getId() !== pog.getId());

@@ -49,7 +49,6 @@ export default class Match {
     getPogOwner(pogId: string) {
         if (!this.pogOwners.has(pogId)) {
             return null;
-            console.log('pog not found');
         }
         return this.pogOwners.get(pogId);
     }
