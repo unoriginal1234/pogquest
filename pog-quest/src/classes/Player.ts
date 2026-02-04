@@ -22,15 +22,15 @@ export default class Player {
   constructor(name: string, archetype: Archetype) {
     this._id = crypto.randomUUID();
     this.name = name;
-    this.pogs = archetype.basepogs;
-    this.inventory = archetype.baseInventory;
+    this.pogs = [...archetype.basepogs];
+    this.inventory = [...archetype.baseInventory];
     this.hitpoints = archetype.basehitpoints;
     this.currentHitpoints = this.hitpoints;
     this.archetype = archetype;
     this.level = 1;
-    this.slammers = archetype.baseSlammers;
+    this.slammers = [...archetype.baseSlammers];
     this.defense = 0;
-    this.gold = 0;
+    this.gold = 10;
     this.experiencePoints = 0;
   } 
 
@@ -68,6 +68,14 @@ export default class Player {
 
   removeItem(item: Item) {
     this.inventory = this.inventory.filter(i => i !== item);
+  }
+
+  addItem(item: Item) {
+    this.inventory.push(item);
+  }
+
+  addSlammer(slammer: Slammer) {
+    this.slammers.push(slammer);
   }
 
   getPogs() {

@@ -12,44 +12,54 @@ import SlammerComponent from './SlammerComponent';
 
 export default function ShopComponent({ shop, player }: { shop: ShopClass, player: PlayerClass }) {
 
+    const [openMenuId, setOpenMenuId] = useState<string | null>(null);
+    // TO DO: refresh the shop when the player buys an item, pog, or slammer
+    const [, setRefresh] = useState(0);
+
     const gold = player.getGold();
-
-    const [selectedItem, setSelectedItem] = useState<string | null>(null);
-    const [selectedPog, setSelectedPog] = useState<string | null>(null);
-    const [selectedSlammer, setSelectedSlammer] = useState<string | null>(null);
-
     const inventory = shop.getInventory();
     const pogs = shop.getPogs();
     const slammers = shop.getSlammers();
 
     function handleItemClick(id: string) {
-        setSelectedItem(id);
-        if (selectedPog) {
-            setSelectedPog(null);
-        }
-        if (selectedSlammer) {
-            setSelectedSlammer(null);
+        setOpenMenuId(openMenuId === id ? null : id);
+    }
+
+    function handleBuyItem(item: ItemClass) {
+        const cost = item.getValue();
+        if (gold >= cost) {
+            player.setGold(gold - cost);
+            player.addItem(item);
+            shop.removeItem(item);
+            setOpenMenuId(null);
+            setRefresh(r => r + 1);
         }
     }
 
-    function handlePogClick(id: string) {
-        setSelectedPog(id);
-        if (selectedItem) {
-            setSelectedItem(null);
-        }
-        if (selectedSlammer) {
-            setSelectedSlammer(null);
+    function handleBuyPog(pog: PogClass) {
+        const cost = pog.getGold();
+        if (gold >= cost) {
+            player.setGold(gold - cost);
+            player.addPog(pog);
+            shop.removePog(pog);
+            setOpenMenuId(null);
+            setRefresh(r => r + 1);
         }
     }
-    
-    function handleSlammerClick(id: string) {
-        setSelectedSlammer(id);
-        if (selectedItem) {
-            setSelectedItem(null);
+
+    function handleBuySlammer(slammer: SlammerClass) {
+        const cost = slammer.getGold();
+        if (gold >= cost) {
+            player.setGold(gold - cost);
+            player.addSlammer(slammer);
+            shop.removeSlammer(slammer);
+            setOpenMenuId(null);
+            setRefresh(r => r + 1);
         }
-        if (selectedPog) {
-            setSelectedPog(null);
-        }
+    }
+
+    function canAfford(cost: number) {
+        return gold >= cost;
     }
 
     return (
@@ -69,16 +79,30 @@ export default function ShopComponent({ shop, player }: { shop: ShopClass, playe
                         <p className="empty-message">No items available</p>
                     ) : (
                         inventory.map((item: ItemClass) => (
-                            <div key={item.getId()} className="shop-card">
+                            <div key={item.getId()} className="shop-card relative">
                                 <ItemComponent 
                                     item={item} 
                                     onClick={() => handleItemClick(item.getId())} 
-                                    isSelected={selectedItem === item.getId()} 
+                                    isSelected={openMenuId === item.getId()} 
                                 />
                                 <div className="price-tag">
                                     <span className="price-icon">🪙</span>
                                     <span>{item.getValue()}</span>
                                 </div>
+                                {openMenuId === item.getId() && (
+                                    <div 
+                                        className="menu menu-sm rounded-box bg-base-200 shadow-lg absolute left-0 mt-2 z-20 p-2"
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <button
+                                            className="btn btn-ghost btn-sm justify-start"
+                                            onClick={() => handleBuyItem(item)}
+                                            disabled={!canAfford(item.getValue())}
+                                        >
+                                            Buy
+                                        </button>
+                                    </div>
+                                )}
                             </div>
                         ))
                     )}
@@ -92,16 +116,30 @@ export default function ShopComponent({ shop, player }: { shop: ShopClass, playe
                         <p className="empty-message">No pogs available</p>
                     ) : (
                         pogs.map((pog: PogClass) => (
-                            <div key={pog.getId()} className="shop-card">
+                            <div key={pog.getId()} className="shop-card relative">
                                 <PogComponent 
                                     pog={pog} 
-                                    onClick={() => handlePogClick(pog.getId())} 
-                                    isSelected={selectedPog === pog.getId()} 
+                                    onClick={() => handleItemClick(pog.getId())} 
+                                    isSelected={openMenuId === pog.getId()} 
                                 />
                                 <div className="price-tag">
                                     <span className="price-icon">🪙</span>
                                     <span>{pog.getGold()}</span>
                                 </div>
+                                {openMenuId === pog.getId() && (
+                                    <div 
+                                        className="menu menu-sm rounded-box bg-base-200 shadow-lg absolute left-0 mt-2 z-20 p-2"
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <button
+                                            className="btn btn-ghost btn-sm justify-start"
+                                            onClick={() => handleBuyPog(pog)}
+                                            disabled={!canAfford(pog.getGold())}
+                                        >
+                                            Buy
+                                        </button>
+                                    </div>
+                                )}
                             </div>
                         ))
                     )}
@@ -115,16 +153,30 @@ export default function ShopComponent({ shop, player }: { shop: ShopClass, playe
                         <p className="empty-message">No slammers available</p>
                     ) : (
                         slammers.map((slammer: SlammerClass) => (
-                            <div key={slammer.getId()} className="shop-card">
+                            <div key={slammer.getId()} className="shop-card relative">
                                 <SlammerComponent 
                                     slammer={slammer} 
-                                    onClick={() => handleSlammerClick(slammer.getId())} 
-                                    isSelected={selectedSlammer === slammer.getId()} 
+                                    onClick={() => handleItemClick(slammer.getId())} 
+                                    isSelected={openMenuId === slammer.getId()} 
                                 />
                                 <div className="price-tag">
                                     <span className="price-icon">🪙</span>
                                     <span>{slammer.getGold()}</span>
                                 </div>
+                                {openMenuId === slammer.getId() && (
+                                    <div 
+                                        className="menu menu-sm rounded-box bg-base-200 shadow-lg absolute left-0 mt-2 z-20 p-2"
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <button
+                                            className="btn btn-ghost btn-sm justify-start"
+                                            onClick={() => handleBuySlammer(slammer)}
+                                            disabled={!canAfford(slammer.getGold())}
+                                        >
+                                            Buy
+                                        </button>
+                                    </div>
+                                )}
                             </div>
                         ))
                     )}

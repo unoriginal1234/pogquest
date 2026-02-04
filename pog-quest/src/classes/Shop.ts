@@ -62,4 +62,16 @@ export default class Shop {
     setSlammers(slammers: Slammer[]) {
         this.slammers = slammers;
     }
+
+    removeItem(item: Item) {
+        this.inventory = this.inventory.filter(i => i.getId() !== item.getId());
+    }
+
+    removePog(pog: Pog) {
+        this.pogs = this.pogs.filter(p => p.getId() !== pog.getId());
+    }
+
+    removeSlammer(slammer: Slammer) {
+        this.slammers = this.slammers.filter(s => s.getId() !== slammer.getId());
+    }
 }

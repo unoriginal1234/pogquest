@@ -84,7 +84,6 @@ export default class Match {
     }
 
     getStack() {
-        console.log('hiiiii')
         return this.stack;
     }
 
