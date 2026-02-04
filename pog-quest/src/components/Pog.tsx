@@ -9,16 +9,22 @@ interface PogProps {
   onClick?: () => void;
 }
 
+// Right now I have added a tooltip, but I want to conditionally render this and provide more information
+// based on the pog's level, strength, defense, and gold.
+
 // I think generally I want to have the onClick come from the parent
 const Pog: React.FC<PogProps> = ({ pog, isSelected, isBaddiePog, onClick }) => {
 
   return (
-    <div 
-      className={`pog-component ${isSelected ? 'selected' : ''} ${isBaddiePog ? 'baddie-pog' : ''}`} 
-      onClick={onClick}
-    >
-      <div className="pog-name">{pog.getName()}</div>
-      <div className="pog-subtitle">LVL {pog.getLevel()}</div>
+    <div className="tooltip" data-tip="hi there">
+      <div 
+        className={`pog-component ${isSelected ? 'selected' : ''} ${isBaddiePog ? 'baddie-pog' : ''} tooltip`} 
+        data-tip={`hi there`}
+        onClick={onClick}
+      >
+        <div className="pog-name">{pog.getName()}</div>
+        <div className="pog-subtitle">LVL {pog.getLevel()}</div>
+      </div>
     </div>
   );
 };
