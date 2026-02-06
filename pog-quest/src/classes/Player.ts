@@ -18,7 +18,7 @@ export default class Player {
   defense: number;
   gold: number;
   experiencePoints: number;
-  equippedSlammer: Slammer | null;
+  equippedSlammer: Slammer | undefined;
 
   constructor(name: string, archetype: Archetype) {
     this._id = crypto.randomUUID();
@@ -119,6 +119,10 @@ export default class Player {
 
   equipSlammer(slammer: Slammer) {
     this.equippedSlammer = slammer;
+  }
+
+  equipSlammerById(id: string) {
+    this.equippedSlammer = this.slammers.find(s => s.getId() === id);
   }
 
   getEquippedSlammer() {

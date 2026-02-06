@@ -8,11 +8,19 @@ import SlammerComponent from './SlammerComponent';
 function SlammersCollection(
     {player, toggleSlammersCollection}: 
     {player: Player | null, toggleSlammersCollection: () => void}) {
+
+    // I don't  need  to update the player state 
     
     const [selectedSlammer, setSelectedSlammer] = useState<string | null>(null);
+    const [equippedSlammerId, setEquippedSlammerId] = useState<string | undefined>(player?.getEquippedSlammer()?.getId());
 
     function handleSlammerClick(id: string) {
         setSelectedSlammer(id);
+    }
+
+    function handleEquipSlammer(id: string) {
+        player?.equipSlammer(slammer!);
+        setEquippedSlammerId(id);
     }
 
     const slammer = player?.getSlammers().find(s => s.getId() === selectedSlammer);
@@ -24,15 +32,26 @@ function SlammersCollection(
             <div className="button-group">
                 {player?.getSlammers().map((slammer: SlammerClass, index: number) => (
                     <SlammerComponent 
-                      key={index} 
-                      slammer={slammer} 
-                      onClick={() => 
-                        handleSlammerClick(slammer.getId())} 
-                        isSelected={selectedSlammer === slammer.getId()} />
+                    key={index} 
+                    slammer={slammer} 
+                    isEquipped={equippedSlammerId === slammer.getId()}
+                    onClick={() => {
+                        console.log(slammer, 'slammer clicked')
+                        handleSlammerClick(slammer.getId())} }
+                    isSelected={selectedSlammer === slammer.getId()} />
+                   
                 ))}
             </div>
 
-            {selectedSlammer && <SlammerDetails slammer={slammer!} />}
+            {selectedSlammer && 
+            <>
+            <SlammerDetails slammer={slammer!} />
+            {selectedSlammer && equippedSlammerId !== selectedSlammer && 
+            <button onClick={() => handleEquipSlammer(selectedSlammer)}>Equip</button>}
+            </>
+            }
+
+
             <button onClick={toggleSlammersCollection}>Back</button>
         </section>
     );

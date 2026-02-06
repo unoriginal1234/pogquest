@@ -12,7 +12,7 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     const player = match.getPlayer();
     const baddie = match.getBaddie();
     const pogOwners = match.getPogOwners();
-    const playerSlammer = player.getSlammers()[0];
+    const playerSlammer = player.getEquippedSlammer();
     const awardGold = baddie.getGold() + player.getGold();
     const awardXP = baddie.getXPbyLevel() || 0;
 
@@ -34,6 +34,10 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     
 
     function handleStackClick() {
+        if (!playerSlammer) {
+            console.log("No slammer equipped");
+            return;
+        }
         const { flippedStack, remainingStack } = playerSlammer.slam(visualStack);
         setInPlayPogs(flippedStack);
         setVisualStack(remainingStack);
