@@ -18,6 +18,7 @@ export default class Player {
   defense: number;
   gold: number;
   experiencePoints: number;
+  equippedSlammer: Slammer | null;
 
   constructor(name: string, archetype: Archetype) {
     this._id = crypto.randomUUID();
@@ -32,6 +33,8 @@ export default class Player {
     this.defense = 0;
     this.gold = 10;
     this.experiencePoints = 0;
+    this.equippedSlammer = this.slammers[0];
+
   } 
 
   getName() {
@@ -112,6 +115,14 @@ export default class Player {
 
   getSlammerCount() {
     return this.slammers.length;
+  }
+
+  equipSlammer(slammer: Slammer) {
+    this.equippedSlammer = slammer;
+  }
+
+  getEquippedSlammer() {
+    return this.equippedSlammer;
   }
 
   getInventoryCount() {

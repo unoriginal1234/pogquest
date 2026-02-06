@@ -79,10 +79,6 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
         setOpenMenuPogId(null);
     }
 
-    
-
-
-
     if (isVictoryScreenOpen) {
         return (
             <VictoryScreen baddieGold={baddie.getGold()} awardXP={awardXP} />
