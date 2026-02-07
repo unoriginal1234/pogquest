@@ -13,7 +13,7 @@ export default function StackComponent({ stack, onClick }: { stack: PogClass[], 
                     className="match-stack-item"
                     style={{ zIndex: stack.length - index }}
                 >
-                    <Pog pog={pog} />
+                    <Pog pog={pog} isFlippedUp={true} />
                 </div>
             ))}
         </div>
