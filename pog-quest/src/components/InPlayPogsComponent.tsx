@@ -8,7 +8,8 @@ interface InPlayPogsProps {
     playerId: string;
     handleInPlayPogClick: (pog: PogClass) => void;
     handleUseClick: (pog: PogClass) => void;
-    handleFlipUpClick: (pog: PogClass) => void;
+    handleFlipClick: (pog: PogClass) => void;
+    flippedPogIds: string[];
 }
 
 export default function InPlayPogsComponent({
@@ -18,7 +19,8 @@ export default function InPlayPogsComponent({
     playerId,
     handleInPlayPogClick,
     handleUseClick,
-    handleFlipUpClick,
+    handleFlipClick,
+    flippedPogIds,
 }: InPlayPogsProps) {
     
     
@@ -30,6 +32,7 @@ export default function InPlayPogsComponent({
                         pog={pog} 
                         onClick={() => handleInPlayPogClick(pog)} 
                         isBaddiePog={pogOwners.get(pog.getId()) !== playerId}
+                        isFlippedUp={flippedPogIds.includes(pog.getId())}
                     />
                     {openMenuPogId === pog.getId() && (
                         <div
@@ -44,7 +47,7 @@ export default function InPlayPogsComponent({
                             </button>
                             <button
                                 className="btn btn-ghost btn-sm justify-start"
-                                onClick={() => handleFlipUpClick(pog)}
+                                onClick={() => handleFlipClick(pog)}
                             >
                                 Flip
                             </button>

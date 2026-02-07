@@ -21,6 +21,7 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     const [ visualStack, setVisualStack ] = useState<PogClass[]>(() => match.getStack().slice());   
     const [currentBaddieHitpoints, setCurrentBaddieHitpoints] = useState(baddie.getCurrentHitpoints());
     const [currentPlayerDefense, setCurrentPlayerDefense] = useState(player.getDefense());
+    const [flippedPogIds, setFlippedPogIds] = useState<string[]>([]);
 
     const isVictoryScreenOpen = baddie.getCurrentHitpoints() <= 0;
 
@@ -50,6 +51,7 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
         match.setInPlayPogs([]);
         setVisualStack(match.getStack().slice());
         setInPlayPogs([]);
+        setFlippedPogIds([]);
     }
 
     function handleInPlayPogClick(pog: PogClass) {
@@ -78,9 +80,10 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
         setOpenMenuPogId(null);
     }
 
-    function handleFlipUpClick(pog: PogClass) {
+    function handleFlipClick(pog: PogClass) {
         console.log("flip up", pog);
         setOpenMenuPogId(null);
+        setFlippedPogIds([...flippedPogIds, pog.getId()]);
     }
 
     if (isVictoryScreenOpen) {
@@ -103,7 +106,8 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
                     playerId={player.getId()}
                     handleInPlayPogClick={handleInPlayPogClick}
                     handleUseClick={handleUseClick}
-                    handleFlipUpClick={handleFlipUpClick}
+                    handleFlipClick={handleFlipClick}
+                    flippedPogIds={flippedPogIds}
                 />
                 <button onClick={handleReStackClick}>
                     Re-stack
