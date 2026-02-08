@@ -6,6 +6,7 @@ import Floor from "../classes/Floor";
 import Baddie from "../classes/Baddie";
 import MatchClass from "../classes/Match";
 import ShopClass from "../classes/Shop";
+import AdventureClass from "../classes/Adventure";
 
 import MatchComponent from "./MatchComponent";
 import ShopComponent from "./ShopComponent";
@@ -31,6 +32,7 @@ export default function GameStoryPanel({ game }: { game: Game}) {
     const [isFinalChapterOpen, setIsFinalChapterOpen] = useState<boolean>(false);
     const [match, setMatch] = useState<MatchClass | null>(null);
     const [shop, setShop] = useState<ShopClass | null>(null);
+    const [adventure, setAdventure] = useState<AdventureClass | null>(null);
 
     useEffect(() => {
         if (completionType instanceof Baddie) {
@@ -47,6 +49,14 @@ export default function GameStoryPanel({ game }: { game: Game}) {
             setShop(completionType);
         } else {
             setShop(null);
+        }
+    }, [completionType]);
+
+    useEffect(() => {
+        if (completionType instanceof AdventureClass) {
+            setAdventure(completionType);
+        } else {
+            setAdventure(null);
         }
     }, [completionType]);
 
@@ -174,7 +184,10 @@ export default function GameStoryPanel({ game }: { game: Game}) {
             }
             return <ShopComponent shop={shop} player={player} />;
         } else if (completionType.constructor.name === "Adventure") {
-            return <AdventureComponent />;
+            if (!adventure) {
+                return null;
+            }
+            return <AdventureComponent adventure={adventure} />;
         } 
     }
 
