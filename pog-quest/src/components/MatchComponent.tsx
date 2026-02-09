@@ -35,6 +35,7 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     
 
     function handleStackClick() {
+        console.log("handleStackClick", playerSlammer);
         if (!playerSlammer) {
             console.log("No slammer equipped");
             return;
