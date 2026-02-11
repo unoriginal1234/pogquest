@@ -161,15 +161,38 @@ export default function GameStoryPanel({ game }: { game: Game}) {
     );
 
     function ChapterNavigator(){
+
+
         return (
             <div className="button-group">
                 {unlockedChapters.map((chapterNumber: number) => (
+                    
                     <button key={chapterNumber} onClick={() => handleChapterClick(chapterNumber)}>
-                        {chapterNumber}
+                        {/* This is very messy and needs to be cleaned up */}
+                        {NavButtonType(currentFloor.getChapter(chapterNumber).getCompletionType().constructor.name)}
                     </button>
                 ))}
             </div>
         )
+    }
+
+    function NavButtonType(string: string) {
+        if (string === "Baddie") {
+            return <button key={chapterNumber} onClick={() => handleChapterClick(chapterNumber)}>
+                👹
+            </button>   
+        }
+        if (string === "Shop") {
+            return <button key={chapterNumber} onClick={() => handleChapterClick(chapterNumber)}>
+                🏪
+            </button>
+        }
+        if (string === "Adventure") {
+            return <button key={chapterNumber} onClick={() => handleChapterClick(chapterNumber)}>
+                ?
+            </button>
+        }
+        return null;
     }
 
     function CompletionTypeComponent() {
