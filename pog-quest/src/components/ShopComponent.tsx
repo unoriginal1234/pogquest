@@ -121,6 +121,8 @@ export default function ShopComponent({ shop, player }: { shop: ShopClass, playe
                                     pog={pog} 
                                     onClick={() => handleItemClick(pog.getId())} 
                                     isSelected={openMenuId === pog.getId()} 
+                                    // need to add isFlippedUp
+                                    isFlippedUp={false}
                                 />
                                 <div className="price-tag">
                                     <span className="price-icon">🪙</span>

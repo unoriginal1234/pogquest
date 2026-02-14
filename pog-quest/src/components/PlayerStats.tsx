@@ -6,7 +6,7 @@ export default function GameMenuView({ player, togglePlayerStats }:
         // TO DO: conditionally display values or auto close this windw during VictoryScreen 
 
         const gold = player.getGold();
-        const hitpoints = player.getHitpoints();
+        const hitpoints = player.getCurrentHitpoints();
         const experiencePoints = player.getExperiencePoints();
         const level = player.getLevel();
     

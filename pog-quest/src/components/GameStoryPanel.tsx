@@ -206,7 +206,7 @@ export default function GameStoryPanel({ game }: { game: Game}) {
             if (!adventure) {
                 return null;
             }
-            return <AdventureComponent adventure={adventure} />;
+            return <AdventureComponent adventure={adventure} player={player} />;
         } 
     }
 

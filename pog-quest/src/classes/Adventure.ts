@@ -29,6 +29,10 @@ export default class Adventure {
     }
 
     getTemplate() {
+        return this.template;
+    }
+
+    getTemplateDescription() {
         return adventureTemplateRegistry[this.template];
     }
 }
