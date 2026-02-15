@@ -12,12 +12,14 @@ export default class Adventure {
     name: string;
     description: string;
     template: AdventureTemplate;
+    isComplete: boolean;
 
     constructor(name: string, description: string, template: AdventureTemplate) {
         this._id = crypto.randomUUID();
         this.name = name;
         this.description = description;
         this.template = template;
+        this.isComplete = false;
     }
 
     getName() {
@@ -35,6 +37,16 @@ export default class Adventure {
     getTemplateDescription() {
         return adventureTemplateRegistry[this.template];
     }
+
+    setIsComplete(isComplete: boolean) {
+        this.isComplete = isComplete;
+    }
+
+    getIsComplete() {
+        return this.isComplete;
+    }
+
+    
 }
 
 
