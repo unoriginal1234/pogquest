@@ -24,11 +24,16 @@ export default function TradeComponent({
         <p>{adventure.getName()}</p>
         <p>{adventure.getDescription()}</p>
         <p>{adventure.getTemplateDescription()}</p>
-        <PogComponent pog={tradePog} isFlippedUp={false} onClick={() => {}} />
-        <div className="pog-grid">
-            {pogs.map((pog: PogClass) => (
-                <PogComponent pog={pog} isFlippedUp={false} onClick={() => {}} />
-            ))}
+        <div className="trade-pog-container">
+            <PogComponent pog={tradePog} isFlippedUp={false} onClick={() => {}} />
+        </div>
+        <div className="player-trade-pog-container">
+            <h2>Your Pogs</h2>
+            <div className="pog-grid">
+                {pogs.map((pog: PogClass) => (
+                    <PogComponent pog={pog} isFlippedUp={false} onClick={() => {}} />
+                ))}
+            </div>
         </div>
         <button 
             className='tooltip' 

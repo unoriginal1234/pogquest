@@ -575,6 +575,63 @@ main {
     border: 1px dashed var(--pog-gray);
 }
 
+/* Trade Component */
+.trade-pog-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border: 3px solid var(--pog-yellow);
+    background: 
+        linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 165, 0, 0.05) 100%),
+        rgba(0, 0, 0, 0.3);
+    box-shadow: 
+        0 0 20px rgba(255, 215, 0, 0.3),
+        inset 0 0 30px rgba(255, 215, 0, 0.1);
+    position: relative;
+}
+
+.trade-pog-container::before {
+    content: '★ TRADER\'S OFFER ★';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.6rem;
+    color: var(--pog-yellow);
+    background: var(--pog-black);
+    padding: 0.3rem 0.8rem;
+    text-shadow: 0 0 10px var(--pog-yellow);
+    white-space: nowrap;
+}
+
+.player-trade-pog-container {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border: 2px solid var(--pog-electric-blue);
+    background: rgba(0, 255, 255, 0.03);
+    box-shadow: 
+        0 0 10px rgba(0, 255, 255, 0.2),
+        inset 0 0 15px rgba(0, 255, 255, 0.05);
+}
+
+.player-trade-pog-container h2 {
+    font-size: 1rem;
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--pog-neon-pink);
+    text-align: center;
+}
+
+.pog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 1rem;
+    justify-items: center;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .app-container {

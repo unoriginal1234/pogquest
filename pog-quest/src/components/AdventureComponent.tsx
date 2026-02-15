@@ -9,14 +9,10 @@ import ChaseComponent from "./adventureTemplateComponents/ChaseComponent";
 import ChestComponent from "./adventureTemplateComponents/ChestComponent";
 import TradeComponent from "./adventureTemplateComponents/TradeComponent";
 
+// ToDo: move this to the factory directory
 function createPog(n: number, name: string) {
     return new PogClass(name, n, 1, n, 1);
 }
-
-
-
-// I want to create a pog factory that I can use here to create a pog for the chest.
-
 
 export default function AdventureComponent({ adventure, player }: { adventure: AdventureClass, player: PlayerClass }) {
 
