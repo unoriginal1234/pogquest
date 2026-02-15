@@ -43,10 +43,11 @@ export default function AdventureComponent({ adventure, player }: { adventure: A
         player.addPog(createPog(3, "Chest Pog"));
     }
 
-    function trade() {
+    function trade(selectedPog: PogClass) {
         setIsTradeCompleted(true);
         adventure.setIsComplete(true);
         player.addPog(tradePog);
+        player.removePog(selectedPog!);
     }
 
     if (template === 'campfire' && !isComplete) {
@@ -81,7 +82,7 @@ export default function AdventureComponent({ adventure, player }: { adventure: A
 
     if (template === 'trade' && !isComplete) {
         return (
-            <TradeComponent adventure={adventure} trade={trade} isTradeCompleted={isTradeCompleted} player={player} tradePog={tradePog} />
+            <TradeComponent adventure={adventure} trade={(selectedPog: PogClass) => trade(selectedPog)} isTradeCompleted={isTradeCompleted} player={player} tradePog={tradePog} />
         );
     } else if (template === 'trade' && isComplete) {
         return (

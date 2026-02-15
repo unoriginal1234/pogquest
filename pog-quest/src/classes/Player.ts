@@ -97,6 +97,10 @@ export default class Player {
     this.pogs.push(pog);
   }
 
+  removePog(pog: Pog) {
+    this.pogs = this.pogs.filter(p => p.getId() !== pog.getId());
+  }
+
   getLevel() {
     return this.level;
   }

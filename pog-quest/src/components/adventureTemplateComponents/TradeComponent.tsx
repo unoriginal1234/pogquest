@@ -1,22 +1,25 @@
+import { useState } from "react";
+
 import AdventureClass from "../../classes/Adventure";
 import PlayerClass from "../../classes/Player";
 import PogClass from "../../classes/Pog";
 
 import PogComponent from "../Pog";
 
-
 export default function TradeComponent({ 
     adventure, trade, isTradeCompleted, player, tradePog }: { 
         adventure: AdventureClass, 
-        trade: () => void, 
+        trade: (selectedPog: PogClass) => void, 
         isTradeCompleted: boolean, 
         player: PlayerClass, 
         tradePog: PogClass }) {
 
     const pogs = player.getPogs();
+    const [selectedPog, setSelectedPog] = useState<PogClass | null>(null);
 
-
-
+    function handlePogClick(pog: PogClass) {
+        setSelectedPog(pog);
+    }
 
     return (
         <div>
@@ -31,16 +34,29 @@ export default function TradeComponent({
             <h2>Your Pogs</h2>
             <div className="pog-grid">
                 {pogs.map((pog: PogClass) => (
-                    <PogComponent pog={pog} isFlippedUp={false} onClick={() => {}} />
+                    <PogComponent pog={pog} isFlippedUp={false} onClick={() => handlePogClick(pog)} 
+                    isSelected={selectedPog?.getId() === pog.getId()}/>
                 ))}
             </div>
         </div>
-        <button 
-            className='tooltip' 
-            data-tip={`Trade with the trader to get a pog.`} 
-            onClick={trade} 
-            disabled={isTradeCompleted}>{isTradeCompleted ? 'Trading...' : 'Trade'}
-        </button>
+
+        {
+            !selectedPog || (selectedPog && selectedPog.getGold() < tradePog.getGold()) ? (
+                <button 
+                    className='tooltip' 
+                    data-tip={`This pog is worth less than the trade pog.`} 
+                    disabled={true}>No Trade!
+                </button>
+            ) : (
+                <button 
+                    className='tooltip' 
+                    data-tip={`Trade with the trader to get a pog.`} 
+                    onClick={() => trade(selectedPog!)} 
+                    disabled={isTradeCompleted}>{isTradeCompleted ? 'Trading...' : 'Trade'}
+                </button>
+            )
+        }
+       
     </div>
     );
 }
