@@ -33,7 +33,8 @@ function createDemoStory() {
                     [new Slammer("Slammer 2", "This is a second level slammer.", 1, demoSlammerAbility2), 
                     new Slammer("Slammer 3", "This is a third level slammer.", 1, demoSlammerAbilityByN(3))])),
             new Chapter("The end", ["This is a demo description 7.", "This is a demo description 8.", "This is a demo description 9."], 
-                new Adventure("Adventure 1", "This is a demo description.", "campfire")),
+                new Adventure("Adventure 1", "This is a demo description.", "trade")),
+
             new Chapter("The beginning again", ["This is a demo description 10.", "This is a demo description 11.", "This is a demo description 12."], 
                 new Baddie("Baddie 1", 
                     [new Pog("Butt Pog 1", 1, 1, 1, 1), 

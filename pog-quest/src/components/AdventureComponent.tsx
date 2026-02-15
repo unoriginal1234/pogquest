@@ -7,10 +7,13 @@ import PogClass from "../classes/Pog";
 import CampfireComponent from "./adventureTemplateComponents/CampfireComponent";
 import ChaseComponent from "./adventureTemplateComponents/ChaseComponent";
 import ChestComponent from "./adventureTemplateComponents/ChestComponent";
+import TradeComponent from "./adventureTemplateComponents/TradeComponent";
 
-function createPog() {
-    return new PogClass("Chest Pog", 1, 1, 1, 1);
+function createPog(n: number, name: string) {
+    return new PogClass(name, n, 1, n, 1);
 }
+
+
 
 // I want to create a pog factory that I can use here to create a pog for the chest.
 
@@ -22,6 +25,9 @@ export default function AdventureComponent({ adventure, player }: { adventure: A
     const [hasRested, setHasRested] = useState(false);
     const [isChaseResolved, setIsChaseResolved] = useState(false);
     const [isChestOpened, setIsChestOpened] = useState(false);
+    const [isTradeCompleted, setIsTradeCompleted] = useState(false);
+
+    const tradePog = createPog(10, "Trade Pog");
 
     function handleRest() {
         player.setCurrentHitpoints(player.getCurrentHitpoints() + 10);
@@ -38,7 +44,13 @@ export default function AdventureComponent({ adventure, player }: { adventure: A
     function openChest() {
         setIsChestOpened(true);
         adventure.setIsComplete(true);
-        player.addPog(createPog());
+        player.addPog(createPog(3, "Chest Pog"));
+    }
+
+    function trade() {
+        setIsTradeCompleted(true);
+        adventure.setIsComplete(true);
+        player.addPog(tradePog);
     }
 
     if (template === 'campfire' && !isComplete) {
@@ -71,15 +83,13 @@ export default function AdventureComponent({ adventure, player }: { adventure: A
         );
     }
 
-    if (template === 'trade') {
+    if (template === 'trade' && !isComplete) {
         return (
-            <div>
-                <h1>Adventure</h1>
-                <p>{adventure.getName()}</p>
-                <p>{adventure.getDescription()}</p>
-                <p>{adventure.getTemplateDescription()}</p>
-                <p>I think that this could be very cool, but I need to figure out how to implement it.</p>
-            </div>
+            <TradeComponent adventure={adventure} trade={trade} isTradeCompleted={isTradeCompleted} player={player} tradePog={tradePog} />
+        );
+    } else if (template === 'trade' && isComplete) {
+        return (
+            <p>You traded with the trader and got a pog!</p>
         );
     }
 
