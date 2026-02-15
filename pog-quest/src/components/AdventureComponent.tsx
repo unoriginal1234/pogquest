@@ -1,5 +1,6 @@
 import AdventureClass from "../classes/Adventure";
 import PlayerClass from "../classes/Player";
+import CampfireComponent from "./adventureTemplateComponents/CampfireComponent";
 import { useState } from "react";
 
 export default function AdventureComponent({ adventure, player }: { adventure: AdventureClass, player: PlayerClass }) {
@@ -15,13 +16,15 @@ export default function AdventureComponent({ adventure, player }: { adventure: A
 
     if (template === 'campfire') {
         return (
-            <div>
-                <h1>Adventure</h1>
-                <p>{adventure.getName()}</p>
-                <p>{adventure.getDescription()}</p>
-                <p>{adventure.getTemplateDescription()}</p>
-                <button onClick={handleRest} disabled={hasRested}>Rest</button>
-            </div>
+            // <div>
+            //     <h1>Adventure</h1>
+            //     <p>{adventure.getName()}</p>
+            //     <p>{adventure.getDescription()}</p>
+            //     <p>{adventure.getTemplateDescription()}</p>
+            //     <button onClick={handleRest} disabled={hasRested}>Rest</button>
+            // </div>
+
+            <CampfireComponent adventure={adventure} handleRest={handleRest} hasRested={hasRested} />
         );
     }
 
