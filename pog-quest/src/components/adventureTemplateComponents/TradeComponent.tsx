@@ -42,18 +42,20 @@ export default function TradeComponent({
 
         {
             !selectedPog || (selectedPog && selectedPog.getGold() < tradePog.getGold()) ? (
+                
+                <div className='tooltip' data-tip={`Pick a pog worth trading`} >
                 <button 
                     className='tooltip' 
-                    data-tip={`This pog is worth less than the trade pog.`} 
-                    disabled={true}>No Trade!
-                </button>
+                        disabled={true}>No Trade!
+                    </button>
+                </div>
             ) : (
-                <button 
-                    className='tooltip' 
-                    data-tip={`Trade with the trader to get a pog.`} 
-                    onClick={() => trade(selectedPog!)} 
-                    disabled={isTradeCompleted}>{isTradeCompleted ? 'Trading...' : 'Trade'}
-                </button>
+                <div className='tooltip' data-tip={`Trade your selected pog to get the trade pog.`} >
+                    <button 
+                        onClick={() => trade(selectedPog!)} 
+                        disabled={isTradeCompleted}>{isTradeCompleted ? 'Trading...' : 'Trade'}
+                    </button>
+                </div>
             )
         }
        
