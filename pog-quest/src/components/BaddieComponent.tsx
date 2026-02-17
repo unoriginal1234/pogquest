@@ -1,6 +1,10 @@
 import BaddieClass from "../classes/Baddie";
 
-export default function BaddieComponent({ baddie, currentBaddieHitpoints }: { baddie: BaddieClass, currentBaddieHitpoints: number }) {
+export default function BaddieComponent({ 
+    baddie, 
+    currentBaddieHitpoints }: { 
+        baddie: BaddieClass, 
+        currentBaddieHitpoints: number }) {
    
     return (
         <div>
