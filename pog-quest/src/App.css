@@ -632,6 +632,19 @@ main {
     justify-items: center;
 }
 
+/* Modal overrides */
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+.modal-box {
+    background-color: var(--pog-black);
+    border: 3px solid var(--pog-electric-blue);
+    box-shadow: 
+        0 0 20px rgba(0, 255, 255, 0.4),
+        inset 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .app-container {

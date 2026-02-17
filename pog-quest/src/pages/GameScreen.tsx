@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 import { useGame } from '../context/GameContext';
 import GameMenuButtons from '../components/GameMenuButtons';
@@ -11,12 +11,19 @@ import { Link } from 'react-router-dom';
 
 export default function GameScreen() {
   const { state } = useGame();
-  const [ menuScreen, setMenuScreen] = useState<string | null>(null);
+  const [menuScreen, setMenuScreen] = useState<string | null>(null);
+  const modalRef = useRef<HTMLDialogElement>(null);
 
   const game = state.game;
   const player = game?.getPlayer();
 
-  function toggleScreen(){
+  function openModal(screen: string) {
+    setMenuScreen(screen);
+    modalRef.current?.showModal();
+  }
+
+  function closeModal() {
+    modalRef.current?.close();
     setMenuScreen(null);
   }
 
@@ -29,45 +36,36 @@ export default function GameScreen() {
       <h1>Game Screen</h1>
       <GameStoryPanel game={game} />
       <div className="game-menu-row">
-        <GameMenuButtons getMenuButtonSelection={getMenuButtonSelection}/>
-        {menuScreen !== null ? <GameMenuScreen /> : null}
+        <GameMenuButtons getMenuButtonSelection={openModal} />
       </div>
+
+      <dialog ref={modalRef} className="modal">
+        <div className="modal-box">
+          <GameMenuScreen />
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
+
       <footer className="footer-wrapper">
-          <Link to="/"><button>Main Menu</button></Link>
+        <Link to="/"><button>Main Menu</button></Link>
       </footer>
     </div>
   );
 
   function GameMenuScreen() {
-
-    if (menuScreen === "pog-collection"){
-      return <PogCollection player={player!} togglePogCollection={toggleScreen} />;
-    } else if (menuScreen === "inventory"){
-      return <Inventory player={player!} toggleInventory={toggleScreen} />;
-    } else if (menuScreen === "stats"){
-      return <PlayerStats player={player!} togglePlayerStats={toggleScreen} />;
-    } else if (menuScreen === "slammers"){
-      return <SlammersCollection player={player!} toggleSlammersCollection={toggleScreen} />;
+    if (menuScreen === "pog-collection") {
+      return <PogCollection player={player!} togglePogCollection={closeModal} />;
+    } else if (menuScreen === "inventory") {
+      return <Inventory player={player!} toggleInventory={closeModal} />;
+    } else if (menuScreen === "stats") {
+      return <PlayerStats player={player!} togglePlayerStats={closeModal} />;
+    } else if (menuScreen === "slammers") {
+      return <SlammersCollection player={player!} toggleSlammersCollection={closeModal} />;
     }
-  
-    return (
-      <div>
-        <PlayerStats player={game!.getPlayer()} togglePlayerStats={toggleScreen} />
-      </div>
-    );
-  }
 
-  function getMenuButtonSelection(selection: string){
-    if (selection === "pog-collection"){
-      setMenuScreen("pog-collection");
-    } else if (selection === "inventory"){
-      setMenuScreen("inventory");
-    } else if (selection === "stats"){
-      setMenuScreen("stats");
-    } else if (selection === "slammers"){
-      setMenuScreen("slammers");
-    }
+    return null;
   }
-
 }
 
