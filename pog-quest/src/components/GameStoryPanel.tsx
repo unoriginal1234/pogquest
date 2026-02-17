@@ -14,7 +14,12 @@ import AdventureComponent from "./AdventureComponent";
 
 import matchFactory from "../resources/matchFactory";
 
-export default function GameStoryPanel({ game }: { game: Game}) {
+interface GameStoryPanelProps {
+    game: Game;
+    onEndGame: () => void;
+}
+
+export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps) {
 
     const story = game.getStory();
     const player = game.getPlayer();
@@ -99,9 +104,8 @@ export default function GameStoryPanel({ game }: { game: Game}) {
     }
 
     function handleCompleteStory() {
-        console.log("complete story");
         game.endGame();
-        console.log(game, "game after endGame");
+        onEndGame();
     }
 
     const atLastChapter = chapterNumber === currentFloor.getChapterCount() - 1;

@@ -3,6 +3,7 @@ import { useState, useRef } from 'react';
 import { useGame } from '../context/GameContext';
 import GameMenuButtons from '../components/GameMenuButtons';
 import GameStoryPanel from '../components/GameStoryPanel';
+import EndGameScreen from '../components/EndGameScreen';
 import PlayerStats from '../components/PlayerStats';
 import PogCollection from '../components/PogCollection';
 import SlammersCollection from '../components/SlammersCollection';
@@ -12,10 +13,15 @@ import { Link } from 'react-router-dom';
 export default function GameScreen() {
   const { state } = useGame();
   const [menuScreen, setMenuScreen] = useState<string | null>(null);
+  const [isGameOver, setIsGameOver] = useState<boolean>(false);
   const modalRef = useRef<HTMLDialogElement>(null);
 
   const game = state.game;
   const player = game?.getPlayer();
+
+  function handleEndGame() {
+    setIsGameOver(true);
+  }
 
   function openModal(screen: string) {
     setMenuScreen(screen);
@@ -31,10 +37,18 @@ export default function GameScreen() {
     return <p>No active game yet.</p>;
   }
 
+  if (isGameOver) {
+    return (
+      <div className="page-layout">
+        <EndGameScreen game={game} />
+      </div>
+    );
+  }
+
   return (
     <div className="page-layout">
       <h1>Game Screen</h1>
-      <GameStoryPanel game={game} />
+      <GameStoryPanel game={game} onEndGame={handleEndGame} />
       <div className="game-menu-row">
         <GameMenuButtons getMenuButtonSelection={openModal} />
       </div>
