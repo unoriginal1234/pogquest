@@ -34,7 +34,7 @@ export default function TradeComponent({
             <h2>Your Pogs</h2>
             <div className="pog-grid">
                 {pogs.map((pog: PogClass) => (
-                    <PogComponent pog={pog} isFlippedUp={false} onClick={() => handlePogClick(pog)} 
+                    <PogComponent key={pog.getId()} pog={pog} isFlippedUp={false} onClick={() => handlePogClick(pog)} 
                     isSelected={selectedPog?.getId() === pog.getId()}/>
                 ))}
             </div>

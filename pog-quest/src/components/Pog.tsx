@@ -16,7 +16,9 @@ interface PogProps {
 // I think generally I want to have the onClick come from the parent
 const Pog: React.FC<PogProps> = ({ pog, isSelected, isBaddiePog, onClick, isFlippedUp }) => {
 
-  const tooltipText = `${pog.getName()} LVL ${pog.getLevel()} Strength: ${pog.getStrength()} Defense: ${pog.getDefense()} Gold: ${pog.getGold()}`;
+  const tooltipText = `⚔️: ${pog.getStrength()}
+🛡️: ${pog.getDefense()}
+🪙: ${pog.getGold()}`;
 
   if (isFlippedUp) {
     return (

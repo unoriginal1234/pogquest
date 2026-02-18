@@ -3,7 +3,7 @@ export default function PogToolTip({ children, tooltipText }:
     
     return (
         <div className="tooltip" >
-            <div className="tooltip-content">
+            <div className="pog-tooltip-content">
                 <div>{tooltipText}</div>
             </div>
             {children}
