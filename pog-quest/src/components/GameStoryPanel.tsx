@@ -148,9 +148,6 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
                 disabled={chapterNumber === currentFloor.getChapterCount() - 1}>
                     Close Current Chapter
             </button>
-            <CompletionTypeComponent /> </> : null}
-
-            
             {isFinalChapterOpen ? <button  
                 disabled={isLastFloor}
                 onClick={handleNextFloor}>Next Floor</button> : null}
@@ -160,7 +157,8 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
             atLastChapterDescription && 
             isLastChapterDescription ? 
             <button onClick={handleCompleteStory}>End Game</button> : null}
-
+            
+            <CompletionTypeComponent /> </> : null}
         </section>
     );
 

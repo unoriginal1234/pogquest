@@ -14,6 +14,7 @@ export default function GameScreen() {
   const { state } = useGame();
   const [menuScreen, setMenuScreen] = useState<string | null>(null);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
+  
   const modalRef = useRef<HTMLDialogElement>(null);
 
   const game = state.game;
