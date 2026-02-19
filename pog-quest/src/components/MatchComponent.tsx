@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
 import MatchClass from "../classes/Match";
+import SlammerClass from "../classes/Slammer";
+
 import BaddieComponent from "./BaddieComponent";
 import PlayerComponent from "./PlayerComponent";
 import StackComponent from "./StackComponent";
@@ -12,7 +14,7 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     const player = match.getPlayer();
     const baddie = match.getBaddie();
     const pogOwners = match.getPogOwners();
-    const playerSlammer = player.getEquippedSlammer();
+    
     const awardGold = baddie.getGold() + player.getGold();
     const awardXP = baddie.getXPbyLevel() || 0;
 
@@ -23,6 +25,8 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     const [currentPlayerDefense, setCurrentPlayerDefense] = useState(player.getDefense());
     const [flippedPogIds, setFlippedPogIds] = useState<string[]>([]);
 
+    const [playerSlammer, setPlayerSlammer] = useState<SlammerClass | null>(player.getEquippedSlammer() || null);
+
     const isVictoryScreenOpen = baddie.getCurrentHitpoints() <= 0;
 
     useEffect(() => {
@@ -32,6 +36,10 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
             player.addExperiencePoints(awardXP);
         }
     }, [isVictoryScreenOpen, match, awardGold, player, awardXP]);
+
+    useEffect(() => {
+        setPlayerSlammer(player.getEquippedSlammer()!);
+    }, [player]);
     
 
     function handleStackClick() {

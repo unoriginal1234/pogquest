@@ -16,7 +16,7 @@ export default class Baddie {
         this.pogs = pogs;
         this.gold = gold;
         this.level = level;
-        this.maxHitpoints = 10;
+        this.maxHitpoints = this.getMaxHitpointsByLevel() || 0;
         this.currentHitpoints = this.maxHitpoints;
         this.defense = 0;
     }
@@ -49,6 +49,21 @@ export default class Baddie {
             8: 384, 
             9: 768, 
             10: 1536}[this.level];
+    }
+
+    getMaxHitpointsByLevel() {
+        return {
+            1: 10,
+            2: 20,
+            3: 30,
+            4: 40,
+            5: 50,
+            6: 60,
+            7: 70,
+            8: 80,
+            9: 90,
+            10: 100,
+        }[this.level];
     }
 
     getId() {
