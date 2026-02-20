@@ -15,7 +15,9 @@
   --pog-red: #ff0000;
   --pog-white: #ffffff;
   --pog-gray: #808080;
-  
+  /* Consistent spacing between border and content for all bordered panels */
+  --pog-panel-inset: 1.25rem;
+
   font-family: 'VT323', 'Courier New', monospace;
   line-height: 1.4;
   font-weight: 400;
@@ -263,6 +265,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 .pog-border {
+  padding: var(--pog-panel-inset);
   border: 3px solid var(--pog-electric-blue);
   box-shadow: 
     0 0 10px var(--pog-electric-blue),

@@ -57,7 +57,7 @@ main {
 }
 
 .status-panel {
-  padding: 1.5rem;
+  padding: var(--pog-panel-inset);
   background-color: rgba(0, 0, 0, 0.5);
   min-width: 300px;
   display: flex;
@@ -78,7 +78,7 @@ main {
 }
 
 .message-box {
-  padding: 2rem;
+  padding: var(--pog-panel-inset);
   background-color: rgba(0, 0, 0, 0.7);
   text-align: center;
   display: flex;
@@ -638,6 +638,7 @@ main {
 }
 
 .modal-box {
+    padding: var(--pog-panel-inset);
     background-color: var(--pog-black);
     border: 3px solid var(--pog-electric-blue);
     box-shadow: 
