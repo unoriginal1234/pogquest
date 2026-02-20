@@ -42,12 +42,12 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     }, [isVictoryScreenOpen, match, awardGold, player, awardXP]);
 
     useEffect(() => {
+        // I am worried that this is triggering too often
         setPlayerSlammer(player.getEquippedSlammer()!);
     }, [player]);
     
 
     function handleStackClick() {
-       console.log("hiiiii")
         for (const pogId of flippedPogIds) {
             const pog = inPlayPogs.find(pog => pog.getId() === pogId);
             if (pog) {
@@ -85,16 +85,28 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     }
 
     function handleUseClick(pog: PogClass) {
-        const pogStrength = (pog.getStrength());
+        let pogStrength = (pog.getStrength());
         const pogDefense = (pog.getDefense());
+
         match.addToPlayedPogs(pog);
         const newInPlayPogs = match.getInPlayPogs().filter(pogs => pogs.getId() !== pog.getId());
         match.setInPlayPogs(newInPlayPogs);
         setInPlayPogs(match.getInPlayPogs().slice());
-        // it doesn't look like we're setting the baddie logic here, so need to do that
-        setCurrentPlayerDefense(currentPlayerDefense + pogDefense);
-        baddie.setCurrentHitpoints(currentBaddieHitpoints - pogStrength);
-        setCurrentBaddieHitpoints(currentBaddieHitpoints - pogStrength);
+
+        player.setDefense(player.getDefense() + pogDefense);
+        setCurrentPlayerDefense(player.getDefense());
+
+        if (baddie.getDefense() > 0) {
+            let newBaddieDefense = baddie.getDefense() - pogStrength;
+            if (newBaddieDefense < 0) {
+                pogStrength = -newBaddieDefense;
+                newBaddieDefense = 0;
+            }
+            baddie.setDefense(newBaddieDefense);
+            setCurrentBaddieDefense(newBaddieDefense);
+        } 
+        baddie.setCurrentHitpoints(baddie.getCurrentHitpoints() - pogStrength);
+        setCurrentBaddieHitpoints(baddie.getCurrentHitpoints());
         setOpenMenuPogId(null);
     }
 
@@ -137,8 +149,6 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     }
 
     return (
-            
-            
             <div className="match-layout">
             <BaddieComponent baddie={baddie} currentBaddieHitpoints={currentBaddieHitpoints} currentBaddieDefense={currentBaddieDefense} />
             <div className="match-arena">
@@ -165,8 +175,5 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
             </div>
             <PlayerComponent player={player} currentPlayerDefense={currentPlayerDefense} currentPlayerHitpoints={currentPlayerHitpoints} />
             </div>
-            
-            
-        
     );
 }
