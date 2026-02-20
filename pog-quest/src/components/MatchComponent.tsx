@@ -22,7 +22,9 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     const [ inPlayPogs, setInPlayPogs ] = useState<PogClass[]>(() => match.getInPlayPogs().slice());
     const [ visualStack, setVisualStack ] = useState<PogClass[]>(() => match.getStack().slice());   
     const [currentBaddieHitpoints, setCurrentBaddieHitpoints] = useState(baddie.getCurrentHitpoints());
+    const [currentBaddieDefense, setCurrentBaddieDefense] = useState(baddie.getDefense());
     const [currentPlayerDefense, setCurrentPlayerDefense] = useState(player.getDefense());
+    const [currentPlayerHitpoints, setCurrentPlayerHitpoints] = useState(player.getCurrentHitpoints());
     const [flippedPogIds, setFlippedPogIds] = useState<string[]>([]);
 
     const [playerSlammer, setPlayerSlammer] = useState<SlammerClass | null>(player.getEquippedSlammer() || null);
@@ -73,15 +75,11 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
 
     function handleUseClick(pog: PogClass) {
         const pogStrength = (pog.getStrength());
-        
         const pogDefense = (pog.getDefense());
-
         match.addToPlayedPogs(pog);
         const newInPlayPogs = match.getInPlayPogs().filter(pogs => pogs.getId() !== pog.getId());
         match.setInPlayPogs(newInPlayPogs);
-
         setInPlayPogs(match.getInPlayPogs().slice());
-        
         // it doesn't look like we're setting the baddie logic here, so need to do that
         setCurrentPlayerDefense(currentPlayerDefense + pogDefense);
         baddie.setCurrentHitpoints(currentBaddieHitpoints - pogStrength);
@@ -95,6 +93,33 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
         setFlippedPogIds([...flippedPogIds, pog.getId()]);
     }
 
+    function endCurrentTurn() {
+        // loop through inPlayPogs and apply their effects to the player
+        //
+        console.log("endCurrentTurn", inPlayPogs);
+        for (const pog of inPlayPogs) {
+            if (pogOwners.get(pog.getId()) === baddie.getId()) {
+            const pogStrength = (pog.getStrength());
+            const pogDefense = (pog.getDefense());
+            baddie.setDefense(baddie.getDefense() + pogDefense);
+            player.setCurrentHitpoints(player.getCurrentHitpoints() - pogStrength);
+            match.addToPlayedPogs(pog);
+            const newInPlayPogs = match.getInPlayPogs().filter(pogs => pogs.getId() !== pog.getId());
+            match.setInPlayPogs(newInPlayPogs);
+            setInPlayPogs(newInPlayPogs);
+            } else {
+                if (!flippedPogIds.includes(pog.getId())) {
+                match.addToPlayedPogs(pog);
+                const newInPlayPogs = match.getInPlayPogs().filter(pogs => pogs.getId() !== pog.getId());
+                match.setInPlayPogs(newInPlayPogs);
+                setInPlayPogs(newInPlayPogs);
+            }}
+        }
+        // clear the inPlayPogs array
+        setCurrentPlayerHitpoints(player.getCurrentHitpoints());
+        setCurrentBaddieDefense(baddie.getDefense());
+    }
+
     if (isVictoryScreenOpen) {
         return (
             <VictoryScreen baddieGold={baddie.getGold()} awardXP={awardXP} />
@@ -105,7 +130,7 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
             
             
             <div className="match-layout">
-            <BaddieComponent baddie={baddie} currentBaddieHitpoints={currentBaddieHitpoints} />
+            <BaddieComponent baddie={baddie} currentBaddieHitpoints={currentBaddieHitpoints} currentBaddieDefense={currentBaddieDefense} />
             <div className="match-arena">
                 <StackComponent stack={visualStack} onClick={handleStackClick} />
                 <InPlayPogsComponent 
@@ -118,11 +143,17 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
                     handleFlipClick={handleFlipClick}
                     flippedPogIds={flippedPogIds}
                 />
-                <button onClick={handleReStackClick}>
-                    Re-stack
-                </button>
+                <div className="flex flex-col gap-2">
+                    <button onClick={handleReStackClick}>
+                        Re-stack
+                    </button>
+                    {/* TO DO: disable the button if there are still pogs belonging to the player in the inPlayPogs array */}
+                    <button onClick={endCurrentTurn}>
+                        End Turn
+                    </button>
+                </div>
             </div>
-            <PlayerComponent player={player} currentPlayerDefense={currentPlayerDefense} />
+            <PlayerComponent player={player} currentPlayerDefense={currentPlayerDefense} currentPlayerHitpoints={currentPlayerHitpoints} />
             </div>
             
             

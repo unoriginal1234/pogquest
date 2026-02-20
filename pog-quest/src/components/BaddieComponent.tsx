@@ -2,9 +2,12 @@ import BaddieClass from "../classes/Baddie";
 
 export default function BaddieComponent({ 
     baddie, 
-    currentBaddieHitpoints }: { 
+    currentBaddieHitpoints,
+    currentBaddieDefense
+ }: { 
         baddie: BaddieClass, 
-        currentBaddieHitpoints: number }) {
+        currentBaddieHitpoints: number,
+        currentBaddieDefense: number }) {
    
     return (
         <div>
@@ -13,6 +16,7 @@ export default function BaddieComponent({
             <p>Gold: {baddie.getGold()}</p>
             <p>Pogs: {baddie.getPogs().length}</p>
             <p>Current Hitpoints: {currentBaddieHitpoints}</p>
+            <p>Current Defense: {currentBaddieDefense}</p>
         </div>
     );
 }
