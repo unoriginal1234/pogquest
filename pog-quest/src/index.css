@@ -42,15 +42,22 @@
 }
 
 html {
-  background: var(--pog-black);
-  background-image: 
+  background-color: #07111a;
+  background-image:
+    /* subtle horizontal scanline texture on top of the Jazz art */
     repeating-linear-gradient(
       0deg,
       transparent,
       transparent 2px,
-      rgba(0, 255, 255, 0.03) 2px,
-      rgba(0, 255, 255, 0.03) 4px
-    );
+      rgba(0, 255, 255, 0.025) 2px,
+      rgba(0, 255, 255, 0.025) 4px
+    ),
+    /* Jazz cup background */
+    url('/jazz-bg.svg');
+  background-size: auto, cover;
+  background-position: 0 0, center center;
+  background-repeat: repeat, no-repeat;
+  background-attachment: fixed, fixed;
 }
 
 body {
@@ -58,7 +65,7 @@ body {
   padding: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: var(--pog-black);
+  background: transparent;
   position: relative;
   overflow-x: hidden;
 }

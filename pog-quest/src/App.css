@@ -58,7 +58,7 @@ main {
 
 .status-panel {
   padding: var(--pog-panel-inset);
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(7, 17, 26, 0.72);
   min-width: 300px;
   display: flex;
   flex-direction: column;
@@ -79,7 +79,7 @@ main {
 
 .message-box {
   padding: var(--pog-panel-inset);
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(7, 17, 26, 0.78);
   text-align: center;
   display: flex;
   flex-direction: column;
