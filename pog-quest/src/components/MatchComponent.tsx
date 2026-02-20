@@ -31,7 +31,9 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
 
     const isVictoryScreenOpen = baddie.getCurrentHitpoints() <= 0;
 
-    // TODO: the pogs strength needs to hit defense first, then hit hitpoints for both baddie and player
+    // TODO: end turn should handle the flipped pog going back to the stack logic
+    // TODO: handle empty stack logic
+    
 
     useEffect(() => {
         if (isVictoryScreenOpen && match.getStatus() !== 'completed') {
@@ -101,6 +103,8 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
             if (newBaddieDefense < 0) {
                 pogStrength = -newBaddieDefense;
                 newBaddieDefense = 0;
+            } else {
+                pogStrength = 0;
             }
             baddie.setDefense(newBaddieDefense);
             setCurrentBaddieDefense(newBaddieDefense);
@@ -121,10 +125,23 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
         console.log("endCurrentTurn", inPlayPogs);
         for (const pog of inPlayPogs) {
             if (pogOwners.get(pog.getId()) === baddie.getId()) {
-            const pogStrength = (pog.getStrength());
+            let pogStrength = (pog.getStrength());
             const pogDefense = (pog.getDefense());
             baddie.setDefense(baddie.getDefense() + pogDefense);
+
+            if (player.getDefense() > 0) {
+                let newPlayerDefense = player.getDefense() - pogStrength;
+                if (newPlayerDefense < 0) {
+                    pogStrength = -newPlayerDefense;
+                    newPlayerDefense = 0;
+                } else {
+                    pogStrength = 0;
+                }
+                player.setDefense(newPlayerDefense);
+                setCurrentPlayerDefense(newPlayerDefense);
+            }
             player.setCurrentHitpoints(player.getCurrentHitpoints() - pogStrength);
+            setCurrentPlayerHitpoints(player.getCurrentHitpoints());
             match.addToPlayedPogs(pog);
             const newInPlayPogs = match.getInPlayPogs().filter(pogs => pogs.getId() !== pog.getId());
             match.setInPlayPogs(newInPlayPogs);
