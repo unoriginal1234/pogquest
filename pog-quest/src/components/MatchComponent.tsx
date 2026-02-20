@@ -8,6 +8,8 @@ import PlayerComponent from "./PlayerComponent";
 import StackComponent from "./StackComponent";
 import InPlayPogsComponent from "./InPlayPogsComponent";
 import PogClass from "../classes/Pog";
+
+import type { Damageable } from "./matchTypes";
 import VictoryScreen from "./VictoryScreen";
 
 export default function MatchComponent({ match }: { match: MatchClass }) {
@@ -33,6 +35,8 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
 
     // TODO: end turn should handle the flipped pog going back to the stack logic
     // TODO: handle empty stack logic
+    // TODO: Check if I'm resetting player defense at the end of the game
+    // TODO: Think about when to reset player and baddie defense
 
 
     useEffect(() => {
@@ -85,13 +89,6 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
             setOpenMenuPogId(null);
         }
     }
-
-    type Damageable = {
-        getDefense: () => number;
-        setDefense: (d: number) => void;
-        getCurrentHitpoints: () => number;
-        setCurrentHitpoints: (hp: number) => void;
-    };
 
     function applyDamageToTarget(
         target: Damageable,
