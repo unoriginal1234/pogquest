@@ -31,6 +31,8 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
 
     const isVictoryScreenOpen = baddie.getCurrentHitpoints() <= 0;
 
+    // TODO: the pogs strength needs to hit defense first, then hit hitpoints for both baddie and player
+
     useEffect(() => {
         if (isVictoryScreenOpen && match.getStatus() !== 'completed') {
             match.endMatch();
@@ -45,7 +47,14 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     
 
     function handleStackClick() {
-        console.log("handleStackClick", playerSlammer);
+       console.log("hiiiii")
+        for (const pogId of flippedPogIds) {
+            const pog = inPlayPogs.find(pog => pog.getId() === pogId);
+            if (pog) {
+                match.addToBottomOfStack(pog);
+            }
+        }
+        setFlippedPogIds([]);
         if (!playerSlammer) {
             console.log("No slammer equipped");
             return;
@@ -55,6 +64,8 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
         setVisualStack(remainingStack);
         match.setInPlayPogs(flippedStack);
         match.setStack(remainingStack);
+        // I need to add the flipped pogs to the bottom of the stack
+
     }
 
     function handleReStackClick() {
@@ -95,7 +106,6 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
 
     function endCurrentTurn() {
         // loop through inPlayPogs and apply their effects to the player
-        //
         console.log("endCurrentTurn", inPlayPogs);
         for (const pog of inPlayPogs) {
             if (pogOwners.get(pog.getId()) === baddie.getId()) {

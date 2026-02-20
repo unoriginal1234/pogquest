@@ -67,6 +67,10 @@ export default class Match {
         this.stack = stack;
     }
 
+    addToBottomOfStack(pog: Pog) {
+        this.stack.push(pog);
+    }
+
     setInPlayPogs(inPlayPogs: Pog[]) {
         this.inPlayPogs = inPlayPogs;
     }
