@@ -49,9 +49,8 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     }, [isVictoryScreenOpen, match, awardGold, player, awardXP]);
 
     useEffect(() => {
-        // I am worried that this is triggering too often
         setPlayerSlammer(player.getEquippedSlammer()!);
-    }, [player]);
+    }, [player.getEquippedSlammer()]);
     
 
     function handleStackClick() {
