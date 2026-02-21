@@ -126,15 +126,52 @@ main {
 
 .game-menu-row {
   display: flex;
-  gap: 2rem;
   justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
 }
 
-.game-menu-row > .demo-section {
-  flex: 1 1 280px;
-  max-width: 420px;
+.game-menu-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0.6rem 0.8rem;
+  border: 2px solid rgba(0, 255, 255, 0.35);
+  background: rgba(0, 0, 0, 0.45);
+  box-shadow:
+    0 0 14px rgba(0, 255, 255, 0.18),
+    inset 0 0 10px rgba(0, 255, 255, 0.06);
+}
+
+.menu-icon-btn {
+  width: 64px;
+  height: 64px;
+  padding: 0.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 2px solid var(--pog-electric-blue);
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow:
+    0 0 8px rgba(0, 255, 255, 0.25),
+    inset 0 0 6px rgba(0, 255, 255, 0.08);
+}
+
+.menu-icon-btn svg {
+  width: 46px;
+  height: 46px;
+  display: block;
+  flex-shrink: 0;
+}
+
+.menu-icon-btn:hover {
+  border-color: var(--pog-cyan);
+  background: rgba(0, 255, 255, 0.08);
+  box-shadow:
+    0 0 18px var(--pog-cyan),
+    inset 0 0 10px rgba(0, 255, 255, 0.15);
+  transform: translateY(-3px);
 }
 
 .pog-component {

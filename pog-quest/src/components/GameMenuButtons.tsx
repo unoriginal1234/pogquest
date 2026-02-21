@@ -6,24 +6,39 @@ import StatsMenuItem from '../icons/StatsMenuItem';
 export default function GameMenuButtons({getMenuButtonSelection}: {getMenuButtonSelection: (selection: string) => void}) {
 
     return (
-        <section className="demo-section">
-            <h2>Game Menu</h2>
-            <div className="button-group">
-                <button onClick={() => getMenuButtonSelection("pog-collection")}>
-                    <PogsMenuItem />
-                    Pogs</button>
-                <button onClick={() => getMenuButtonSelection("slammers")}>
-                    <SlammersMenuItem />
-                    Slammers</button>
-                <button onClick={() => getMenuButtonSelection("inventory")}>
-                    <InventoryMenuItem />
-                    Inventory</button>
-                <button onClick={() => getMenuButtonSelection("stats")}>
-                    <StatsMenuItem />
-                    Stats</button>
-                
-            </div>
-            
-        </section>
+        <nav className="game-menu-bar">
+            <button
+                className="menu-icon-btn"
+                onClick={() => getMenuButtonSelection("pog-collection")}
+                aria-label="Pogs"
+                title="Pogs"
+            >
+                <PogsMenuItem />
+            </button>
+            <button
+                className="menu-icon-btn"
+                onClick={() => getMenuButtonSelection("slammers")}
+                aria-label="Slammers"
+                title="Slammers"
+            >
+                <SlammersMenuItem />
+            </button>
+            <button
+                className="menu-icon-btn"
+                onClick={() => getMenuButtonSelection("inventory")}
+                aria-label="Inventory"
+                title="Inventory"
+            >
+                <InventoryMenuItem />
+            </button>
+            <button
+                className="menu-icon-btn"
+                onClick={() => getMenuButtonSelection("stats")}
+                aria-label="Stats"
+                title="Stats"
+            >
+                <StatsMenuItem />
+            </button>
+        </nav>
     );
 }

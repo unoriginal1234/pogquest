@@ -50,9 +50,7 @@ export default function GameScreen() {
     <div className="page-layout">
       <h1>Game Screen</h1>
       <GameStoryPanel game={game} onEndGame={handleEndGame} />
-      <div className="game-menu-row">
-        <GameMenuButtons getMenuButtonSelection={openModal} />
-      </div>
+      <GameMenuButtons getMenuButtonSelection={openModal} />
 
       <dialog ref={modalRef} className="modal">
         <div className="modal-box">
