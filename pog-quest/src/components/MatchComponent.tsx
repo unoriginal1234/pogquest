@@ -35,13 +35,14 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
 
     // TODO: end turn should handle the flipped pog going back to the stack logic
     // TODO: handle empty stack logic
-    // TODO: Check if I'm resetting player defense at the end of the game
     // TODO: Think about when to reset player and baddie defense
 
 
     useEffect(() => {
         if (isVictoryScreenOpen && match.getStatus() !== 'completed') {
+            // this logic should only run once
             match.endMatch();
+            player.setDefense(0);
             player.setGold(awardGold);
             player.addExperiencePoints(awardXP);
         }

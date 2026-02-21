@@ -1,16 +1,18 @@
 import Pog from './Pog';
 
+type Level = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+
 export default class Baddie {
     _id: string;
     name: string;
     pogs: Pog[];
     gold: number;
-    level: number; // could have two levels for each "floor"
+    level: Level;
     maxHitpoints: number;
     currentHitpoints: number;
     defense: number;
 
-    constructor(name: string, pogs: Pog[], gold: number, level: number) {
+    constructor(name: string, pogs: Pog[], gold: number, level: Level) {
         this._id = crypto.randomUUID();
         this.name = name;
         this.pogs = pogs;
