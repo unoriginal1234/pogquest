@@ -16,7 +16,7 @@ import matchFactory from "../resources/matchFactory";
 
 interface GameStoryPanelProps {
     game: Game;
-    onEndGame: () => void;
+    onEndGame: (didLose: boolean) => void;
 }
 
 export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps) {
@@ -38,6 +38,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
     const [match, setMatch] = useState<MatchClass | null>(null);
     const [shop, setShop] = useState<ShopClass | null>(null);
     const [adventure, setAdventure] = useState<AdventureClass | null>(null);
+    const [isGameOver, setIsGameOver] = useState<boolean>(false);
 
     useEffect(() => {
         if (completionType instanceof Baddie) {
@@ -64,6 +65,8 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
             setAdventure(null);
         }
     }, [completionType]);
+
+
 
 
     function handleChapterClick(chapterNumber: number) {
@@ -105,7 +108,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
 
     function handleCompleteStory() {
         game.endGame();
-        onEndGame();
+        onEndGame(false);
     }
 
     const atLastChapter = chapterNumber === currentFloor.getChapterCount() - 1;
@@ -119,6 +122,12 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
         !isFinalChapterOpen) {
             setIsFinalChapterOpen(true);
     }
+
+    useEffect(() => {
+        if (isGameOver) {
+            onEndGame(true);
+        }
+    }, [isGameOver, onEndGame]);
 
     return (
         <section className="demo-section pog-border">
@@ -198,7 +207,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
             if (!match) {
                 return null;
             }
-            return <MatchComponent key={match.getBaddie().getId()} match={match} />;
+            return <MatchComponent key={match.getBaddie().getId()} match={match} setIsGameOver={setIsGameOver} />;
         } else if (completionType.constructor.name === "Shop") {
             if (!shop) {
                 return null;

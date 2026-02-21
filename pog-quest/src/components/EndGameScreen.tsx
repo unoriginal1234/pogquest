@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Game from "../classes/Game";
 
-export default function EndGameScreen({ game }: { game: Game }) {
+export default function EndGameScreen({ game, didLose }: { game: Game, didLose: boolean | null }) {
     const player = game.getPlayer();
     const story = game.getStory();
 
@@ -62,7 +62,7 @@ export default function EndGameScreen({ game }: { game: Game }) {
                     </div>
                     <div className="status-item">
                         <span className="pog-glow-green">Game Status:</span>
-                        <span className="pog-glow-pink">Victory!</span>
+                        {didLose ? <span className="pog-glow-red">Loss</span> : <span className="pog-glow-green">Victory!</span>}
                     </div>
                 </div>
             </div>

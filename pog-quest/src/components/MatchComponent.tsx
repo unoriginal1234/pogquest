@@ -2,20 +2,26 @@ import { useState, useEffect } from "react";
 
 import MatchClass from "../classes/Match";
 import SlammerClass from "../classes/Slammer";
+import PogClass from "../classes/Pog";
 
 import BaddieComponent from "./BaddieComponent";
 import PlayerComponent from "./PlayerComponent";
 import StackComponent from "./StackComponent";
 import InPlayPogsComponent from "./InPlayPogsComponent";
-import PogClass from "../classes/Pog";
 
 import type { Damageable } from "./matchTypes";
 import VictoryScreen from "./VictoryScreen";
 
-export default function MatchComponent({ match }: { match: MatchClass }) {
+export default function MatchComponent({ match, setIsGameOver }: { match: MatchClass, setIsGameOver: (isGameOver: boolean) => void }) {
+    // const { state, dispatch } = useGame();
+    // const game = state.game;
+
+
     const player = match.getPlayer();
     const baddie = match.getBaddie();
     const pogOwners = match.getPogOwners();
+
+
     
     const awardGold = baddie.getGold() + player.getGold();
     const awardXP = baddie.getXPbyLevel() || 0;
@@ -32,10 +38,16 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     const [playerSlammer, setPlayerSlammer] = useState<SlammerClass | null>(player.getEquippedSlammer() || null);
 
     const isVictoryScreenOpen = baddie.getCurrentHitpoints() <= 0;
+    const isGameOver = player.getCurrentHitpoints() <= 0;
 
     // TODO: end turn should handle the flipped pog going back to the stack logic
     // TODO: Think about when to reset player and baddie defense
 
+    useEffect(() => {
+        if (isGameOver) {
+            setIsGameOver(true);
+        }
+    }, [isGameOver, setIsGameOver]);
 
     useEffect(() => {
         if (isVictoryScreenOpen && match.getStatus() !== 'completed') {

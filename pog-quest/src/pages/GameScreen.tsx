@@ -14,14 +14,16 @@ export default function GameScreen() {
   const { state } = useGame();
   const [menuScreen, setMenuScreen] = useState<string | null>(null);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
+  const [didLose, setDidLose] = useState<boolean | null>(null);
   
   const modalRef = useRef<HTMLDialogElement>(null);
 
   const game = state.game;
   const player = game?.getPlayer();
 
-  function handleEndGame() {
+  function handleEndGame(didLose: boolean) {
     setIsGameOver(true);
+    setDidLose(didLose);
   }
 
   function openModal(screen: string) {
@@ -41,7 +43,7 @@ export default function GameScreen() {
   if (isGameOver) {
     return (
       <div className="page-layout">
-        <EndGameScreen game={game} />
+        <EndGameScreen game={game} didLose={didLose} />
       </div>
     );
   }
@@ -49,7 +51,7 @@ export default function GameScreen() {
   return (
     <div className="page-layout">
       <h1>Game Screen</h1>
-      <GameStoryPanel game={game} onEndGame={handleEndGame} />
+      <GameStoryPanel game={game} onEndGame={(didLose: boolean) => handleEndGame(didLose)} />
       <GameMenuButtons getMenuButtonSelection={openModal} />
 
       <dialog ref={modalRef} className="modal">
