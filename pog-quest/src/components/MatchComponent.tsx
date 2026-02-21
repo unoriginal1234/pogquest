@@ -34,7 +34,6 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     const isVictoryScreenOpen = baddie.getCurrentHitpoints() <= 0;
 
     // TODO: end turn should handle the flipped pog going back to the stack logic
-    // TODO: handle empty stack logic
     // TODO: Think about when to reset player and baddie defense
 
 
@@ -42,6 +41,7 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
         if (isVictoryScreenOpen && match.getStatus() !== 'completed') {
             // this logic should only run once
             match.endMatch();
+            // I could put these on the match class instead of this hook
             player.setDefense(0);
             player.setGold(awardGold);
             player.addExperiencePoints(awardXP);
@@ -54,13 +54,10 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     
 
     function handleStackClick() {
-        for (const pogId of flippedPogIds) {
-            const pog = inPlayPogs.find(pog => pog.getId() === pogId);
-            if (pog) {
-                match.addToBottomOfStack(pog);
-            }
-        }
-        setFlippedPogIds([]);
+        player.setDefense(0);
+        setCurrentPlayerDefense(0);
+        
+        
         if (!playerSlammer) {
             console.log("No slammer equipped");
             return;
@@ -75,6 +72,12 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     }
 
     function handleReStackClick() {
+        // need to double check if I like this logic for resetting defense
+        baddie.setDefense(0);
+        setCurrentBaddieDefense(0);
+        player.setDefense(0);
+        setCurrentPlayerDefense(0);
+
         match.setNewStack();
         match.setInPlayPogs([]);
         setVisualStack(match.getStack().slice());
@@ -137,6 +140,8 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
     function endCurrentTurn() {
         // loop through inPlayPogs and apply their effects to the player
         console.log("endCurrentTurn", inPlayPogs);
+        baddie.setDefense(0);
+        setCurrentBaddieDefense(0);
         for (const pog of inPlayPogs) {
             if (pogOwners.get(pog.getId()) === baddie.getId()) {
             let pogStrength = (pog.getStrength());
@@ -154,8 +159,21 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
                 const newInPlayPogs = match.getInPlayPogs().filter(pogs => pogs.getId() !== pog.getId());
                 match.setInPlayPogs(newInPlayPogs);
                 setInPlayPogs(newInPlayPogs);
-            }}
+                }
+            }
         }
+        for (const pogId of flippedPogIds) {
+            const pog = inPlayPogs.find(pog => pog.getId() === pogId);
+            if (pog) {
+                // TO DO: there is some duplicate logic that could be abstracted out
+                match.addToBottomOfStack(pog);
+                setVisualStack(match.getStack().slice());
+                const newInPlayPogs = match.getInPlayPogs().filter(pogs => pogs.getId() !== pog.getId());
+                match.setInPlayPogs(newInPlayPogs);
+                setInPlayPogs(newInPlayPogs);
+            }
+        }
+        setFlippedPogIds([]);
         // clear the inPlayPogs array
         setCurrentPlayerHitpoints(player.getCurrentHitpoints());
         setCurrentBaddieDefense(baddie.getDefense());
@@ -171,7 +189,7 @@ export default function MatchComponent({ match }: { match: MatchClass }) {
             <div className="match-layout">
             <BaddieComponent baddie={baddie} currentBaddieHitpoints={currentBaddieHitpoints} currentBaddieDefense={currentBaddieDefense} />
             <div className="match-arena">
-                <StackComponent stack={visualStack} onClick={handleStackClick} />
+                {StackComponent && <StackComponent stack={visualStack} onClick={handleStackClick} />}
                 <InPlayPogsComponent 
                     inPlayPogs={inPlayPogs}
                     openMenuPogId={openMenuPogId}
