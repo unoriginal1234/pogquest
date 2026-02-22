@@ -4,6 +4,7 @@ export default class User {
     emails: string[];
     name: string;
     _id: string;
+    role: "user" | "admin";
 
     constructor(username: string, password: string, emails: string[]) {
         this.username = username;
@@ -11,6 +12,15 @@ export default class User {
         this.emails = emails;
         this.name = "";
         this._id = "";
+        this.role = "user";
+    }
+
+    setRole(role: "user" | "admin") {
+        this.role = role;
+    }
+
+    getRole() {
+        return this.role;
     }
 
     setId(id: string) {
@@ -52,4 +62,6 @@ export default class User {
     setPassword(password: string) {
         this.password = password;
     }
+
+
 }

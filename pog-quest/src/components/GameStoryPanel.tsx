@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Game from "../classes/Game";
+import User from "../classes/User"; 
+import { UserContext } from "../context/UserContext";
 
 import Chapter from "../classes/Chapter";
 import Floor from "../classes/Floor";
@@ -20,6 +22,9 @@ interface GameStoryPanelProps {
 }
 
 export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps) {
+
+    const user = useContext<User | null>(UserContext);
+    const isAdmin = user?.getRole() === "admin";
 
     const story = game.getStory();
     const player = game.getPlayer();
@@ -155,7 +160,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
             <button 
                 onClick={handleCloseCurrentChapter}
                 disabled={chapterNumber === currentFloor.getChapterCount() - 1}>
-                    Close Current Chapter
+                    {isAdmin ? "Dev: Close Current Chapter" : "Close Current Chapter"}
             </button>
             {isFinalChapterOpen ? <button  
                 disabled={isLastFloor}
