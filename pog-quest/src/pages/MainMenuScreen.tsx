@@ -3,6 +3,8 @@ import { useGame } from '../context/GameContext';
 
 function MainMenuScreen() {
 
+    // TO DO: if the game is over I shouldn't be able to continue
+
     const { state, dispatch } = useGame();
     const game = state.game;
 

@@ -7,7 +7,7 @@ export default function EndGameScreen({ game, didLose }: { game: Game, didLose: 
 
     return (
         <section className="demo-section pog-border">
-            <h1 className="pog-glow-pink">Game Complete!</h1>
+            {didLose ? <h1 className="pog-glow-red">Game Over</h1> : <h1 className="pog-glow-pink">Game Complete!</h1>}
             
             <div className="game-summary">
                 <h2>Final Stats</h2>
