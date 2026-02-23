@@ -165,22 +165,36 @@ export default class Player {
     this.experiencePoints += experiencePoints;
   }
 
-  _levelsByExperiencePoints: { [key: number]: number } = {
-    4: 1,
-    8: 2,
-    16: 3,
-    32: 4,
-    64: 5,
-    128: 6,
-    256: 7,
-    512: 8,
-    1024: 9,
-  };
-
-  _getLevelFromExperiencePoints(experiencePoints: number) {
-    return this._levelsByExperiencePoints[experiencePoints];
+  _levelsByExperiencePoints(key: number): number {
+    if (key < 4) {
+      return 1;
+    } else if (key < 8) {
+      return 2;
+    } else if (key < 16) {
+      return 3;
+    } else if (key < 32) {
+      return 4;
+    } else if (key < 64) {
+      return 5;
+    } else if (key < 128) {
+      return 6;
+    } else if (key < 256) {
+      return 7;
+    } else if (key < 512) {
+      return 8;
+    } else if (key < 1024) {
+      return 9;
+    } else {
+      return 10;
+    }
   }
 
-  
+  _getLevelFromExperiencePoints(experiencePoints: number) {
+    return this._levelsByExperiencePoints(experiencePoints);
+  }
+
+  setLevel() {
+    this.level = this._getLevelFromExperiencePoints(this.getExperiencePoints());
+  }
 
 }

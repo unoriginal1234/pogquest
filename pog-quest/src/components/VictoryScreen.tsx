@@ -1,18 +1,44 @@
-export default function VictoryScreen({ baddieGold, awardXP }: { baddieGold: number, awardXP: number }) {
-    // TO DO: handle level up with experience points
-    // TODO: add experience points per Baddie to baddie class
+import { useState, useEffect } from "react";
+import PlayerClass from "../classes/Player";
+
+export default function VictoryScreen(
+
+    { baddieGold, 
+        awardXP, 
+        playerXPBeforeVictory, 
+        playerLevelBeforeVictory, 
+        player }: 
+    { baddieGold: number, 
+        awardXP: number, 
+        playerXPBeforeVictory: number, 
+        playerLevelBeforeVictory: number, 
+        player: PlayerClass }) {
+    
+    
+    const [playerLevel, setPlayerLevel] = useState(player.getLevel());
+
     // TO DO : increase HP when level up
     // TO DO: Offer a choice of pawns / slammers when level up
-
-    // there's a bug here where gold is duplicating when I open the item menu
     
+    useEffect(() => {
+        player.setLevel();
+        setPlayerLevel(player.getLevel());
+    }, [player]);
 
     return (
         <div>
             <h1>Victory</h1>
-            <p>Level Up!</p>
-            <p>You gained {baddieGold} gold</p>
+            
+            <p>You had {playerXPBeforeVictory} XP before victory</p>
             <p>You gained {awardXP} XP</p>
+
+            <p>You were level {playerLevelBeforeVictory} before victory</p>
+            <p>You are now level {playerLevel}</p>
+            {playerLevel > playerLevelBeforeVictory && <p>Level Up!</p>}
+
+            <p>You gained {baddieGold} gold</p>
+            
+
             {/* <p>You have reached level {player.getLevel()}</p>
             <p>You have {player.getGold()} gold</p>
             <p>You have {player.getPogs().length} pogs</p>

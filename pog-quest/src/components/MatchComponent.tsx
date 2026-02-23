@@ -13,16 +13,11 @@ import type { Damageable } from "./matchTypes";
 import VictoryScreen from "./VictoryScreen";
 
 export default function MatchComponent({ match, setIsGameOver }: { match: MatchClass, setIsGameOver: (isGameOver: boolean) => void }) {
-    // const { state, dispatch } = useGame();
-    // const game = state.game;
-
-
+    
     const player = match.getPlayer();
     const baddie = match.getBaddie();
     const pogOwners = match.getPogOwners();
 
-
-    
     const awardGold = baddie.getGold() + player.getGold();
     const awardXP = baddie.getXPbyLevel() || 0;
 
@@ -40,6 +35,8 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
     const isVictoryScreenOpen = baddie.getCurrentHitpoints() <= 0;
     const isGameOver = player.getCurrentHitpoints() <= 0;
 
+    const playerLevelBeforeVictory = player.getLevel();
+    const playerXPBeforeVictory = player.getExperiencePoints();
     // TODO: end turn should handle the flipped pog going back to the stack logic
     // TODO: Think about when to reset player and baddie defense
 
@@ -61,6 +58,7 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
     }, [isVictoryScreenOpen, match, awardGold, player, awardXP]);
 
     useEffect(() => {
+        // This could be dangerous. It works now because the player.getEquippedSlammer() is not changing in the same render cycle.
         setPlayerSlammer(player.getEquippedSlammer()!);
     }, [player.getEquippedSlammer()]);
     
@@ -156,7 +154,7 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
         setCurrentBaddieDefense(0);
         for (const pog of inPlayPogs) {
             if (pogOwners.get(pog.getId()) === baddie.getId()) {
-            let pogStrength = (pog.getStrength());
+            const pogStrength = (pog.getStrength());
             const pogDefense = (pog.getDefense());
             baddie.setDefense(baddie.getDefense() + pogDefense);
 
@@ -193,7 +191,12 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
 
     if (isVictoryScreenOpen) {
         return (
-            <VictoryScreen baddieGold={baddie.getGold()} awardXP={awardXP} />
+            <VictoryScreen 
+            baddieGold={baddie.getGold()} 
+            awardXP={awardXP} 
+            playerXPBeforeVictory={playerXPBeforeVictory}
+            playerLevelBeforeVictory={playerLevelBeforeVictory} 
+            player={player}/>
         );
     }
 
