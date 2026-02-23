@@ -168,21 +168,21 @@ export default class Player {
   _levelsByExperiencePoints(key: number): number {
     if (key < 4) {
       return 1;
-    } else if (key < 8) {
-      return 2;
     } else if (key < 16) {
-      return 3;
+      return 2;
     } else if (key < 32) {
-      return 4;
+      return 3;
     } else if (key < 64) {
-      return 5;
+      return 4;
     } else if (key < 128) {
-      return 6;
+      return 5;
     } else if (key < 256) {
-      return 7;
+      return 6;
     } else if (key < 512) {
-      return 8;
+      return 7;
     } else if (key < 1024) {
+      return 8;
+    } else if (key < 2048) {
       return 9;
     } else {
       return 10;
