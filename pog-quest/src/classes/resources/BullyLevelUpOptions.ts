@@ -6,9 +6,6 @@
 import Pog from "../Pog";
 
 const BullyLevelUpOptions = {
-    1: {
-        pogs: [new Pog("Slap", 8, 0, 10, 1), new Pog("Sandal Wipe", 8, 0, 10, 1)],
-    },
     2: {
         pogs: [new Pog("Slap", 8, 0, 10, 1), new Pog("Sandal Wipe", 8, 0, 10, 1)],
     },

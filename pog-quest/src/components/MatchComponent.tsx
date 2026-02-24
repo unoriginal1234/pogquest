@@ -53,7 +53,8 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
             // I could put these on the match class instead of this hook
             player.setDefense(0);
             player.setGold(awardGold);
-            player.addExperiencePoints(awardXP);
+            // TODO: this method returns a value, I can use it in the victory screen
+            player.addExperiencePointsAndMaybeLevelUp(awardXP);
         }
     }, [isVictoryScreenOpen, match, awardGold, player, awardXP]);
 
@@ -196,6 +197,7 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
             awardXP={awardXP} 
             playerXPBeforeVictory={playerXPBeforeVictory}
             playerLevelBeforeVictory={playerLevelBeforeVictory} 
+
             player={player}/>
         );
     }

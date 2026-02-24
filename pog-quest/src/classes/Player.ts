@@ -19,6 +19,7 @@ export default class Player {
   gold: number;
   experiencePoints: number;
   equippedSlammer: Slammer | undefined;
+  leveUpPerksReceived: number;
 
   constructor(name: string, archetype: Archetype) {
     this._id = crypto.randomUUID();
@@ -34,7 +35,7 @@ export default class Player {
     this.gold = 10;
     this.experiencePoints = 0;
     this.equippedSlammer = this.slammers[0];
-
+    this.leveUpPerksReceived = 1;
   } 
 
   getName() {
@@ -161,8 +162,31 @@ export default class Player {
     return this.experiencePoints;
   }
 
-  addExperiencePoints(experiencePoints: number) {
+  _increaseHitpointsByLevel() {
+    this.setHitpoints(Math.ceil(this.getHitpoints() * 1.2));
+    this.setCurrentHitpoints(this.getHitpoints());
+  }
+
+  addExperiencePointsAndMaybeLevelUp(experiencePoints: number): number {
+    const oldLevel = this.getLevel();
     this.experiencePoints += experiencePoints;
+    this.setLevel();
+    if (this.getLevel() > oldLevel) {
+      for (let i = oldLevel; i < this.getLevel(); i++) {
+        this._increaseHitpointsByLevel();
+      }
+      return this.getLevel() - oldLevel;
+    } else {
+      return 0;
+    }
+  }
+
+  getLeveUpPerksReceived() {
+    return this.leveUpPerksReceived;
+  }
+  
+  addToLeveUpPerksReceived() {
+    this.leveUpPerksReceived++;
   }
 
   _levelsByExperiencePoints(key: number): number {
