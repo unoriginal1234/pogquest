@@ -2,18 +2,16 @@ import { useState, useEffect } from "react";
 import PlayerClass from "../classes/Player";
 import LevelUpScreen from "./LevelUpScreen";
 
-export default function VictoryScreen(
 
-    { baddieGold, 
-        awardXP, 
-        playerXPBeforeVictory, 
-        playerLevelBeforeVictory, 
-        player }: 
-    { baddieGold: number, 
-        awardXP: number, 
-        playerXPBeforeVictory: number, 
-        playerLevelBeforeVictory: number, 
-        player: PlayerClass }) {
+interface VictoryScreenProps {
+    baddieGold: number;
+    awardXP: number;
+    playerXPBeforeVictory: number;
+    playerLevelBeforeVictory: number;
+    player: PlayerClass;
+}
+
+export default function VictoryScreen({ baddieGold, awardXP, playerXPBeforeVictory, playerLevelBeforeVictory, player }: VictoryScreenProps) {
     
     // TODO: Only let the player proceed if they have collected all the level up perks to match their level
     

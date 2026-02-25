@@ -35,8 +35,11 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
     const isVictoryScreenOpen = baddie.getCurrentHitpoints() <= 0;
     const isGameOver = player.getCurrentHitpoints() <= 0;
 
-    const playerLevelBeforeVictory = player.getLevel();
-    const playerXPBeforeVictory = player.getExperiencePoints();
+    // const playerLevelBeforeVictory = player.getLevel();
+    // const playerXPBeforeVictory = player.getExperiencePoints();
+    const playerLevelBeforeVictory = match.getPlayerLevelBeforeVictory();
+    const playerXPBeforeVictory = match.getPlayerXPBeforeVictory();
+    
     // TODO: end turn should handle the flipped pog going back to the stack logic
     // TODO: Think about when to reset player and baddie defense
 
@@ -49,12 +52,13 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
     useEffect(() => {
         if (isVictoryScreenOpen && match.getStatus() !== 'completed') {
             // this logic should only run once
-            match.endMatch();
+            
             // I could put these on the match class instead of this hook
             player.setDefense(0);
             player.setGold(awardGold);
             // TODO: this method returns a value, I can use it in the victory screen
             player.addExperiencePointsAndMaybeLevelUp(awardXP);
+            match.endMatch();
         }
     }, [isVictoryScreenOpen, match, awardGold, player, awardXP]);
 
@@ -150,7 +154,7 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
 
     function endCurrentTurn() {
         // loop through inPlayPogs and apply their effects to the player
-        console.log("endCurrentTurn", inPlayPogs);
+        
         baddie.setDefense(0);
         setCurrentBaddieDefense(0);
         for (const pog of inPlayPogs) {
@@ -193,12 +197,11 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
     if (isVictoryScreenOpen) {
         return (
             <VictoryScreen 
-            baddieGold={baddie.getGold()} 
-            awardXP={awardXP} 
-            playerXPBeforeVictory={playerXPBeforeVictory}
-            playerLevelBeforeVictory={playerLevelBeforeVictory} 
-
-            player={player}/>
+                baddieGold={baddie.getGold()} 
+                awardXP={awardXP} 
+                playerXPBeforeVictory={playerXPBeforeVictory}
+                playerLevelBeforeVictory={playerLevelBeforeVictory} 
+                player={player}/>
         );
     }
 

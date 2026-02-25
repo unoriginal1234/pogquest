@@ -13,6 +13,8 @@ export default class Match {
     pogOwners: Map<string,string>;
     inProgress: boolean;
     status: string;
+    playerLevelBeforeVictory: number;
+    playerXPBeforeVictory: number;
 
     constructor(player: Player, baddie: Baddie)
     {
@@ -25,6 +27,8 @@ export default class Match {
         this.pogOwners = new Map();
         this.inProgress = false;
         this.status = 'pending';
+        this.playerLevelBeforeVictory = player.getLevel();
+        this.playerXPBeforeVictory = player.getExperiencePoints();
     }
 
     startMatch() {
@@ -114,5 +118,13 @@ export default class Match {
     endMatch() {
         this.inProgress = false;
         this.status = 'completed';
+    }
+
+    getPlayerLevelBeforeVictory() {
+        return this.playerLevelBeforeVictory;
+    }
+
+    getPlayerXPBeforeVictory() {
+        return this.playerXPBeforeVictory;
     }
 }
