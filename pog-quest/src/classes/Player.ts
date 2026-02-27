@@ -167,18 +167,23 @@ export default class Player {
     this.setCurrentHitpoints(this.getHitpoints());
   }
 
-  addExperiencePointsAndMaybeLevelUp(experiencePoints: number): number {
-    const oldLevel = this.getLevel();
+  addExperiencePoints(experiencePoints: number) {
     this.experiencePoints += experiencePoints;
-    this.setLevel();
-    if (this.getLevel() > oldLevel) {
-      for (let i = oldLevel; i < this.getLevel(); i++) {
-        this._increaseHitpointsByLevel();
-      }
-      return this.getLevel() - oldLevel;
-    } else {
-      return 0;
+  }
+
+  hasLeveledUp(): boolean {
+    return this.getLevel() === this._getLevelFromExperiencePoints(this.getExperiencePoints());
+  }
+
+  levelUp() {
+    if (!this.hasLeveledUp()) {
+      this._setLevel(this.getLevel() + 1);
+      this._increaseHitpointsByLevel();
     }
+  }
+
+  hasReceivedCurrentLevelUpPerks(): boolean {
+    return this.getLeveUpPerksReceived() === this.getLevel();
   }
 
   getLeveUpPerksReceived() {
@@ -217,6 +222,7 @@ export default class Player {
     return this._levelsByExperiencePoints(experiencePoints);
   }
 
+  // I don't think this is needed anymore but I'll keep it for now
   setLevel() {
     this.level = this._getLevelFromExperiencePoints(this.getExperiencePoints());
   }

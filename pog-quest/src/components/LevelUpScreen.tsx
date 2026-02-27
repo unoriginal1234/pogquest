@@ -9,9 +9,13 @@ interface LevelUpScreenProps {
     newLevel: number;
     setLevelUp: (levelUp: boolean) => void;
     player: PlayerClass;
+    setPlayerNeedsToLevelUp: (playerNeedsToLevelUp: boolean) => void;
+
 }
 
-export default function LevelUpScreen({levelUpOptions, newLevel, setLevelUp, player}: LevelUpScreenProps) {
+export default function LevelUpScreen({levelUpOptions, newLevel, setLevelUp, player, setPlayerNeedsToLevelUp}: LevelUpScreenProps) {
+
+    // right now I'm separating the level up from receiving the perks -- need to double check both before letting the player proceed
     
     const [openMenuPogId, setOpenMenuPogId] = useState<string | null>(null);
 
@@ -23,6 +27,8 @@ export default function LevelUpScreen({levelUpOptions, newLevel, setLevelUp, pla
         player.addPog(pog);
         setOpenMenuPogId(null);
         setLevelUp(false);
+        setPlayerNeedsToLevelUp(player.hasLeveledUp());
+        player.addToLeveUpPerksReceived();
     }
 
     return (

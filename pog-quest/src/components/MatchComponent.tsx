@@ -37,7 +37,6 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
 
     // const playerLevelBeforeVictory = player.getLevel();
     // const playerXPBeforeVictory = player.getExperiencePoints();
-    const playerLevelBeforeVictory = match.getPlayerLevelBeforeVictory();
     const playerXPBeforeVictory = match.getPlayerXPBeforeVictory();
     
     // TODO: end turn should handle the flipped pog going back to the stack logic
@@ -57,7 +56,7 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
             player.setDefense(0);
             player.setGold(awardGold);
             // TODO: this method returns a value, I can use it in the victory screen
-            player.addExperiencePointsAndMaybeLevelUp(awardXP);
+            player.addExperiencePoints(awardXP);
             match.endMatch();
         }
     }, [isVictoryScreenOpen, match, awardGold, player, awardXP]);
@@ -200,7 +199,6 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
                 baddieGold={baddie.getGold()} 
                 awardXP={awardXP} 
                 playerXPBeforeVictory={playerXPBeforeVictory}
-                playerLevelBeforeVictory={playerLevelBeforeVictory} 
                 player={player}/>
         );
     }
