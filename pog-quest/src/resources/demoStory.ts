@@ -22,7 +22,7 @@ function createDemoStory() {
                     [new Pog("Butt Pog 1", 1, 1, 1, 1), 
                         new Pog("Butt Pog 2", 1, 1, 1, 1), 
                         new Pog("Butt Pog 3", 1, 1, 1, 1)], 
-                        100, 5)),
+                        100, 1)),
                 new Chapter("The monster breaths", ["This is a demo description 1.", "This is a demo description 2.", "This is a demo description 3."], 
                     new Baddie("Baddie 1", 
                         [new Pog("Butt Pog 1", 1, 1, 1, 1), 
@@ -38,8 +38,7 @@ function createDemoStory() {
                     [new Pog("Big Pog City", 10, 1, 50, 1),
                         new Pog("Big Honker", 10, 10, 250, 1),
                     new Pog("Biiig Defense", 2, 10, 20, 1),], 
-                    [new Slammer("Slammer 2", "This is a second level slammer.", 1, demoSlammerAbility2), 
-                    new Slammer("Slammer 3", "This is a third level slammer.", 1, demoSlammerAbilityByN(3))])),
+                    [new Slammer("Slammer 2", "This is a second level slammer.", 1, demoSlammerAbility2)])),
             new Chapter("The end", ["This is a demo description 7.", "This is a demo description 8.", "This is a demo description 9."], 
                 new Adventure("Adventure 1", "This is a demo description.", "trade")),
 

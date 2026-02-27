@@ -16,6 +16,8 @@ function createPog(n: number, name: string) {
 
 export default function AdventureComponent({ adventure, player }: { adventure: AdventureClass, player: PlayerClass }) {
 
+    //TO DO: Need to make sure that the adventure is being checked for completion correctly
+
     const template = adventure.getTemplate();
     const isComplete = adventure.getIsComplete();
     const [hasRested, setHasRested] = useState(false);

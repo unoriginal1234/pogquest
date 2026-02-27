@@ -35,6 +35,10 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
     const isVictoryScreenOpen = baddie.getCurrentHitpoints() <= 0;
     const isGameOver = player.getCurrentHitpoints() <= 0;
 
+    //TO DO: I need to add a tooltip to the stack component
+    //TO DO: I need to disable the stack component if there are still pogs in play
+    //TO DO: I need to disable the stack component if there are no pogs in the stack
+
     // const playerLevelBeforeVictory = player.getLevel();
     // const playerXPBeforeVictory = player.getExperiencePoints();
     const playerXPBeforeVictory = match.getPlayerXPBeforeVictory();

@@ -1,3 +1,6 @@
+// Thinking through this - I want to be able to combine slammers to create a new slammer
+
+
 import Pog from './Pog';
 
 export default class Slammer {

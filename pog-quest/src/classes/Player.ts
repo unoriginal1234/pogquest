@@ -1,3 +1,5 @@
+// Thinking through this - I might want a base slammer ability that returns if no slammer
+
 import Pog from './Pog';
 import Item from './Item';
 import Archetype from './Archetype';

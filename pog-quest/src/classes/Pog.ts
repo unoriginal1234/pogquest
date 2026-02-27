@@ -1,3 +1,6 @@
+// Thinking through this - I want to either level up or use the Balatro method where you can 
+// put specific wrappers around the pog to give it bonuses, this way I don't have to worry about "leveling up" the pog.
+
 export default class Pog {
   _id: string;
   name: string;
