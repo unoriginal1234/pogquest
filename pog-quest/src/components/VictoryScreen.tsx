@@ -57,7 +57,8 @@ export default function VictoryScreen({ baddieGold, awardXP, playerXPBeforeVicto
                 <LevelUpScreen 
                 levelUpOptions={levelUpOptions} 
                 newLevel={playerLevel} 
-                setLevelUp={setLevelUp}/>}
+                setLevelUp={setLevelUp}
+                player={player}/>}
         </div>
     );
 }

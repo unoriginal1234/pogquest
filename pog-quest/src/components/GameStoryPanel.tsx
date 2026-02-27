@@ -16,6 +16,8 @@ import AdventureComponent from "./AdventureComponent";
 
 import matchFactory from "../resources/matchFactory";
 
+// TODO: I want to see the baddie's name/type and level when selecting a baddie
+
 interface GameStoryPanelProps {
     game: Game;
     onEndGame: (didLose: boolean) => void;
