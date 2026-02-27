@@ -10,10 +10,10 @@ interface LevelUpScreenProps {
     setLevelUp: (levelUp: boolean) => void;
     player: PlayerClass;
     setPlayerNeedsToLevelUp: (playerNeedsToLevelUp: boolean) => void;
-
+    setPlayerLevel: (playerLevel: number) => void;
 }
 
-export default function LevelUpScreen({levelUpOptions, newLevel, setLevelUp, player, setPlayerNeedsToLevelUp}: LevelUpScreenProps) {
+export default function LevelUpScreen({levelUpOptions, newLevel, setLevelUp, player, setPlayerNeedsToLevelUp, setPlayerLevel}: LevelUpScreenProps) {
 
     // right now I'm separating the level up from receiving the perks -- need to double check both before letting the player proceed
     
@@ -29,6 +29,7 @@ export default function LevelUpScreen({levelUpOptions, newLevel, setLevelUp, pla
         setLevelUp(false);
         setPlayerNeedsToLevelUp(player.hasLeveledUp());
         player.addToLeveUpPerksReceived();
+        setPlayerLevel(player.getLevel());
     }
 
     return (

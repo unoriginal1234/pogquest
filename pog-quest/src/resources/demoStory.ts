@@ -22,7 +22,7 @@ function createDemoStory() {
                     [new Pog("Butt Pog 1", 1, 1, 1, 1), 
                         new Pog("Butt Pog 2", 1, 1, 1, 1), 
                         new Pog("Butt Pog 3", 1, 1, 1, 1)], 
-                        100, 1)),
+                        100, 5)),
                 new Chapter("The monster breaths", ["This is a demo description 1.", "This is a demo description 2.", "This is a demo description 3."], 
                     new Baddie("Baddie 1", 
                         [new Pog("Butt Pog 1", 1, 1, 1, 1), 

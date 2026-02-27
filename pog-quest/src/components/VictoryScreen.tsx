@@ -68,6 +68,7 @@ export default function VictoryScreen({
                     levelUpOptions={levelUpOptions} 
                     newLevel={playerLevel + 1} 
                     setLevelUp={setLevelUp}
+                    setPlayerLevel={setPlayerLevel}
                     player={player}
                     setPlayerNeedsToLevelUp={setPlayerNeedsToLevelUp}
                 />}
