@@ -17,21 +17,30 @@ function Settings() {
     }
 
     return (
-        <div>
-            <p>These are the settings</p>
-            <p>User: {user?.getUsername()}</p>
-            <p>Email: {user?.getEmails()[0]}</p>
-            <p>Role: {userRole}</p>
-            <fieldset className="fieldset bg-base-100 border-base-300 rounded-box w-64 border p-4">
-              <legend className="fieldset-legend">Make Admin</legend>
-              <label className="label">
-                <input type="checkbox" defaultChecked={user?.getRole() === "admin"} className="toggle" onClick={toggleAdmin} />
-                Make Admin
-              </label>
-            </fieldset>
-            <Link to="/"><button>Main Menu</button></Link>
+        <div className="settings-container">
+            <h1>Settings</h1>
+            
+            <div className="settings-info">
+                <p><span className="pog-glow-green">User:</span> <span className="pog-glow-pink">{user?.getUsername()}</span></p>
+                <p><span className="pog-glow-green">Email:</span> <span className="pog-glow-blue">{user?.getEmails()[0]}</span></p>
+                <p><span className="pog-glow-green">Role:</span> <span className="pog-glow-pink">{userRole}</span></p>
+            </div>
 
-           
+            <fieldset className="settings-fieldset">
+                <legend className="settings-legend">Admin Mode</legend>
+                <label className="settings-toggle-label">
+                    <input 
+                        type="checkbox" 
+                        defaultChecked={user?.getRole() === "admin"} 
+                        className="settings-toggle" 
+                        onClick={toggleAdmin} 
+                    />
+                    <span className="settings-toggle-slider"></span>
+                    <span>Enable Admin</span>
+                </label>
+            </fieldset>
+
+            <Link to="/"><button>Main Menu</button></Link>
         </div>
     );
 }

@@ -1,4 +1,4 @@
-import PogToolTip from "./tooltips/pogToolTip";
+import PogToolTip from "./pogToolTip";
  
  export default function StackToolTip({ length, children }: { length: number, children: React.ReactNode }) {
     
