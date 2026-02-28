@@ -11,6 +11,7 @@ import InPlayPogsComponent from "./InPlayPogsComponent";
 
 import type { Damageable } from "./matchTypes";
 import VictoryScreen from "./VictoryScreen";
+import StackToolTip from "./stackToolTip";
 
 export default function MatchComponent({ match, setIsGameOver }: { match: MatchClass, setIsGameOver: (isGameOver: boolean) => void }) {
     
@@ -211,7 +212,7 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
             <div className="match-layout">
             <BaddieComponent baddie={baddie} currentBaddieHitpoints={currentBaddieHitpoints} currentBaddieDefense={currentBaddieDefense} />
             <div className="match-arena">
-                {StackComponent && <StackComponent stack={visualStack} onClick={handleStackClick} />}
+                {StackComponent && <StackToolTip length={visualStack.length}><StackComponent stack={visualStack} onClick={handleStackClick} /></StackToolTip>}
                 <InPlayPogsComponent 
                     inPlayPogs={inPlayPogs}
                     openMenuPogId={openMenuPogId}

@@ -6,7 +6,7 @@ export default function StackComponent({ stack, onClick }: { stack: PogClass[], 
     
 
     return (
-        <div className="match-stack" onClick={onClick}>
+        <div className="match-stack" onClick={onClick} >
             {stack.map((pog, index) => (
                 <div
                     key={pog.getId()}
