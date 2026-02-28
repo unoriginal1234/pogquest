@@ -11,7 +11,7 @@ import InPlayPogsComponent from "./InPlayPogsComponent";
 
 import type { Damageable } from "./matchTypes";
 import VictoryScreen from "./VictoryScreen";
-import StackToolTip from "./stackToolTip";
+import StackToolTip from "./tooltips/stackToolTip";
 
 export default function MatchComponent({ match, setIsGameOver }: { match: MatchClass, setIsGameOver: (isGameOver: boolean) => void }) {
     

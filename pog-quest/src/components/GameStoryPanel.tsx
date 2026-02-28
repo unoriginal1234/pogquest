@@ -13,6 +13,9 @@ import AdventureClass from "../classes/Adventure";
 import MatchComponent from "./MatchComponent";
 import ShopComponent from "./ShopComponent";
 import AdventureComponent from "./AdventureComponent";
+import BaddieIcon from "../icons/BaddieIcon";
+import ShopIcon from "../icons/ShopIcon";
+import AdventureIcon from "../icons/AdventureIcon";
 
 import matchFactory from "../resources/matchFactory";
 
@@ -198,13 +201,13 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
 
     function NavButtonType(string: string) {
         if (string === "Baddie") {
-            return "👹"
+            return <BaddieIcon size={32} />;
         }
         if (string === "Shop") {
-            return "🏪"
+            return <ShopIcon size={32} />;
         }
         if (string === "Adventure") {
-            return "👾"
+            return <AdventureIcon size={32} />;
         }
         return "something went wrong";
     }
