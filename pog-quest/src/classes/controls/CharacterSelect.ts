@@ -45,7 +45,7 @@ export default class CharacterSelect {
         "Steals lunch money.", 
         19, 
         [...startingPogs, new Pog("Tease", 8, 0, 10, 1)],
-        [new Slammer("Jab", "Packs a punch.", 1, 10, demoSlammerAbility)],
+        [new Slammer("Jab", "Flips up 3 pogs.", 1, 10, demoSlammerAbility)],
         [new Item("Brick", "Deals 10 damage.", 100)],
         BullyLevelUpOptions
     );

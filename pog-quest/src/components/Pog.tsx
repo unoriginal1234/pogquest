@@ -16,6 +16,7 @@ interface PogProps {
 // I think generally I want to have the onClick come from the parent
 const Pog: React.FC<PogProps> = ({ pog, isSelected, isBaddiePog, onClick, isFlippedUp }) => {
 
+  // TO DO: boons should add to the pogs ability and be a different color
   const tooltipText = `⚔️: ${pog.getStrength()}
 🛡️: ${pog.getDefense()}
 🪙: ${pog.getGold()}`;

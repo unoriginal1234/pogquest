@@ -11,6 +11,7 @@ import Story from "../classes/Story";
 
 import demoSlammerAbility2 from "../slammerResources/demoSlammerAbility2";
 import demoSlammerAbilityByN from "../slammerResources/demoSlammerAbilityByN";
+import beeferSlammerAbilityByInput from "../slammerResources/beeferSlammerAbilityByInput";
 
 function createDemoStory() {
     return new Story(
@@ -23,14 +24,14 @@ function createDemoStory() {
                         new Pog("Butt Pog 2", 1, 1, 1, 1), 
                         new Pog("Butt Pog 3", 1, 1, 1, 1)], 
                         100, 1)),
-                new Chapter("The monster breaths", ["This is a demo description 1.", "This is a demo description 2.", "This is a demo description 3."], 
-                    new Baddie("Baddie 1", 
-                        [new Pog("Butt Pog 1", 1, 1, 1, 1), 
-                            new Pog("Butt Pog 2", 1, 2, 1, 1), 
-                            new Pog("Butt Pog 2", 3, 1, 1, 1), 
-                            new Pog("Butt Pog 2", 3, 1, 1, 1), 
-                            new Pog("Butt Pog 3", 1, 1, 1, 1)], 
-                            100, 1)),
+            new Chapter("The monster breaths", ["This is a demo description 1.", "This is a demo description 2.", "This is a demo description 3."], 
+                new Baddie("Baddie 1", 
+                    [new Pog("Butt Pog 1", 1, 1, 1, 1), 
+                        new Pog("Butt Pog 2", 1, 2, 1, 1), 
+                        new Pog("Butt Pog 2", 3, 1, 1, 1), 
+                        new Pog("Butt Pog 2", 3, 1, 1, 1), 
+                        new Pog("Butt Pog 3", 1, 1, 1, 1)], 
+                        100, 1)),
             new Chapter("The middle", ["This is a demo description 4.", "This is a demo description 5.", "This is a demo description 6."], 
                 new Shop("Shop 1", "This is a demo shop.", 
                     [new Item("Item 1", "This is a demo item.", 1), 
@@ -38,7 +39,9 @@ function createDemoStory() {
                     [new Pog("Big Pog City", 10, 1, 50, 1),
                         new Pog("Big Honker", 10, 10, 250, 1),
                     new Pog("Biiig Defense", 2, 10, 20, 1),], 
-                    [new Slammer("Slammer 2", "This is a second level slammer.", 1, 10, demoSlammerAbility2)])),
+                    [new Slammer("Slammer 2", "This is a second level slammer.", 1, 10, demoSlammerAbility2),
+                        new Slammer("BeeferSlammer 1, 1", "1 Beefer for 1 turn.", 1, 20, beeferSlammerAbilityByInput(1, 1))
+                    ],)),
             new Chapter("The end", ["This is a demo description 7.", "This is a demo description 8.", "This is a demo description 9."], 
                 new Adventure("Adventure 1", "This is a demo description.", "trade")),
             new Chapter("The end", ["This is a demo description 7.", "This is a demo description 8.", "This is a demo description 9."], 
@@ -73,8 +76,9 @@ function createDemoStory() {
                         new Pog("The funky chicken", 10, 10, 250, 1),
                         new Pog("Banana Sam", 7, 7, 25, 1),
                     ], 
-                    [new Slammer("Slammer 4", "This is a level 4 demo slammer.", 1, 25, 
-                        demoSlammerAbilityByN(3))])),
+                    [new Slammer("Slammer 4", "Flips up 6 pogs.", 1, 25, demoSlammerAbilityByN(3)),
+                    new Slammer("BeeferSlammer 1, 2", "1 Beefer for 2 turns.", 1, 20, beeferSlammerAbilityByInput(1, 2))
+                    ])),
             new Chapter("The end again", ["This is a demo description 16.", "This is a demo description 17.", "This is a demo description 18."], 
                 new Adventure("Adventure 1", "This is a demo description.", "chase")),
             new Chapter("The beginning again", ["This is a demo description 19.", "This is a demo description 20.", "This is a demo description 21."], 
@@ -111,7 +115,9 @@ function createDemoStory() {
                 new Pog("Pac-Man 3", 16, 16, 75, 1),
                 new Pog("Donkey Kong 3", 17, 17, 80, 1),
             ], 
-            [new Slammer("Slammer 7", "This is a level 7 demo slammer.", 1, 50, demoSlammerAbilityByN(4))])),
+            [new Slammer("Slammer Jazzmo", "Flips up 7 pogs.", 1, 50, demoSlammerAbilityByN(4)),
+            new Slammer("Beef Strutler 2, 2", "2 Beefer for 2 turns.", 1, 20, beeferSlammerAbilityByInput(2, 2))
+            ])),
             new Chapter("The end again", ["This is a demo description 25.", "This is a demo description 26.", "This is a demo description 27."], 
                 new Adventure("Adventure 1", "This is a demo description.", "chest")),
             ]),
@@ -139,7 +145,9 @@ function createDemoStory() {
                         new Pog("Pog Mania", 15, 10, 300, 1),
                         new Pog("Biiig Defense", 2, 10, 20, 1),
                     ], 
-                    [new Slammer("Slammer 125", "This is a level 125 demo slammer.", 1, 75, demoSlammerAbilityByN(6))])),
+                    [new Slammer("8 Ball Slammer", "Flips up 8 pogs.", 1, 75, demoSlammerAbilityByN(6)),
+                    new Slammer("Beef Strogonoff 3, 3", "3 Beefer for 3 turns.", 1, 20, beeferSlammerAbilityByInput(3, 3))
+                    ])),
             new Chapter("The end", ["This is a demo description 34.", "This is a demo description 35.", "This is a demo description 36."], 
                 new Adventure("Adventure 1", "This is a demo description.", "trade")),
             new Chapter("Just kidding the REAL end", ["This is a demo description 37.", "This is a demo description 38.", "This is a demo description 39."], 
