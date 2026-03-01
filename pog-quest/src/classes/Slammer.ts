@@ -1,7 +1,7 @@
 // Thinking through this - I want to be able to combine slammers to create a new slammer
-
-
 import Pog from './Pog';
+
+import type { Boon } from './types'
 
 export default class Slammer {
     _id: string;
@@ -9,9 +9,9 @@ export default class Slammer {
     description: string;
     level: number;
     gold: number;
-    slamAbility: (stack: Pog[]) => { flippedStack: Pog[], remainingStack: Pog[] };
+    slamAbility: (stack: Pog[]) => { flippedStack: Pog[], remainingStack: Pog[], boons?: { [key: string]: Boon } };
 
-    constructor(name: string, description: string, level: number, gold: number, slamAbility: (stack: Pog[]) => { flippedStack: Pog[], remainingStack: Pog[] }) {
+    constructor(name: string, description: string, level: number, gold: number, slamAbility: (stack: Pog[]) => { flippedStack: Pog[], remainingStack: Pog[], boons?: { [key: string]: Boon } }) {
         this._id = crypto.randomUUID();
         this.name = name;
         this.description = description;

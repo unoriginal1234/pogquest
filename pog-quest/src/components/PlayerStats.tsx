@@ -9,6 +9,7 @@ export default function GameMenuView({ player, togglePlayerStats }:
         const hitpoints = player.getCurrentHitpoints();
         const experiencePoints = player.getExperiencePoints();
         const level = player.getLevel();
+        const boons = player.getBoons();
     
 
     return (
@@ -31,6 +32,10 @@ export default function GameMenuView({ player, togglePlayerStats }:
                 <div className="status-item">
                     <span className="pog-glow-green">Experience Points:</span>
                     <span className="pog-glow-pink">{experiencePoints}</span>
+                </div>
+                <div className="status-item">
+                    <span className="pog-glow-green">Boons:</span>
+                    <span className="pog-glow-pink">{Object.keys(boons).join(', ')}</span>
                 </div>
             </div>
             <button onClick={togglePlayerStats}>Back</button>

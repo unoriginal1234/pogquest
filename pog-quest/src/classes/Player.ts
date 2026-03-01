@@ -5,6 +5,10 @@ import Item from './Item';
 import Archetype from './Archetype';
 import Slammer from './Slammer';
 
+import type { Boon } from './types'
+
+
+
 export default class Player {
   name: string;
   pogs: Pog[];
@@ -15,7 +19,7 @@ export default class Player {
   archetype: Archetype;
   level: number;
   _id: string;
-  // boons: Boon[];
+  boons: { [key: string]: Boon };
   // nerfs: Nerf[];
   defense: number;
   gold: number;
@@ -38,7 +42,29 @@ export default class Player {
     this.experiencePoints = 0;
     this.equippedSlammer = this.slammers[0];
     this.leveUpPerksReceived = 1;
+    this.boons = {};
   } 
+
+
+  getBoons() {
+    return this.boons;
+  }
+
+  getBoon(name: string) {
+    return this.boons[name];
+  }
+
+  addBoon(name: string, boon: Boon) {
+    this.boons[name] = boon;
+  }
+
+  removeBoon(name: string) {
+    delete this.boons[name];
+  }
+
+  setBoons(boons: { [key: string]: Boon }) {
+    this.boons = boons;
+  }
 
   getName() {
     return this.name;
