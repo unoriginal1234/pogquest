@@ -1,4 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+
+import { UserContext } from "../context/UserContext";
+import User from "../classes/User";
 
 import MatchClass from "../classes/Match";
 import SlammerClass from "../classes/Slammer";
@@ -31,11 +34,16 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
     const [currentPlayerHitpoints, setCurrentPlayerHitpoints] = useState(player.getCurrentHitpoints());
     const [flippedPogIds, setFlippedPogIds] = useState<string[]>([]);
 
+    const [canReStack, setCanReStack] = useState(false);
+
     const [playerSlammer, setPlayerSlammer] = useState<SlammerClass | null>(player.getEquippedSlammer() || null);
 
     const isVictoryScreenOpen = baddie.getCurrentHitpoints() <= 0;
     const isGameOver = player.getCurrentHitpoints() <= 0;
 
+
+    const user = useContext<User | null>(UserContext);
+    const isAdmin = user?.getRole() === "admin";
     //TO DO: I need to add a tooltip to the stack component
     //TO DO: I need to disable the stack component if there are still pogs in play
     //TO DO: I need to disable the stack component if there are no pogs in the stack
@@ -86,11 +94,15 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
         setVisualStack(remainingStack);
         match.setInPlayPogs(flippedStack);
         match.setStack(remainingStack);
+        if (match.getStackCount() <= 0) {
+            setCanReStack(true);
+        }
         // I need to add the flipped pogs to the bottom of the stack
 
     }
 
     function handleReStackClick() {
+        setCanReStack(false);
         // need to double check if I like this logic for resetting defense
         baddie.setDefense(0);
         setCurrentBaddieDefense(0);
@@ -99,6 +111,7 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
 
         match.setNewStack();
         match.setInPlayPogs([]);
+        
         setVisualStack(match.getStack().slice());
         setInPlayPogs([]);
         setFlippedPogIds([]);
@@ -224,9 +237,13 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
                     flippedPogIds={flippedPogIds}
                 />
                 <div className="flex flex-col gap-2">
-                    <button onClick={handleReStackClick}>
+                    {isAdmin ? 
+                    <button onClick={handleReStackClick} >
+                        DEV: Re-stack
+                    </button> : 
+                    <button onClick={handleReStackClick} disabled={!canReStack}>
                         Re-stack
-                    </button>
+                    </button>}
                     {/* TO DO: disable the button if there are still pogs belonging to the player in the inPlayPogs array */}
                     <button onClick={endCurrentTurn}>
                         End Turn

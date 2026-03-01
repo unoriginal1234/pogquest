@@ -71,6 +71,10 @@ export default class Match {
         this.stack = stack;
     }
 
+    getStackCount() {
+        return this.stack.length;
+    }
+
     addToBottomOfStack(pog: Pog) {
         this.stack.push(pog);
     }
@@ -89,6 +93,10 @@ export default class Match {
 
     getInPlayPogs() {
         return this.inPlayPogs;
+    }
+
+    getInPlayPogsCount() {
+        return this.inPlayPogs.length;
     }
 
     getStack() {

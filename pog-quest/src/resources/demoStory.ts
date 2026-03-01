@@ -136,7 +136,7 @@ function createDemoStory() {
                     [new Item("Item 1", "This is a demo item.", 1)], 
                     [new Pog("Pog 1", 1, 1, 1, 1),
                         new Pog("Big Honker", 10, 10, 250, 1),
-                        new Pog("Pog Mania", 20, 20, 100, 1),
+                        new Pog("Pog Mania", 15, 10, 300, 1),
                         new Pog("Biiig Defense", 2, 10, 20, 1),
                     ], 
                     [new Slammer("Slammer 125", "This is a level 125 demo slammer.", 1, 75, demoSlammerAbilityByN(6))])),
