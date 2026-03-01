@@ -185,9 +185,11 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
         return (
             <div className="button-group">
                 {unlockedChapters.map((chapterNumber: number) => (
-                    
-                    <button key={chapterNumber} onClick={() => handleChapterClick(chapterNumber)}>
-                        {/* This is very messy and needs to be cleaned up */}
+                    <button 
+                        key={chapterNumber} 
+                        className="nav-icon-button"
+                        onClick={() => handleChapterClick(chapterNumber)}
+                    >
                         {NavButtonType(getNavButtonTypeByChapterNumber(chapterNumber))}
                     </button>
                 ))}
@@ -201,13 +203,13 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
 
     function NavButtonType(string: string) {
         if (string === "Baddie") {
-            return <BaddieIcon size={32} />;
+            return <BaddieIcon size={72} />;
         }
         if (string === "Shop") {
-            return <ShopIcon size={32} />;
+            return <ShopIcon size={72} />;
         }
         if (string === "Adventure") {
-            return <AdventureIcon size={32} />;
+            return <AdventureIcon size={72} />;
         }
         return "something went wrong";
     }

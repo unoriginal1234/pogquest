@@ -725,6 +725,54 @@ main {
     visibility: visible;
 }
 
+/* Nav Icon Buttons */
+.nav-icon-button {
+    width: 88px;
+    height: 88px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--pog-electric-blue);
+    background:
+        radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.14) 0%, rgba(0, 0, 0, 0.95) 72%);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 
+        0 0 16px rgba(0, 255, 255, 0.45),
+        inset 0 0 14px rgba(0, 255, 255, 0.12);
+}
+
+.nav-icon-button svg {
+    width: 72px;
+    height: 72px;
+    display: block;
+    filter:
+        drop-shadow(0 0 8px rgba(0, 255, 255, 0.35))
+        saturate(1.15)
+        contrast(1.08);
+}
+
+.nav-icon-button:hover {
+    border-color: var(--pog-cyan);
+    transform: scale(1.08);
+    box-shadow: 
+        0 0 26px rgba(0, 255, 255, 0.62),
+        0 0 42px rgba(0, 255, 255, 0.32),
+        inset 0 0 16px rgba(0, 255, 255, 0.22);
+}
+
+.nav-icon-button:hover svg {
+    filter:
+        drop-shadow(0 0 12px rgba(0, 255, 255, 0.5))
+        saturate(1.2)
+        contrast(1.12);
+}
+
+.nav-icon-button:active {
+    transform: scale(1.03);
+}
+
 /* Level Up Screen */
 .level-up-container {
     padding: 1.5rem;

@@ -11,14 +11,14 @@ export default class Slammer {
     gold: number;
     slamAbility: (stack: Pog[]) => { flippedStack: Pog[], remainingStack: Pog[] };
 
-    constructor(name: string, description: string, level: number, slamAbility: (stack: Pog[]) => { flippedStack: Pog[], remainingStack: Pog[] }) {
+    constructor(name: string, description: string, level: number, gold: number, slamAbility: (stack: Pog[]) => { flippedStack: Pog[], remainingStack: Pog[] }) {
         this._id = crypto.randomUUID();
         this.name = name;
         this.description = description;
         this.level = level;
         this.slamAbility = slamAbility;
         // TO DO: Add gold to the constructor
-        this.gold = 10;
+        this.gold = gold;
     }
 
 

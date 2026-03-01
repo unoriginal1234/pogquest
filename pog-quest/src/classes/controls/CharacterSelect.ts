@@ -17,7 +17,7 @@ export default class CharacterSelect {
         17, 
         [...startingPogs, new Pog("Kick Flip", 5, 5, 5, 1)],
         // I should return the in game copy as part of the demo slammer ability
-        [new Slammer("Radical Style", "Flips up 3 Pogs.", 1, demoSlammerAbility)],
+        [new Slammer("Radical Style", "Flips up 3 Pogs.", 1, 10, demoSlammerAbility)],
         [new Item("Camera", "Replay last turn.", 100)],
         BullyLevelUpOptions
     );
@@ -31,7 +31,7 @@ export default class CharacterSelect {
         "Master of pop and awe.", 
         15, 
         [...startingPogs, new Pog("Bottle Rocket", 10, 0, 10, 1)],
-        [new Slammer("Blower Upper", "Flips up 3 Pogs.", 1, demoSlammerAbility)],
+        [new Slammer("Blower Upper", "Flips up 3 Pogs.", 1, 10, demoSlammerAbility)],
         [new Item("Lighter", "Fireworks deal 2 more damage till end of turn.", 100)],
         BullyLevelUpOptions
     );
@@ -45,7 +45,7 @@ export default class CharacterSelect {
         "Steals lunch money.", 
         19, 
         [...startingPogs, new Pog("Tease", 8, 0, 10, 1)],
-        [new Slammer("Jab", "Packs a punch.", 1, demoSlammerAbility)],
+        [new Slammer("Jab", "Packs a punch.", 1, 10, demoSlammerAbility)],
         [new Item("Brick", "Deals 10 damage.", 100)],
         BullyLevelUpOptions
     );
