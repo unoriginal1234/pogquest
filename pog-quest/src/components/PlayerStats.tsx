@@ -35,7 +35,7 @@ export default function GameMenuView({ player, togglePlayerStats }:
                 </div>
                 <div className="status-item">
                     <span className="pog-glow-green">Boons:</span>
-                    <span className="pog-glow-pink">{Object.keys(boons).join(', ')}</span>
+                    <span className="pog-glow-pink">{Object.keys(boons).map((boon: string) => `${boons[boon].name}  ${boons[boon].value} -` + '⏱️'.repeat(boons[boon].duration)).join(', ')}</span>
                 </div>
             </div>
             <button onClick={togglePlayerStats}>Back</button>

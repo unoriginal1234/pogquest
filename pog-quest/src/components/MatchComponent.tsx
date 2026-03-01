@@ -211,6 +211,13 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
         // clear the inPlayPogs array
         setCurrentPlayerHitpoints(player.getCurrentHitpoints());
         setCurrentBaddieDefense(baddie.getDefense());
+        for (const boonName in player.getBoons()) {
+            const boon = player.getBoons()[boonName];
+            boon.duration--;
+            if (boon.duration <= 0) {
+                player.removeBoon(boonName);
+            }
+        }
     }
 
     if (isVictoryScreenOpen) {

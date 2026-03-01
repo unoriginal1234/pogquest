@@ -8,8 +8,8 @@ export default function demoSlammerAbility(stack: Pog[]) {
         'beefer': {
             name: 'beefer',
             description: 'Increases pog strength by 1 for 1 turn.',
-            value: 1,
-            duration: 1,
+            value: 2,
+            duration: 2,
         }
     };
 
