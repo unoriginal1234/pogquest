@@ -89,7 +89,9 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
             console.log("No slammer equipped");
             return;
         }
-        const { flippedStack, remainingStack } = playerSlammer.slam(visualStack);
+        const { flippedStack, remainingStack, boons } = playerSlammer.slam(visualStack);
+        player.setBoons(boons || {});
+        // TODO: I need to add a visual indicator 
         setInPlayPogs(flippedStack);
         setVisualStack(remainingStack);
         match.setInPlayPogs(flippedStack);
