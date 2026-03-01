@@ -6,6 +6,8 @@ import User from "../classes/User";
 import MatchClass from "../classes/Match";
 import SlammerClass from "../classes/Slammer";
 import PogClass from "../classes/Pog";
+import type { Boon } from "../classes/types";
+
 
 import BaddieComponent from "./BaddieComponent";
 import PlayerComponent from "./PlayerComponent";
@@ -70,6 +72,7 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
             player.setGold(awardGold);
             // TODO: this method returns a value, I can use it in the victory screen
             player.addExperiencePoints(awardXP);
+            player.setBoons({});
             match.endMatch();
         }
     }, [isVictoryScreenOpen, match, awardGold, player, awardXP]);
@@ -83,14 +86,15 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
     function handleStackClick() {
         player.setDefense(0);
         setCurrentPlayerDefense(0);
-        
-        
         if (!playerSlammer) {
             console.log("No slammer equipped");
             return;
         }
         const { flippedStack, remainingStack, boons } = playerSlammer.slam(visualStack);
-        player.setBoons(boons || {});
+        // TO DO: FIgure out how to handle overwritting boons
+        if (boons) {
+            player.setBoons(boons);
+        }
         // TODO: I need to add a visual indicator 
         setInPlayPogs(flippedStack);
         setVisualStack(remainingStack);
@@ -130,10 +134,15 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
     function applyDamageToTarget(
         target: Damageable,
         pogStrength: number,
+        
         setDefense: (d: number) => void,
-        setHitpoints: (hp: number) => void
+        setHitpoints: (hp: number) => void,
+        boons: { [key: string]: Boon } = {},
     ) {
         let remainingStrength = pogStrength;
+        if (boons['beefer']) {
+            remainingStrength += boons['beefer'].value;
+        }
         if (target.getDefense() > 0) {
             let newDefense = target.getDefense() - remainingStrength;
             if (newDefense < 0) {
@@ -161,7 +170,7 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
         player.setDefense(player.getDefense() + pogDefense);
         setCurrentPlayerDefense(player.getDefense());
 
-        applyDamageToTarget(baddie, pogStrength, setCurrentBaddieDefense, setCurrentBaddieHitpoints);
+        applyDamageToTarget(baddie, pogStrength, setCurrentBaddieDefense, setCurrentBaddieHitpoints, player.getBoons());
         setOpenMenuPogId(null);
     }
 
