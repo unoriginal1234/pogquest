@@ -3,22 +3,25 @@ import Pog from './Pog';
 
 import type { Boon } from './types'
 
+export type SlammerType = 'flipper' | 'beefer' | 'turtler';
+
 export default class Slammer {
     _id: string;
     name: string;
     description: string;
     level: number;
     gold: number;
+    slammerType: SlammerType;
     slamAbility: (stack: Pog[]) => { flippedStack: Pog[], remainingStack: Pog[], boons?: { [key: string]: Boon } };
 
-    constructor(name: string, description: string, level: number, gold: number, slamAbility: (stack: Pog[]) => { flippedStack: Pog[], remainingStack: Pog[], boons?: { [key: string]: Boon } }) {
+    constructor(name: string, description: string, level: number, gold: number, slamAbility: (stack: Pog[]) => { flippedStack: Pog[], remainingStack: Pog[], boons?: { [key: string]: Boon } }, slammerType: SlammerType = 'flipper') {
         this._id = crypto.randomUUID();
         this.name = name;
         this.description = description;
         this.level = level;
         this.slamAbility = slamAbility;
-        // TO DO: Add gold to the constructor
         this.gold = gold;
+        this.slammerType = slammerType;
     }
 
 
@@ -41,6 +44,10 @@ export default class Slammer {
 
     getName() {
         return this.name;
+    }
+
+    getSlammerType(): SlammerType {
+        return this.slammerType;
     }
 
     slam(stack: Pog[]) {

@@ -440,6 +440,143 @@ main {
   color: var(--pog-lime-green);
 }
 
+/* Slammer Art */
+.slammer-art {
+  width: 48px;
+  height: 48px;
+  position: relative;
+  margin-bottom: 4px;
+  flex-shrink: 0;
+}
+
+/* Turtle shell - hexagonal shell pattern */
+.slammer-art-turtler {
+  width: 48px;
+  height: 44px;
+  background: #2d6b3f;
+  border-radius: 50% 50% 45% 45%;
+  border: 3px solid #1a4028;
+  position: relative;
+  box-shadow:
+    inset 0 -6px 12px rgba(0, 0, 0, 0.4),
+    inset 0 4px 8px rgba(100, 200, 120, 0.25),
+    0 0 8px rgba(45, 107, 63, 0.4);
+}
+
+.slammer-art-turtler::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 16px;
+  border: 2px solid rgba(26, 64, 40, 0.7);
+  border-radius: 4px 4px 2px 2px;
+  background: rgba(60, 140, 80, 0.3);
+}
+
+.slammer-art-turtler::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 2px;
+  background: rgba(26, 64, 40, 0.5);
+  box-shadow:
+    0 -6px 0 rgba(26, 64, 40, 0.4),
+    0 -12px 0 rgba(26, 64, 40, 0.3),
+    -8px -3px 0 rgba(26, 64, 40, 0.35),
+    8px -3px 0 rgba(26, 64, 40, 0.35),
+    -8px -9px 0 rgba(26, 64, 40, 0.3),
+    8px -9px 0 rgba(26, 64, 40, 0.3);
+}
+
+/* Beef cut - marbled steak shape */
+.slammer-art-beefer {
+  width: 44px;
+  height: 36px;
+  background:
+    radial-gradient(ellipse 6px 3px at 30% 40%, rgba(255, 220, 200, 0.6) 0%, transparent 100%),
+    radial-gradient(ellipse 4px 8px at 65% 55%, rgba(255, 220, 200, 0.5) 0%, transparent 100%),
+    radial-gradient(ellipse 3px 5px at 45% 70%, rgba(255, 220, 200, 0.4) 0%, transparent 100%),
+    linear-gradient(160deg, #c0392b 0%, #a93226 40%, #922b21 70%, #7b241c 100%);
+  border-radius: 40% 50% 45% 48%;
+  border: 3px solid #6e1f18;
+  position: relative;
+  box-shadow:
+    inset 0 -4px 8px rgba(0, 0, 0, 0.35),
+    inset 0 2px 6px rgba(255, 100, 80, 0.2),
+    0 0 8px rgba(192, 57, 43, 0.4);
+}
+
+.slammer-art-beefer::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 10px;
+  height: 6px;
+  background: rgba(255, 240, 230, 0.45);
+  border-radius: 50%;
+  transform: rotate(-20deg);
+}
+
+.slammer-art-beefer::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  right: 6px;
+  width: 8px;
+  height: 4px;
+  background: rgba(255, 240, 230, 0.35);
+  border-radius: 50%;
+  transform: rotate(15deg);
+}
+
+/* Flipper - stacked pogs being flipped */
+.slammer-art-flipper {
+  width: 40px;
+  height: 44px;
+  position: relative;
+}
+
+.slammer-art-flipper::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pog-electric-blue);
+  border: 2px solid rgba(0, 200, 200, 0.6);
+  box-shadow:
+    0 -6px 0 2px #110b1a,
+    0 -6px 0 4px var(--pog-electric-blue),
+    0 -12px 0 4px #110b1a,
+    0 -12px 0 6px var(--pog-electric-blue),
+    0 0 6px rgba(0, 255, 255, 0.3);
+}
+
+.slammer-art-flipper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) rotate(-15deg);
+  width: 28px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pog-hot-pink);
+  border: 2px solid rgba(255, 20, 147, 0.6);
+  box-shadow:
+    0 0 8px rgba(255, 20, 147, 0.4);
+}
+
 @keyframes slammer-pulse {
   0% {
     transform: scale(0.98);

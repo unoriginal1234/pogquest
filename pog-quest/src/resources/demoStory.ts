@@ -15,7 +15,7 @@ import beeferSlammerAbilityByInput from "../slammerResources/beeferSlammerAbilit
 import turtlerSlammerAbility from "../slammerResources/turtlerSlammerAbility";
 
 function createButtPog(index: number) {
-    return new Pog(`Butt Pog ${index}`, index, index, index * 1.2, index);
+    return new Pog(`Butt Pog ${index}`, index, index, Math.floor(index * 1.2), index);
 }
 
 function createDemoStory() {
@@ -39,8 +39,8 @@ function createDemoStory() {
                         new Pog("Big Honker", 10, 10, 250, 1),
                     new Pog("Biiig Defense", 2, 10, 20, 1),], 
                     [new Slammer("Slammer 2", "Flips up 4 pogs.", 1, 10, demoSlammerAbility2),
-                        new Slammer("Premier BeeferSlammer", "1 Beefer for 1 turn.", 1, 20, beeferSlammerAbilityByInput(1, 1)),
-                        new Slammer("Shell Shield 1, 1", "1 Turtler for 1 turn.", 1, 20, turtlerSlammerAbility(1, 1))
+                        new Slammer("Premier BeeferSlammer", "1 Beefer for 1 turn.", 1, 20, beeferSlammerAbilityByInput(1, 1), 'beefer'),
+                        new Slammer("Shell Shield 1, 1", "1 Turtler for 1 turn.", 1, 20, turtlerSlammerAbility(1, 1), 'turtler')
                     ],)),
             new Chapter("The end", ["This is a demo description 7.", "This is a demo description 8.", "This is a demo description 9."], 
                 new Adventure("Adventure 1", "This is a demo description.", "trade")),
@@ -52,14 +52,14 @@ function createDemoStory() {
                     [createButtPog(1), createButtPog(2), createButtPog(4), createButtPog(5), createButtPog(6), createButtPog(7), createButtPog(3)], 100, 2)),
             new Chapter("The beginning again", ["This is a demo description 10.", "This is a demo description 11.", "This is a demo description 12."], 
                 new Baddie("Baddie 2", 
-                    [createButtPog(2), createButtPog(4), createButtPog(4), createButtPog(2), createButtPog(4), createButtPog(2), createButtPog(4), createButtPog(5), createButtPog(6), createButtPog(7), createButtPog(3)], 100, 2)),
+                    [createButtPog(2), createButtPog(4), createButtPog(4), createButtPog(2), createButtPog(4), createButtPog(2), createButtPog(4), createButtPog(3)], 100, 2)),
             new Chapter("The middle again", ["This is a demo description 13.", "This is a demo description 14.", "This is a demo description 15."], 
                 new Shop("Shop 1", "This is a demo shop.", 
                     [new Item("Participation Trophy", "1 Participation Award", 35)], 
                     [createButtPog(1), createButtPog(2), new Pog("The funky chicken", 10, 10, 250, 1), new Pog("Banana Sam", 7, 7, 25, 1)], 
                     [new Slammer("Slammer 4", "Flips up 6 pogs.", 1, 25, demoSlammerAbilityByN(3)),
-                    new Slammer("BeeferSlammer 1, 2", "1 Beefer for 2 turns.", 1, 20, beeferSlammerAbilityByInput(1, 2)),
-                    new Slammer("Turtle Power 1, 2", "1 Turtler for 2 turns.", 1, 20, turtlerSlammerAbility(1, 2))
+                    new Slammer("BeeferSlammer 1, 2", "1 Beefer for 2 turns.", 1, 20, beeferSlammerAbilityByInput(1, 2), 'beefer'),
+                    new Slammer("Turtle Power 1, 2", "1 Turtler for 2 turns.", 1, 20, turtlerSlammerAbility(1, 2), 'turtler')
                     ])),
             new Chapter("The end again", ["This is a demo description 16.", "This is a demo description 17.", "This is a demo description 18."], 
                 new Adventure("Adventure 1", "This is a demo description.", "chase")),
@@ -89,8 +89,8 @@ function createDemoStory() {
                 new Pog("Donkey Kong 3", 17, 17, 80, 1),
             ], 
             [new Slammer("Slammer Jazzmo", "Flips up 7 pogs.", 1, 50, demoSlammerAbilityByN(4)),
-            new Slammer("Beef Strutler 2, 2", "2 Beefer for 2 turns.", 1, 20, beeferSlammerAbilityByInput(2, 2)),
-            new Slammer("Iron Shell 2, 2", "2 Turtler for 2 turns.", 1, 25, turtlerSlammerAbility(2, 2))
+            new Slammer("Beef Strutler 2, 2", "2 Beefer for 2 turns.", 1, 20, beeferSlammerAbilityByInput(2, 2), 'beefer'),
+            new Slammer("Iron Shell 2, 2", "2 Turtler for 2 turns.", 1, 25, turtlerSlammerAbility(2, 2), 'turtler')
             ])),
             new Chapter("The end again", ["This is a demo description 25.", "This is a demo description 26.", "This is a demo description 27."], 
                 new Adventure("Adventure 1", "This is a demo description.", "chest")),
@@ -119,8 +119,8 @@ function createDemoStory() {
                         new Pog("Biiig Defense", 2, 10, 20, 1),
                     ], 
                     [new Slammer("8 Ball Slammer", "Flips up 8 pogs.", 1, 75, demoSlammerAbilityByN(6)),
-                    new Slammer("Beef Strogonoff 3, 3", "3 Beefer for 3 turns.", 1, 20, beeferSlammerAbilityByInput(3, 3)),
-                    new Slammer("Fortress Shell 3, 3", "3 Turtler for 3 turns.", 1, 30, turtlerSlammerAbility(3, 3))
+                    new Slammer("Beef Strogonoff 3, 3", "3 Beefer for 3 turns.", 1, 20, beeferSlammerAbilityByInput(3, 3), 'beefer'),
+                    new Slammer("Fortress Shell 3, 3", "3 Turtler for 3 turns.", 1, 30, turtlerSlammerAbility(3, 3), 'turtler')
                     ])),
             new Chapter("The end", ["This is a demo description 34.", "This is a demo description 35.", "This is a demo description 36."], 
                 new Adventure("Adventure 1", "This is a demo description.", "trade")),
