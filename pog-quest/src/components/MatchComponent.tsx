@@ -161,7 +161,11 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
     function handleUseClick(pog: PogClass) {
         const pogStrength = pog.getStrength();
         const pogDefense = pog.getDefense();
-
+        const boons = player.getBoons();
+        if (boons['turtler']) {
+            player.setDefense(player.getDefense() + boons['turtler'].value);
+            setCurrentPlayerDefense(player.getDefense());
+        }
         match.addToPlayedPogs(pog);
         const newInPlayPogs = match.getInPlayPogs().filter(pogs => pogs.getId() !== pog.getId());
         match.setInPlayPogs(newInPlayPogs);
@@ -169,7 +173,6 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
 
         player.setDefense(player.getDefense() + pogDefense);
         setCurrentPlayerDefense(player.getDefense());
-
         applyDamageToTarget(baddie, pogStrength, setCurrentBaddieDefense, setCurrentBaddieHitpoints, player.getBoons());
         setOpenMenuPogId(null);
     }
