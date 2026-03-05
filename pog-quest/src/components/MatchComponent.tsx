@@ -263,7 +263,6 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
             <div className="match-layout">
             <BaddieComponent baddie={baddie} currentBaddieHitpoints={currentBaddieHitpoints} currentBaddieDefense={currentBaddieDefense} />
             <div className="match-arena">
-                {StackComponent && <StackToolTip length={visualStack.length}><StackComponent stack={visualStack} onClick={handleStackClick} /></StackToolTip>}
                 <InPlayPogsComponent 
                     inPlayPogs={inPlayPogs}
                     openMenuPogId={openMenuPogId}
@@ -274,18 +273,23 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
                     handleFlipClick={handleFlipClick}
                     flippedPogIds={flippedPogIds}
                 />
-                <div className="flex flex-col gap-2">
-                    {isAdmin ? 
-                    <button onClick={handleReStackClick} >
-                        DEV: Re-stack
-                    </button> : 
-                    <button onClick={handleReStackClick} disabled={!canReStack}>
-                        Re-stack
-                    </button>}
-                    {/* TO DO: disable the button if there are still pogs belonging to the player in the inPlayPogs array */}
-                    {canEndTurn ? <button onClick={endCurrentTurn} >
-                        End Turn
-                    </button> : null}
+                <div className="match-arena-bottom">
+                    <div className="match-arena-bottom-side">
+                        {isAdmin ? 
+                        <button onClick={handleReStackClick} >
+                            DEV: Re-stack
+                        </button> : 
+                        canReStack ? <button onClick={handleReStackClick}>
+                            Re-stack
+                        </button> : null}
+                    </div>
+                    {StackComponent && <StackToolTip length={visualStack.length}><StackComponent stack={visualStack} onClick={handleStackClick} /></StackToolTip>}
+                    <div className="match-arena-bottom-side">
+                        {isAdmin ? <button onClick={endCurrentTurn} >DEV: End Turn</button> :
+                        canEndTurn ? <button onClick={endCurrentTurn} >
+                            End Turn
+                        </button> : null}
+                    </div>
                 </div>
             </div>
             <PlayerComponent player={player} currentPlayerDefense={currentPlayerDefense} currentPlayerHitpoints={currentPlayerHitpoints} />

@@ -25,7 +25,7 @@ export default function InPlayPogsComponent({
     
     
     return (
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 justify-center">
             {inPlayPogs.map((pog) => (
                 <div key={pog.getId()} className="relative">
                     <Pog 
