@@ -35,8 +35,10 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
     const [currentPlayerDefense, setCurrentPlayerDefense] = useState(player.getDefense());
     const [currentPlayerHitpoints, setCurrentPlayerHitpoints] = useState(player.getCurrentHitpoints());
     const [flippedPogIds, setFlippedPogIds] = useState<string[]>([]);
+    
 
-    const [canReStack, setCanReStack] = useState(false);
+    const [canReStack, setCanReStack] = useState(() => match.getCanReStack());
+    const [canEndTurn, setCanEndTurn] = useState(() => match.getCanEndTurn());
 
     const [playerSlammer, setPlayerSlammer] = useState<SlammerClass | null>(player.getEquippedSlammer() || null);
 
@@ -70,7 +72,6 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
             // I could put these on the match class instead of this hook
             player.setDefense(0);
             player.setGold(awardGold);
-            // TODO: this method returns a value, I can use it in the victory screen
             player.addExperiencePoints(awardXP);
             player.setBoons({});
             match.endMatch();
@@ -84,6 +85,13 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
     
 
     function handleStackClick() {
+        match.setCanEndTurn(true);
+        setCanEndTurn(true);
+        if (!match.getCanSlam()) {
+            console.log("Cannot slam");
+            return;
+        }
+        match.setCanSlam(false);
         player.setDefense(0);
         setCurrentPlayerDefense(0);
         if (!playerSlammer) {
@@ -100,15 +108,14 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
         setVisualStack(remainingStack);
         match.setInPlayPogs(flippedStack);
         match.setStack(remainingStack);
-        if (match.getStackCount() <= 0) {
-            setCanReStack(true);
-        }
+        
         // I need to add the flipped pogs to the bottom of the stack
 
     }
 
     function handleReStackClick() {
         setCanReStack(false);
+        match.setCanReStack(false);
         // need to double check if I like this logic for resetting defense
         baddie.setDefense(0);
         setCurrentBaddieDefense(0);
@@ -121,6 +128,10 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
         setVisualStack(match.getStack().slice());
         setInPlayPogs([]);
         setFlippedPogIds([]);
+
+        match.setCanEndTurn(false);
+        setCanEndTurn(false);
+        match.setCanSlam(true);
     }
 
     function handleInPlayPogClick(pog: PogClass) {
@@ -185,7 +196,8 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
 
     function endCurrentTurn() {
         // loop through inPlayPogs and apply their effects to the player
-        
+        match.setCanEndTurn(false);
+        setCanEndTurn(false);
         baddie.setDefense(0);
         setCurrentBaddieDefense(0);
         for (const pog of inPlayPogs) {
@@ -207,6 +219,7 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
                 setInPlayPogs(newInPlayPogs);
                 }
             }
+            match.setCanSlam(true);
         }
         for (const pogId of flippedPogIds) {
             const pog = inPlayPogs.find(pog => pog.getId() === pogId);
@@ -229,6 +242,10 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
             if (boon.duration <= 0) {
                 player.removeBoon(boonName);
             }
+        }
+        if (match.getStackCount() <= 0) {
+            setCanReStack(true);
+            match.setCanReStack(true);
         }
     }
 
@@ -266,9 +283,9 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
                         Re-stack
                     </button>}
                     {/* TO DO: disable the button if there are still pogs belonging to the player in the inPlayPogs array */}
-                    <button onClick={endCurrentTurn}>
+                    {canEndTurn ? <button onClick={endCurrentTurn} >
                         End Turn
-                    </button>
+                    </button> : null}
                 </div>
             </div>
             <PlayerComponent player={player} currentPlayerDefense={currentPlayerDefense} currentPlayerHitpoints={currentPlayerHitpoints} />

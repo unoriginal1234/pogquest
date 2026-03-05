@@ -15,6 +15,9 @@ export default class Match {
     status: string;
     playerLevelBeforeVictory: number;
     playerXPBeforeVictory: number;
+    canSlam: boolean;
+    canEndTurn: boolean;
+    canReStack: boolean;
 
     constructor(player: Player, baddie: Baddie)
     {
@@ -29,6 +32,9 @@ export default class Match {
         this.status = 'pending';
         this.playerLevelBeforeVictory = player.getLevel();
         this.playerXPBeforeVictory = player.getExperiencePoints();
+        this.canSlam = true;
+        this.canEndTurn = false;
+        this.canReStack = false;
     }
 
     startMatch() {
@@ -135,4 +141,30 @@ export default class Match {
     getPlayerXPBeforeVictory() {
         return this.playerXPBeforeVictory;
     }
+
+    getCanSlam() {
+        return this.canSlam;
+    }
+
+    setCanSlam(canSlam: boolean) {
+        this.canSlam = canSlam;
+    }
+
+    getCanEndTurn() {
+        return this.canEndTurn;
+    }
+
+    setCanEndTurn(canEndTurn: boolean) {
+        this.canEndTurn = canEndTurn;
+    }
+
+    getCanReStack() {
+        return this.canReStack;
+    }
+
+    setCanReStack(canReStack: boolean) {
+        this.canReStack = canReStack;
+    }
+
+
 }
