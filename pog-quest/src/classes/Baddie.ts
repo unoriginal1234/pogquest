@@ -1,6 +1,6 @@
 import Pog from './Pog';
 
-type Level = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+export type Level = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
 export default class Baddie {
     _id: string;

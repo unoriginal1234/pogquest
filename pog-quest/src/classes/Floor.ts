@@ -1,4 +1,5 @@
 import Chapter from './Chapter';
+import FinalChapter from './FinalChapter';
 
 export default class Floor {
     _id: string;
@@ -9,8 +10,11 @@ export default class Floor {
     chapterNumber: number;
     currentChapter: Chapter;
     nextUnlockedChapter: number;
+    finalChapter: FinalChapter;
+    canCloseFloor: boolean;
 
-    constructor(name: string, description: string, chapters: Chapter[]) {
+
+    constructor(name: string, description: string, chapters: Chapter[], finalChapter: FinalChapter) {
         this._id = crypto.randomUUID();
         this.name = name;
         this.chapters = chapters;
@@ -19,6 +23,20 @@ export default class Floor {
         this.chapterNumber = 0;
         this.currentChapter = this.chapters[this.chapterNumber];
         this.nextUnlockedChapter = Math.max(...this.unlockedChapters) + 1;
+        this.finalChapter = finalChapter;
+        this.canCloseFloor = false;
+    }
+
+    getFinalChapter() {
+        return this.finalChapter;
+    }
+
+    setCanCloseFloor(canCloseFloor: boolean) {
+        this.canCloseFloor = canCloseFloor;
+    }
+
+    getCanCloseFloor() {
+        return this.canCloseFloor;
     }
 
     setCurrentChapter(chapterNumber: number) {
