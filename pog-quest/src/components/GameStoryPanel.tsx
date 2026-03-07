@@ -166,7 +166,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
 
             {/* I like this but might want to not check for development purposes */}
             {isLastChapterDescription ? <>
-            {isAdmin ? <button onClick={() => handleCanCloseChapter(true)}>Dev: Can Close Chapter</button> : 
+            {isAdmin ? <button onClick={() => handleCloseCurrentChapter()}>Dev: Close Chapter</button> : 
             chapterNumber === currentFloor.getChapterCount() - 1 || !canCloseChapter ? null :
             <button 
                 onClick={handleCloseCurrentChapter}>

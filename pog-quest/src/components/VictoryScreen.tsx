@@ -44,6 +44,8 @@ export default function VictoryScreen({
         setPlayerLevel(player.getLevel());
     }, [player]);
 
+    if (playerNeedsToLevelUp) {handleCanCloseChapter(true);}
+
     return (
         <div>
             <h1>Victory</h1>
@@ -62,8 +64,7 @@ export default function VictoryScreen({
                         player.levelUp();
                     }
                 }
-                >Level Up to {playerLevel + 1}</button> : 
-            <button onClick={() => handleCanCloseChapter(true)}>Okay</button>}
+                >Level Up to {playerLevel + 1}</button> : null}
             
             
             {levelUp && 
