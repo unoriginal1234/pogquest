@@ -18,7 +18,13 @@ import type { Damageable } from "./matchTypes";
 import VictoryScreen from "./VictoryScreen";
 import StackToolTip from "./tooltips/stackToolTip";
 
-export default function MatchComponent({ match, setIsGameOver }: { match: MatchClass, setIsGameOver: (isGameOver: boolean) => void }) {
+export default function MatchComponent({ 
+    match, 
+    setIsGameOver, 
+    handleCanCloseChapter }: 
+    { match: MatchClass, 
+        setIsGameOver: (isGameOver: boolean) => void, 
+        handleCanCloseChapter: (canClose: boolean) => void }) {
     
     const player = match.getPlayer();
     const baddie = match.getBaddie();
@@ -48,16 +54,8 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
 
     const user = useContext<User | null>(UserContext);
     const isAdmin = user?.getRole() === "admin";
-    //TO DO: I need to add a tooltip to the stack component
-    //TO DO: I need to disable the stack component if there are still pogs in play
-    //TO DO: I need to disable the stack component if there are no pogs in the stack
 
-    // const playerLevelBeforeVictory = player.getLevel();
-    // const playerXPBeforeVictory = player.getExperiencePoints();
     const playerXPBeforeVictory = match.getPlayerXPBeforeVictory();
-    
-    // TODO: end turn should handle the flipped pog going back to the stack logic
-    // TODO: Think about when to reset player and baddie defense
 
     useEffect(() => {
         if (isGameOver) {
@@ -219,7 +217,7 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
                 setInPlayPogs(newInPlayPogs);
                 }
             }
-            match.setCanSlam(true);
+            
         }
         for (const pogId of flippedPogIds) {
             const pog = inPlayPogs.find(pog => pog.getId() === pogId);
@@ -247,6 +245,7 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
             setCanReStack(true);
             match.setCanReStack(true);
         }
+        match.setCanSlam(true);
     }
 
     if (isVictoryScreenOpen) {
@@ -255,7 +254,9 @@ export default function MatchComponent({ match, setIsGameOver }: { match: MatchC
                 baddieGold={baddie.getGold()} 
                 awardXP={awardXP} 
                 playerXPBeforeVictory={playerXPBeforeVictory}
-                player={player}/>
+                player={player}
+                handleCanCloseChapter={handleCanCloseChapter}
+                />
         );
     }
 

@@ -7,6 +7,7 @@ export default class Chapter {
     title: string;
     description: string[];
     completionType: Baddie | Shop | Adventure;
+    canClose: boolean;
 
     constructor(
         title: string, 
@@ -17,6 +18,7 @@ export default class Chapter {
         this.title = title;
         this.description = description;
         this.completionType = completionType;
+        this.canClose = false;
     }
 
     getId() {
@@ -34,4 +36,14 @@ export default class Chapter {
     getCompletionType() {
         return this.completionType;
     }
+
+    getCanClose() {
+        return this.canClose;
+    }
+
+    setCanClose(canClose: boolean) {
+        this.canClose = canClose;
+    }
+
+
 }

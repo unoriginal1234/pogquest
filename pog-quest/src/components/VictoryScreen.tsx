@@ -8,13 +8,15 @@ interface VictoryScreenProps {
     awardXP: number;
     playerXPBeforeVictory: number;
     player: PlayerClass;
+    handleCanCloseChapter: (canClose: boolean) => void;
 }
 
 export default function VictoryScreen({ 
     baddieGold, 
     awardXP, 
     playerXPBeforeVictory,  
-    player }: VictoryScreenProps) {
+    player,
+    handleCanCloseChapter }: VictoryScreenProps) {
     
     // TODO: Only let the player proceed if they have collected all the level up perks to match their level
     
@@ -53,16 +55,17 @@ export default function VictoryScreen({
 
             
 
-            {!playerNeedsToLevelUp && 
+            {!playerNeedsToLevelUp ? 
                 <button onClick={() => 
                     {
                         setLevelUp(true);
                         player.levelUp();
                     }
                 }
-                >Level Up to {playerLevel + 1}</button>
+                >Level Up to {playerLevel + 1}</button> : 
+            <button onClick={() => handleCanCloseChapter(true)}>Okay</button>}
             
-            }
+            
             {levelUp && 
                 <LevelUpScreen 
                     levelUpOptions={levelUpOptions} 

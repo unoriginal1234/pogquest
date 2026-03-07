@@ -1,4 +1,3 @@
-// import Story from "../classes/Story";
 import Chapter from "../classes/Chapter";
 import Baddie from "../classes/Baddie";
 import Shop from "../classes/Shop";
@@ -29,7 +28,7 @@ function createDemoStory() {
                         100, 1)),
             new Chapter("The monster breaths", ["This is a demo description 1.", "This is a demo description 2.", "This is a demo description 3."], 
                 new Baddie("Baddie 1", 
-                    [createButtPog(1), createButtPog(2), createButtPog(3), createButtPog(1), createButtPog(5)], 
+                    [createButtPog(1), createButtPog(2), createButtPog(3), createButtPog(1)], 
                         100, 1)),
             new Chapter("The middle", ["This is a demo description 4.", "This is a demo description 5.", "This is a demo description 6."], 
                 new Shop("Shop 1", "This is a demo shop.", 
@@ -49,10 +48,10 @@ function createDemoStory() {
 
             new Chapter("The beginning again", ["This is a demo description 10.", "This is a demo description 11.", "This is a demo description 12."], 
                 new Baddie("Baddie 2", 
-                    [createButtPog(1), createButtPog(2), createButtPog(4), createButtPog(5), createButtPog(6), createButtPog(7), createButtPog(3)], 100, 2)),
+                    [createButtPog(1), createButtPog(2), createButtPog(4), createButtPog(5), createButtPog(6), createButtPog(3)], 100, 2)),
             new Chapter("The beginning again", ["This is a demo description 10.", "This is a demo description 11.", "This is a demo description 12."], 
                 new Baddie("Baddie 2", 
-                    [createButtPog(2), createButtPog(4), createButtPog(4), createButtPog(2), createButtPog(4), createButtPog(2), createButtPog(4), createButtPog(3)], 100, 2)),
+                    [createButtPog(2), createButtPog(4), createButtPog(2), createButtPog(4), createButtPog(2), createButtPog(4), createButtPog(3)], 100, 2)),
             new Chapter("The middle again", ["This is a demo description 13.", "This is a demo description 14.", "This is a demo description 15."], 
                 new Shop("Shop 1", "This is a demo shop.", 
                     [new Item("Participation Trophy", "1 Participation Award", 35)], 
@@ -65,7 +64,7 @@ function createDemoStory() {
                 new Adventure("Adventure 1", "This is a demo description.", "chase")),
             new Chapter("The beginning again", ["This is a demo description 19.", "This is a demo description 20.", "This is a demo description 21."], 
                 new Baddie("Baddie 3", 
-                    [createButtPog(1), createButtPog(2), new Pog("Big Honker", 10, 10, 250, 1), new Pog("Biiig Defense", 2, 10, 20, 1), new Pog("Biiig Defense", 2, 10, 20, 1), new Pog("Big Honker", 10, 10, 250, 1), createButtPog(8)], 100, 3)),
+                    [createButtPog(1), createButtPog(2), new Pog("Big Honker", 10, 10, 250, 1), new Pog("Biiig Defense", 2, 10, 20, 1), new Pog("Big Honker", 10, 10, 250, 1), createButtPog(8)], 100, 3)),
             new Chapter("The middle again", ["This is a demo description 22.", "This is a demo description 23.", "This is a demo description 24."], 
                 new Shop("Shop 1", "This is a demo shop.", 
                     [new Item("Participation Trophy", "1 Participation Award", 45)], 

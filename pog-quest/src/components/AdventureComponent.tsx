@@ -14,7 +14,7 @@ function createPog(n: number, name: string) {
     return new PogClass(name, n, 1, n, 1);
 }
 
-export default function AdventureComponent({ adventure, player }: { adventure: AdventureClass, player: PlayerClass }) {
+export default function AdventureComponent({ adventure, player, handleCanCloseChapter }: { adventure: AdventureClass, player: PlayerClass, handleCanCloseChapter: (canClose: boolean) => void }) {
 
     //TO DO: Need to make sure that the adventure is being checked for completion correctly
 
@@ -37,6 +37,7 @@ export default function AdventureComponent({ adventure, player }: { adventure: A
         player.setCurrentHitpoints(player.getCurrentHitpoints() - 5);
         setIsChaseResolved(true);
         adventure.setIsComplete(true);
+        handleCanCloseChapter(true);
     }
 
     function openChest() {
@@ -53,10 +54,12 @@ export default function AdventureComponent({ adventure, player }: { adventure: A
     }
 
     if (template === 'campfire' && !isComplete) {
+        
         return (
             <CampfireComponent adventure={adventure} handleRest={handleRest} hasRested={hasRested} />
         );
     } else if (template === 'campfire' && isComplete) {
+        handleCanCloseChapter(true);
         return (
             <p>Good campfire!</p>
         );
@@ -67,12 +70,14 @@ export default function AdventureComponent({ adventure, player }: { adventure: A
             <ChaseComponent adventure={adventure} resolveChase={resolveChase} isChaseResolved={isChaseResolved} />
         );
     } else if (template === 'chase' && isComplete) {
+        handleCanCloseChapter(true);
         return (
             <p>You escaped, but took a hit!</p>
         );
     }
 
     if (template === 'chest' && !isComplete) {
+        handleCanCloseChapter(true);
         return (
             <ChestComponent adventure={adventure} openChest={openChest} isChestOpened={isChestOpened} />
         );
@@ -83,6 +88,7 @@ export default function AdventureComponent({ adventure, player }: { adventure: A
     }
 
     if (template === 'trade' && !isComplete) {
+        handleCanCloseChapter(true);
         return (
             <TradeComponent adventure={adventure} trade={(selectedPog: PogClass) => trade(selectedPog)} isTradeCompleted={isTradeCompleted} player={player} tradePog={tradePog} />
         );

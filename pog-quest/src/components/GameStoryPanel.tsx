@@ -49,6 +49,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
     const [shop, setShop] = useState<ShopClass | null>(null);
     const [adventure, setAdventure] = useState<AdventureClass | null>(null);
     const [isGameOver, setIsGameOver] = useState<boolean>(false);
+    const [canCloseChapter, setCanCloseChapter] = useState<boolean>(currentChapter.getCanClose());
 
     useEffect(() => {
         if (completionType instanceof Baddie) {
@@ -76,7 +77,9 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
         }
     }, [completionType]);
 
-
+    function handleCanCloseChapter(canClose: boolean) {
+        setCanCloseChapter(canClose);
+    }
 
 
     function handleChapterClick(chapterNumber: number) {
@@ -100,6 +103,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
         setChapterDescription(nextChapter.getDescription()[0]);
         setChapterTitle(nextChapter.getTitle());
         setChapterDescriptionIndex(0);
+        setCanCloseChapter(nextChapter.getCanClose());
     }
 
     function handleNextFloor() {        
@@ -162,11 +166,12 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
 
             {/* I like this but might want to not check for development purposes */}
             {isLastChapterDescription ? <>
+            {isAdmin ? <button onClick={() => handleCanCloseChapter(true)}>Dev: Can Close Chapter</button> : 
+            chapterNumber === currentFloor.getChapterCount() - 1 || !canCloseChapter ? null :
             <button 
-                onClick={handleCloseCurrentChapter}
-                disabled={chapterNumber === currentFloor.getChapterCount() - 1}>
-                    {isAdmin ? "Dev: Close Current Chapter" : "Close Current Chapter"}
-            </button>
+                onClick={handleCloseCurrentChapter}>
+                    Move On
+            </button>}
             {isFinalChapterOpen ? <button  
                 disabled={isLastFloor}
                 onClick={handleNextFloor}>Next Floor</button> : null}
@@ -219,17 +224,22 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
             if (!match) {
                 return null;
             }
-            return <MatchComponent key={match.getBaddie().getId()} match={match} setIsGameOver={setIsGameOver} />;
+            return <MatchComponent 
+            key={match.getBaddie().getId()} 
+            match={match} 
+            setIsGameOver={setIsGameOver} 
+            handleCanCloseChapter={handleCanCloseChapter} />;
         } else if (completionType.constructor.name === "Shop") {
             if (!shop) {
                 return null;
             }
+            handleCanCloseChapter(true)
             return <ShopComponent shop={shop} player={player} />;
         } else if (completionType.constructor.name === "Adventure") {
             if (!adventure) {
                 return null;
             }
-            return <AdventureComponent adventure={adventure} player={player} />;
+            return <AdventureComponent adventure={adventure} player={player} handleCanCloseChapter={handleCanCloseChapter}/>;
         } 
     }
 
