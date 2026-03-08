@@ -97,9 +97,8 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
 
     function handleCloseCurrentChapter() {
         currentFloor.closeChapter();
-        const canPlayerGetToFinalChapter = currentFloor.canGetToFinalChapter();
-        setCanGetToFinalChapter(canPlayerGetToFinalChapter);  
-        const nextChapter = canPlayerGetToFinalChapter ? currentFloor.getFinalChapter() : currentFloor.getCurrentChapter();
+        setCanGetToFinalChapter(currentFloor.canGetToFinalChapter());  
+        const nextChapter = canGetToFinalChapter ? currentFloor.getFinalChapter() : currentFloor.getCurrentChapter();
         
         setUnlockedChapters(currentFloor.getUnlockedChapters());
 

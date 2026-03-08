@@ -28,7 +28,7 @@ export default class Floor {
     }
 
     canGetToFinalChapter() {
-        return this.unlockedChapters.length === 0;
+        return this.unlockedChapters.length === this.chapters.length - 1;
     }
 
     getFinalChapter() {
