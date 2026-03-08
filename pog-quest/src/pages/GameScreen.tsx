@@ -7,7 +7,8 @@ import EndGameScreen from '../components/EndGameScreen';
 import PlayerStats from '../components/PlayerStats';
 import PogCollection from '../components/PogCollection';
 import SlammersCollection from '../components/SlammersCollection';
-import Inventory from '../components/Inventory';    
+import Inventory from '../components/Inventory';
+import Sedrick from '../components/Sedrick';
 import { Link } from 'react-router-dom';
 
 export default function GameScreen() {
@@ -63,6 +64,7 @@ export default function GameScreen() {
         </form>
       </dialog>
 
+      <Sedrick />
       <footer className="footer-wrapper">
         <Link to="/"><button>Main Menu</button></Link>
       </footer>
