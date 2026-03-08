@@ -11,7 +11,7 @@ export default class Floor {
     currentChapter: Chapter;
     nextUnlockedChapter: number;
     finalChapter: FinalChapter;
-    canCloseFloor: boolean;
+    canClose: boolean;
 
 
     constructor(name: string, description: string, chapters: Chapter[], finalChapter: FinalChapter) {
@@ -24,19 +24,23 @@ export default class Floor {
         this.currentChapter = this.chapters[this.chapterNumber];
         this.nextUnlockedChapter = Math.max(...this.unlockedChapters) + 1;
         this.finalChapter = finalChapter;
-        this.canCloseFloor = false;
+        this.canClose = false;
+    }
+
+    canGetToFinalChapter() {
+        return this.unlockedChapters.length === this.chapters.length - 1;
     }
 
     getFinalChapter() {
         return this.finalChapter;
     }
 
-    setCanCloseFloor(canCloseFloor: boolean) {
-        this.canCloseFloor = canCloseFloor;
+    setCanClose(canClose: boolean) {
+        this.canClose = canClose;
     }
 
-    getCanCloseFloor() {
-        return this.canCloseFloor;
+    getCanClose() {
+        return this.canClose;
     }
 
     setCurrentChapter(chapterNumber: number) {
@@ -55,7 +59,7 @@ export default class Floor {
     }
 
     getChapterNumber() {
-        return this.chapterNumber;
+        return this.chapterNumber ;
     }
 
     removeUnlockedChapter(chapterNumber: number) {
