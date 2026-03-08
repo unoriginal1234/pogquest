@@ -1,5 +1,8 @@
 import Chapter from "../classes/Chapter";
 import Baddie from "../classes/Baddie";
+import SuperBaddie from "../classes/SuperBaddie";
+import FinalChapter from "../classes/FinalChapter";
+
 import Shop from "../classes/Shop";
 import Adventure from "../classes/Adventure";
 import Item from "../classes/Item";
@@ -93,7 +96,8 @@ function createDemoStory() {
             ])),
             new Chapter("The end again", ["This is a demo description 25.", "This is a demo description 26.", "This is a demo description 27."], 
                 new Adventure("Adventure 1", "This is a demo description.", "chest")),
-            ]),
+            ], new FinalChapter("Final Chapter", ["You have defeated the final baddie and completed the floor."], new SuperBaddie("Final Baddie", [], 0, 1, "Final Super Power"))),
+
         new Floor("Second Floor", "Second Floor Description", [
             new Chapter("The beginning", ["This is a demo description 28.", "This is a demo description 29.", "This is a demo description 30."], 
                 new Baddie("Baddie 4", 
@@ -138,7 +142,8 @@ function createDemoStory() {
                         createButtPog(7),
                         createButtPog(7),],
                     100, 10),)    
-        ])
+        ], new FinalChapter("Final Chapter", ["You have defeated the final baddie and completed the floor."], 
+            new SuperBaddie("Final Baddie", [], 0, 1, "Final Super Power")))
     ]);
 }
 

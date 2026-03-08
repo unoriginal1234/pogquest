@@ -51,6 +51,9 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
     const [isGameOver, setIsGameOver] = useState<boolean>(false);
     const [canCloseChapter, setCanCloseChapter] = useState<boolean>(currentChapter.getCanClose());
 
+    const [canGetToFinalChapter, setCanGetToFinalChapter] = useState<boolean>(currentFloor.canGetToFinalChapter());
+    const [canCloseFloor, setCanCloseFloor] = useState<boolean>(currentFloor.getCanClose());
+
     useEffect(() => {
         if (completionType instanceof Baddie) {
             const nextMatch = matchFactory(player, completionType);
@@ -81,7 +84,6 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
         setCanCloseChapter(canClose);
     }
 
-
     function handleChapterClick(chapterNumber: number) {
         currentFloor.setCurrentChapter(chapterNumber);
         const nextChapter = currentFloor.getChapter(chapterNumber);
@@ -95,15 +97,24 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
 
     function handleCloseCurrentChapter() {
         currentFloor.closeChapter();
-        const nextChapter = currentFloor.getCurrentChapter();
+        setCanGetToFinalChapter(currentFloor.canGetToFinalChapter());  
+        const nextChapter = canGetToFinalChapter ? currentFloor.getFinalChapter() : currentFloor.getCurrentChapter();
+        
         setUnlockedChapters(currentFloor.getUnlockedChapters());
-        setChapterNumber(currentFloor.getChapterNumber());
-        setCurrentChapter(nextChapter);
+
+        if (!canGetToFinalChapter){
+            setChapterNumber(currentFloor.getChapterNumber());
+            setCurrentChapter(nextChapter);
+        }
+
         setCompletionType(nextChapter.getCompletionType());
+        
         setChapterDescription(nextChapter.getDescription()[0]);
         setChapterTitle(nextChapter.getTitle());
         setChapterDescriptionIndex(0);
         setCanCloseChapter(nextChapter.getCanClose());
+        setCanCloseFloor(currentFloor.getCanClose());
+
     }
 
     function handleNextFloor() {        
