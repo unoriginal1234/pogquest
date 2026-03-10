@@ -97,8 +97,9 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
 
     function handleCloseCurrentChapter() {
         currentFloor.closeChapter();
-        setCanGetToFinalChapter(currentFloor.canGetToFinalChapter());  
-        const nextChapter = canGetToFinalChapter ? currentFloor.getFinalChapter() : currentFloor.getCurrentChapter();
+        const canPlayerGetToFinalChapter = currentFloor.canGetToFinalChapter();
+        setCanGetToFinalChapter(canPlayerGetToFinalChapter);  
+        const nextChapter = canPlayerGetToFinalChapter ? currentFloor.getFinalChapter() : currentFloor.getCurrentChapter();
         
         setUnlockedChapters(currentFloor.getUnlockedChapters());
 
@@ -131,18 +132,27 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
         setIsFinalChapterOpen(false);
     }
 
+    function handleEnterFinalChapterClick() {
+        console.log("Entering final chapter");
+    }
+
     function handleCompleteStory() {
         game.endGame();
         onEndGame(false);
     }
 
-    const atLastChapter = chapterNumber === currentFloor.getChapterCount() - 1;
+    // TO DO: I want to refactor so that when you complete all the chapters, you go to the final chapter instead of the next floor
+    
+
+    
     const atLastChapterDescription = chapterDescriptionIndex === currentChapter.getDescription().length - 1;
     const isLastFloor = story.getCurrentFloorIndex() === story.getFloorCount() - 1;
     const isLastChapterDescription = chapterDescriptionIndex === currentChapter.getDescription().length - 1;
     
+
+    // TODO : Unbreak this in a second
     if (
-        atLastChapter && 
+        
         atLastChapterDescription &&
         !isFinalChapterOpen) {
             setIsFinalChapterOpen(true);
@@ -178,14 +188,15 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
             {/* I like this but might want to not check for development purposes */}
             {isLastChapterDescription ? <>
             {isAdmin ? <button onClick={() => handleCloseCurrentChapter()}>Dev: Close Chapter</button> : 
-            chapterNumber === currentFloor.getChapterCount() - 1 || !canCloseChapter ? null :
+           !canCloseChapter ? null :
             <button 
                 onClick={handleCloseCurrentChapter}>
                     Move On
             </button>}
+            {canGetToFinalChapter ? <button onClick={handleEnterFinalChapterClick}>Final Chapter</button> : null}
             {isFinalChapterOpen ? <button  
                 disabled={isLastFloor}
-                onClick={handleNextFloor}>Next Floor</button> : null}
+                onClick={handleNextFloor}>Work in Progress: Next Floor</button> : null}
             
             {isLastFloor && 
             isFinalChapterOpen &&
