@@ -13,6 +13,7 @@ import AdventureClass from "../classes/Adventure";
 import MatchComponent from "./MatchComponent";
 import ShopComponent from "./ShopComponent";
 import AdventureComponent from "./AdventureComponent";
+import FinalChapterComponent from "./FinalChapterComponent";
 import BaddieIcon from "../icons/BaddieIcon";
 import ShopIcon from "../icons/ShopIcon";
 import AdventureIcon from "../icons/AdventureIcon";
@@ -53,6 +54,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
 
     const [canGetToFinalChapter, setCanGetToFinalChapter] = useState<boolean>(currentFloor.canGetToFinalChapter());
     const [canCloseFloor, setCanCloseFloor] = useState<boolean>(currentFloor.getCanClose());
+    const [showFinalChapter, setShowFinalChapter] = useState<boolean>(false);
 
     useEffect(() => {
         if (completionType instanceof Baddie) {
@@ -80,6 +82,12 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
         }
     }, [completionType]);
 
+    useEffect(() => {
+        if (shop) {
+            handleCanCloseChapter(true);
+        }
+    }, [shop]);
+
     function handleCanCloseChapter(canClose: boolean) {
         setCanCloseChapter(canClose);
     }
@@ -102,11 +110,17 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
         
         setUnlockedChapters(currentFloor.getUnlockedChapters());
 
-        if (!canGetToFinalChapter){
-            setChapterNumber(currentFloor.getChapterNumber());
-            setCurrentChapter(nextChapter);
+        if (canPlayerGetToFinalChapter) {
+            setChapterDescription(nextChapter.getDescription()[0]);
+            setChapterTitle(nextChapter.getTitle());
+            setChapterDescriptionIndex(0);
+            setCanCloseChapter(nextChapter.getCanClose());
+            setShowFinalChapter(true);
+            return;
         }
 
+        setChapterNumber(currentFloor.getChapterNumber());
+        setCurrentChapter(nextChapter);
         setCompletionType(nextChapter.getCompletionType());
         
         setChapterDescription(nextChapter.getDescription()[0]);
@@ -129,10 +143,19 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
         setUnlockedChapters(nextFloor.getUnlockedChapters());
         setChapterDescriptionIndex(0);
         setIsFinalChapterOpen(false);
+        setShowFinalChapter(false);
+        setCanCloseFloor(false);
+        setCanGetToFinalChapter(false);
     }
 
     function handleEnterFinalChapterClick() {
-        console.log("Entering final chapter");
+        setShowFinalChapter(true);
+    }
+
+    function handleCanCloseFloor(canClose: boolean) {
+        currentFloor.setCanClose(canClose);
+        setCanCloseFloor(canClose);
+        setCanGetToFinalChapter(false);
     }
 
     function handleCompleteStory() {
@@ -150,18 +173,41 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
     
 
     // TODO : Unbreak this in a second
-    if (
-        
-        atLastChapterDescription &&
-        !isFinalChapterOpen) {
+    useEffect(() => {
+        if (atLastChapterDescription && !isFinalChapterOpen) {
             setIsFinalChapterOpen(true);
-    }
+        }
+    }, [atLastChapterDescription, isFinalChapterOpen]);
 
     useEffect(() => {
         if (isGameOver) {
             onEndGame(true);
         }
     }, [isGameOver, onEndGame]);
+
+    if (showFinalChapter) {
+        return (
+            <section className="demo-section pog-border">
+                <h2>{story.getTitle()}</h2>
+                <p className="pog-glow-blue">{currentFloor.getDescription()}</p>
+
+                <FinalChapterComponent
+                    finalChapter={currentFloor.getFinalChapter()}
+                    player={player}
+                    setIsGameOver={setIsGameOver}
+                    handleCanCloseFloor={handleCanCloseFloor}
+                />
+
+                {canCloseFloor && !isLastFloor ? (
+                    <button onClick={handleNextFloor}>Next Floor</button>
+                ) : null}
+
+                {canCloseFloor && isLastFloor ? (
+                    <button onClick={handleCompleteStory}>Work in Progress: End Game</button>
+                ) : null}
+            </section>
+        );
+    }
 
     return (
         <section className="demo-section pog-border">
@@ -171,7 +217,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
                 Chapter {chapterNumber} :
                 <p className="pog-glow-green">{chapterTitle}</p>
                 <p className="pog-glow-blue">{chapterDescription}</p>
-                {chapterDescriptionIndex < currentChapter.getDescription().length - 1  && (
+                {(chapterDescriptionIndex < currentChapter.getDescription().length - 1) && (
                     <button onClick={() => {
                         const nextChapterIndex = chapterDescriptionIndex + 1;
                         setChapterDescriptionIndex(nextChapterIndex);
@@ -187,7 +233,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
             {/* I like this but might want to not check for development purposes */}
             {isLastChapterDescription ? <>
             {isAdmin ? <button onClick={() => handleCloseCurrentChapter()}>Dev: Close Chapter</button> : 
-           !canCloseChapter ? null :
+           !canCloseChapter || canGetToFinalChapter ? null :
             <button 
                 onClick={handleCloseCurrentChapter}>
                     Move On
@@ -201,7 +247,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
             isFinalChapterOpen &&
             atLastChapterDescription && 
             isLastChapterDescription ? 
-            <button onClick={handleCompleteStory}>End Game</button> : null}
+            <button onClick={handleCompleteStory}>Work in Progress: End Game</button> : null}
             
             <CompletionTypeComponent /> </> : null}
         </section>
@@ -254,7 +300,6 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
             if (!shop) {
                 return null;
             }
-            handleCanCloseChapter(true)
             return <ShopComponent shop={shop} player={player} />;
         } else if (completionType.constructor.name === "Adventure") {
             if (!adventure) {

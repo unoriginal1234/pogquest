@@ -30,12 +30,12 @@ function createDemoFloorDebuggerStory() {
                         100, 1)),
             new Chapter("Chapter 2", ["This is a demo description 25.", "This is a demo description 26.", "This is a demo description 27."], 
                 new Adventure("Adventure 1", "This is a demo description.", "chest")),
-            ], new FinalChapter("Final Chapter", ["You have defeated the final baddie and completed the floor."], new SuperBaddie("Final Baddie", [], 0, 1, "Final Super Power"))),
+            ], new FinalChapter("Final Chapter", ["This is the final Baddie of the floor. He's big and has one eye."], new SuperBaddie("Richard Hill Giant", [], 0, 1, "Final Super Power"))),
 
         new Floor("Second Floor", "Second Floor Description", [
             new Chapter("The beginning", ["This is a demo description 28.", "This is a demo description 29.", "This is a demo description 30."], 
                 new Baddie("Baddie 4", 
-                    [createButtPog(1), createButtPog(2),], 100, 4)),
+                    [createButtPog(1), createButtPog(2),], 100, 1)),
             new Chapter("The middle", ["This is a demo description 31.", "This is a demo description 32.", "This is a demo description 33."], 
                 new Shop("Shop 1", "This is a demo shop.", 
                     [new Item("Participation Trophy", "1 Participation Award", 55)], 
@@ -50,7 +50,7 @@ function createDemoFloorDebuggerStory() {
                     ])),
             new Chapter("The end", ["This is a demo description 34.", "This is a demo description 35.", "This is a demo description 36."], 
                 new Adventure("Adventure 1", "This is a demo description.", "trade")),
-        ], new FinalChapter("Final Chapter", ["You have defeated the final baddie and completed the floor."], 
+        ], new FinalChapter("Final Chapter", ["It's time to fight the final baddie."], 
             new SuperBaddie("Final Baddie", [], 0, 1, "Final Super Power")))
     ]);
 }
