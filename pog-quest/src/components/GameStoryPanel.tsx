@@ -85,11 +85,11 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
         }
     }, [completionType]);
 
-    useEffect(() => {
-        if (shop) {
-            handleCanCloseChapter(true);
-        }
-    }, [shop]);
+    // useEffect(() => {
+    //     if (shop) {
+    //         handleCanCloseChapter(true);
+    //     }
+    // }, [shop]);
 
     function handleCanCloseChapter(canClose: boolean) {
         setCanCloseChapter(canClose);
@@ -222,8 +222,8 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
 
     return (
         <section className="demo-section pog-border">
-            <h2>{story.getTitle()}</h2>
-            <p className="pog-glow-blue">{currentFloor.getDescription()}</p>
+            {/* <h2>{story.getTitle()}</h2>
+            <p className="pog-glow-blue">{currentFloor.getDescription()}</p> */}
             <span className="pog-glow-blue">
                 {/* Chapter {chapterNumber} : */}
                 <p className="pog-glow-green">{chapterTitle}</p>

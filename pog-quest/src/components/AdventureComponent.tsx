@@ -19,7 +19,7 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
     //TO DO: Need to make sure that the adventure is being checked for completion correctly
 
     const template = adventure.getTemplate();
-    const isComplete = adventure.getIsComplete();
+    const [isComplete, setIsComplete] = useState(adventure.getIsComplete());
     const [hasRested, setHasRested] = useState(false);
     const [isChaseResolved, setIsChaseResolved] = useState(false);
     const [isChestOpened, setIsChestOpened] = useState(false);
@@ -43,12 +43,14 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
         player.setCurrentHitpoints(player.getCurrentHitpoints() + 10);
         setHasRested(true);
         adventure.setIsComplete(true);
+        setIsComplete(true);
     }
 
     function resolveChase() {
         player.setCurrentHitpoints(player.getCurrentHitpoints() - 5);
         setIsChaseResolved(true);
         adventure.setIsComplete(true);
+        setIsComplete(true);
         handleCanCloseChapter(true);
     }
 
@@ -56,6 +58,7 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
         setIsChestOpened(true);
         adventure.setIsComplete(true);
         player.addPog(createPog(3, "Chest Pog"));
+        setIsComplete(true);
     }
 
     function trade(selectedPog: PogClass) {
@@ -63,6 +66,7 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
         adventure.setIsComplete(true);
         player.addPog(tradePog);
         player.removePog(selectedPog!);
+        setIsComplete(true);
     }
 
     if (template === 'campfire' && !isComplete) {
