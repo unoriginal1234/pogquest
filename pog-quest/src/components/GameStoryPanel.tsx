@@ -129,7 +129,6 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
         setChapterDescriptionIndex(0);
         setCanCloseChapter(nextChapter.getCanClose());
         setCanCloseFloor(currentFloor.getCanClose());
-
     }
 
     function handleNextFloor() {        
@@ -204,7 +203,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
                 ) : null}
 
                 {canCloseFloor && isLastFloor ? (
-                    <button onClick={handleCompleteStory}>Work in Progress: End Game</button>
+                    <button onClick={handleCompleteStory}>End Game</button>
                 ) : null}
             </section>
         );
@@ -240,16 +239,12 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
                     Move On
             </button>}
             {canGetToFinalChapter ? <button onClick={handleEnterFinalChapterClick}>Final Chapter</button> : null}
-            {isFinalChapterOpen ? <button  
+            {isAdmin ? <button  
                 disabled={isLastFloor}
-                onClick={handleNextFloor}>Work in Progress: Next Floor</button> : null}
+                onClick={handleNextFloor}>Dev: Next Floor</button> : null}
             
-            {isLastFloor && 
-            isFinalChapterOpen &&
-            atLastChapterDescription && 
-            isLastChapterDescription ? 
-            <button onClick={handleCompleteStory}>Work in Progress: End Game</button> : null}
-            
+            {isAdmin ? 
+            <button onClick={handleCompleteStory}>DEV: End Game</button> : null}
             <CompletionTypeComponent /> </> : null}
         </section>
     );
