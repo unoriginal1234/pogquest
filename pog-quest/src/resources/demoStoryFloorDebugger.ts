@@ -24,19 +24,19 @@ function createDemoFloorDebuggerStory() {
         "Demo Story",
         "This is a demo story.",
         [ new Floor("First Floor", "First Floor Description", [
-            new Chapter("Chapter 1", ["This is a demo description 1.", "This is a demo description 2.", "This is a demo description 3."], 
+            new Chapter("First Chapter", ["First chapter description 1.", "First chapter description 2.", "First chapter description 3."], 
                 new Baddie("Baddie 1", 
                     [createButtPog(1), createButtPog(2), createButtPog(3)], 
                         100, 1)),
-            new Chapter("Chapter 2", ["This is a demo description 25.", "This is a demo description 26.", "This is a demo description 27."], 
+            new Chapter("Second Chapter", ["Second chapter description 1.", "Second chapter description 2.", "Second chapter description 3."], 
                 new Adventure("Adventure 1", "This is a demo description.", "chest")),
             ], new FinalChapter("Final Chapter", ["This is the final Baddie of the floor. He's big and has one eye."], new SuperBaddie("Richard Hill Giant", [], 0, 1, "Final Super Power"))),
 
         new Floor("Second Floor", "Second Floor Description", [
-            new Chapter("The beginning", ["This is a demo description 28.", "This is a demo description 29.", "This is a demo description 30."], 
+            new Chapter("First Chapter", ["First chapter description 1.", "First chapter description 2.", "First chapter description 3."], 
                 new Baddie("Baddie 4", 
                     [createButtPog(1), createButtPog(2),], 100, 1)),
-            new Chapter("The middle", ["This is a demo description 31.", "This is a demo description 32.", "This is a demo description 33."], 
+            new Chapter("Second Chapter", ["Second chapter description 1.", "Second chapter description 2.", "Second chapter description 3."], 
                 new Shop("Shop 1", "This is a demo shop.", 
                     [new Item("Participation Trophy", "1 Participation Award", 55)], 
                     [createButtPog(11),
@@ -48,9 +48,9 @@ function createDemoFloorDebuggerStory() {
                     new Slammer("Beef Strogonoff 3, 3", "3 Beefer for 3 turns.", 1, 20, beeferSlammerAbilityByInput(3, 3), 'beefer'),
                     new Slammer("Fortress Shell 3, 3", "3 Turtler for 3 turns.", 1, 30, turtlerSlammerAbility(3, 3), 'turtler')
                     ])),
-            new Chapter("The end", ["This is a demo description 34.", "This is a demo description 35.", "This is a demo description 36."], 
+            new Chapter("Third Chapter", ["Third chapter description 1.", "Third chapter description 2.", "Third chapter description 3."], 
                 new Adventure("Adventure 1", "This is a demo description.", "trade")),
-        ], new FinalChapter("Final Chapter", ["It's time to fight the final baddie."], 
+        ], new FinalChapter("Final Chapter", ["Final chapter description 1.", "Final chapter description 2.", "Final chapter description 3."], 
             new SuperBaddie("Final Baddie", [], 0, 1, "Final Super Power")))
     ]);
 }

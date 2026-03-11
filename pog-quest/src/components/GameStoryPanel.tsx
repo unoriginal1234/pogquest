@@ -17,6 +17,7 @@ import FinalChapterComponent from "./FinalChapterComponent";
 import BaddieIcon from "../icons/BaddieIcon";
 import ShopIcon from "../icons/ShopIcon";
 import AdventureIcon from "../icons/AdventureIcon";
+import FloorDescription from "./FloorDescription";
 
 import matchFactory from "../resources/matchFactory";
 
@@ -55,6 +56,8 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
     const [canGetToFinalChapter, setCanGetToFinalChapter] = useState<boolean>(currentFloor.canGetToFinalChapter());
     const [canCloseFloor, setCanCloseFloor] = useState<boolean>(currentFloor.getCanClose());
     const [showFinalChapter, setShowFinalChapter] = useState<boolean>(false);
+    const [isFloorDescriptionOpen, setIsFloorDescriptionOpen] = useState<boolean>(true);
+
 
     useEffect(() => {
         if (completionType instanceof Baddie) {
@@ -131,7 +134,8 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
         setCanCloseFloor(currentFloor.getCanClose());
     }
 
-    function handleNextFloor() {        
+    function handleNextFloor() {     
+        
         story.setCurrentFloorByIndex(story.getCurrentFloorIndex() + 1);
         const nextFloor = story.getCurrentFloor();
         setCurrentFloor(nextFloor);
@@ -146,6 +150,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
         setShowFinalChapter(false);
         setCanCloseFloor(false);
         setCanGetToFinalChapter(false);
+        setIsFloorDescriptionOpen(true);
     }
 
     function handleEnterFinalChapterClick() {
@@ -185,6 +190,12 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
         }
     }, [isGameOver, onEndGame]);
 
+    if (isFloorDescriptionOpen) {
+        return <FloorDescription storyTitle={story.getTitle()} 
+        floorDescription={currentFloor.getDescription()} 
+        setIsFloorDescriptionOpen={setIsFloorDescriptionOpen} />;
+    }
+
     if (showFinalChapter) {
         return (
             <section className="demo-section pog-border">
@@ -214,7 +225,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
             <h2>{story.getTitle()}</h2>
             <p className="pog-glow-blue">{currentFloor.getDescription()}</p>
             <span className="pog-glow-blue">
-                Chapter {chapterNumber} :
+                {/* Chapter {chapterNumber} : */}
                 <p className="pog-glow-green">{chapterTitle}</p>
                 <p className="pog-glow-blue">{chapterDescription}</p>
                 {(chapterDescriptionIndex < currentChapter.getDescription().length - 1) && (
