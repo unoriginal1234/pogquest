@@ -23,8 +23,7 @@ export default function TradeComponent({
 
     return (
         <div>
-        <h1>Adventure</h1>
-        <p>{adventure.getName()}</p>
+        <h2>{adventure.getName()}</h2>
         <p>{adventure.getDescription()}</p>
         <p>{adventure.getTemplateDescription()}</p>
         <div className="trade-pog-container">

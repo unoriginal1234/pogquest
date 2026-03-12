@@ -51,7 +51,7 @@ export default function GameScreen() {
 
   return (
     <div className="page-layout">
-      <h1>Game Screen</h1>
+      {/* <h1>Game Screen</h1> */}
       <GameStoryPanel game={game} onEndGame={(didLose: boolean) => handleEndGame(didLose)} />
       <GameMenuButtons getMenuButtonSelection={openModal} />
 

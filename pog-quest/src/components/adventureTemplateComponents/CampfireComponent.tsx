@@ -3,8 +3,7 @@ import AdventureClass from "../../classes/Adventure";
 export default function CampfireComponent({ adventure, handleRest, hasRested }: { adventure: AdventureClass, handleRest: () => void, hasRested: boolean }) {
     return (
         <div>
-                <h1>Adventure</h1>
-                <p>{adventure.getName()}</p>
+                <h2>{adventure.getName()}</h2>
                 <p>{adventure.getDescription()}</p>
                 <p>{adventure.getTemplateDescription()}</p>
                 <button 

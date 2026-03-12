@@ -85,11 +85,11 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
         }
     }, [completionType]);
 
-    // useEffect(() => {
-    //     if (shop) {
-    //         handleCanCloseChapter(true);
-    //     }
-    // }, [shop]);
+    useEffect(() => {
+        if (shop) {
+            handleCanCloseChapter(true);
+        }
+    }, [shop]);
 
     function handleCanCloseChapter(canClose: boolean) {
         setCanCloseChapter(canClose);
@@ -199,9 +199,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
     if (showFinalChapter) {
         return (
             <section className="demo-section pog-border">
-                <h2>{story.getTitle()}</h2>
-                <p className="pog-glow-blue">{currentFloor.getDescription()}</p>
-
+                
                 <FinalChapterComponent
                     finalChapter={currentFloor.getFinalChapter()}
                     player={player}
@@ -226,8 +224,8 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
             <p className="pog-glow-blue">{currentFloor.getDescription()}</p> */}
             <span className="pog-glow-blue">
                 {/* Chapter {chapterNumber} : */}
-                <p className="pog-glow-green">{chapterTitle}</p>
-                <p className="pog-glow-blue">{chapterDescription}</p>
+                {chapterDescriptionIndex === 0 ? <p className="pog-glow-green">{chapterTitle}</p> : null}
+                { <p className="pog-glow-blue">{chapterDescription}</p>}
                 {(chapterDescriptionIndex < currentChapter.getDescription().length - 1) && (
                     <button onClick={() => {
                         const nextChapterIndex = chapterDescriptionIndex + 1;
@@ -237,7 +235,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
                     </button>)}
             </span>
            
-            <p className="pog-glow-blue">Completion Type: {completionType.constructor.name}</p>
+            {chapterDescriptionIndex === 0 ? <p className="pog-glow-blue">Completion Type: {completionType.constructor.name}</p> : null}
 
             {chapterDescriptionIndex === 0 ? <ChapterNavigator /> : null}
 

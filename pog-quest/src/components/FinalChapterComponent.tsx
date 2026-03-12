@@ -41,6 +41,9 @@ export default function FinalChapterComponent({
     }
 
     if (isFighting && match) {
+        // #region agent log
+        fetch('http://127.0.0.1:7825/ingest/b490d155-cec4-4e8a-b369-26abecb8ab09',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'06bfef'},body:JSON.stringify({sessionId:'06bfef',location:'FinalChapterComponent.tsx:44',message:'FinalChapter rendering match (fighting)',data:{isFighting,finalChapterTitle:finalChapter.getTitle()},timestamp:Date.now(),hypothesisId:'B'})}).catch(()=>{});
+        // #endregion
         return (
             <MatchComponent
                 key={match.getBaddie().getId()}
@@ -51,6 +54,9 @@ export default function FinalChapterComponent({
         );
     }
 
+    // #region agent log
+    fetch('http://127.0.0.1:7825/ingest/b490d155-cec4-4e8a-b369-26abecb8ab09',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'06bfef'},body:JSON.stringify({sessionId:'06bfef',location:'FinalChapterComponent.tsx:57',message:'FinalChapter rendering pre-fight view',data:{isFighting,finalChapterTitle:finalChapter.getTitle(),descriptions:finalChapter.getDescription()},timestamp:Date.now(),hypothesisId:'B'})}).catch(()=>{});
+    // #endregion
     return (
         <div>
             <h2 className="pog-glow-green">{finalChapter.getTitle()}</h2>

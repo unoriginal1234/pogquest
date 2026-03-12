@@ -26,7 +26,7 @@ function createDemoFloorDebuggerStory() {
         [ new Floor("First Floor", "First Floor Description", [
             new Chapter("First Chapter", ["First chapter description 1.", "First chapter description 2.", "First chapter description 3."], 
                 new Baddie("Baddie 1", 
-                    [createButtPog(1), createButtPog(2), createButtPog(3)], 
+                    [], 
                         100, 1)),
             new Chapter("Second Chapter", ["Second chapter description 1.", "Second chapter description 2.", "Second chapter description 3."], 
                 new Adventure("Adventure 1", "This is a demo description.", "chest")),
