@@ -26,19 +26,6 @@ export default function TradeComponent({
         <h2>{adventure.getName()}</h2>
         <p>{adventure.getDescription()}</p>
         <p>{adventure.getTemplateDescription()}</p>
-        <div className="trade-pog-container">
-            <PogComponent pog={tradePog} isFlippedUp={false} onClick={() => {}} />
-        </div>
-        <div className="player-trade-pog-container">
-            <h2>Your Pogs</h2>
-            <div className="pog-grid">
-                {pogs.map((pog: PogClass) => (
-                    <PogComponent key={pog.getId()} pog={pog} isFlippedUp={false} onClick={() => handlePogClick(pog)} 
-                    isSelected={selectedPog?.getId() === pog.getId()}/>
-                ))}
-            </div>
-        </div>
-
         {
             !selectedPog || (selectedPog && selectedPog.getGold() < tradePog.getGold()) ? (
                 
@@ -57,6 +44,20 @@ export default function TradeComponent({
                 </div>
             )
         }
+        <div className="trade-pog-container">
+            <PogComponent pog={tradePog} isFlippedUp={false} onClick={() => {}} />
+        </div>
+        <div className="player-trade-pog-container">
+            <h2>Your Pogs</h2>
+            <div className="pog-grid">
+                {pogs.map((pog: PogClass) => (
+                    <PogComponent key={pog.getId()} pog={pog} isFlippedUp={false} onClick={() => handlePogClick(pog)} 
+                    isSelected={selectedPog?.getId() === pog.getId()}/>
+                ))}
+            </div>
+        </div>
+
+        
        
     </div>
     );

@@ -29,7 +29,7 @@ function createDemoFloorDebuggerStory() {
                     [], 
                         100, 1)),
             new Chapter("Second Chapter", ["Second chapter description 1.", "Second chapter description 2.", "Second chapter description 3."], 
-                new Adventure("Adventure 1", "This is a demo description.", "chest")),
+                new Adventure("Chest Adventure", "This is a description of the chest adventure.", "chest")),
             ], new FinalChapter("Final Chapter", ["This is the final Baddie of the floor. He's big and has one eye."], new SuperBaddie("Richard Hill Giant", [], 0, 1, "Final Super Power"))),
 
         new Floor("Second Floor", "Second Floor Description", [
@@ -49,7 +49,7 @@ function createDemoFloorDebuggerStory() {
                     new Slammer("Fortress Shell 3, 3", "3 Turtler for 3 turns.", 1, 30, turtlerSlammerAbility(3, 3), 'turtler')
                     ])),
             new Chapter("Third Chapter", ["Third chapter description 1.", "Third chapter description 2.", "Third chapter description 3."], 
-                new Adventure("Adventure 1", "This is a demo description.", "trade")),
+                new Adventure("The trader flashes his wares", "This is a description of the trader's whole thing.", "trade")),
         ], new FinalChapter("Final Chapter", ["Final chapter description 1.", "Final chapter description 2.", "Final chapter description 3."], 
             new SuperBaddie("Final Baddie", [], 0, 1, "Final Super Power")))
     ]);

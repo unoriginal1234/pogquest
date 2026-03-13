@@ -18,6 +18,7 @@ import BaddieIcon from "../icons/BaddieIcon";
 import ShopIcon from "../icons/ShopIcon";
 import AdventureIcon from "../icons/AdventureIcon";
 import FloorDescription from "./FloorDescription";
+import ChapterDescription from "./ChapterDescription";
 
 import matchFactory from "../resources/matchFactory";
 
@@ -222,20 +223,18 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
         <section className="demo-section pog-border">
             {/* <h2>{story.getTitle()}</h2>
             <p className="pog-glow-blue">{currentFloor.getDescription()}</p> */}
-            <span className="pog-glow-blue">
-                {/* Chapter {chapterNumber} : */}
-                {chapterDescriptionIndex === 0 ? <p className="pog-glow-green">{chapterTitle}</p> : null}
-                { <p className="pog-glow-blue">{chapterDescription}</p>}
-                {(chapterDescriptionIndex < currentChapter.getDescription().length - 1) && (
-                    <button onClick={() => {
-                        const nextChapterIndex = chapterDescriptionIndex + 1;
-                        setChapterDescriptionIndex(nextChapterIndex);
-                        setChapterDescription(currentChapter.getDescription()[nextChapterIndex])}}>
-                            {chapterDescriptionIndex > 0 ? "Next" : "Enter"}
-                    </button>)}
-            </span>
-           
-            {chapterDescriptionIndex === 0 ? <p className="pog-glow-blue">Completion Type: {completionType.constructor.name}</p> : null}
+            <ChapterDescription
+                key={`${chapterNumber}-${chapterDescriptionIndex}`}
+                chapterTitle={chapterDescriptionIndex === 0 ? chapterTitle : undefined}
+                description={chapterDescription}
+                buttonLabel={chapterDescriptionIndex > 0 ? "Next" : "Enter"}
+                onProceed={() => {
+                    const nextIndex = chapterDescriptionIndex + 1;
+                    setChapterDescriptionIndex(nextIndex);
+                    setChapterDescription(currentChapter.getDescription()[nextIndex]);
+                }}
+                showButton={chapterDescriptionIndex < currentChapter.getDescription().length - 1}
+            />
 
             {chapterDescriptionIndex === 0 ? <ChapterNavigator /> : null}
 
