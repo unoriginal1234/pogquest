@@ -4,7 +4,6 @@ import { UserContext } from "../context/UserContext";
 import User from "../classes/User";
 
 import MatchClass from "../classes/Match";
-import SlammerClass from "../classes/Slammer";
 import PogClass from "../classes/Pog";
 import type { Boon } from "../classes/types";
 
@@ -46,8 +45,6 @@ export default function MatchComponent({
     const [canReStack, setCanReStack] = useState(() => match.getCanReStack());
     const [canEndTurn, setCanEndTurn] = useState(() => match.getCanEndTurn());
 
-    const [playerSlammer, setPlayerSlammer] = useState<SlammerClass | null>(player.getEquippedSlammer() || null);
-
     const isVictoryScreenOpen = baddie.getCurrentHitpoints() <= 0;
     const isGameOver = player.getCurrentHitpoints() <= 0;
 
@@ -76,10 +73,6 @@ export default function MatchComponent({
         }
     }, [isVictoryScreenOpen, match, awardGold, player, awardXP]);
 
-    useEffect(() => {
-        // This could be dangerous. It works now because the player.getEquippedSlammer() is not changing in the same render cycle.
-        setPlayerSlammer(player.getEquippedSlammer()!);
-    }, [player.getEquippedSlammer()]);
     
 
     function handleStackClick() {
@@ -92,6 +85,7 @@ export default function MatchComponent({
         match.setCanSlam(false);
         player.setDefense(0);
         setCurrentPlayerDefense(0);
+        const playerSlammer = player.getEquippedSlammer();
         if (!playerSlammer) {
             console.log("No slammer equipped");
             return;
