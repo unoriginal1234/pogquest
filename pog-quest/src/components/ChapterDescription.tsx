@@ -19,26 +19,13 @@ export default function ChapterDescription({
         chapterTitle ? "title" : "description"
     );
     const [displayedText, setDisplayedText] = useState("");
-    // useEffect(() => {
-    //     fetch('http://127.0.0.1:7825/ingest/b490d155-cec4-4e8a-b369-26abecb8ab09',
-    //         {method:'POST',
-    //             headers:{'Content-Type':'application/json','X-Debug-Session-Id':'dd99b4'},
-    //             body:JSON.stringify(
-    //                 {sessionId:'dd99b4',
-    //                     location:'ChapterDescription.tsx:mount',
-    //                     message:'ChapterDescription MOUNTED (fresh instance)',
-    //                     data:{chapterTitle,description},
-    //                     timestamp:Date.now(),
-    //                     hypothesisId:'A'})})
-    //                     .catch(()=>{});
-    // }, []);
-    // // #endregion
+    const [skipped, setSkipped] = useState(false);
 
     useEffect(() => {
-        if (!chapterTitle) return;
+        if (phase !== "title" || !chapterTitle) return;
         const timer = setTimeout(() => setPhase("description"), 1000);
         return () => clearTimeout(timer);
-    }, [chapterTitle]);
+    }, [phase, chapterTitle]);
 
     useEffect(() => {
         if (phase !== "description") return;
@@ -52,8 +39,19 @@ export default function ChapterDescription({
         return () => clearTimeout(readyTimer);
     }, [phase, displayedText, description]);
 
+    const skipAnimation = () => {
+        if (phase !== "ready") {
+            setSkipped(true);
+            setDisplayedText(description);
+            setPhase("ready");
+        }
+    };
+
     return (
-        <div className={`ch-desc-container${!showButton && phase === "ready" ? " ch-desc-container--will-fade" : ""}`}>
+        <div
+            className={`ch-desc-container${!showButton && phase === "ready" ? " ch-desc-container--will-fade" : ""}`}
+            onClick={skipAnimation}
+        >
             <div className="ch-desc-divider ch-desc-divider--top" />
 
             {chapterTitle && (
@@ -87,9 +85,9 @@ export default function ChapterDescription({
             {showButton && (
                 <button
                     className={`ch-desc-enter ${
-                        phase === "ready" ? "ch-desc-enter--visible" : ""
+                        phase === "ready" ? (skipped ? "ch-desc-enter--visible-instant" : "ch-desc-enter--visible") : ""
                     }`}
-                    onClick={onProceed}
+                    onClick={(e) => { e.stopPropagation(); onProceed(); }}
                 >
                     {buttonLabel}
                 </button>
