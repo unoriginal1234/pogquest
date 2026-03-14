@@ -10,8 +10,8 @@ import Inventory from '../components/Inventory';
 
 import MainMenuButton from '../components/MainMenuButton';
 
-// import createDemoStory from '../resources/demoStory';
-import createDemoFloorDebuggerStory from '../resources/demoStoryFloorDebugger';
+import createDemoStory from '../resources/demoStory';
+// import createDemoFloorDebuggerStory from '../resources/demoStoryFloorDebugger';
 
 import Story from '../classes/Story';
 import Game from '../classes/Game';
@@ -29,7 +29,7 @@ function CharacterSelectScreen() {
     const [ currentStory, setCurrentStory ] = useState<Story | null>(null);
 
     useEffect(() => {
-      setCurrentStory(createDemoFloorDebuggerStory());
+      setCurrentStory(createDemoStory());
     }, []);
 
     function toggleInventory() {

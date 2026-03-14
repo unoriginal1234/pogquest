@@ -56,10 +56,10 @@ export default function EndGameScreen({ game, didLose }: { game: Game, didLose: 
                         <span className="pog-glow-green">Story:</span>
                         <span className="pog-glow-blue">{story.getTitle()}</span>
                     </div>
-                    <div className="status-item">
+                    {/* <div className="status-item">
                         <span className="pog-glow-green">Floors Cleared:</span>
                         <span className="pog-glow-pink">{story.getFloorCount()}</span>
-                    </div>
+                    </div> */}
                     <div className="status-item">
                         <span className="pog-glow-green">Game Status:</span>
                         {didLose ? <span className="pog-glow-red">Loss</span> : <span className="pog-glow-green">Victory!</span>}

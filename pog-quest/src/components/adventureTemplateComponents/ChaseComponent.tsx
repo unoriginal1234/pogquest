@@ -10,7 +10,7 @@ export default function ChaseComponent({ adventure, resolveChase, isChaseResolve
                 className='tooltip' 
                 data-tip={`Resolve the chase to gain 5 hitpoints.`} 
                 onClick={resolveChase} 
-                disabled={isChaseResolved}>{isChaseResolved ? 'Chasing...' : 'Resolve Chase'}
+                disabled={isChaseResolved}>{isChaseResolved ? 'Chasing...' : 'Get out!'}
             </button>
         </div>
     );

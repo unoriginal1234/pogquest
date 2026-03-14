@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import ShopClass from '../classes/Shop';
 import ItemClass from '../classes/Item';
@@ -10,7 +10,7 @@ import ItemComponent from './ItemComponent';
 import PogComponent from './Pog';
 import SlammerComponent from './SlammerComponent';
 
-export default function ShopComponent({ shop, player }: { shop: ShopClass, player: PlayerClass }) {
+export default function ShopComponent({ shop, player, handleCanCloseChapter }: { shop: ShopClass, player: PlayerClass, handleCanCloseChapter: (canClose: boolean) => void }) {
 
     const [openMenuId, setOpenMenuId] = useState<string | null>(null);
     // TO DO: refresh the shop when the player buys an item, pog, or slammer
@@ -20,6 +20,10 @@ export default function ShopComponent({ shop, player }: { shop: ShopClass, playe
     const inventory = shop.getInventory();
     const pogs = shop.getPogs();
     const slammers = shop.getSlammers();
+
+    useEffect(() => {
+        handleCanCloseChapter(true);
+    }, []);
 
     function handleItemClick(id: string) {
         setOpenMenuId(openMenuId === id ? null : id);

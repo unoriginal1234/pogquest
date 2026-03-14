@@ -5,7 +5,6 @@ export default function CampfireComponent({ adventure, handleRest, hasRested }: 
         <div>
                 <h2>{adventure.getName()}</h2>
                 <p>{adventure.getDescription()}</p>
-                <p>{adventure.getTemplateDescription()}</p>
                 <button 
                     className='tooltip'
                     data-tip={`hi there`}                

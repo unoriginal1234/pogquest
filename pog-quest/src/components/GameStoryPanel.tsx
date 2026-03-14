@@ -59,9 +59,9 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
     const [showFinalChapter, setShowFinalChapter] = useState<boolean>(false);
     const [isFloorDescriptionOpen, setIsFloorDescriptionOpen] = useState<boolean>(true);
 
-
     useEffect(() => {
         if (completionType instanceof Baddie) {
+            console.log('am I here Baddie?');
             const nextMatch = matchFactory(player, completionType);
             nextMatch.startMatch();
             setMatch(nextMatch);
@@ -72,6 +72,8 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
 
     useEffect(() => {
         if (completionType instanceof ShopClass) {
+            console.log('am I here Shop?');            
+            setCanCloseChapter(true);
             setShop(completionType);
         } else {
             setShop(null);
@@ -80,17 +82,18 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
 
     useEffect(() => {
         if (completionType instanceof AdventureClass) {
+            console.log('am I here Adventure?');
             setAdventure(completionType);
         } else {
             setAdventure(null);
         }
     }, [completionType]);
 
-    useEffect(() => {
-        if (shop) {
-            handleCanCloseChapter(true);
-        }
-    }, [shop]);
+    // useEffect(() => {
+    //     if (shop) {
+    //         handleCanCloseChapter(true);
+    //     }
+    // }, [shop]);
 
     function handleCanCloseChapter(canClose: boolean) {
         setCanCloseChapter(canClose);
@@ -105,6 +108,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
         setChapterDescription(nextChapter.getDescription()[0]);
         setChapterTitle(nextChapter.getTitle());
         setChapterDescriptionIndex(0);
+        setCanCloseChapter(nextChapter.getCanClose());
     }
 
     function handleCloseCurrentChapter() {
@@ -301,10 +305,11 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
             setIsGameOver={setIsGameOver} 
             handleCanCloseChapter={handleCanCloseChapter} />;
         } else if (completionType.constructor.name === "Shop") {
+
             if (!shop) {
                 return null;
             }
-            return <ShopComponent shop={shop} player={player} />;
+            return <ShopComponent shop={shop} player={player} handleCanCloseChapter={handleCanCloseChapter}/>;
         } else if (completionType.constructor.name === "Adventure") {
             if (!adventure) {
                 return null;

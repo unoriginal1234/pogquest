@@ -76,7 +76,7 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
         );
     } else if (template === 'campfire' && isComplete) {
         return (
-            <p>Good campfire!</p>
+            <p>Good fire!</p>
         );
     }
 
@@ -96,7 +96,7 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
         );
     } else if (template === 'chest' && isComplete) {
         return (
-            <p>You opened the chest and got a pog!</p>
+            <p>You opened it and got a pog!</p>
         );
     }
 
@@ -106,7 +106,7 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
         );
     } else if (template === 'trade' && isComplete) {
         return (
-            <p>You traded with the trader and got a pog!</p>
+            <p>Good trade!</p>
         );
     }
 
