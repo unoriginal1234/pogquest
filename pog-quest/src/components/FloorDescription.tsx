@@ -9,11 +9,13 @@ interface FloorDescriptionProps {
 export default function FloorDescription({ storyTitle, floorDescription, setIsFloorDescriptionOpen }: FloorDescriptionProps) {
     const [phase, setPhase] = useState<"title" | "description" | "ready">("title");
     const [displayedText, setDisplayedText] = useState("");
+    const [skipped, setSkipped] = useState(false);
 
     useEffect(() => {
+        if (phase !== "title") return;
         const titleTimer = setTimeout(() => setPhase("description"), 1200);
         return () => clearTimeout(titleTimer);
-    }, []);
+    }, [phase]);
 
     useEffect(() => {
         if (phase !== "description") return;
@@ -27,8 +29,16 @@ export default function FloorDescription({ storyTitle, floorDescription, setIsFl
         return () => clearTimeout(readyTimer);
     }, [phase, displayedText, floorDescription]);
 
+    const skipAnimation = () => {
+        if (phase !== "ready") {
+            setSkipped(true);
+            setDisplayedText(floorDescription);
+            setPhase("ready");
+        }
+    };
+
     return (
-        <div className="floor-desc-overlay">
+        <div className="floor-desc-overlay" onClick={skipAnimation}>
             <div className="floor-desc-corner floor-desc-corner--tl" />
             <div className="floor-desc-corner floor-desc-corner--tr" />
             <div className="floor-desc-corner floor-desc-corner--bl" />
@@ -53,9 +63,8 @@ export default function FloorDescription({ storyTitle, floorDescription, setIsFl
                 <div className="floor-desc-divider floor-desc-divider--bottom" />
 
                 <button
-                    className={`floor-desc-enter ${phase === "ready" ? "floor-desc-enter--visible" : ""}`}
-                    onClick={() => setIsFloorDescriptionOpen(false)}
-                    disabled={phase !== "ready"}
+                    className={`floor-desc-enter ${phase === "ready" ? (skipped ? "floor-desc-enter--visible-instant" : "floor-desc-enter--visible") : ""}`}
+                    onClick={(e) => { e.stopPropagation(); setIsFloorDescriptionOpen(false); }}
                 >
                     Begin
                 </button>
