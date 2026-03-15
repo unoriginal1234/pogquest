@@ -86,6 +86,8 @@ export default function MatchComponent({
         player.setDefense(0);
         setCurrentPlayerDefense(0);
         const playerSlammer = player.getEquippedSlammer();
+        console.log("playerSlammer", playerSlammer);
+        console.log("playerSlammer.slam", playerSlammer?.slam(visualStack));
         if (!playerSlammer) {
             console.log("No slammer equipped");
             return;
