@@ -46,7 +46,7 @@ export default function EndGameScreen({ game, didLose }: { game: Game, didLose: 
                         <span className="pog-glow-pink">{player.getSlammerCount()}</span>
                     </div>
                     <div className="status-item">
-                        <span className="pog-glow-green">Items:</span>
+                        <span className="pog-glow-green">Participation Trophies:</span>
                         <span className="pog-glow-pink">{player.getInventoryCount()}</span>
                     </div>
                 </div>

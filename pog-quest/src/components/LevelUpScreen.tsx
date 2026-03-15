@@ -16,7 +16,7 @@ interface LevelUpScreenProps {
 export default function LevelUpScreen({levelUpOptions, newLevel, setLevelUp, player, setPlayerNeedsToLevelUp, setPlayerLevel}: LevelUpScreenProps) {
 
     // right now I'm separating the level up from receiving the perks -- need to double check both before letting the player proceed
-    
+    console.log("level", player.getLevel());
     const [openMenuPogId, setOpenMenuPogId] = useState<string | null>(null);
 
     function handlePogClick(pogId: string) {
