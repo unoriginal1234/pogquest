@@ -269,6 +269,7 @@ export default function MatchComponent({
                     handleUseClick={handleUseClick}
                     handleFlipClick={handleFlipClick}
                     flippedPogIds={flippedPogIds}
+                    canFlip={visualStack.length > 0}
                 />
                 <div className="match-arena-bottom">
                     <div className="match-arena-bottom-side">

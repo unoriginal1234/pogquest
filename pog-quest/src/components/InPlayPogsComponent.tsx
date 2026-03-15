@@ -10,6 +10,7 @@ interface InPlayPogsProps {
     handleUseClick: (pog: PogClass) => void;
     handleFlipClick: (pog: PogClass) => void;
     flippedPogIds: string[];
+    canFlip: boolean;
 }
 
 export default function InPlayPogsComponent({
@@ -21,6 +22,7 @@ export default function InPlayPogsComponent({
     handleUseClick,
     handleFlipClick,
     flippedPogIds,
+    canFlip,
 }: InPlayPogsProps) {
     
     
@@ -45,12 +47,15 @@ export default function InPlayPogsComponent({
                             >
                                 Use
                             </button>
-                            <button
-                                className="btn btn-ghost btn-sm justify-start"
-                                onClick={() => handleFlipClick(pog)}
-                            >
-                                Flip
-                            </button>
+                            <div className={!canFlip ? "tooltip" : ""} data-tip={!canFlip ? "Can't flip to an empty Stack" : undefined}>
+                                <button
+                                    className="btn btn-ghost btn-sm justify-start"
+                                    onClick={() => handleFlipClick(pog)}
+                                    disabled={!canFlip}
+                                >
+                                    Flip
+                                </button>
+                            </div>
                         </div>
                     )}
                 </div>
