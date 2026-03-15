@@ -10,7 +10,7 @@ export default function PlayerComponent({ player, currentPlayerDefense, currentP
             <h2>{player.getName()}</h2>
             <p>Defense: {currentPlayerDefense}</p>
             <p>Hitpoints: {currentPlayerHitpoints}</p>
-            <p>Level: {player.getLevel()}</p>
+            
             {/* <p>Gold: {player.getGold()}</p> */}
             <p>Pogs: {player.getPogs().length}</p>
         </div>
