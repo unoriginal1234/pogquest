@@ -35,7 +35,6 @@ const Pog: React.FC<PogProps> = ({ pog, isSelected, isBaddiePog, onClick, isFlip
         >
           <div className="pog-stat pog-attack">{pog.getStrength()}</div>
           <div className="pog-name">{pog.getName()}</div>
-          <div className="pog-subtitle">LVL {pog.getLevel()}</div>
           <div className="pog-stat pog-defense">{pog.getDefense()}</div>
         </div>
     </PogToolTip>
