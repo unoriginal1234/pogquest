@@ -241,8 +241,8 @@ main {
 
 .pog-attack {
   top: 4px;
-  color: var(--pog-red);
-  text-shadow: 0 0 6px var(--pog-red);
+  color: var(--pog-neon-pink);
+  text-shadow: 0 0 6px var(--pog-neon-pink);
 }
 
 .pog-defense {
