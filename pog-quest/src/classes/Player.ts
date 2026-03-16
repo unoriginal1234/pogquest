@@ -51,7 +51,7 @@ export default class Player {
   }
 
   getBoon(name: string) {
-    return this.boons[name];
+    return this.boons[name] || null;
   }
 
   addBoon(name: string, boon: Boon) {

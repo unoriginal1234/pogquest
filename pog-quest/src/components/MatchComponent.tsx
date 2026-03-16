@@ -40,10 +40,9 @@ export default function MatchComponent({
     const [currentPlayerDefense, setCurrentPlayerDefense] = useState(player.getDefense());
     const [currentPlayerHitpoints, setCurrentPlayerHitpoints] = useState(player.getCurrentHitpoints());
     const [flippedPogIds, setFlippedPogIds] = useState<string[]>([]);
-    
-
     const [canReStack, setCanReStack] = useState(() => match.getCanReStack());
     const [canEndTurn, setCanEndTurn] = useState(() => match.getCanEndTurn());
+    const [playerBoons, setPlayerBoons] = useState<{ [key: string]: Boon }>(player.getBoons());
 
     const isVictoryScreenOpen = baddie.getCurrentHitpoints() <= 0;
     const isGameOver = player.getCurrentHitpoints() <= 0;
@@ -86,17 +85,27 @@ export default function MatchComponent({
         player.setDefense(0);
         setCurrentPlayerDefense(0);
         const playerSlammer = player.getEquippedSlammer();
-        console.log("playerSlammer", playerSlammer);
-        console.log("playerSlammer.slam", playerSlammer?.slam(visualStack));
         if (!playerSlammer) {
             console.log("No slammer equipped");
             return;
         }
         const { flippedStack, remainingStack, boons } = playerSlammer.slam(visualStack);
         // TO DO: FIgure out how to handle overwritting boons
+        // right now this is overwriting the boons, I need to add them if they're new
         if (boons) {
-            player.setBoons(boons);
+            for (const boon in boons) {
+                if (!player.getBoons()[boon]) {
+                    player.addBoon(boon, boons[boon]);
+                } else {
+                    player.removeBoon(boon);
+                    player.addBoon(boon, boons[boon]);
+                }
+            }
+            console.log("player.getBoons()", player.getBoons());
         }
+        
+        
+        setPlayerBoons({...player.getBoons()});
         // TODO: I need to add a visual indicator 
         setInPlayPogs(flippedStack);
         setVisualStack(remainingStack);
@@ -190,6 +199,7 @@ export default function MatchComponent({
 
     function endCurrentTurn() {
         // loop through inPlayPogs and apply their effects to the player
+        console.log("ending current turn");
         match.setCanEndTurn(false);
         setCanEndTurn(false);
         baddie.setDefense(0);
@@ -235,7 +245,10 @@ export default function MatchComponent({
             boon.duration--;
             if (boon.duration <= 0) {
                 player.removeBoon(boonName);
+                console.log("player.getBoons()", player.getBoons());
             }
+            player.setBoons({...player.getBoons(), [boonName]: boon});
+            setPlayerBoons(player.getBoons());
         }
         if (match.getStackCount() <= 0) {
             setCanReStack(true);
@@ -290,7 +303,12 @@ export default function MatchComponent({
                     </div>
                 </div>
             </div>
-            <PlayerComponent player={player} currentPlayerDefense={currentPlayerDefense} currentPlayerHitpoints={currentPlayerHitpoints} />
+            <PlayerComponent 
+            player={player} 
+            currentPlayerDefense={currentPlayerDefense} 
+            currentPlayerHitpoints={currentPlayerHitpoints} 
+            playerBoons={playerBoons}
+            />
             </div>
     );
 }
