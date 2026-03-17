@@ -26,15 +26,17 @@ export default class Slammer {
         
     }
     
-    _bigPogStack = new Array(999).fill(new Pog("Big Pog", 1, 1, 1, 1));
-
+    _getBigPogStack() {
+        return new Array(999).fill(new Pog("Big Pog", 1, 1, 1, 1));
+    }
+    
     getAmountFlippedBySlamAbility() {
-        const { flippedStack } = this.slamAbility(this._bigPogStack);
+        const { flippedStack } = this.slamAbility(this._getBigPogStack());
         return flippedStack.length;
     }
 
     getBoonsBySlamAbility() {
-        const { boons } = this.slamAbility(this._bigPogStack);
+        const { boons } = this.slamAbility(this._getBigPogStack());
         return boons;
     }
 
