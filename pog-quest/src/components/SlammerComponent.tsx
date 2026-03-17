@@ -1,5 +1,7 @@
 import SlammerClass from '../classes/Slammer';
 import type { SlammerType } from '../classes/Slammer';
+import FlexIcon from '../icons/FlexIcon';
+import TurtlerIcon from '../icons/TurtlerIcon';
 
 interface SlammerComponentProps {
     slammer: SlammerClass;
@@ -10,10 +12,10 @@ interface SlammerComponentProps {
 
 function SlammerArt({ type }: { type: SlammerType }) {
     if (type === 'turtler') {
-        return <div className="slammer-art slammer-art-turtler" />;
+        return <TurtlerIcon size={54} />;
     }
     if (type === 'beefer') {
-        return <div className="slammer-art slammer-art-beefer" />;
+        return <FlexIcon size={54} />;
     }
     return <div className="slammer-art slammer-art-flipper" />;
 }

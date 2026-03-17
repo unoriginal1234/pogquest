@@ -508,8 +508,8 @@ main {
 }
 
 .slammer-boon-value {
-  color: var(--pog-lime-green);
-  text-shadow: 0 0 6px var(--pog-lime-green);
+  color: var(--pog-neon-pink);
+  text-shadow: 0 0 6px var(--pog-neon-pink);
 }
 
 .slammer-boon-duration {
@@ -521,8 +521,8 @@ main {
   font-size: 20px;
   font-weight: bold;
   z-index: 2;
-  color: var(--pog-orange);
-  text-shadow: 0 0 6px var(--pog-orange);
+  color: var(--pog-electric-blue);
+  text-shadow: 0 0 6px var(--pog-electric-blue);
 }
 
 /* Slammer Art */
