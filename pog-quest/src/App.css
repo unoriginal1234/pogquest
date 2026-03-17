@@ -465,8 +465,8 @@ main {
 }
 
 .slammer-component h3 {
-  margin: 0 0 6px 0;
-  font-size: 0.9em;
+  margin: 0 0 2px 0;
+  font-size: 0.34em;
 }
 
 .slammer-component p {
@@ -475,12 +475,55 @@ main {
   color: var(--pog-lime-green);
 }
 
+.slammer-flip-count {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--pog-yellow);
+  text-shadow: 0 0 6px var(--pog-yellow);
+}
+
+.slammer-boon-row {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 0 4px;
+}
+
+.slammer-boon-value {
+  color: var(--pog-lime-green);
+  text-shadow: 0 0 6px var(--pog-lime-green);
+}
+
+.slammer-boon-duration {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--pog-orange);
+  text-shadow: 0 0 6px var(--pog-orange);
+}
+
 /* Slammer Art */
 .slammer-art {
-  width: 48px;
-  height: 48px;
+  width: 18px;
+  height: 18px;
   position: relative;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   flex-shrink: 0;
 }
 

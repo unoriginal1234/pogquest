@@ -5,6 +5,7 @@ import type { Boon } from './types'
 
 export type SlammerType = 'flipper' | 'beefer' | 'turtler';
 
+
 export default class Slammer {
     _id: string;
     name: string;
@@ -22,9 +23,20 @@ export default class Slammer {
         this.slamAbility = slamAbility;
         this.gold = gold;
         this.slammerType = slammerType;
+        
+    }
+    
+    _bigPogStack = new Array(999).fill(new Pog("Big Pog", 1, 1, 1, 1));
+
+    getAmountFlippedBySlamAbility() {
+        const { flippedStack } = this.slamAbility(this._bigPogStack);
+        return flippedStack.length;
     }
 
-
+    getBoonsBySlamAbility() {
+        const { boons } = this.slamAbility(this._bigPogStack);
+        return boons;
+    }
 
     getId() {
         return this._id;

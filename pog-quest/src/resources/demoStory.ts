@@ -42,7 +42,7 @@ function createDemoStory() {
                     new Pog("Biiig Defense", 2, 10, 20, 1),], 
                     [new Slammer("Slammer 4", "Flips up 4 pogs.", 1, 10, demoSlammerAbility2),
                         new Slammer("Premier BeeferSlammer", "1 Beefer for 1 turn.", 1, 20, beeferSlammerAbilityByInput(1, 1), 'beefer'),
-                        new Slammer("Shell Shield 1, 1", "1 Turtler for 1 turn.", 1, 20, turtlerSlammerAbility(1, 1), 'turtler')
+                        new Slammer("Shell Shield", "1 Turtler for 1 turn.", 1, 20, turtlerSlammerAbility(1, 1), 'turtler')
                     ],)),
             new Chapter("A junior sales Witch", 
                 ["\"Who are you???\"", 
