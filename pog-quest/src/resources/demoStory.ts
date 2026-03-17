@@ -40,8 +40,8 @@ function createDemoStory() {
                     [new Pog("Big Pog City", 10, 1, 50, 1),
                         new Pog("Big Honker", 10, 10, 250, 1),
                     new Pog("Biiig Defense", 2, 10, 20, 1),], 
-                    [new Slammer("Slammer 4", "Flips up 4 pogs.", 1, 10, demoSlammerAbility2),
-                        new Slammer("Premier BeeferSlammer", "1 Beefer for 1 turn.", 1, 20, beeferSlammerAbilityByInput(1, 1), 'beefer'),
+                    [new Slammer("Hot Pocket", "Flips up 4 pogs.", 1, 10, demoSlammerAbility2),
+                        new Slammer("Premier Beefer", "1 Beefer for 1 turn.", 1, 20, beeferSlammerAbilityByInput(1, 1), 'beefer'),
                         new Slammer("Shell Shield", "1 Turtler for 1 turn.", 1, 20, turtlerSlammerAbility(1, 1), 'turtler')
                     ],)),
             new Chapter("A junior sales Witch", 
@@ -63,8 +63,8 @@ function createDemoStory() {
                     [new Item("Participation Trophy", "1 Participation Award", 35)], 
                     [createButtPog(1), createButtPog(2), new Pog("The funky chicken", 10, 10, 250, 1), new Pog("Banana Sam", 7, 7, 25, 1)], 
                     [new Slammer("Slammer 5", "Flips up 5 pogs.", 1, 25, demoSlammerAbilityByN(3)),
-                    new Slammer("BeeferSlammer 1, 2", "1 Beefer for 2 turns.", 1, 20, beeferSlammerAbilityByInput(1, 2), 'beefer'),
-                    new Slammer("Turtle Power 1, 2", "1 Turtler for 2 turns.", 1, 20, turtlerSlammerAbility(1, 2), 'turtler')
+                    new Slammer("Beefaroni", "1 Beefer for 2 turns.", 1, 20, beeferSlammerAbilityByInput(1, 2), 'beefer'),
+                    new Slammer("Shellaplooza", "1 Turtler for 2 turns.", 1, 20, turtlerSlammerAbility(1, 2), 'turtler')
                     ])),
             new Chapter("A Gronk Emerges", ["He's coming right at you!", "He jumps on your head.", "You run!"], 
                 new Adventure("Gronk on the dome", "Gronk licks your face.", "chase")),
@@ -100,8 +100,8 @@ function createDemoStory() {
                 new Pog("Donkey Kong 3", 17, 17, 80, 1),
             ], 
             [new Slammer("Slammer Jazzmo", "Flips up 6 pogs.", 1, 50, demoSlammerAbilityByN(4)),
-            new Slammer("Beef Strutler 2, 2", "2 Beefer for 2 turns.", 1, 20, beeferSlammerAbilityByInput(2, 2), 'beefer'),
-            new Slammer("Iron Shell 2, 2", "2 Turtler for 2 turns.", 1, 25, turtlerSlammerAbility(2, 2), 'turtler')
+            new Slammer("Beef Strutler", "2 Beefer for 2 turns.", 1, 20, beeferSlammerAbilityByInput(2, 2), 'beefer'),
+            new Slammer("Blocksonova", "2 Turtler for 2 turns.", 1, 25, turtlerSlammerAbility(2, 2), 'turtler')
             ])),
             new Chapter("A lone computer", ["A mouse hovers above an icon.", "The icon is a chest.", "Maybe you should open it."], 
                 new Adventure("Computer Chest", "You open this and it's yours.", "chest")),
@@ -146,9 +146,9 @@ function createDemoStory() {
                         new Pog("Pog Mania", 15, 10, 300, 1),
                         new Pog("Biiig Defense", 2, 10, 20, 1),
                     ], 
-                    [new Slammer("8 Ball Slammer", "Flips up 8 pogs.", 1, 75, demoSlammerAbilityByN(6)),
-                    new Slammer("Beef Strogonoff 3, 3", "3 Beefer for 3 turns.", 1, 20, beeferSlammerAbilityByInput(3, 3), 'beefer'),
-                    new Slammer("Fortress Shell 3, 3", "3 Turtler for 3 turns.", 1, 30, turtlerSlammerAbility(3, 3), 'turtler')
+                    [new Slammer("8 Ball", "Flips up 8 pogs.", 1, 75, demoSlammerAbilityByN(6)),
+                    new Slammer("Beef Strogonoff", "3 Beefer for 3 turns.", 1, 20, beeferSlammerAbilityByInput(3, 3), 'beefer'),
+                    new Slammer("Lover's Shell", "3 Turtler for 3 turns.", 1, 30, turtlerSlammerAbility(3, 3), 'turtler')
                     ])),
             new Chapter("Creglor", ["A small cube.", "The cube's eyes spring to life.", "It's looking right at you!"], 
                 new Adventure("Creglor's Trade", "\"I love some of your stuff, not all...\".", "trade")),
