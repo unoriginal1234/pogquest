@@ -11,6 +11,14 @@ interface SlammerComponentProps {
 }
 
 function SlammerArt({ type }: { type: SlammerType }) {
+    if (type === 'beeferturtler') {
+        return (
+            <div className="slammer-art-combo">
+                <FlexIcon size={42} className="slammer-art-combo-left" />
+                <TurtlerIcon size={42} className="slammer-art-combo-right" />
+            </div>
+        );
+    }
     if (type === 'turtler') {
         return <TurtlerIcon size={54} />;
     }
@@ -22,7 +30,9 @@ function SlammerArt({ type }: { type: SlammerType }) {
 
 export default function SlammerComponent({slammer, isSelected, isEquipped, onClick}: SlammerComponentProps) {
     const boons = slammer.getBoonsBySlamAbility();
-    const boonEntry = boons ? Object.values(boons)[0] : null;
+    const beeferBoon = boons?.['beefer'] ?? null;
+    const turtlerBoon = boons?.['turtler'] ?? null;
+    const hasBoons = beeferBoon || turtlerBoon;
 
     return (
         <div 
@@ -35,12 +45,13 @@ export default function SlammerComponent({slammer, isSelected, isEquipped, onCli
             <SlammerArt type={slammer.getSlammerType()} />
             <h3>{slammer.getName()}</h3>
             <p>{isEquipped ? 'Equipped' : ''}</p>
-            {boonEntry && (
+            {hasBoons && (
                 <>
                     <div className="slammer-boon-row">
-                        <span className="slammer-boon-value">{boonEntry.value}</span>
+                        {beeferBoon && <span className="slammer-boon-value">{beeferBoon.value}</span>}
+                        {turtlerBoon && <span className="slammer-boon-value-turtler">{turtlerBoon.value}</span>}
                     </div>
-                    <div className="slammer-boon-duration">{boonEntry.duration}</div>
+                    <div className="slammer-boon-duration">{(beeferBoon ?? turtlerBoon)!.duration}</div>
                 </>
             )}
         </div>

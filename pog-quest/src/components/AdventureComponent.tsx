@@ -36,6 +36,8 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
             handleCanCloseChapter(true);
         } else if (template === 'trade' && !isComplete) {
             handleCanCloseChapter(true);
+        } else if (template === 'forge' && !isComplete) {
+            handleCanCloseChapter(true);
         }
     }, [template, isComplete, handleCanCloseChapter]);
 
@@ -109,6 +111,16 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
             <p>Good trade!</p>
         );
     }
+
+    // if (template === 'forge' && !isComplete) {
+    //     return (
+    //         <ForgeComponent adventure={adventure} forge={forge} isForgeCompleted={isForgeCompleted} />
+    //     );
+    // } else if (template === 'forge' && isComplete) {
+    //     return (
+    //         <p>Good forge!</p>
+    //     );
+    // }
 
     return <p>Unknown adventure template</p>;
 }

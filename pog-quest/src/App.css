@@ -525,6 +525,25 @@ main {
   text-shadow: 0 0 6px var(--pog-electric-blue);
 }
 
+.slammer-boon-value-turtler {
+  color: var(--pog-electric-blue);
+  text-shadow: 0 0 6px var(--pog-electric-blue);
+}
+
+.slammer-art-combo {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.slammer-art-combo-left {
+  margin-right: -12px;
+}
+
+.slammer-art-combo-right {
+  margin-left: -12px;
+}
+
 /* Slammer Art */
 .slammer-art {
   width: 18px;

@@ -3,7 +3,7 @@ import Pog from './Pog';
 
 import type { Boon } from './types'
 
-export type SlammerType = 'flipper' | 'beefer' | 'turtler';
+export type SlammerType = 'flipper' | 'beefer' | 'turtler' | 'beeferturtler';
 
 
 export default class Slammer {

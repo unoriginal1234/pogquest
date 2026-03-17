@@ -14,6 +14,8 @@ import Story from "../classes/Story";
 import demoSlammerAbilityByN from "../slammerResources/demoSlammerAbilityByN";
 import beeferSlammerAbilityByInput from "../slammerResources/beeferSlammerAbilityByInput";
 import turtlerSlammerAbility from "../slammerResources/turtlerSlammerAbility";
+import beefTurtSlammer from "../slammerResources/beefTurtSlammer";
+
 
 function createButtPog(index: number) {
     return new Pog(`Butt Pog ${index}`, index, index, Math.floor(index * 1.2), index);
@@ -33,8 +35,9 @@ function createDemoFloorDebuggerStory() {
                         new Pog("Biiig Defense", 2, 10, 20, 1),
                     ], 
                     [new Slammer("8 Ball Slammer", "Flips up 8 pogs.", 1, 75, demoSlammerAbilityByN(6)),
-                    new Slammer("Beef Strogonoff 3, 3", "3 Beefer for 3 turns.", 1, 0, beeferSlammerAbilityByInput(3, 3), 'beefer'),
-                    new Slammer("Fortress Shell 3, 3", "3 Turtler for 3 turns.", 1, 0, turtlerSlammerAbility(3, 3), 'turtler')
+                    new Slammer("Beef Turtle", "3 Beefer and 3 Turtler for 3 turns.", 1, 0, beefTurtSlammer(3, 3), 'beeferturtler'),
+                    new Slammer("Beef Strogonoff", "3 Beefer for 3 turns.", 1, 0, beeferSlammerAbilityByInput(3, 3), 'beefer'),
+                    new Slammer("Fortress Shell", "3 Turtler for 3 turns.", 1, 0, turtlerSlammerAbility(3, 3), 'turtler')
                     ])),
             new Chapter("First Chapter", ["First chapter description 1.", "First chapter description 2.", "First chapter description 3."], 
                 new Baddie("Baddie 1", 

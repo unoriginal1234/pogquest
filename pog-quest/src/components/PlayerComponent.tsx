@@ -13,13 +13,13 @@ export default function PlayerComponent({ player, currentPlayerDefense, currentP
         return (
         <div>
             <p>
-                {Object.keys(playerBoons).map((boon: string) => `${playerBoons[boon].name}  ${playerBoons[boon].value} -` + '⏱️'.repeat(playerBoons[boon].duration)).join(', ')}</p>
+                {Object.keys(playerBoons).map((boon: string) => 
+                    playerBoons[boon].duration > 0 ? `${playerBoons[boon].name}  ${playerBoons[boon].value} -` + '⏱️'.repeat(playerBoons[boon].duration) : '' )}</p>
             <h2>{player.getName()}</h2>
+            <p>Pogs: {player.getPogs().length}</p>
             <p>Defense: {currentPlayerDefense}</p>
             <p>Hitpoints: {currentPlayerHitpoints}</p>
-            
-            {/* <p>Gold: {player.getGold()}</p> */}
-            <p>Pogs: {player.getPogs().length}</p>
+
         </div>
     );
 }
