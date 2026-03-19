@@ -63,7 +63,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
     useEffect(() => {
         const needsToLevelUp = !player.hasLeveledUp();
         setNeedsToLevelUp(needsToLevelUp);
-    }, [canCloseChapter, player.getPogCount()]);
+    }, [canCloseChapter, canCloseFloor, player.getPogCount()]);
 
     useEffect(() => {
         if (completionType instanceof Baddie) {
@@ -216,14 +216,15 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
                     player={player}
                     setIsGameOver={setIsGameOver}
                     handleCanCloseFloor={handleCanCloseFloor}
+                    onLevelUpComplete={() => setNeedsToLevelUp(false)}
                 />
 
                 {canCloseFloor && !isLastFloor ? (
-                    <button onClick={handleNextFloor}>Next Floor</button>
+                    <button disabled={needsToLevelUp} onClick={handleNextFloor}>Next Floor</button>
                 ) : null}
 
                 {canCloseFloor && isLastFloor ? (
-                    <button onClick={handleCompleteStory}>End Game</button>
+                    <button disabled={needsToLevelUp} onClick={handleCompleteStory}>End Game</button>
                 ) : null}
             </section>
         );
