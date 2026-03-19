@@ -3,35 +3,44 @@
 // import Player from "../Player";
 // TODO: Add the ability to level up slammers and items
 
-import Pog from "../Pog";
+import { createPogByInput } from "../../resources/pilotDemo_001";
 
 const BullyLevelUpOptions = {
     2: {
-        pogs: [new Pog("Level 2 Perk 1", 2, 1, 10, 1), new Pog("Level 2 Perk 2", 1, 2, 10, 1)],
+        pogs: [createPogByInput({name: "Noogie", strength: 3, defense: 1}), 
+            createPogByInput({name: "Sand Slap", strength: 1, defense: 3})],
     },
     3: {
-        pogs: [new Pog("Level 4 Perk 1", 3, 2, 10, 1), new Pog("Level 3 Perk 2", 2, 3, 10, 1)],
+        pogs: [createPogByInput({name: "Hook Kick", strength: 5, defense: 3}), 
+            createPogByInput({name: "Pebble Chuck", strength: 3, defense: 5})],
     },
     4: {
-        pogs: [new Pog("Level 5 Perk 1", 4, 3, 10, 1), new Pog("Level 4 Perk 2", 3, 4, 10, 1)],
+        pogs: [createPogByInput({name: "Spoonman", strength: 7, defense: 5}), 
+            createPogByInput({name: "Bold Shoulder", strength: 5, defense: 7})],
     },
     5: {
-        pogs: [new Pog("Level 5 Perk 1", 5, 4, 10, 1), new Pog("Level 5 Perk 2", 4, 5, 10, 1)],
+        pogs: [createPogByInput({name: "Crazy Slap", strength: 9, defense: 7}), 
+            createPogByInput({name: "Slurpee", strength: 7, defense: 11})],
     },
     6: {
-        pogs: [new Pog("Level 6 Perk 1", 7, 5, 10, 1), new Pog("Level 6 Perk 2", 5, 6, 10, 1)],
+        pogs: [createPogByInput({name: "Groovie Ghoulie", strength: 11, defense: 7}), 
+            createPogByInput({name: "Bush Did", strength: 9, defense: 11})],
     }, 
     7: {
-        pogs: [new Pog("Level 7 Perk 1", 10, 6, 10, 1), new Pog("Level 7 Perk 2", 6, 7, 10, 1)],
+        pogs: [createPogByInput({name: "Knucle", strength: 13, defense: 9}), 
+            createPogByInput({name: "Tattoo", strength: 9, defense: 13})],
     },
     8: {
-        pogs: [new Pog("Level 8 Perk 1", 11, 7, 10, 1), new Pog("Level 8 Perk 2", 7, 8, 10, 1)],
+        pogs: [createPogByInput({name: "Spinning Nimrod", strength: 15, defense: 11}), 
+            createPogByInput({name: "Big Boot", strength: 11, defense: 15})],
     },
     9: {
-        pogs: [new Pog("Level 9 Perk 1", 9, 8, 10, 1), new Pog("Level 9 Perk 2", 8, 12, 10, 1)],
+        pogs: [createPogByInput({name: "Full Frontal Slam", strength: 17, defense: 10}), 
+            createPogByInput({name: "Underkick", strength: 10, defense: 17})],
     },
     10: {
-        pogs: [new Pog("Level 10 Perk 1", 10, 9, 10, 1), new Pog("Level 10 Perk 2", 9, 15, 10, 1)],
+        pogs: [createPogByInput({name: "Neck Snap", strength: 20, defense: 10}), 
+            createPogByInput({name: "Backflip Kick", strength: 10, defense: 20})],
     },
 };
 

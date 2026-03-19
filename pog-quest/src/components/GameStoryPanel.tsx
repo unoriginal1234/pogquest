@@ -58,6 +58,12 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
     const [canCloseFloor, setCanCloseFloor] = useState<boolean>(currentFloor.getCanClose());
     const [showFinalChapter, setShowFinalChapter] = useState<boolean>(false);
     const [isFloorDescriptionOpen, setIsFloorDescriptionOpen] = useState<boolean>(true);
+    const [needsToLevelUp, setNeedsToLevelUp] = useState<boolean>(false);
+
+    useEffect(() => {
+        const needsToLevelUp = !player.hasLeveledUp();
+        setNeedsToLevelUp(needsToLevelUp);
+    }, [canCloseChapter, player.getPogCount()]);
 
     useEffect(() => {
         if (completionType instanceof Baddie) {
@@ -247,6 +253,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
             {isAdmin ? <button onClick={() => handleCloseCurrentChapter()}>Dev: Close Chapter</button> : 
            !canCloseChapter || canGetToFinalChapter ? null :
             <button 
+                disabled={needsToLevelUp}
                 onClick={handleCloseCurrentChapter}>
                     Move On
             </button>}

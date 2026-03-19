@@ -18,8 +18,16 @@ import beeferSlammerAbilityByInput from "../slammerResources/beeferSlammerAbilit
 import turtlerSlammerAbility from "../slammerResources/turtlerSlammerAbility";
 import beefTurtSlammer from "../slammerResources/beefTurtSlammer";
 
+import masterDemoSlammer from "../slammerResources/masterDemoSlammer";
+
+
 function createButtPog(index: number) {
     return new Pog(`Butt Pog ${index}`, index, index, Math.floor(index * 1.2), index);
+}
+
+export function createPogByInput({name, strength, defense}: {name: string, strength: number, defense: number}){
+    const gold = Math.floor((strength*4 + defense*3));
+    return new Pog(name, strength, defense, gold, 1);
 }
 
 function createDemoStory() {
@@ -29,22 +37,23 @@ function createDemoStory() {
         [ new Floor("Lobby", "You burst through the spinning doors, and into the lobby...", [
             new Chapter("The Security Desk", ["The ogre behind the desk looks up from his newspaper..", "\"Hey, who are you?\"", "You grip your fist full of pogs. Ready for anything."], 
                 new Baddie("Security Ogre", 
-                    [createButtPog(1), createButtPog(2), createButtPog(3)], 
+                    [createButtPog(1), createButtPog(2), createPogByInput({name: "Loong Jacket", strength: 1, defense: 4})], 
                         100, 1)),
             new Chapter("Information Kiosk", ["A demon sneers.", "\"Hey you're not supposed to be here\".", "Time to mix pogs with the Demon."], 
-                new Baddie("Demon Informationist", 
-                    [createButtPog(1), createButtPog(2), createButtPog(3), createButtPog(1)], 
+                new Baddie("Demon with a Phone", 
+                    [createButtPog(1), createButtPog(2), createPogByInput({name: "Jagged Lil", strength: 4, defense: 1}), createPogByInput({name: "Phone", strength: 1, defense: 2})], 
                         100, 1)),
             new Chapter("A man smokes behind the stairs", ["\"Hey, dude, wanna check out my Pogs?\".", "\"I got something you're gonna like.\"", "\"Watchu lookin' for?.\""], 
                 new Shop("Shop 1", "This is a demo shop.", 
                     [new Item("Participation Trophy", "1 Participation Award", 25), 
                     new Item("Participation Trophy", "1 Participation Award", 25)], 
-                    [new Pog("Big Pog City", 10, 1, 50, 1),
-                        new Pog("Big Honker", 10, 10, 250, 1),
-                    new Pog("Biiig Defense", 2, 10, 20, 1),], 
-                    [new Slammer("Hot Pocket", "Flips up 4 pogs.", 1, 10, demoSlammerAbility2),
-                        new Slammer("Premier Beefer", "1 Beefer for 1 turn.", 1, 20, beeferSlammerAbilityByInput(1, 1), 'beefer'),
-                        new Slammer("Shell Shield", "1 Turtler for 1 turn.", 1, 20, turtlerSlammerAbility(1, 1), 'turtler')
+                    [createPogByInput({name: "Big Pog City", strength: 7, defense: 5}),
+                        createPogByInput({name: "Notorious", strength: 5, defense: 5}),
+                        createPogByInput({name: "Short Skirt", strength: 4, defense: 1}),
+                        createPogByInput({name: "Bee Costume", strength: 2, defense: 7})], 
+                    [new Slammer("Hot Pocket", "Flips up 4 pogs.", 1, 40, demoSlammerAbility2),
+                        new Slammer("Premier Beefer", "1 Beefer for 1 turn.", 1, 30, beeferSlammerAbilityByInput(1, 1), 'beefer'),
+                        new Slammer("Shell Shield", "1 Turtler for 1 turn.", 1, 25, turtlerSlammerAbility(1, 1), 'turtler')
                     ],)),
             new Chapter("A junior sales Witch", 
                 ["\"Who are you???\"", 
@@ -55,18 +64,29 @@ function createDemoStory() {
                 new Adventure("Wizard's Fire", "\"We should hang out some time.\"", "campfire")),
             new Chapter("Bogart's Bathroom", ["It reeks.", "The Bogart leaps at you.", "You're gonna need all the pogs you got."], 
                 new Baddie("Bogart 2", 
-                    [createButtPog(1), createButtPog(2), createButtPog(4), createButtPog(5), createButtPog(6), createButtPog(3)], 100, 2)),
+                    [createButtPog(1), 
+                        createButtPog(2), 
+                        createPogByInput({name: "Jagged Lil", strength: 4, defense: 1}), 
+                        createPogByInput({name: "Phone", strength: 1, defense: 2}), 
+                        createPogByInput({name: "Loong Jacket", strength: 1, defense: 4}), 
+                        createPogByInput({name: "Short Skirt", strength: 4, defense: 1})], 100, 2)),
             new Chapter("Scrug", ["\"You're not authoriiiiized!\"", "Scrug's got a big stack of pogs.", "Time to smash Pogs with Scrug."], 
                 new Baddie("Scrug, the Devil's lil Guy", 
-                    [createButtPog(2), createButtPog(4), createButtPog(2), createButtPog(4), createButtPog(2), createButtPog(4), createButtPog(3)], 
+                    [createButtPog(5), 
+                        createPogByInput({name: "Jagged Lil", strength: 4, defense: 1}), 
+                        createPogByInput({name: "Short Skirt", strength: 4, defense: 1}), 
+                        createPogByInput({name: "Notorious", strength: 5, defense: 5}),
+                        createPogByInput({name: "Waterfalls", strength: 3, defense: 2}), 
+                        createPogByInput({name: "Razorblade Suitcase", strength: 6, defense: 8})], 
                     100, 2)),
             new Chapter("A chill gnome", ["\"You like pogs?\"", "\"I got pogs.\"", "\"Don't touch my hat\"."], 
                 new Shop("Gnome shop", "\"I like the big ones.\"", 
                     [new Item("Participation Trophy", "1 Participation Award", 35)], 
                     [createButtPog(1), createButtPog(2), new Pog("The funky chicken", 10, 10, 250, 1), new Pog("Banana Sam", 7, 7, 25, 1)], 
                     [new Slammer("Ripper", "Flips up 5 pogs.", 1, 25, demoSlammerAbilityByN(3)),
+                        new Slammer("Beefer Ripper", "1 Beefer for 1 turn.", 1, 30, beeferSlammerAbilityByInput(1, 1), 'beefer'),
                     new Slammer("Beefaroni", "3 Beefer for 2 turns.", 1, 20, beeferSlammerAbilityByInput(3, 2), 'beefer'),
-                    new Slammer("Shellaplooza", "5 Turtler for 2 turns.", 1, 20, turtlerSlammerAbility(1, 2), 'turtler')
+                    new Slammer("Lil Grumper", "Flips up 51 Turtler for 3 turns.", 1, 0, masterDemoSlammer({flips: 7, boonMaker: [{name: 'turtler', value: 3}], duration: 3}), 'turtler'),
                     ])),
             new Chapter("A Gronk Emerges", ["He's coming right at you!", "He jumps on your head.", "You run!"], 
                 new Adventure("Gronk on the dome", "Gronk licks your face.", "chase")),
@@ -74,9 +94,9 @@ function createDemoStory() {
                 new Baddie("Skeleton Accountant", 
                     [createButtPog(1), 
                         createButtPog(2), 
-                        new Pog("Big Honker", 10, 10, 250, 1), 
-                        new Pog("Biiig Defense", 2, 10, 20, 1), 
-                        new Pog("Big Honker", 10, 10, 250, 1), 
+                        createPogByInput({name: "Welcome", strength: 10, defense: 9}),
+                        createPogByInput({name: "To", strength: 2, defense: 10}),
+                        createPogByInput({name: "Paradise", strength: 10, defense: 2}),
                         createButtPog(8)], 
                         100, 3)),
             new Chapter("The Broom Closet", ["A glimmer of light bounces off the mop water.", "A will-o-the-wisp dances.", "\"Like what I got?\""], 
@@ -93,7 +113,7 @@ function createDemoStory() {
                 createButtPog(8),
                 createButtPog(9),                
             ], 
-            [new Slammer("Slammer Jazzmo", "Flips up 6 pogs.", 1, 60, demoSlammerAbilityByN(4)),
+            [new Slammer("Slammer Jazzmo", "Flips up 6 pogs.", 1, 60, masterDemoSlammer({flips: 6})),
             new Slammer("Beef Turtler", "3 Beefer and 3 Turtler for 2 turns.", 1, 69, beefTurtSlammer(3, 3), 'beeferturtler'),
             ])),
             new Chapter("A lone computer", ["A mouse hovers above an icon.", "The icon is a chest.", "Maybe you should open it."], 
@@ -182,8 +202,37 @@ function createDemoStory() {
                 createButtPog(6),
                 createButtPog(7),
                 createButtPog(8),
-                createButtPog(9),], 100, 8, "Final Super Power")))
-    ]);
+                createButtPog(9),], 100, 8, "Final Super Power"))),
+
+        new Floor("The Top Floor of the Center of the Earth", "The Devil stands looking at a volcano.", [
+            new Chapter("\"I've been expecting you.\"", ["He straightens his tie.", "\"Oh no, it is not our time yet.\"", "The room pulses with the power of the erupting volcano ."], 
+                new Baddie("HR Lava Bear", [createButtPog(1), createButtPog(2), createButtPog(3)], 100, 1)),
+            new Chapter("Death's Griffon", ["\"You have come too far.\"", "Pogs glide from the Griffon's feathers in spiraling formation. ", "You ready your pogs."], 
+                new Shop("Death's Griffon Shop", "\"You want a soda?\"", 
+                    [new Item("Participation Trophy", "1 Participation Award", 55)], 
+                    [createButtPog(11),
+                        new Pog("Big Honker", 10, 10, 250, 1),
+                        new Pog("Pog Mania", 15, 10, 300, 1),
+                        new Pog("Biiig Defense", 2, 10, 20, 1),
+                    ], 
+                    
+                    [new Slammer("8 Ball", "Flips up 8 pogs.", 1, 75, demoSlammerAbilityByN(6)),
+                    new Slammer("Beef Strogonoff", "2 Beefer and 2 Turtler for 3 turns.", 1, 20, beefTurtSlammer(2, 2), 'beeferturtler'),
+                    ])),
+            new Chapter("Bogart's Bathroom", ["It reeks.", "The Bogart leaps at you.", "You're gonna need all the pogs you got."], 
+                new Baddie("Bogart 2", 
+                    [createButtPog(1), createButtPog(2), createButtPog(4), createButtPog(5), createButtPog(6), createButtPog(3)], 100, 2)),
+            new Chapter("Scrug", ["\"You're not authoriiiiized!\"", "Scrug's got a big stack of pogs.", "Time to smash Pogs with Scrug."], 
+                new Baddie("Scrug, the Devil's lil Guy", 
+                    [createButtPog(2), createButtPog(4), createButtPog(2), createButtPog(4), createButtPog(2), createButtPog(4), createButtPog(3)], 
+                    100, 2)),
+            
+            
+        ], new FinalChapter("Final Baddie", ["You've made it to the final floor.", "The final baddie is here.", "You're ready to fight."], 
+            new SuperBaddie("Final Baddie", [createButtPog(1), createButtPog(2), createButtPog(3)], 100, 1, "Final Super Power")))
+    ], 
+    
+);
 }
 
 

@@ -14,6 +14,9 @@ function createPog(n: number, name: string) {
     return new PogClass(name, n, 1, n, 1);
 }
 
+import { createPogByInput } from "../resources/pilotDemo_001";
+const tradePog = createPogByInput({name: "Trade Pog", strength: Math.ceil(Math.random() * 10), defense: Math.ceil(Math.random() * 10)});
+
 export default function AdventureComponent({ adventure, player, handleCanCloseChapter }: { adventure: AdventureClass, player: PlayerClass, handleCanCloseChapter: (canClose: boolean) => void }) {
 
     //TO DO: Need to make sure that the adventure is being checked for completion correctly
@@ -25,7 +28,6 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
     const [isChestOpened, setIsChestOpened] = useState(false);
     const [isTradeCompleted, setIsTradeCompleted] = useState(false);
 
-    const tradePog = createPog(10, "Trade Pog");
 
     useEffect(() => {
         if (template === 'campfire' && isComplete) {
