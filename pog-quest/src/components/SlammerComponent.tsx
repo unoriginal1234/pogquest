@@ -2,6 +2,7 @@ import SlammerClass from '../classes/Slammer';
 import type { SlammerType } from '../classes/Slammer';
 import FlexIcon from '../icons/FlexIcon';
 import TurtlerIcon from '../icons/TurtlerIcon';
+import SlammerToolTip from './tooltips/slammerToolTip';
 
 interface SlammerComponentProps {
     slammer: SlammerClass;
@@ -35,25 +36,27 @@ export default function SlammerComponent({slammer, isSelected, isEquipped, onCli
     const hasBoons = beeferBoon || turtlerBoon;
 
     return (
-        <div 
-            className={`slammer-component ${isSelected ? 'selected' : ''} ${isEquipped ? 'equipped' : ''}`} 
-            onClick={onClick}
-        >
-            <div className="slammer-flip-count">
-                {slammer.getAmountFlippedBySlamAbility()}
+        <SlammerToolTip slammer={slammer}>
+            <div 
+                className={`slammer-component ${isSelected ? 'selected' : ''} ${isEquipped ? 'equipped' : ''}`} 
+                onClick={onClick}
+            >
+                <div className="slammer-flip-count">
+                    {slammer.getAmountFlippedBySlamAbility()}
+                </div>
+                <SlammerArt type={slammer.getSlammerType()} />
+                <h3>{slammer.getName()}</h3>
+                <p>{isEquipped ? 'Equipped' : ''}</p>
+                {hasBoons && (
+                    <>
+                        <div className="slammer-boon-row">
+                            {beeferBoon && <span className="slammer-boon-value">{beeferBoon.value}</span>}
+                            {turtlerBoon && <span className="slammer-boon-value-turtler">{turtlerBoon.value}</span>}
+                        </div>
+                        <div className="slammer-boon-duration">{(beeferBoon ?? turtlerBoon)!.duration}</div>
+                    </>
+                )}
             </div>
-            <SlammerArt type={slammer.getSlammerType()} />
-            <h3>{slammer.getName()}</h3>
-            <p>{isEquipped ? 'Equipped' : ''}</p>
-            {hasBoons && (
-                <>
-                    <div className="slammer-boon-row">
-                        {beeferBoon && <span className="slammer-boon-value">{beeferBoon.value}</span>}
-                        {turtlerBoon && <span className="slammer-boon-value-turtler">{turtlerBoon.value}</span>}
-                    </div>
-                    <div className="slammer-boon-duration">{(beeferBoon ?? turtlerBoon)!.duration}</div>
-                </>
-            )}
-        </div>
+        </SlammerToolTip>
     );
 }
