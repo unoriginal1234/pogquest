@@ -10,10 +10,10 @@ import Inventory from '../components/Inventory';
 
 import MainMenuButton from '../components/MainMenuButton';
 
-// import pilotDemo_001 from '../resources/pilotDemo_001';
+import pilotDemo_001 from '../resources/pilotDemo_001';
 // import createDemoStory from '../resources/demoStory';
 // import createDemoStorySlammerPlayground from '../resources/demoStorySlammerPlayground';
-import createDemoFloorDebuggerStory from '../resources/demoStoryFloorDebugger';
+// import createDemoFloorDebuggerStory from '../resources/demoStoryFloorDebugger';
 
 import Story from '../classes/Story';
 import Game from '../classes/Game';
@@ -31,7 +31,7 @@ function CharacterSelectScreen() {
     const [ currentStory, setCurrentStory ] = useState<Story | null>(null);
 
     useEffect(() => {
-      setCurrentStory(createDemoFloorDebuggerStory());
+      setCurrentStory(pilotDemo_001());
     }, []);
 
     function toggleInventory() {
