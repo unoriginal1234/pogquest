@@ -310,7 +310,8 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
             key={match.getBaddie().getId()} 
             match={match} 
             setIsGameOver={setIsGameOver} 
-            handleCanCloseChapter={handleCanCloseChapter} />;
+            handleCanCloseChapter={handleCanCloseChapter}
+            onLevelUpComplete={() => setNeedsToLevelUp(false)} />;
         } else if (completionType.constructor.name === "Shop") {
 
             if (!shop) {

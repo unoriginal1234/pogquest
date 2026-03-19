@@ -20,10 +20,12 @@ import StackToolTip from "./tooltips/stackToolTip";
 export default function MatchComponent({ 
     match, 
     setIsGameOver, 
-    handleCanCloseChapter }: 
+    handleCanCloseChapter,
+    onLevelUpComplete }: 
     { match: MatchClass, 
         setIsGameOver: (isGameOver: boolean) => void, 
-        handleCanCloseChapter: (canClose: boolean) => void }) {
+        handleCanCloseChapter: (canClose: boolean) => void,
+        onLevelUpComplete: () => void }) {
     
     const player = match.getPlayer();
     const baddie = match.getBaddie();
@@ -265,6 +267,7 @@ export default function MatchComponent({
                 playerXPBeforeVictory={playerXPBeforeVictory}
                 player={player}
                 handleCanCloseChapter={handleCanCloseChapter}
+                onLevelUpComplete={onLevelUpComplete}
                 />
         );
     }
