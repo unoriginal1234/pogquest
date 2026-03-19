@@ -6,8 +6,12 @@ import SlammerClass from '../classes/Slammer';
 import SlammerComponent from './SlammerComponent';
 
 function SlammersCollection(
-    {player, toggleSlammersCollection}: 
-    {player: Player | null, toggleSlammersCollection: () => void}) {
+    {player, toggleSlammersCollection, onSlammerClick, excludeIds, hideControls}: 
+    {player: Player | null, 
+     toggleSlammersCollection?: () => void,
+     onSlammerClick?: (slammer: SlammerClass) => void,
+     excludeIds?: string[],
+     hideControls?: boolean}) {
 
     // I don't  need  to update the player state 
     
@@ -25,25 +29,34 @@ function SlammersCollection(
 
     const slammer = player?.getSlammers().find(s => s.getId() === selectedSlammer);
 
+    const displayedSlammers = excludeIds
+        ? player?.getSlammers().filter(s => !excludeIds.includes(s.getId()))
+        : player?.getSlammers();
+
     return (
         <section className="demo-section">
             <h2>Slammers Collection</h2>
 
             <div className="button-group">
-                {player?.getSlammers().map((slammer: SlammerClass, index: number) => (
+                {displayedSlammers?.map((slammer: SlammerClass, index: number) => (
                     <SlammerComponent 
-                    key={index} 
+                    key={slammer.getId()} 
                     slammer={slammer} 
-                    isEquipped={equippedSlammerId === slammer.getId()}
+                    isEquipped={!hideControls ? equippedSlammerId === slammer.getId() : false}
                     onClick={() => {
-                        console.log(slammer, 'slammer clicked')
-                        handleSlammerClick(slammer.getId())} }
-                    isSelected={selectedSlammer === slammer.getId()} />
+                        if (onSlammerClick) {
+                            onSlammerClick(slammer);
+                        } else {
+                            console.log(slammer, 'slammer clicked')
+                            handleSlammerClick(slammer.getId());
+                        }
+                    }}
+                    isSelected={!onSlammerClick ? selectedSlammer === slammer.getId() : false} />
                    
                 ))}
             </div>
 
-            {selectedSlammer && 
+            {!hideControls && selectedSlammer && 
             <>
             <SlammerDetails slammer={slammer!} />
             {selectedSlammer && equippedSlammerId !== selectedSlammer && 
@@ -51,8 +64,8 @@ function SlammersCollection(
             </>
             }
 
-
-            <button onClick={toggleSlammersCollection}>Back</button>
+            {!hideControls && toggleSlammersCollection &&
+            <button onClick={toggleSlammersCollection}>Back</button>}
         </section>
     );
 }

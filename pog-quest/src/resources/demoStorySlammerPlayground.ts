@@ -14,7 +14,7 @@ import Story from "../classes/Story";
 import demoSlammerAbilityByN from "../slammerResources/demoSlammerAbilityByN";
 import beeferSlammerAbilityByInput from "../slammerResources/beeferSlammerAbilityByInput";
 import turtlerSlammerAbility from "../slammerResources/turtlerSlammerAbility";
-import beefTurtSlammer from "../slammerResources/beefTurtSlammer";
+// import beefTurtSlammer from "../slammerResources/beefTurtSlammer";
 import masterDemoSlammer from "../slammerResources/masterDemoSlammer";
 
 function createButtPog(index: number) {
@@ -32,10 +32,12 @@ function createDemoFloorDebuggerStory() {
                     [createButtPog(11),
                         ...Array.from({ length: 10 }, (_, i) => createButtPog(i + 1)),
                     ], 
-                    [new Slammer("8 Ball Slammer", "Flips up 8 pogs.", 1, 0, demoSlammerAbilityByN(6)),
-                    new Slammer("Beef Turtle", "3 Beefer and 3 Turtler for 3 turns.", 1, 0, beefTurtSlammer(3, 3), 'beeferturtler'),
-                    new Slammer("Beef Strogonoff", "3 Beefer for 3 turns.", 1, 0, beeferSlammerAbilityByInput(3, 3), 'beefer'),
-                    new Slammer("Fortress Shell", "3 Turtler for 3 turns.", 1, 0, turtlerSlammerAbility(3, 3), 'turtler'),
+                    [new Slammer("5 Ball Slammer", "Flips up 5 pogs.", 1, 0, masterDemoSlammer({flips: 5, duration: 1})),
+                        new Slammer("Beef Ball", "2 Beefer for 1 turn.", 1, 0, masterDemoSlammer({flips: 2, boonMaker: [{name: 'beefer', value: 2}]}), 'beefer'),
+                        new Slammer("Turtler Ball", "2 Turtler for 1 turn.", 1, 0, masterDemoSlammer({flips: 2, boonMaker: [{name: 'turtler', value: 2}], duration: 1}), 'turtler'),
+                    new Slammer("Beef Turtle", "3 Beefer and 3 Turtler for 3 turns.", 1, 0, masterDemoSlammer({flips: 3, boonMaker: [{name: 'beefer', value: 3}, {name: 'turtler', value: 3}], duration: 3}), 'beeferturtler'),
+                    new Slammer("Beef Strogonoff", "3 Beefer for 3 turns.", 1, 0, masterDemoSlammer({flips: 3, boonMaker: [{name: 'beefer', value: 3}], duration: 3}), 'beefer'),
+                    new Slammer("Fortress Shell", "3 Turtler for 3 turns.", 1, 0, masterDemoSlammer({flips: 3, boonMaker: [{name: 'turtler', value: 3}], duration: 3}), 'turtler'),
                     new Slammer("Master Demo Slammer", "Flips up 7 pogs and grants 3 Beefer and 3 Turtler for 3 turns.", 1, 0, masterDemoSlammer({flips: 7, boonMaker: [{name: 'beefer', value: 3}, {name: 'turtler', value: 3}], duration: 3}), 'beeferturtler'),
 
                     ])),
@@ -56,7 +58,7 @@ function createDemoFloorDebuggerStory() {
                                 new Slammer("Fortress Shell", "7 Turtler for 1 turn.", 1, 30, turtlerSlammerAbility(7, 1), 'turtler')
                                 ])),
             new Chapter("Second Chapter", ["Second chapter description 1.", "Second chapter description 2.", "Second chapter description 3."], 
-                new Adventure("Chest Adventure", "This is a description of the chest adventure.", "chest")),
+                new Adventure("Forge", "This is a description of the forge adventure.", "forge")),
             ], new FinalChapter("Final Chapter", ["This is the final Baddie of the floor. He's big and has one eye."], new SuperBaddie("Richard Hill Giant", [], 0, 1, "Final Super Power"))),
 
         new Floor("Second Floor", "Second Floor Description", [

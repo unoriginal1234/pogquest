@@ -1570,3 +1570,68 @@ main {
 
   
 }
+
+/* Forge Component */
+
+.forge-slots-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.forge-slot {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 4px dashed var(--pog-electric-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  background-color: rgba(17, 11, 26, 0.5);
+}
+
+.forge-slot:hover {
+  border-color: var(--pog-cyan);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.25);
+}
+
+.forge-slot-label {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  color: var(--pog-electric-blue);
+  opacity: 0.6;
+  text-align: center;
+}
+
+.forge-plus {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 24px;
+  color: var(--pog-yellow);
+}
+
+.forge-button {
+  display: block;
+  margin: 0 auto 24px auto;
+  padding: 12px 32px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 14px;
+  color: var(--pog-yellow);
+  background-color: var(--pog-deep-purple);
+  border: 3px solid var(--pog-hot-pink);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s, box-shadow 0.2s;
+}
+
+.forge-button:hover:not(:disabled) {
+  box-shadow: 0 0 16px rgba(255, 20, 147, 0.5);
+}
+
+.forge-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

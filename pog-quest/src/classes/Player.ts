@@ -110,6 +110,10 @@ export default class Player {
     this.slammers.push(slammer);
   }
 
+  removeSlammer(slammer: Slammer) {
+    this.slammers = this.slammers.filter(s => s.getId() !== slammer.getId());
+  }
+
   getPogs() {
     return this.pogs;
   }

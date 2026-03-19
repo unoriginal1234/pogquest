@@ -3,11 +3,17 @@ import { useEffect, useState } from "react";
 import AdventureClass from "../classes/Adventure";
 import PlayerClass from "../classes/Player";
 import PogClass from "../classes/Pog";
+import SlammerClass from "../classes/Slammer";
+import type { SlammerType } from "../classes/Slammer";
 
 import CampfireComponent from "./adventureTemplateComponents/CampfireComponent";
 import ChaseComponent from "./adventureTemplateComponents/ChaseComponent";
 import ChestComponent from "./adventureTemplateComponents/ChestComponent";
 import TradeComponent from "./adventureTemplateComponents/TradeComponent";
+import ForgeComponent from "./adventureTemplateComponents/ForgeComponent";
+
+import masterDemoSlammer from "../slammerResources/masterDemoSlammer";
+
 
 // ToDo: move this to the factory directory
 function createPog(n: number, name: string) {
@@ -27,6 +33,7 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
     const [isChaseResolved, setIsChaseResolved] = useState(false);
     const [isChestOpened, setIsChestOpened] = useState(false);
     const [isTradeCompleted, setIsTradeCompleted] = useState(false);
+    const [isForgeCompleted, setIsForgeCompleted] = useState(false);
 
 
     useEffect(() => {
@@ -73,6 +80,64 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
         setIsComplete(true);
     }
 
+    function forge(slammer1: SlammerClass, slammer2: SlammerClass) {
+        const flips = slammer1.getAmountFlippedBySlamAbility() + slammer2.getAmountFlippedBySlamAbility();
+
+        const boons1 = slammer1.getBoonsBySlamAbility() ?? {};
+        const boons2 = slammer2.getBoonsBySlamAbility() ?? {};
+
+        const beeferValue = (boons1['beefer']?.value ?? 0) + (boons2['beefer']?.value ?? 0);
+        const turtlerValue = (boons1['turtler']?.value ?? 0) + (boons2['turtler']?.value ?? 0);
+
+        const allDurations = [
+            boons1['beefer']?.duration, boons1['turtler']?.duration,
+            boons2['beefer']?.duration, boons2['turtler']?.duration,
+        ].filter((d): d is number => d !== undefined);
+        const duration = allDurations.length > 0 ? Math.max(...allDurations) : undefined;
+
+        const boonMaker: { name: 'beefer' | 'turtler'; value: number }[] = [];
+        if (beeferValue > 0) boonMaker.push({ name: 'beefer', value: beeferValue });
+        if (turtlerValue > 0) boonMaker.push({ name: 'turtler', value: turtlerValue });
+
+        let slammerType: SlammerType = 'flipper';
+        if (beeferValue > 0 && turtlerValue > 0) slammerType = 'beeferturtler';
+        else if (beeferValue > 0) slammerType = 'beefer';
+        else if (turtlerValue > 0) slammerType = 'turtler';
+
+        const slamAbility = masterDemoSlammer({
+            flips,
+            boonMaker: boonMaker.length > 0 ? boonMaker : undefined,
+            duration,
+        });
+
+        const descriptionParts = [`Flips ${flips} pogs.`];
+        if (beeferValue > 0) descriptionParts.push(`${beeferValue} Beefer`);
+        if (turtlerValue > 0) descriptionParts.push(`${turtlerValue} Turtler`);
+        if (duration) descriptionParts.push(`for ${duration} turn(s).`);
+
+        const newSlammer = new SlammerClass(
+            `${slammer1.getName()} + ${slammer2.getName()}`,
+            descriptionParts.join(' '),
+            1,
+            0,
+            slamAbility,
+            slammerType,
+        );
+
+        const equippedId = player.getEquippedSlammer()?.getId();
+        player.removeSlammer(slammer1);
+        player.removeSlammer(slammer2);
+        player.addSlammer(newSlammer);
+
+        if (equippedId === slammer1.getId() || equippedId === slammer2.getId()) {
+            player.equipSlammer(newSlammer);
+        }
+
+        setIsForgeCompleted(true);
+        adventure.setIsComplete(true);
+        setIsComplete(true);
+    }
+
     if (template === 'campfire' && !isComplete) {
         
         return (
@@ -114,15 +179,15 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
         );
     }
 
-    // if (template === 'forge' && !isComplete) {
-    //     return (
-    //         <ForgeComponent adventure={adventure} forge={forge} isForgeCompleted={isForgeCompleted} />
-    //     );
-    // } else if (template === 'forge' && isComplete) {
-    //     return (
-    //         <p>Good forge!</p>
-    //     );
-    // }
+    if (template === 'forge' && !isComplete) {
+        return (
+            <ForgeComponent adventure={adventure} forge={forge} isForgeCompleted={isForgeCompleted} player={player} />
+        );
+    } else if (template === 'forge' && isComplete) {
+        return (
+            <p>Good forge!</p>
+        );
+    }
 
     return <p>Unknown adventure template</p>;
 }
