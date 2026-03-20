@@ -195,7 +195,7 @@ export default class Player {
   }
 
   _increaseHitpointsByLevel() {
-    this.setHitpoints(Math.ceil(this.getHitpoints() * 1.2));
+    this.setHitpoints(Math.ceil(this.getHitpoints() * 1.3));
     this.setCurrentHitpoints(this.getHitpoints());
   }
 
