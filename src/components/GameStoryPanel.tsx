@@ -278,25 +278,22 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
                         className="nav-icon-button"
                         onClick={() => handleChapterClick(chapterNumber)}
                     >
-                        {NavButtonType(getNavButtonTypeByChapterNumber(chapterNumber))}
+                        {NavButtonIcon(chapterNumber)}
                     </button>
                 ))}
             </div>
         )
     }
 
-    function getNavButtonTypeByChapterNumber(chapterNumber: number) {
-        return currentFloor.getChapter(chapterNumber).getCompletionType().constructor.name
-    }
-
-    function NavButtonType(string: string) {
-        if (string === "Baddie") {
+    function NavButtonIcon(chapterNumber: number) {
+        const completionType = currentFloor.getChapter(chapterNumber).getCompletionType();
+        if (completionType instanceof Baddie) {
             return <BaddieIcon size={72} />;
         }
-        if (string === "Shop") {
+        if (completionType instanceof ShopClass) {
             return <ShopIcon size={72} />;
         }
-        if (string === "Adventure") {
+        if (completionType instanceof AdventureClass) {
             return <AdventureIcon size={72} />;
         }
         return "something went wrong";
@@ -313,13 +310,13 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
             setIsGameOver={setIsGameOver} 
             handleCanCloseChapter={handleCanCloseChapter}
             onLevelUpComplete={() => setNeedsToLevelUp(false)} />;
-        } else if (completionType.constructor.name === "Shop") {
+        } else if (completionType instanceof ShopClass) {
 
             if (!shop) {
                 return null;
             }
             return <ShopComponent shop={shop} player={player} handleCanCloseChapter={handleCanCloseChapter}/>;
-        } else if (completionType.constructor.name === "Adventure") {
+        } else if (completionType instanceof AdventureClass) {
             if (!adventure) {
                 return null;
             }
