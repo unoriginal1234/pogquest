@@ -28,6 +28,7 @@ function PogCollection(
                         pog={pog} 
                         onClick={() => handlePogClick(pog.getId())}
                         isSelected={selectedPog === pog.getId()}
+                        isFlippedUp={false}
                     />
                 ))}
             </div>

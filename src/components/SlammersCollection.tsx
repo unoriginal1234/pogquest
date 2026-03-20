@@ -38,7 +38,7 @@ function SlammersCollection(
             <h2>Slammers Collection</h2>
 
             <div className="button-group">
-                {displayedSlammers?.map((slammer: SlammerClass, index: number) => (
+                {displayedSlammers?.map((slammer: SlammerClass) => (
                     <SlammerComponent 
                     key={slammer.getId()} 
                     slammer={slammer} 
