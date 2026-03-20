@@ -138,18 +138,18 @@ function StatusDisplay(
                 </div>
                 <div className="status-item">
                   <span className="pog-glow-green">Pogs:</span>
-                  <span className="pog-glow-blue" 
-                  onClick={togglePogCollection}>View</span>
+                  <span className="pog-glow-blue"
+                  onClick={togglePogCollection} style={{cursor: 'pointer'}}>👁️</span>
                 </div>
                 <div className="status-item">
                   <span className="pog-glow-green">Slammers:</span>
                   <span className="pog-glow-blue" 
-                  onClick={toggleSlammersCollection}>View</span>
+                  onClick={toggleSlammersCollection} style={{cursor: 'pointer'}}>👁️</span>
                 </div>
                 <div className="status-item">
                   <span className="pog-glow-green">Inventory:</span>
                   <span className="pog-glow-blue" 
-                  onClick={toggleInventory}>View</span>
+                  onClick={toggleInventory} style={{cursor: 'pointer'}}>👁️</span>
                 </div>
               </div>
             </section>
