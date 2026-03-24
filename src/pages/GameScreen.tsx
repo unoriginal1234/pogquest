@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 
 import { useGame } from '../context/GameContext';
+import useBeforeUnload from '../hooks/useBeforeUnload';
 import GameMenuButtons from '../components/GameMenuButtons';
 import GameStoryPanel from '../components/GameStoryPanel';
 import EndGameScreen from '../components/EndGameScreen';
@@ -21,6 +22,8 @@ export default function GameScreen() {
 
   const game = state.game;
   const player = game?.getPlayer();
+
+  useBeforeUnload(!!game && !isGameOver);
 
   function handleEndGame(didLose: boolean) {
     setIsGameOver(true);
