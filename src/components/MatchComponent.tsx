@@ -42,7 +42,7 @@ export default function MatchComponent({
     const [currentBaddieDefense, setCurrentBaddieDefense] = useState(baddie.getDefense());
     const [currentPlayerDefense, setCurrentPlayerDefense] = useState(player.getDefense());
     const [currentPlayerHitpoints, setCurrentPlayerHitpoints] = useState(player.getCurrentHitpoints());
-    const [flippedPogIds, setFlippedPogIds] = useState<string[]>([]);
+    const [flippedPogIds, setFlippedPogIds] = useState<string[]>(() => match.getSnapshot().flippedPogIds);
     const [canReStack, setCanReStack] = useState(() => match.getCanReStack());
     const [canEndTurn, setCanEndTurn] = useState(() => match.getCanEndTurn());
     const [playerBoons, setPlayerBoons] = useState<{ [key: string]: Boon }>(player.getBoons());
@@ -67,6 +67,7 @@ export default function MatchComponent({
         setCanReStack(snapshot.canReStack);
         setCanEndTurn(snapshot.canEndTurn);
         setCanPlayAll(snapshot.canPlayAll);
+        setFlippedPogIds(snapshot.flippedPogIds);
     }
 
     useEffect(() => {
@@ -89,7 +90,6 @@ export default function MatchComponent({
     function handleReStackClick() {
         match.restack();
         syncState(match.getSnapshot());
-        setFlippedPogIds([]);
         setOpenMenuPogId(null)
     }
 
@@ -108,14 +108,14 @@ export default function MatchComponent({
     }
 
     function handleFlipClick(pog: PogClass) {
+        match.flipPog(pog.getId());
+        syncState(match.getSnapshot());
         setOpenMenuPogId(null);
-        setFlippedPogIds([...flippedPogIds, pog.getId()]);
     }
 
     function handleEndTurn() {
-        match.endTurn(flippedPogIds);
+        match.endTurn();
         syncState(match.getSnapshot());
-        setFlippedPogIds([]);
         setOpenMenuPogId(null)
     }
 

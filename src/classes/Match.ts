@@ -16,6 +16,7 @@ export interface MatchSnapshot {
     canEndTurn: boolean;
     canSlam: boolean;
     canPlayAll: boolean;
+    flippedPogIds: string[];
 }
 
 export default class Match {
@@ -25,6 +26,7 @@ export default class Match {
     stack: Pog[];
     playedPogs: Pog[];
     inPlayPogs: Pog[];
+    
     pogOwners: Map<string,string>;
     inProgress: boolean;
     status: string;
@@ -34,6 +36,7 @@ export default class Match {
     canEndTurn: boolean;
     canReStack: boolean;
     canPlayAll: boolean;
+    flippedPogIds: string[];
 
     constructor(player: Player, baddie: Baddie)
     {
@@ -52,6 +55,7 @@ export default class Match {
         this.canEndTurn = false;
         this.canReStack = false;
         this.canPlayAll = false;
+        this.flippedPogIds = [];
     }
 
     getSnapshot(): MatchSnapshot {
@@ -67,6 +71,7 @@ export default class Match {
             canEndTurn: this.canEndTurn,
             canSlam: this.canSlam,
             canPlayAll: this.canPlayAll,
+            flippedPogIds: this.flippedPogIds.slice(),
         };
     }
 
@@ -115,9 +120,14 @@ export default class Match {
         this.canPlayAll = canPlayAll;
     }
 
+    flipPog(pogId: string) {
+        this.flippedPogIds = [...this.flippedPogIds, pogId];
+    }
+
     slam() {
         this.canEndTurn = true;
         this.setCanPlayAll(true);
+        this.flippedPogIds = [];
         if (!this.canSlam) return;
         this.canSlam = false;
         this.player.setDefense(0);
@@ -158,11 +168,12 @@ export default class Match {
         this.player.setDefense(0);
         this.setNewStack();
         this.inPlayPogs = [];
+        this.flippedPogIds = [];
         this.canEndTurn = false;
         this.canSlam = true;
     }
 
-    endTurn(flippedPogIds: string[]) {
+    endTurn() {
         this.canEndTurn = false;
         this.baddie.setDefense(0);
         this.setCanPlayAll(false)
@@ -174,12 +185,12 @@ export default class Match {
                 this.baddie.setDefense(this.baddie.getDefense() + pog.getDefense());
                 this.applyDamageToTarget(this.player, pog.getStrength());
                 this.removePogFromPlay(pog);
-            } else if (!flippedPogIds.includes(pog.getId())) {
+            } else if (!this.flippedPogIds.includes(pog.getId())) {
                 this.removePogFromPlay(pog);
             }
         }
 
-        for (const pogId of flippedPogIds) {
+        for (const pogId of this.flippedPogIds) {
             const pog = currentInPlayPogs.find(p => p.getId() === pogId);
             if (pog) {
                 this.addToBottomOfStack(pog);
@@ -195,6 +206,8 @@ export default class Match {
             }
         }
         this.player.setBoons({ ...this.player.getBoons() });
+
+        this.flippedPogIds = [];
 
         if (this.stack.length <= 0) {
             this.canReStack = true;
