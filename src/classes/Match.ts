@@ -15,6 +15,7 @@ export interface MatchSnapshot {
     canReStack: boolean;
     canEndTurn: boolean;
     canSlam: boolean;
+    canPlayAll: boolean;
 }
 
 export default class Match {
@@ -32,6 +33,7 @@ export default class Match {
     canSlam: boolean;
     canEndTurn: boolean;
     canReStack: boolean;
+    canPlayAll: boolean;
 
     constructor(player: Player, baddie: Baddie)
     {
@@ -49,6 +51,7 @@ export default class Match {
         this.canSlam = true;
         this.canEndTurn = false;
         this.canReStack = false;
+        this.canPlayAll = false;
     }
 
     getSnapshot(): MatchSnapshot {
@@ -63,6 +66,7 @@ export default class Match {
             canReStack: this.canReStack,
             canEndTurn: this.canEndTurn,
             canSlam: this.canSlam,
+            canPlayAll: this.canPlayAll,
         };
     }
 
@@ -93,8 +97,27 @@ export default class Match {
         this.inPlayPogs = this.inPlayPogs.filter(p => p.getId() !== pog.getId());
     }
 
+    playAll() {
+        if (!this.canPlayAll) return;
+        for (const pog of this.inPlayPogs) {
+            if (this.pogOwners.get(pog.getId()) === this.player.getId()) {
+                this.usePog(pog.getId());
+            }
+        }
+        this.canPlayAll = false;
+    }
+
+    getCanPlayAll() {
+        return this.canPlayAll;
+    }
+
+    setCanPlayAll(canPlayAll: boolean) {
+        this.canPlayAll = canPlayAll;
+    }
+
     slam() {
         this.canEndTurn = true;
+        this.setCanPlayAll(true);
         if (!this.canSlam) return;
         this.canSlam = false;
         this.player.setDefense(0);
@@ -142,6 +165,7 @@ export default class Match {
     endTurn(flippedPogIds: string[]) {
         this.canEndTurn = false;
         this.baddie.setDefense(0);
+        this.setCanPlayAll(false)
 
         const currentInPlayPogs = this.inPlayPogs.slice();
 

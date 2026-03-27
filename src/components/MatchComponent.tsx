@@ -46,6 +46,7 @@ export default function MatchComponent({
     const [canReStack, setCanReStack] = useState(() => match.getCanReStack());
     const [canEndTurn, setCanEndTurn] = useState(() => match.getCanEndTurn());
     const [playerBoons, setPlayerBoons] = useState<{ [key: string]: Boon }>(player.getBoons());
+    const [canPlayAll, setCanPlayAll] = useState(() => match.getCanPlayAll());
 
     const isVictoryScreenOpen = currentBaddieHitpoints <= 0;
     const isGameOver = currentPlayerHitpoints <= 0;
@@ -65,6 +66,7 @@ export default function MatchComponent({
         setInPlayPogs(snapshot.inPlayPogs);
         setCanReStack(snapshot.canReStack);
         setCanEndTurn(snapshot.canEndTurn);
+        setCanPlayAll(snapshot.canPlayAll);
     }
 
     useEffect(() => {
@@ -88,6 +90,7 @@ export default function MatchComponent({
         match.restack();
         syncState(match.getSnapshot());
         setFlippedPogIds([]);
+        setOpenMenuPogId(null)
     }
 
     function handleInPlayPogClick(pog: PogClass) {
@@ -113,6 +116,14 @@ export default function MatchComponent({
         match.endTurn(flippedPogIds);
         syncState(match.getSnapshot());
         setFlippedPogIds([]);
+        setOpenMenuPogId(null)
+    }
+
+    function handlePlayAllClick() {
+        match.playAll();
+        syncState(match.getSnapshot());
+        setCanPlayAll(match.getCanPlayAll());
+        setOpenMenuPogId(null)
     }
 
     if (isVictoryScreenOpen) {
@@ -145,6 +156,11 @@ export default function MatchComponent({
                 />
                 <div className="match-arena-bottom">
                     <div className="match-arena-bottom-side">
+                        {(isAdmin || canPlayAll) && (
+                            <button onClick={handlePlayAllClick}>
+                                {isAdmin ? "DEV: Play All" : "Play All"}
+                            </button>
+                        )}
                         {(isAdmin || canReStack) && (
                             <button onClick={handleReStackClick}>
                                 {isAdmin ? "DEV: Re-stack" : "Re-stack"}
