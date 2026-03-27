@@ -105,7 +105,7 @@ export default class Match {
     playAll() {
         if (!this.canPlayAll) return;
         for (const pog of this.inPlayPogs) {
-            if (this.pogOwners.get(pog.getId()) === this.player.getId()) {
+            if (this.pogOwners.get(pog.getId()) === this.player.getId() && !this.flippedPogIds.includes(pog.getId())) {
                 this.usePog(pog.getId());
             }
         }
