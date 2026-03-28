@@ -80,7 +80,7 @@ function CharacterSelectScreen() {
               </div>
             </section>   
 
-            <main>
+            <main style={{ flex: 1, minHeight: 0, overflowY: 'auto' }}>
             {selectedButton !== null && (
               <div className="message-box pog-border">
                 <section className="pog-glow-yellow">

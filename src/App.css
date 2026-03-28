@@ -21,7 +21,7 @@
 
 header {
   text-align: center;
-  padding: 2rem 0;
+  padding: 1rem 0;
 }
 
 .subtitle {
@@ -33,13 +33,13 @@ header {
 main {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 1.5rem;
 }
 
 .demo-section {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   align-items: center;
 }
 
@@ -112,10 +112,10 @@ main {
 }
 
 .page-layout {
-  min-height: 100vh;
+  min-height: calc(100dvh - 4rem);
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .footer-wrapper {
