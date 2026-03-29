@@ -106,7 +106,7 @@ export default class Match {
         if (!this.canPlayAll) return;
         for (const pog of this.inPlayPogs) {
             if (this.pogOwners.get(pog.getId()) === this.player.getId() && !this.flippedPogIds.includes(pog.getId())) {
-                this.usePog(pog.getId());
+                this.playPog(pog.getId());
             }
         }
         this.canPlayAll = false;
@@ -148,7 +148,7 @@ export default class Match {
         this.stack = remainingStack;
     }
 
-    usePog(pogId: string) {
+    playPog(pogId: string) {
         const pog = this.inPlayPogs.find(p => p.getId() === pogId);
         if (!pog) return;
 

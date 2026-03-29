@@ -64,7 +64,7 @@ export default function MatchComponent({
         }
     }, [isVictoryScreenOpen, match]);
 
-    function handleUseClick(pog: PogClass) {
+    function handlePlayClick(pog: PogClass) {
         playPog(pog.getId());
     }
 
@@ -95,7 +95,7 @@ export default function MatchComponent({
                     pogOwners={pogOwners}
                     playerId={player.getId()}
                     handleInPlayPogClick={handleInPlayPogClick}
-                    handleUseClick={handleUseClick}
+                    handlePlayClick={handlePlayClick}
                     handleFlipClick={handleFlipClick}
                     flippedPogIds={snapshot.flippedPogIds}
                     canFlip={snapshot.stack.length > 0}

@@ -28,7 +28,7 @@ export default function useMatch(match: MatchClass) {
     }
 
     function playPog(pogId: string) {
-        match.usePog(pogId);
+        match.playPog(pogId);
         sync();
         setOpenMenuPogId(null);
     }

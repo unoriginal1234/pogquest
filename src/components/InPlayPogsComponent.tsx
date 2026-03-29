@@ -7,7 +7,7 @@ interface InPlayPogsProps {
     pogOwners: Map<string, string>;
     playerId: string;
     handleInPlayPogClick: (pog: PogClass) => void;
-    handleUseClick: (pog: PogClass) => void;
+    handlePlayClick: (pog: PogClass) => void;
     handleFlipClick: (pog: PogClass) => void;
     flippedPogIds: string[];
     canFlip: boolean;
@@ -19,7 +19,7 @@ export default function InPlayPogsComponent({
     pogOwners,
     playerId,
     handleInPlayPogClick,
-    handleUseClick,
+    handlePlayClick,
     handleFlipClick,
     flippedPogIds,
     canFlip,
@@ -43,9 +43,9 @@ export default function InPlayPogsComponent({
                         >
                             <button
                                 className="btn btn-ghost btn-sm justify-start"
-                                onClick={() => handleUseClick(pog)}
+                                onClick={() => handlePlayClick(pog)}
                             >
-                                Use
+                                Play
                             </button>
                             <div className={!canFlip ? "tooltip" : ""} data-tip={!canFlip ? "Can't flip to an empty Stack" : undefined}>
                                 <button
