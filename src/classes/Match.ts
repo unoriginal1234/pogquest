@@ -102,7 +102,6 @@ export default class Match {
         this.inPlayPogs = this.inPlayPogs.filter(p => p.getId() !== pog.getId());
     }
 
-    // I want to check this on play, on flip
     private hasPlayablePogs() {
         return this.inPlayPogs.some(pog => this.pogOwners.get(pog.getId()) === this.player.getId() && !this.flippedPogIds.includes(pog.getId()));
     }
@@ -133,11 +132,9 @@ export default class Match {
     }
 
     slam() {
-        if (!this.hasPlayablePogs()) {
-            this.setCanPlayAll(false);
-        }
+        
         this.canEndTurn = true;
-        this.setCanPlayAll(true);
+       
         this.flippedPogIds = [];
         if (!this.canSlam) return;
         this.canSlam = false;
@@ -157,6 +154,11 @@ export default class Match {
 
         this.inPlayPogs = flippedStack;
         this.stack = remainingStack;
+        if (this.hasPlayablePogs()) {
+            this.setCanPlayAll(true);
+        } else {
+            this.setCanPlayAll(false);
+        }
     }
 
     playPog(pogId: string) {
