@@ -33,9 +33,9 @@ const Pog: React.FC<PogProps> = ({ pog, isSelected, isBaddiePog, onClick, isFlip
           className={`pog-component ${isSelected ? 'selected' : ''} ${isBaddiePog ? 'baddie-pog' : ''} `} 
           onClick={onClick}
         >
-          <div className="pog-stat pog-attack">{pog.getStrength()}</div>
+          <div className="pog-stat pog-attack">{pog.getStrength() || ''}</div>
           <div className="pog-name">{pog.getName()}</div>
-          <div className="pog-stat pog-defense">{pog.getDefense()}</div>
+          <div className="pog-stat pog-defense">{pog.getDefense() || ''}</div>
         </div>
     </PogToolTip>
   );
