@@ -1,12 +1,12 @@
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 
 import { UserContext } from "../context/UserContext";
 import User from "../classes/User";
 
 import MatchClass from "../classes/Match";
-import type { MatchSnapshot } from "../classes/Match";
 import PogClass from "../classes/Pog";
-import type { Boon } from "../classes/types";
+
+import useMatch from "../hooks/useMatch";
 
 import BaddieComponent from "./BaddieComponent";
 import PlayerComponent from "./PlayerComponent";
@@ -29,46 +29,28 @@ export default function MatchComponent({
     onLevelUpComplete,
 }: MatchComponentProps) {
     
-    const player = match.getPlayer();
-    const baddie = match.getBaddie();
-    const pogOwners = match.getPogOwners();
+    const {
+        snapshot,
+        openMenuPogId,
+        player,
+        baddie,
+        pogOwners,
+        awardXP,
+        playerXPBeforeVictory,
+        slam,
+        restack,
+        playPog,
+        flipPog,
+        endTurn,
+        playAll,
+        handleInPlayPogClick,
+    } = useMatch(match);
 
-    const awardXP = baddie.getXPbyLevel() || 0;
-
-    const [openMenuPogId, setOpenMenuPogId] = useState<string | null>(null);    
-    const [inPlayPogs, setInPlayPogs] = useState<PogClass[]>(() => match.getInPlayPogs().slice());
-    const [visualStack, setVisualStack] = useState<PogClass[]>(() => match.getStack().slice());   
-    const [currentBaddieHitpoints, setCurrentBaddieHitpoints] = useState(baddie.getCurrentHitpoints());
-    const [currentBaddieDefense, setCurrentBaddieDefense] = useState(baddie.getDefense());
-    const [currentPlayerDefense, setCurrentPlayerDefense] = useState(player.getDefense());
-    const [currentPlayerHitpoints, setCurrentPlayerHitpoints] = useState(player.getCurrentHitpoints());
-    const [flippedPogIds, setFlippedPogIds] = useState<string[]>(() => match.getSnapshot().flippedPogIds);
-    const [canReStack, setCanReStack] = useState(() => match.getCanReStack());
-    const [canEndTurn, setCanEndTurn] = useState(() => match.getCanEndTurn());
-    const [playerBoons, setPlayerBoons] = useState<{ [key: string]: Boon }>(player.getBoons());
-    const [canPlayAll, setCanPlayAll] = useState(() => match.getCanPlayAll());
-
-    const isVictoryScreenOpen = currentBaddieHitpoints <= 0;
-    const isGameOver = currentPlayerHitpoints <= 0;
+    const isVictoryScreenOpen = snapshot.baddieHitpoints <= 0;
+    const isGameOver = snapshot.playerHitpoints <= 0;
 
     const user = useContext<User | null>(UserContext);
     const isAdmin = user?.getRole() === "admin";
-
-    const playerXPBeforeVictory = match.getPlayerXPBeforeVictory();
-
-    function syncState(snapshot: MatchSnapshot) {
-        setCurrentBaddieHitpoints(snapshot.baddieHitpoints);
-        setCurrentBaddieDefense(snapshot.baddieDefense);
-        setCurrentPlayerHitpoints(snapshot.playerHitpoints);
-        setCurrentPlayerDefense(snapshot.playerDefense);
-        setPlayerBoons(snapshot.playerBoons);
-        setVisualStack(snapshot.stack);
-        setInPlayPogs(snapshot.inPlayPogs);
-        setCanReStack(snapshot.canReStack);
-        setCanEndTurn(snapshot.canEndTurn);
-        setCanPlayAll(snapshot.canPlayAll);
-        setFlippedPogIds(snapshot.flippedPogIds);
-    }
 
     useEffect(() => {
         if (isGameOver) {
@@ -82,48 +64,12 @@ export default function MatchComponent({
         }
     }, [isVictoryScreenOpen, match]);
 
-    function handleStackClick() {
-        match.slam();
-        syncState(match.getSnapshot());
-    }
-
-    function handleReStackClick() {
-        match.restack();
-        syncState(match.getSnapshot());
-        setOpenMenuPogId(null)
-    }
-
-    function handleInPlayPogClick(pog: PogClass) {
-        if (pogOwners.get(pog.getId()) === player.getId()) {
-            setOpenMenuPogId(pog.getId());
-        } else {
-            setOpenMenuPogId(null);
-        }
-    }
-
     function handleUseClick(pog: PogClass) {
-        match.usePog(pog.getId());
-        syncState(match.getSnapshot());
-        setOpenMenuPogId(null);
+        playPog(pog.getId());
     }
 
     function handleFlipClick(pog: PogClass) {
-        match.flipPog(pog.getId());
-        syncState(match.getSnapshot());
-        setOpenMenuPogId(null);
-    }
-
-    function handleEndTurn() {
-        match.endTurn();
-        syncState(match.getSnapshot());
-        setOpenMenuPogId(null)
-    }
-
-    function handlePlayAllClick() {
-        match.playAll();
-        syncState(match.getSnapshot());
-        setCanPlayAll(match.getCanPlayAll());
-        setOpenMenuPogId(null)
+        flipPog(pog.getId());
     }
 
     if (isVictoryScreenOpen) {
@@ -141,38 +87,38 @@ export default function MatchComponent({
 
     return (
         <div className="match-layout">
-            <BaddieComponent baddie={baddie} currentBaddieHitpoints={currentBaddieHitpoints} currentBaddieDefense={currentBaddieDefense} />
+            <BaddieComponent baddie={baddie} currentBaddieHitpoints={snapshot.baddieHitpoints} currentBaddieDefense={snapshot.baddieDefense} />
             <div className="match-arena">
                 <InPlayPogsComponent 
-                    inPlayPogs={inPlayPogs}
+                    inPlayPogs={snapshot.inPlayPogs}
                     openMenuPogId={openMenuPogId}
                     pogOwners={pogOwners}
                     playerId={player.getId()}
                     handleInPlayPogClick={handleInPlayPogClick}
                     handleUseClick={handleUseClick}
                     handleFlipClick={handleFlipClick}
-                    flippedPogIds={flippedPogIds}
-                    canFlip={visualStack.length > 0}
+                    flippedPogIds={snapshot.flippedPogIds}
+                    canFlip={snapshot.stack.length > 0}
                 />
                 <div className="match-arena-bottom">
                     <div className="match-arena-bottom-side">
-                        {(isAdmin || canPlayAll) && (
-                            <button onClick={handlePlayAllClick}>
+                        {(isAdmin || snapshot.canPlayAll) && (
+                            <button onClick={playAll}>
                                 {isAdmin ? "DEV: Play All" : "Play All"}
                             </button>
                         )}
-                        {(isAdmin || canReStack) && (
-                            <button onClick={handleReStackClick}>
+                        {(isAdmin || snapshot.canReStack) && (
+                            <button onClick={restack}>
                                 {isAdmin ? "DEV: Re-stack" : "Re-stack"}
                             </button>
                         )}
                     </div>
-                    <StackToolTip length={visualStack.length}>
-                        <StackComponent stack={visualStack} onClick={handleStackClick} />
+                    <StackToolTip length={snapshot.stack.length}>
+                        <StackComponent stack={snapshot.stack} onClick={slam} />
                     </StackToolTip>
                     <div className="match-arena-bottom-side">
-                        {(isAdmin || canEndTurn) && (
-                            <button onClick={handleEndTurn}>
+                        {(isAdmin || snapshot.canEndTurn) && (
+                            <button onClick={endTurn}>
                                 {isAdmin ? "DEV: End Turn" : "End Turn"}
                             </button>
                         )}
@@ -181,9 +127,9 @@ export default function MatchComponent({
             </div>
             <PlayerComponent 
                 player={player} 
-                currentPlayerDefense={currentPlayerDefense} 
-                currentPlayerHitpoints={currentPlayerHitpoints} 
-                playerBoons={playerBoons}
+                currentPlayerDefense={snapshot.playerDefense} 
+                currentPlayerHitpoints={snapshot.playerHitpoints} 
+                playerBoons={snapshot.playerBoons}
             />
         </div>
     );
