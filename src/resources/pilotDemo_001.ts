@@ -220,7 +220,7 @@ function createDemoStory() {
                 new Shop("Death's Griffon Shop", "\"You want a soda?\"", 
                     [new Item("Participation Trophy", "1 Participation Award", 55)], 
                     [   
-                        createPogByInput({name: "The Griffon's Egg", strength: 10, defense: 10}),
+                        createPogByInput({name: "Griffy Egg", strength: 10, defense: 10}),
                         createRandomDefensePog(8),
                         createRandomAttackPog(8),
                     ], 
@@ -255,7 +255,7 @@ function createDemoStory() {
         ], new FinalChapter("CEO's Private Living Quarteres", ["The Devil CEO turns from drinking a child's blood..", "\"Looks like I'll have to deal with you myself.\"", "Hope you got the right pogs..."], 
             new SuperBaddie("Devil CEO", [
                 createPogByInput({name: "CEO's Honker", strength: 10, defense: 10}),
-                createPogByInput({name: "Boardroom Veto", strength: 15, defense: 10}),
+                createPogByInput({name: "Veto", strength: 15, defense: 10}),
                 createPogByInput({name: "Layoff", strength: 2, defense: 10}),
                 createAttackPog(1),
                 createDefensePog(2),
@@ -303,7 +303,7 @@ function createDemoStory() {
             new Chapter("Phoenix Go-getter", ["An egg sits on a lunch tray.", "The egg bursts into flames!", "\"Hey! You look like someone who knows what they want!\""], 
                 new Shop("Phoenix Go-getter's Shop", "\"You want a soda?\"", 
                     [new Item("Participation Trophy", "1 Participation Award", 55)], 
-                    [createPogByInput({name: "Fire's Rebirth", strength: 2, defense: 15}),
+                    [createPogByInput({name: "Fire Re Birth", strength: 2, defense: 15}),
                         createPogByInput({name: "Soda", strength: 2, defense: 2}),
                         createRandomDefensePog(15),
                         createRandomAttackPog(15),
