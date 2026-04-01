@@ -143,7 +143,10 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
     }
 
     function makeLucky(selectedPog: PogClass) {
-        selectedPog.setAbility("lucky");
+        const luckyPog = selectedPog.clone();
+        luckyPog.setAbility("lucky");
+        player.removePog(selectedPog);
+        player.addPog(luckyPog);
         setIsLuckyCompleted(true);
         adventure.setIsComplete(true);
         setIsComplete(true);

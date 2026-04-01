@@ -37,10 +37,6 @@ export default class Pog {
     return this.name;
   }
 
-  getStartTime() {
-    return this.startTime;
-  }
-
   generateNewId() {
     this._id = crypto.randomUUID();
   }
@@ -72,5 +68,9 @@ export default class Pog {
     this.defense++;
     this.gold++;
     }
+  }
+
+  clone(): Pog {
+    return new Pog(this.name, this.strength, this.defense, this.gold, this.level, this.ability);
   }
 }
