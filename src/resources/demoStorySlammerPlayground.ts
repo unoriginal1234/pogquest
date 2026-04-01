@@ -21,6 +21,10 @@ function createButtPog(index: number) {
     return new Pog(`Butt Pog ${index}`, index, index, Math.floor(index * 1.2), index);
 }
 
+function createLuckyPog(index: number) {
+    return new Pog(`Lucky Pog ${index}`, index, index, Math.floor(index * 1.2), index, 'lucky');
+}
+
 function createDemoFloorDebuggerStory() {
     return new Story(
         "Demo Story",
@@ -30,6 +34,7 @@ function createDemoFloorDebuggerStory() {
                 new Shop("Shop 1", "This is a demo shop.", 
                     [new Item("Participation Trophy", "1 Participation Award", 55)], 
                     [createButtPog(11),
+                        createLuckyPog(1),
                         ...Array.from({ length: 10 }, (_, i) => createButtPog(i + 1)),
                     ], 
                     [new Slammer("5 Ball Slammer", "Flips up 5 pogs.", 1, 0, masterDemoSlammer({flips: 5, duration: 1})),

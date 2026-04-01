@@ -1,5 +1,6 @@
 // Thinking through this - I want to either level up or use the Balatro method where you can 
 // put specific wrappers around the pog to give it bonuses, this way I don't have to worry about "leveling up" the pog.
+type Ability = "lucky" | "trick";
 
 export default class Pog {
   _id: string;
@@ -10,8 +11,9 @@ export default class Pog {
   level: number;
   startTime: Date;
   ownerId: string | undefined;
+  ability: Ability | undefined;
 
-  constructor(name: string, strength: number, defense: number, gold: number, level: number) {
+  constructor(name: string, strength: number, defense: number, gold: number, level: number, ability?: Ability) {
     this._id = crypto.randomUUID();
     this.name = name;
     this.strength = strength;
@@ -20,6 +22,15 @@ export default class Pog {
     this.level = level;
     this.startTime = new Date();
     this.ownerId = undefined;
+    this.ability = ability;
+  }
+
+  setAbility(ability: Ability) {
+    this.ability = ability;
+  }
+
+  getAbility() {
+    return this.ability;
   }
 
   getName() {

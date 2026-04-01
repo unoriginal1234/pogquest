@@ -4,6 +4,7 @@ const adventureTemplateRegistry = {
     chest: "You found a chest. You can open it to get a reward.",
     trade: "You found a trader. You can trade with them to get a reward.",
     forge: "You found a forge. You can combine two Slammers to create a new one.",
+    
 };
 
 type AdventureTemplate = keyof typeof adventureTemplateRegistry;
