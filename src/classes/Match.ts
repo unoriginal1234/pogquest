@@ -155,8 +155,8 @@ export default class Match {
         // THIS IS THE NORMAL SLAM LOGIC
         const { flippedStack, remainingStack, boons } = playerSlammer.slam(this.stack);
 
+        // this is the lucky pog logic
         let remainingStackWithoutLucky: Pog[] = [];
-
         if (remainingStack.length > 0) {
             if (luckyPog) {
                 if (!flippedStack.includes(luckyPog)) {

@@ -11,6 +11,7 @@ import ChaseComponent from "./adventureTemplateComponents/ChaseComponent";
 import ChestComponent from "./adventureTemplateComponents/ChestComponent";
 import TradeComponent from "./adventureTemplateComponents/TradeComponent";
 import ForgeComponent from "./adventureTemplateComponents/ForgeComponent";
+import LuckyComponent from "./adventureTemplateComponents/LuckyComponent";
 
 import masterDemoSlammer from "../slammerResources/masterDemoSlammer";
 
@@ -34,6 +35,7 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
     const [isChestOpened, setIsChestOpened] = useState(false);
     const [isTradeCompleted, setIsTradeCompleted] = useState(false);
     const [isForgeCompleted, setIsForgeCompleted] = useState(false);
+    const [isLuckyCompleted, setIsLuckyCompleted] = useState(false);
 
 
     useEffect(() => {
@@ -46,6 +48,8 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
         } else if (template === 'trade' && !isComplete) {
             handleCanCloseChapter(true);
         } else if (template === 'forge' && !isComplete) {
+            handleCanCloseChapter(true);
+        } else if (template === 'lucky') {
             handleCanCloseChapter(true);
         }
     }, [template, isComplete, handleCanCloseChapter]);
@@ -138,6 +142,13 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
         setIsComplete(true);
     }
 
+    function makeLucky(selectedPog: PogClass) {
+        selectedPog.setAbility("lucky");
+        setIsLuckyCompleted(true);
+        adventure.setIsComplete(true);
+        setIsComplete(true);
+    }
+
     if (template === 'campfire' && !isComplete) {
         
         return (
@@ -186,6 +197,16 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
     } else if (template === 'forge' && isComplete) {
         return (
             <p>Good forge!</p>
+        );
+    }
+
+    if (template === 'lucky' && !isComplete) {
+        return (
+            <LuckyComponent adventure={adventure} makeLucky={makeLucky} isLuckyCompleted={isLuckyCompleted} player={player} />
+        );
+    } else if (template === 'lucky' && isComplete) {
+        return (
+            <p>Lucky pog!</p>
         );
     }
 
