@@ -131,6 +131,10 @@ export default class Match {
         }
     }
 
+    findLuckyPog() {
+        return this.stack.find(pog => pog.getAbility() === 'lucky');
+    }
+
     slam() {
         
         this.canEndTurn = true;
@@ -143,7 +147,30 @@ export default class Match {
         const playerSlammer = this.player.getEquippedSlammer();
         if (!playerSlammer) return;
 
+        // adding the lucky pog to the stack
+        // there might be a need to build a more robust "slam with ability" but let's start with this
+        // I could even move the find luck pog logic after the slam to make this cleaner
+
+        const luckyPog = this.findLuckyPog();
+        // THIS IS THE NORMAL SLAM LOGIC
         const { flippedStack, remainingStack, boons } = playerSlammer.slam(this.stack);
+
+        let remainingStackWithoutLucky: Pog[] = [];
+
+        if (remainingStack.length > 0) {
+            if (luckyPog) {
+                if (!flippedStack.includes(luckyPog)) {
+                    remainingStackWithoutLucky = remainingStack.filter(pog => pog.getId() !== luckyPog.getId());
+                    flippedStack.unshift(luckyPog);
+                    if (flippedStack.length > 1) {
+                        const unluckyPog = flippedStack.pop();
+                        if (unluckyPog) {
+                            remainingStackWithoutLucky.unshift(unluckyPog);
+                        }
+                    }
+                }
+            }
+        }
 
         if (boons) {
             for (const boon in boons) {
@@ -153,7 +180,14 @@ export default class Match {
         }
 
         this.inPlayPogs = flippedStack;
-        this.stack = remainingStack;
+
+        // handles the LUCKY POG LOGIC
+        if (remainingStackWithoutLucky.length > 0) {
+            this.stack = remainingStackWithoutLucky;
+        } else {
+            this.stack = remainingStack;
+        }
+
         if (this.hasPlayablePogs()) {
             this.setCanPlayAll(true);
         } else {

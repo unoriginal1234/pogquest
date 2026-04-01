@@ -22,7 +22,7 @@ function createButtPog(index: number) {
 }
 
 function createLuckyPog(index: number) {
-    return new Pog(`Lucky Pog ${index}`, index, index, Math.floor(index * 1.2), index, 'lucky');
+    return new Pog(`Lucky`, index, index, Math.floor(index * 1.2), index, 'lucky');
 }
 
 function createDemoFloorDebuggerStory() {
