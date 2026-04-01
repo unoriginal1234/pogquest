@@ -35,6 +35,7 @@ const Pog: React.FC<PogProps> = ({ pog, isSelected, isBaddiePog, onClick, isFlip
         >
           <div className="pog-stat pog-attack">{pog.getStrength() || ''}</div>
           <div className="pog-name">{pog.getName()}</div>
+          <div className="pog-ability">{pog.getAbility() === 'lucky' ? '🍀' : pog.getAbility() === 'trick' ? '💥' : ''}</div>
           <div className="pog-stat pog-defense">{pog.getDefense() || ''}</div>
         </div>
     </PogToolTip>

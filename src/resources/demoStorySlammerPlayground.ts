@@ -21,6 +21,10 @@ function createButtPog(index: number) {
     return new Pog(`Butt Pog ${index}`, index, index, Math.floor(index * 1.2), index);
 }
 
+function createLuckyPog(index: number) {
+    return new Pog(`Lucky`, index, index, Math.floor(index * 1.2), index, 'lucky');
+}
+
 function createDemoFloorDebuggerStory() {
     return new Story(
         "Demo Story",
@@ -30,6 +34,7 @@ function createDemoFloorDebuggerStory() {
                 new Shop("Shop 1", "This is a demo shop.", 
                     [new Item("Participation Trophy", "1 Participation Award", 55)], 
                     [createButtPog(11),
+                        createLuckyPog(1),
                         ...Array.from({ length: 10 }, (_, i) => createButtPog(i + 1)),
                     ], 
                     [new Slammer("5 Ball Slammer", "Flips up 5 pogs.", 1, 0, masterDemoSlammer({flips: 5, duration: 1})),
@@ -41,6 +46,8 @@ function createDemoFloorDebuggerStory() {
                     new Slammer("Master Demo Slammer", "Flips up 7 pogs and grants 3 Beefer and 3 Turtler for 3 turns.", 1, 0, masterDemoSlammer({flips: 7, boonMaker: [{name: 'beefer', value: 3}, {name: 'turtler', value: 3}], duration: 3}), 'beeferturtler'),
 
                     ])),
+            new Chapter("Lucky Chapter", ["Lucky chapter description 1.", "Lucky chapter description 2.", "Lucky chapter description 3."], 
+                new Adventure("Lucky Adventure", "This is a description of the lucky adventure.", "lucky")), 
             new Chapter("First Chapter", ["First chapter description 1.", "First chapter description 2.", "First chapter description 3."], 
                 new Baddie("Baddie 1", 
                     [], 
