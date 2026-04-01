@@ -1,7 +1,7 @@
-import Pog from "../classes/Pog";
+import { createPogByInput } from "../classes/controls/CharacterSelect";
 
 export const startingPogs = [
-    new Pog("Attack", 2, 0, 2, 1),
-    new Pog("Attack", 2, 0, 2, 1),
-    new Pog("Block", 0, 2, 2, 1),
+    createPogByInput({name: "Attack", strength: 2, defense: 0}),
+    createPogByInput({name: "Attack", strength: 2, defense: 0}),
+    createPogByInput({name: "Block", strength: 0, defense: 2}),
 ]
