@@ -12,7 +12,7 @@ interface PlayerComponentProps {
 export default function PlayerComponent({ player, currentPlayerDefense, currentPlayerHitpoints, playerBoons }: PlayerComponentProps) {
     
         return (
-        <div>
+        <div className="combatant-panel">
             <p>
                 {Object.keys(playerBoons).map((boon: string) => 
                     playerBoons[boon].duration > 0 ? `${playerBoons[boon].name}  ${playerBoons[boon].value} -` + '⏱️'.repeat(playerBoons[boon].duration) : '' )}</p>

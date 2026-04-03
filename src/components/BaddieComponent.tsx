@@ -11,7 +11,7 @@ export default function BaddieComponent({
         currentBaddieDefense: number }) {
    
     return (
-        <div>
+        <div className="combatant-panel">
             {currentBaddieHitpoints > 0 ? <h2>{baddie.getName()}</h2> : <h2>Baddie Defeated</h2>}
             <p>Level: {baddie.getLevel()}</p>
             <p>Pogs: {baddie.getPogs().length}</p>

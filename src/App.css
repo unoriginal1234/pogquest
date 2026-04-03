@@ -355,6 +355,10 @@ main {
   width: 100%;
 }
 
+.combatant-panel {
+  width: 100%;
+}
+
 .match-stack {
   position: relative;
   width: 120px;
