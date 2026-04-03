@@ -1,5 +1,6 @@
 import PlayerClass from "../classes/Player";
 import type { Boon } from "../classes/types";
+import StatBar from "./StatBar";
 
 interface PlayerComponentProps {
     player: PlayerClass;
@@ -17,9 +18,8 @@ export default function PlayerComponent({ player, currentPlayerDefense, currentP
                     playerBoons[boon].duration > 0 ? `${playerBoons[boon].name}  ${playerBoons[boon].value} -` + '⏱️'.repeat(playerBoons[boon].duration) : '' )}</p>
             <h2>{player.getName()}</h2>
             <p>Pogs: {player.getPogs().length}</p>
-            <p>Defense: {currentPlayerDefense}</p>
-            <p>Hitpoints: {currentPlayerHitpoints}</p>
-
+            <StatBar current={currentPlayerHitpoints} max={player.getHitpoints()} label="HP" variant="hp" />
+            <StatBar current={currentPlayerDefense} max={currentPlayerDefense} label="DEF" variant="defense" />
         </div>
     );
 }
