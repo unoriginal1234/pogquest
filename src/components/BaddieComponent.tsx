@@ -1,4 +1,5 @@
 import BaddieClass from "../classes/Baddie";
+import StatBar from "./StatBar";
 
 export default function BaddieComponent({ 
     baddie, 
@@ -10,13 +11,12 @@ export default function BaddieComponent({
         currentBaddieDefense: number }) {
    
     return (
-        <div>
+        <div className="combatant-panel">
             {currentBaddieHitpoints > 0 ? <h2>{baddie.getName()}</h2> : <h2>Baddie Defeated</h2>}
             <p>Level: {baddie.getLevel()}</p>
-            
             <p>Pogs: {baddie.getPogs().length}</p>
-            <p>Current Hitpoints: {currentBaddieHitpoints}</p>
-            <p>Current Defense: {currentBaddieDefense}</p>
+            <StatBar current={currentBaddieHitpoints} max={baddie.getMaxHitpoints()} label="HP" variant="hp" />
+            <StatBar current={currentBaddieDefense} max={currentBaddieDefense} label="DEF" variant="defense" />
         </div>
     );
 }
