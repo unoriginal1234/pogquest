@@ -64,16 +64,19 @@ function createDemoFloorDebuggerStory() {
                                 new Slammer("Beef Strogonoff", "5 Beefer for 2 turns.", 1, 20, beeferSlammerAbilityByInput(5, 2), 'beefer'),
                                 new Slammer("Fortress Shell", "7 Turtler for 1 turn.", 1, 30, turtlerSlammerAbility(7, 1), 'turtler')
                                 ])),
+                
             new Chapter("Second Chapter", ["Second chapter description 1.", "Second chapter description 2.", "Second chapter description 3."], 
                 new Adventure("Forge", "This is a description of the forge adventure.", "forge")),
-            ], new FinalChapter("Final Chapter", ["This is the final Baddie of the floor. He's big and has one eye."], new SuperBaddie("Richard Hill Giant", [], 0, 1, "Final Super Power"))),
+            ], new FinalChapter("Final Chapter", ["This is the final Baddie of the floor. He's big and has one eye."], new SuperBaddie("Richard Hill Giant", [], 0, 5, "Final Super Power"))),
 
         new Floor("Second Floor", "Second Floor Description", [
             new Chapter("First Chapter", ["First chapter description 1.", "First chapter description 2.", "First chapter description 3."], 
                 new Baddie("Baddie 4", 
                     [createButtPog(1), createButtPog(2),], 100, 1)),
             
-            new Chapter("Third Chapter", ["Third chapter description 1.", "Third chapter description 2.", "Third chapter description 3."], 
+            new Chapter("Lucky Chapter", ["Lucky chapter description 1.", "Lucky chapter description 2.", "Lucky chapter description 3."], 
+                new Adventure("Lucky Adventure", "This is a description of the lucky adventure.", "lucky")), 
+                    new Chapter("Third Chapter", ["Third chapter description 1.", "Third chapter description 2.", "Third chapter description 3."], 
                 new Adventure("The trader flashes his wares", "This is a description of the trader's whole thing.", "trade")),
         ], new FinalChapter("Final Chapter", ["Final chapter description 1.", "Final chapter description 2.", "Final chapter description 3."], 
             new SuperBaddie("Final Baddie", [], 0, 1, "Final Super Power")))
