@@ -1,4 +1,4 @@
-import { createPogByInput } from "../classes/controls/CharacterSelect";
+import { createPogByInput } from "./pilotDemo_001";
 
 export const startingPogs = [
     createPogByInput({name: "Attack", strength: 2, defense: 0}),
