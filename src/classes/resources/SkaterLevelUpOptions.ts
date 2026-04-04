@@ -7,40 +7,40 @@ import { createPogByInput } from "../../resources/pilotDemo_001";
 
 const BullyLevelUpOptions = {
     2: {
-        pogs: [createPogByInput({name: "Nose Slide", strength: 3, defense: 1, ability: 'radical'}), 
-            createPogByInput({name: "Sand Slap", strength: 1, defense: 3})],
+        pogs: [createPogByInput({name: "Nose Slide", strength: 3, defense: 0, ability: 'radical'}), 
+            createPogByInput({name: "Nose Grab", strength: 1, defense: 4})],
     },
     3: {
-        pogs: [createPogByInput({name: "Hook Kick", strength: 5, defense: 3}), 
-            createPogByInput({name: "Pebble Chuck", strength: 3, defense: 5})],
+        pogs: [createPogByInput({name: "50-50", strength: 5, defense: 0, ability: 'radical'}), 
+            createPogByInput({name: "Grip Tape", strength: 1, defense: 6})],
     },
     4: {
-        pogs: [createPogByInput({name: "Spoonman", strength: 7, defense: 5}), 
-            createPogByInput({name: "Bold Shoulder", strength: 5, defense: 7})],
+        pogs: [createPogByInput({name: "Spoonman", strength: 7, defense: 0, ability: 'radical'}), 
+            createPogByInput({name: "Big Air", strength: 2, defense: 9})],
     },
     5: {
-        pogs: [createPogByInput({name: "Crazy Slap", strength: 9, defense: 7}), 
+        pogs: [createPogByInput({name: "360 Flip", strength: 9, defense: 0, ability: 'radical'}), 
             createPogByInput({name: "Slurpee", strength: 7, defense: 11})],
     },
     6: {
-        pogs: [createPogByInput({name: "Groovie Ghoulie", strength: 11, defense: 7}), 
+        pogs: [createPogByInput({name: "Big Spin", strength: 11, defense: 0, ability: 'radical'}), 
             createPogByInput({name: "Bush Did", strength: 9, defense: 11})],
     }, 
     7: {
-        pogs: [createPogByInput({name: "Knucle", strength: 13, defense: 9}), 
-            createPogByInput({name: "Tattoo", strength: 9, defense: 13})],
+        pogs: [createPogByInput({name: "Pressure Flip", strength: 13, defense: 0, ability: 'radical'}), 
+            createPogByInput({name: "Dark Slide", strength: 3, defense: 15})],
     },
     8: {
-        pogs: [createPogByInput({name: "Spinning Nimrod", strength: 15, defense: 11}), 
-            createPogByInput({name: "Big Boot", strength: 11, defense: 15})],
+        pogs: [createPogByInput({name: "Nollie 360 Flip", strength: 15, defense: 0, ability: 'radical'}), 
+            createPogByInput({name: "Block", strength: 0, defense: 20})],
     },
     9: {
-        pogs: [createPogByInput({name: "Full Frontal Slam", strength: 17, defense: 10}), 
-            createPogByInput({name: "Underkick", strength: 10, defense: 17})],
+        pogs: [createPogByInput({name: "Full Frontal Slam", strength: 17, defense: 0, ability: 'radical'}), 
+            createPogByInput({name: "Impos Sible", strength: 5, defense: 23})],
     },
     10: {
-        pogs: [createPogByInput({name: "Neck Snap", strength: 20, defense: 10}), 
-            createPogByInput({name: "Backflip Kick", strength: 10, defense: 20})],
+        pogs: [createPogByInput({name: "Board Snap", strength: 20, defense: 0, ability: 'radical'}), 
+            createPogByInput({name: "Backflip Kick", strength: 0, defense: 25})],
     },
 };
 

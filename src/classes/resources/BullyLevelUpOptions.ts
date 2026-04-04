@@ -15,15 +15,15 @@ const BullyLevelUpOptions = {
             createPogByInput({name: "Pebble Chuck", strength: 3, defense: 5})],
     },
     4: {
-        pogs: [createPogByInput({name: "Spoonman", strength: 7, defense: 5}), 
-            createPogByInput({name: "Bold Shoulder", strength: 5, defense: 7})],
+        pogs: [createPogByInput({name: "Titty Twist", strength: 7, defense: 5}), 
+            createPogByInput({name: "Shoulder Slam", strength: 5, defense: 7})],
     },
     5: {
         pogs: [createPogByInput({name: "Crazy Slap", strength: 9, defense: 7}), 
             createPogByInput({name: "Slurpee", strength: 7, defense: 11})],
     },
     6: {
-        pogs: [createPogByInput({name: "Groovie Ghoulie", strength: 11, defense: 7}), 
+        pogs: [createPogByInput({name: "Kidney Punch", strength: 11, defense: 7}), 
             createPogByInput({name: "Bush Did", strength: 9, defense: 11})],
     }, 
     7: {
@@ -31,7 +31,7 @@ const BullyLevelUpOptions = {
             createPogByInput({name: "Tattoo", strength: 9, defense: 13})],
     },
     8: {
-        pogs: [createPogByInput({name: "Spinning Nimrod", strength: 15, defense: 11}), 
+        pogs: [createPogByInput({name: "Spinning Fist", strength: 15, defense: 11}), 
             createPogByInput({name: "Big Boot", strength: 11, defense: 15})],
     },
     9: {
@@ -40,7 +40,7 @@ const BullyLevelUpOptions = {
     },
     10: {
         pogs: [createPogByInput({name: "Neck Snap", strength: 20, defense: 10}), 
-            createPogByInput({name: "Backflip Kick", strength: 10, defense: 20})],
+            createPogByInput({name: "Spine Kick", strength: 10, defense: 20})],
     },
 };
 

@@ -1,5 +1,4 @@
 import Archetype from "../Archetype";
-import Pog from "../Pog";
 import Slammer from "../Slammer";
 import { startingPogs } from "../../resources/startingPogs";
 import Item from "../Item";
@@ -10,10 +9,7 @@ import SkaterLevelUpOptions from "../resources/SkaterLevelUpOptions";
 
 // TODO: Add level up options for other archetypes
 
-export function createPogByInput({name, strength, defense}: {name: string, strength: number, defense: number}){
-    const gold = Math.floor((8*strength + 7*defense));
-    return new Pog(name, strength, defense, gold, 1);
-}
+import { createPogByInput } from "../../resources/pilotDemo_001";
 
 export default class CharacterSelect {
 
@@ -21,7 +17,7 @@ export default class CharacterSelect {
         "Skater", 
         "Gnarly shredder.", 
         17, 
-        [...startingPogs, createPogByInput({name: "Kick Flip", strength: 3, defense: 3})],
+        [...startingPogs, createPogByInput({name: "Kick Flip", strength: 2, defense: 3, ability: 'radical'})],
         // I should return the in game copy as part of the demo slammer ability
         [new Slammer("Radical Style", "Flips up 3 Pogs.", 1, 10, demoSlammerAbility)],
         [new Item("Participation Trophy", "1 Participation Award", 100)],
