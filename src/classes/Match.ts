@@ -4,6 +4,8 @@ import Pog from './Pog';
 import shuffleArray from '../helperFunctions/shuffle';
 import type { Boon, Damageable } from './types';
 
+import type { Ability } from './Pog';
+
 export interface MatchSnapshot {
     baddieHitpoints: number;
     baddieDefense: number;
@@ -79,12 +81,14 @@ export default class Match {
         target: Damageable,
         strength: number,
         boons: { [key: string]: Boon } = {},
+        ability: Ability | undefined = undefined,
     ) {
         let remaining = strength;
         if (boons['beefer']) {
             remaining += boons['beefer'].value;
         }
-        if (target.getDefense() > 0) {
+        
+        if (ability !== 'radical' && target.getDefense() > 0) {
             let newDefense = target.getDefense() - remaining;
             if (newDefense < 0) {
                 remaining = -newDefense;
@@ -94,6 +98,7 @@ export default class Match {
             }
             target.setDefense(newDefense);
         }
+        
         target.setCurrentHitpoints(target.getCurrentHitpoints() - remaining);
     }
 
@@ -206,7 +211,7 @@ export default class Match {
 
         this.removePogFromPlay(pog);
         this.player.setDefense(this.player.getDefense() + pog.getDefense());
-        this.applyDamageToTarget(this.baddie, pog.getStrength(), this.player.getBoons());
+        this.applyDamageToTarget(this.baddie, pog.getStrength(), this.player.getBoons(), pog.getAbility());
         if (!this.hasPlayablePogs()) {
             this.setCanPlayAll(false);
         }
@@ -233,7 +238,8 @@ export default class Match {
         for (const pog of currentInPlayPogs) {
             if (this.pogOwners.get(pog.getId()) === this.baddie.getId()) {
                 this.baddie.setDefense(this.baddie.getDefense() + pog.getDefense());
-                this.applyDamageToTarget(this.player, pog.getStrength());
+                // hard coded that baddies don't get boons
+                this.applyDamageToTarget(this.player, pog.getStrength(), {}, pog.getAbility());
                 this.removePogFromPlay(pog);
             } else if (!this.flippedPogIds.includes(pog.getId())) {
                 this.removePogFromPlay(pog);

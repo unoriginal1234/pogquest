@@ -20,9 +20,12 @@ import beefTurtSlammer from "../slammerResources/beefTurtSlammer";
 
 import masterDemoSlammer from "../slammerResources/masterDemoSlammer";
 
-export function createPogByInput({name, strength, defense}: {name: string, strength: number, defense: number}){
-    const gold = Math.floor((8*strength + 7*defense));
-    return new Pog(name, strength, defense, gold, 1);
+import type { Ability } from "../classes/Pog";
+
+export function createPogByInput({name, strength, defense, ability}: {name: string, strength: number, defense: number, ability?: Ability}){
+    let gold = Math.floor((8*strength + 7*defense));
+    if (ability) { gold += 10; }
+    return new Pog(name, strength, defense, gold, 1, ability);
 }
 
 export function createRandomPog() {
@@ -55,6 +58,10 @@ export function createAttackPog(strength: number) {
 
 export function createDefensePog(defense: number) {
     return createPogByInput({name: "Block", strength: 0, defense});
+}
+
+export function createRadicalPog(index: number) {
+    return createPogByInput({name: "Rad", strength: index, defense: 0, ability: 'radical'});
 }
 
 function createDemoStory() {
@@ -148,6 +155,7 @@ function createDemoStory() {
                     [createPogByInput({name: "Wisp's Secret", strength: 7, defense: 2}), 
                         createRandomDefensePog(8), 
                         createRandomAttackPog(7), 
+                        createRadicalPog(3),
                         createRandomAttackPog(6), 
                         createRandomAttackPog(5)], 
             [new Slammer("Slammer Jazzmo", "Flips up 6 pogs.", 1, 60, masterDemoSlammer({flips: 6})),
@@ -165,9 +173,9 @@ function createDemoStory() {
                     createDefensePog(2),
                     createDefensePog(3),
                     createDefensePog(4),
-                    createAttackPog(3),
+                    createRadicalPog(3),
                     createDefensePog(4),
-                    createAttackPog(5),
+                    createRadicalPog(5),
                     createDefensePog(6),
                     createDefensePog(7),
                     createAttackPog(7),
@@ -183,7 +191,7 @@ function createDemoStory() {
                         createAttackPog(5),
                         createDefensePog(3),
                         createAttackPog(4),
-                        createAttackPog(5),
+                        createRadicalPog(5),
                         createDefensePog(4),
                         createDefensePog(5),
                         createAttackPog(6),
@@ -194,8 +202,8 @@ function createDemoStory() {
                             createDefensePog(2),
                             createAttackPog(3),
                             createDefensePog(5),
-                            createAttackPog(3),
-                            createAttackPog(5),
+                            createRadicalPog(3),
+                            createRadicalPog(5),
                             createDefensePog(4),
                             createAttackPog(4),
                             createDefensePog(5),
@@ -208,7 +216,7 @@ function createDemoStory() {
                 new Baddie("Beltway Fuzzlebottom", 
                     [createPogByInput({name: "Belt Whip", strength: 7, defense: 7}), 
                         createDefensePog(2),
-                        createRandomPogByInput(10),
+                        createRadicalPog(5),
                         createAttackPog(5),
                         createDefensePog(3),
                         createRandomDefensePog(10),
@@ -236,7 +244,7 @@ function createDemoStory() {
                 new Baddie("Troll Controller", 
                     [createAttackPog(1), 
                         createDefensePog(12), 
-                        createAttackPog(3), 
+                        createRadicalPog(3), 
                         createDefensePog(5), 
                         createAttackPog(6), 
                         createDefensePog(7), 
@@ -263,16 +271,16 @@ function createDemoStory() {
                 createDefensePog(3),
                 createAttackPog(4),
                 createDefensePog(5),
-                createAttackPog(6),
+                createRadicalPog(6),
                 createDefensePog(7),
                 createDefensePog(8),
                 createAttackPog(9),
                 createDefensePog(1),
-                createAttackPog(2),
+                createRadicalPog(2),
                 createDefensePog(3),
-                createAttackPog(4),
+                createRadicalPog(4),
                 createDefensePog(5),
-                createAttackPog(7),
+                createRadicalPog(7),
                 createDefensePog(8),
                 createAttackPog(9),], 100, 9, "Final Super Power"))),
 
@@ -345,7 +353,7 @@ function createDemoStory() {
                     new Baddie("Fizzlipper", [
                         createPogByInput({name: "Heart Spurt", strength: 20, defense: 0}), 
                         createPogByInput({name: "Mur Mur", strength: 0, defense: 20}), 
-                        createRandomAttackPog(18),
+                        createRadicalPog(10),
                         createRandomDefensePog(18),
                         createRandomAttackPog(18),
                         createRandomDefensePog(18),
@@ -385,7 +393,7 @@ function createDemoStory() {
                 createPogByInput({name: "Lay Off", strength: 25, defense: 10}),
                 createPogByInput({name: "401 Kill", strength: 40, defense: 5}),
                 createDefensePog(20),
-                createAttackPog(20),
+                createRadicalPog(20),
                 createDefensePog(20),
                 createAttackPog(20),
                 createDefensePog(20),

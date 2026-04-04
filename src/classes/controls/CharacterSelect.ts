@@ -6,6 +6,7 @@ import Item from "../Item";
 import demoSlammerAbility from "../../slammerResources/demoSlammerAbility";
 
 import BullyLevelUpOptions from "../resources/BullyLevelUpOptions";
+import SkaterLevelUpOptions from "../resources/SkaterLevelUpOptions";
 
 // TODO: Add level up options for other archetypes
 
@@ -24,7 +25,7 @@ export default class CharacterSelect {
         // I should return the in game copy as part of the demo slammer ability
         [new Slammer("Radical Style", "Flips up 3 Pogs.", 1, 10, demoSlammerAbility)],
         [new Item("Participation Trophy", "1 Participation Award", 100)],
-        BullyLevelUpOptions
+        SkaterLevelUpOptions
     );
 
     static getSkater(): Archetype {
