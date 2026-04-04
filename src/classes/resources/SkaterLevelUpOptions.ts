@@ -15,7 +15,7 @@ const BullyLevelUpOptions = {
             createPogByInput({name: "Grip Tape", strength: 1, defense: 6})],
     },
     4: {
-        pogs: [createPogByInput({name: "Spoonman", strength: 7, defense: 0, ability: 'radical'}), 
+        pogs: [createPogByInput({name: "Spoon Man", strength: 7, defense: 0, ability: 'radical'}), 
             createPogByInput({name: "Big Air", strength: 2, defense: 9})],
     },
     5: {
