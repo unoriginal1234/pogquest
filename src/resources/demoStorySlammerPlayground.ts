@@ -25,6 +25,10 @@ function createLuckyPog(index: number) {
     return new Pog(`Lucky`, index, index, Math.floor(index * 1.2), index, 'lucky');
 }
 
+function createRadicalPog(index: number) {
+    return new Pog(`Rad`, index, index, Math.floor(index * 1.2), index, 'radical');
+}
+
 function createDemoFloorDebuggerStory() {
     return new Story(
         "Demo Story",
@@ -35,6 +39,9 @@ function createDemoFloorDebuggerStory() {
                     [new Item("Participation Trophy", "1 Participation Award", 55)], 
                     [createButtPog(11),
                         createLuckyPog(1),
+                        createRadicalPog(1),
+                        createRadicalPog(1),
+                        createRadicalPog(1),
                         ...Array.from({ length: 10 }, (_, i) => createButtPog(i + 1)),
                     ], 
                     [new Slammer("5 Ball Slammer", "Flips up 5 pogs.", 1, 0, masterDemoSlammer({flips: 5, duration: 1})),
@@ -50,7 +57,7 @@ function createDemoFloorDebuggerStory() {
                 new Adventure("Lucky Adventure", "This is a description of the lucky adventure.", "lucky")), 
             new Chapter("First Chapter", ["First chapter description 1.", "First chapter description 2.", "First chapter description 3."], 
                 new Baddie("Baddie 1", 
-                    [], 
+                    [createRadicalPog(1), createRadicalPog(1), createRadicalPog(1)], 
                         100, 1)),
                         new Chapter("Second Chapter", ["Second chapter description 1.", "Second chapter description 2.", "Second chapter description 3."], 
                             new Shop("Shop 1", "This is a demo shop.", 
