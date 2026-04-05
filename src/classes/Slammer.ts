@@ -27,7 +27,7 @@ export default class Slammer {
     }
     
     _getBigPogStack() {
-        return new Array(999).fill(new Pog("Big Pog", 1, 1, 1, 1));
+        return new Array(999).fill(new Pog("Big Pog", 1));
     }
     
     getAmountFlippedBySlamAbility() {

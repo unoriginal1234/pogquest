@@ -6,7 +6,7 @@ import FinalChapter from "../classes/FinalChapter";
 import Shop from "../classes/Shop";
 import Adventure from "../classes/Adventure";
 import Item from "../classes/Item";
-import Pog from "../classes/Pog";
+import CombatPog from "../classes/pogClasses/CombatPog";
 import Slammer from "../classes/Slammer";
 import Floor from "../classes/Floor";
 import Story from "../classes/Story";
@@ -25,7 +25,7 @@ import type { Ability } from "../classes/Pog";
 export function createPogByInput({name, strength, defense, ability}: {name: string, strength: number, defense: number, ability?: Ability}){
     let gold = Math.floor((8*strength + 7*defense));
     if (ability) { gold += 10; }
-    return new Pog(name, strength, defense, gold, 1, ability);
+    return new CombatPog(name, strength, defense, gold, ability);
 }
 
 export function createRandomPog() {
