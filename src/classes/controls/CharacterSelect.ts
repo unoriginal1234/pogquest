@@ -9,7 +9,7 @@ import SkaterLevelUpOptions from "../resources/SkaterLevelUpOptions";
 
 // TODO: Add level up options for other archetypes
 
-import { createPogByInput } from "../../resources/pilotDemo_001";
+import { createCombatPogByInput } from "../../resources/pilotDemo_001";
 
 export default class CharacterSelect {
 
@@ -17,7 +17,7 @@ export default class CharacterSelect {
         "Skater", 
         "Gnarly shredder.", 
         17, 
-        [...startingPogs, createPogByInput({name: "Kick Flip", strength: 2, defense: 3, ability: 'radical'})],
+        [...startingPogs, createCombatPogByInput({name: "Kick Flip", strength: 2, defense: 3, ability: 'radical'})],
         // I should return the in game copy as part of the demo slammer ability
         [new Slammer("Radical Style", "Flips up 3 Pogs.", 1, 10, demoSlammerAbility)],
         [new Item("Participation Trophy", "1 Participation Award", 100)],
@@ -32,7 +32,7 @@ export default class CharacterSelect {
         "Fireworker", 
         "Master of pop and awe.", 
         15, 
-        [...startingPogs, createPogByInput({name: "Bottle Rocket", strength: 6, defense: 0})],
+        [...startingPogs, createCombatPogByInput({name: "Bottle Rocket", strength: 6, defense: 0})],
         [new Slammer("Blower Upper", "Flips up 3 Pogs.", 1, 10, demoSlammerAbility)],
         [new Item("Participation Trophy", "1 Participation Award", 100)],
         BullyLevelUpOptions
@@ -46,7 +46,7 @@ export default class CharacterSelect {
         "Bully", 
         "Steals lunch money.", 
         19, 
-        [...startingPogs, createPogByInput({name: "Tease", strength: 4, defense: 2})],
+        [...startingPogs, createCombatPogByInput({name: "Tease", strength: 4, defense: 2})],
         [new Slammer("Jab", "Flips up 3 pogs.", 1, 10, demoSlammerAbility)],
         [new Item("Participation Trophy", "1 Participation Award", 100)],
         BullyLevelUpOptions

@@ -17,12 +17,9 @@ import masterDemoSlammer from "../slammerResources/masterDemoSlammer";
 
 
 // ToDo: move this to the factory directory
-function createPog(n: number, name: string) {
-    return new PogClass(name, n, 1, n, 1);
-}
 
-import { createPogByInput } from "../resources/pilotDemo_001";
-const tradePog = createPogByInput({name: "Trade Pog", strength: Math.ceil(Math.random() * 10), defense: Math.ceil(Math.random() * 10)});
+import { createCombatPogByInput } from "../resources/pilotDemo_001";
+import { createRandomPog } from "../resources/pilotDemo_001";
 
 export default function AdventureComponent({ adventure, player, handleCanCloseChapter }: { adventure: AdventureClass, player: PlayerClass, handleCanCloseChapter: (canClose: boolean) => void }) {
 
@@ -36,7 +33,7 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
     const [isTradeCompleted, setIsTradeCompleted] = useState(false);
     const [isForgeCompleted, setIsForgeCompleted] = useState(false);
     const [isLuckyCompleted, setIsLuckyCompleted] = useState(false);
-
+    const tradePog = createRandomPog();
 
     useEffect(() => {
         if (template === 'campfire' && isComplete) {
@@ -72,7 +69,7 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
     function openChest() {
         setIsChestOpened(true);
         adventure.setIsComplete(true);
-        player.addPog(createPog(3, "Chest Pog"));
+        player.addPog(createCombatPogByInput({name: "Chest Pog", strength: 3, defense: 1}));
         setIsComplete(true);
     }
 
@@ -85,6 +82,7 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
     }
 
     function forge(slammer1: SlammerClass, slammer2: SlammerClass) {
+        
         const flips = slammer1.getAmountFlippedBySlamAbility() + slammer2.getAmountFlippedBySlamAbility();
 
         const boons1 = slammer1.getBoonsBySlamAbility() ?? {};
@@ -184,6 +182,7 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
     }
 
     if (template === 'trade' && !isComplete) {
+        
         return (
             <TradeComponent adventure={adventure} trade={(selectedPog: PogClass) => trade(selectedPog)} isTradeCompleted={isTradeCompleted} player={player} tradePog={tradePog} />
         );
