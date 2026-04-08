@@ -6,7 +6,7 @@ import FinalChapter from "../classes/FinalChapter";
 import Shop from "../classes/Shop";
 import Adventure from "../classes/Adventure";
 import Item from "../classes/Item";
-import Pog from "../classes/Pog";
+import CombatPog from "../classes/pogClasses/CombatPog";
 import Slammer from "../classes/Slammer";
 import Floor from "../classes/Floor";
 import Story from "../classes/Story";
@@ -17,16 +17,18 @@ import turtlerSlammerAbility from "../slammerResources/turtlerSlammerAbility";
 // import beefTurtSlammer from "../slammerResources/beefTurtSlammer";
 import masterDemoSlammer from "../slammerResources/masterDemoSlammer";
 
+import { createActionPogByInput } from "./pilotDemo_001";
+
 function createButtPog(index: number) {
-    return new Pog(`Butt Pog ${index}`, index, index, Math.floor(index * 1.2), index);
+    return new CombatPog(`Butt Pog ${index}`, index, index, Math.floor(index * 1.2));
 }
 
 function createLuckyPog(index: number) {
-    return new Pog(`Lucky`, index, index, Math.floor(index * 1.2), index, 'lucky');
+    return new CombatPog(`Lucky`, index, index, Math.floor(index * 1.2), 'lucky');
 }
 
 function createRadicalPog(index: number) {
-    return new Pog(`Rad`, index, index, Math.floor(index * 1.2), index, 'radical');
+    return new CombatPog(`Rad`, index, index, Math.floor(index * 1.2), 'radical');
 }
 
 function createDemoFloorDebuggerStory() {
@@ -37,7 +39,11 @@ function createDemoFloorDebuggerStory() {
             new Chapter("Second Chapter", ["Second chapter description 1.", "Second chapter description 2.", "Second chapter description 3."], 
                 new Shop("Shop 1", "This is a demo shop.", 
                     [new Item("Participation Trophy", "1 Participation Award", 55)], 
-                    [createButtPog(11),
+                    [createActionPogByInput({name: "Crunch", gold: 10, action: 'double_attack', description: 'Doubles the next attack.'}),
+                        createActionPogByInput({name: "Crunch", gold: 10, action: 'double_attack', description: 'Doubles the next attack.'}),
+                        createActionPogByInput({name: "Crunch", gold: 10, action: 'double_attack', description: 'Doubles the next attack.'}),
+                        createActionPogByInput({name: "Hide", gold: 10, action: 'double_defense', description: 'Doubles your current defense.'}),
+                        createActionPogByInput({name: "Hide", gold: 10, action: 'double_defense', description: 'Doubles your current defense.'}),
                         createLuckyPog(1),
                         createRadicalPog(1),
                         createRadicalPog(1),
@@ -63,9 +69,9 @@ function createDemoFloorDebuggerStory() {
                             new Shop("Shop 1", "This is a demo shop.", 
                                 [new Item("Participation Trophy", "1 Participation Award", 55)], 
                                 [createButtPog(11),
-                                    new Pog("Big Honker", 10, 10, 250, 1),
-                                    new Pog("Pog Mania", 15, 10, 300, 1),
-                                    new Pog("Biiig Defense", 2, 10, 20, 1),
+                                    new CombatPog("Big Honker", 10, 10, 250),
+                                    new CombatPog("Pog Mania", 15, 10, 300),
+                                    new CombatPog("Biiig Defense", 2, 10, 20),
                                 ], 
                                 [new Slammer("8 Ball Slammer", "Flips up 8 pogs.", 1, 75, demoSlammerAbilityByN(6)),
                                 new Slammer("Beef Strogonoff", "5 Beefer for 2 turns.", 1, 20, beeferSlammerAbilityByInput(5, 2), 'beefer'),

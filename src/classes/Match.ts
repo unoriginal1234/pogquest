@@ -1,6 +1,8 @@
 import Player from './Player';
 import Baddie from './Baddie';
 import Pog from './Pog';
+import CombatPog from './pogClasses/CombatPog';
+import ActionPog from './pogClasses/ActionPog';
 import shuffleArray from '../helperFunctions/shuffle';
 import type { Boon, Damageable } from './types';
 
@@ -77,6 +79,25 @@ export default class Match {
         };
     }
 
+    applyAction(pog: ActionPog) {
+        if (pog.getAction() === 'double_defense') {
+            this.player.setDefense(this.player.getDefense() * 2);
+        } else if (pog.getAction() === 'double_attack') {
+            const boons = this.player.getBoons();
+            if (boons['cruncher']) {
+                boons['cruncher'].value++;
+            } else {
+                boons['cruncher'] = {
+                    name: 'cruncher',
+                    description: 'Doubles the next attack.',
+                    value: 1,
+                    duration: 1,
+                };
+            }
+            this.player.setBoons({...boons});
+        }
+    }
+
     private applyDamageToTarget(
         target: Damageable,
         strength: number,
@@ -87,7 +108,14 @@ export default class Match {
         if (boons['beefer']) {
             remaining += boons['beefer'].value;
         }
-        
+        if (boons['cruncher']) {
+            remaining *= 2**boons['cruncher'].value;
+            boons['cruncher'].duration--;
+            if (boons['cruncher'].duration <= 0) {
+                delete boons['cruncher'];
+            }
+            this.player.setBoons({...boons});
+        }
         if (ability !== 'radical' && target.getDefense() > 0) {
             let newDefense = target.getDefense() - remaining;
             if (newDefense < 0) {
@@ -205,13 +233,18 @@ export default class Match {
         if (!pog) return;
 
         const boons = this.player.getBoons();
-        if (boons['turtler']) {
-            this.player.setDefense(this.player.getDefense() + boons['turtler'].value);
-        }
 
         this.removePogFromPlay(pog);
-        this.player.setDefense(this.player.getDefense() + pog.getDefense());
-        this.applyDamageToTarget(this.baddie, pog.getStrength(), this.player.getBoons(), pog.getAbility());
+        if (pog instanceof CombatPog) {
+            if (boons['turtler']) {
+                this.player.setDefense(this.player.getDefense() + boons['turtler'].value);
+            }
+            this.player.setDefense(this.player.getDefense() + pog.getDefense());
+            this.applyDamageToTarget(this.baddie, pog.getStrength(), this.player.getBoons(), pog.getAbility());
+            
+        } else if (pog instanceof ActionPog) {
+            this.applyAction(pog);
+        }
         if (!this.hasPlayablePogs()) {
             this.setCanPlayAll(false);
         }
@@ -237,10 +270,12 @@ export default class Match {
 
         for (const pog of currentInPlayPogs) {
             if (this.pogOwners.get(pog.getId()) === this.baddie.getId()) {
-                this.baddie.setDefense(this.baddie.getDefense() + pog.getDefense());
-                // hard coded that baddies don't get boons
-                this.applyDamageToTarget(this.player, pog.getStrength(), {}, pog.getAbility());
-                this.removePogFromPlay(pog);
+                if (pog instanceof CombatPog) {
+                    this.baddie.setDefense(this.baddie.getDefense() + pog.getDefense());
+                    // hard coded that baddies don't get boons
+                    this.applyDamageToTarget(this.player, pog.getStrength(), {}, pog.getAbility());
+                    this.removePogFromPlay(pog);
+                }
             } else if (!this.flippedPogIds.includes(pog.getId())) {
                 this.removePogFromPlay(pog);
             }
