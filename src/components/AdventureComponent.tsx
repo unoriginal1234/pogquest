@@ -15,9 +15,6 @@ import LuckyComponent from "./adventureTemplateComponents/LuckyComponent";
 
 import masterDemoSlammer from "../slammerResources/masterDemoSlammer";
 
-
-// ToDo: move this to the factory directory
-
 import { createCombatPogByInput } from "../resources/pilotDemo_001";
 import { createRandomPog } from "../resources/pilotDemo_001";
 
