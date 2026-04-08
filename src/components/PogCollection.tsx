@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import Player from '../classes/Player';
 import PogClass from '../classes/Pog';
+import CombatPog from '../classes/pogClasses/CombatPog';
 
 import Pog from './Pog';
 
@@ -43,8 +44,8 @@ function PogCollection(
 function PogDetails({pog}: {pog: PogClass | undefined}) {
 
     const name = pog?.name;
-    const strength = pog?.strength;
-    const defense = pog?.defense;
+    const strength = pog instanceof CombatPog ? pog.getStrength() : 0;
+    const defense = pog instanceof CombatPog ? pog.getDefense() : 0;
     
     if (!pog) {
         return null;
