@@ -80,7 +80,6 @@ export default class Match {
     }
 
     applyAction(pog: ActionPog) {
-
         if (pog.getAction() === 'double_defense') {
             this.player.setDefense(this.player.getDefense() * 2);
         } else if (pog.getAction() === 'double_attack') {
@@ -97,7 +96,6 @@ export default class Match {
             }
             this.player.setBoons({...boons});
         }
-
     }
 
     private applyDamageToTarget(
@@ -112,6 +110,11 @@ export default class Match {
         }
         if (boons['cruncher']) {
             remaining *= 2**boons['cruncher'].value;
+            boons['cruncher'].duration--;
+            if (boons['cruncher'].duration <= 0) {
+                delete boons['cruncher'];
+            }
+            this.player.setBoons({...boons});
         }
         if (ability !== 'radical' && target.getDefense() > 0) {
             let newDefense = target.getDefense() - remaining;
@@ -238,9 +241,12 @@ export default class Match {
         if (pog instanceof CombatPog) {
             this.player.setDefense(this.player.getDefense() + pog.getDefense());
             this.applyDamageToTarget(this.baddie, pog.getStrength(), this.player.getBoons(), pog.getAbility());
-            if (!this.hasPlayablePogs()) {
-                this.setCanPlayAll(false);
-            }
+            
+        } else if (pog instanceof ActionPog) {
+            this.applyAction(pog);
+        }
+        if (!this.hasPlayablePogs()) {
+            this.setCanPlayAll(false);
         }
     }
 

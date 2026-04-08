@@ -25,8 +25,8 @@ import masterDemoSlammer from "../slammerResources/masterDemoSlammer";
 
 import type { Ability } from "../classes/Pog";
 
-export function createActionPogByInput({name, action, description}: {name: string, action: Action, description: string  }){
-    return new ActionPog(name, 0, action, description);
+export function createActionPogByInput({name, gold, action, description}: {name: string, gold: number, action: Action, description: string  }){
+    return new ActionPog(name, gold, action, description);
 }
 
 export function createCombatPogByInput({name, strength, defense, ability}: {name: string, strength: number, defense: number, ability?: Ability}){
@@ -237,6 +237,7 @@ function createDemoStory() {
                     [new Item("Participation Trophy", "1 Participation Award", 55)], 
                     [   
                         createCombatPogByInput({name: "Griffy Egg", strength: 10, defense: 10}),
+                        createActionPogByInput({name: "Hide", gold: 30, action: 'double_defense', description: 'Doubles your current defense.'}),
                         createRandomDefensePog(8),
                         createRandomAttackPog(8),
                     ], 
@@ -323,6 +324,7 @@ function createDemoStory() {
                     [new Item("Participation Trophy", "1 Participation Award", 55)], 
                     [createCombatPogByInput({name: "Fire Re Birth", strength: 2, defense: 15}),
                         createRadicalPog(15),
+                        createActionPogByInput({name: "Crunch", gold: 50, action: 'double_attack', description: 'Doubles the next attack.'}),
                         createRandomDefensePog(15),
                         createRandomAttackPog(20),
                         createRandomDefensePog(20),
