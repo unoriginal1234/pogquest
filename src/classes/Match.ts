@@ -233,12 +233,12 @@ export default class Match {
         if (!pog) return;
 
         const boons = this.player.getBoons();
-        if (boons['turtler']) {
-            this.player.setDefense(this.player.getDefense() + boons['turtler'].value);
-        }
 
         this.removePogFromPlay(pog);
         if (pog instanceof CombatPog) {
+            if (boons['turtler']) {
+                this.player.setDefense(this.player.getDefense() + boons['turtler'].value);
+            }
             this.player.setDefense(this.player.getDefense() + pog.getDefense());
             this.applyDamageToTarget(this.baddie, pog.getStrength(), this.player.getBoons(), pog.getAbility());
             
