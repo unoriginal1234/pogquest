@@ -18,9 +18,16 @@ import beeferSlammerAbilityByInput from "../slammerResources/beeferSlammerAbilit
 import turtlerSlammerAbility from "../slammerResources/turtlerSlammerAbility";
 import beefTurtSlammer from "../slammerResources/beefTurtSlammer";
 
+import ActionPog from "../classes/pogClasses/ActionPog";
+import type { Action } from "../classes/pogClasses/ActionPog";
+
 import masterDemoSlammer from "../slammerResources/masterDemoSlammer";
 
 import type { Ability } from "../classes/Pog";
+
+export function createActionPogByInput({name, action, description}: {name: string, action: Action, description: string  }){
+    return new ActionPog(name, 0, action, description);
+}
 
 export function createCombatPogByInput({name, strength, defense, ability}: {name: string, strength: number, defense: number, ability?: Ability}){
     let gold = Math.floor((8*strength + 7*defense));

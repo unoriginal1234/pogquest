@@ -266,6 +266,27 @@ main {
     inset 0 0 15px rgba(255, 102, 0, 0.3);
 }
 
+.pog-component.action-pog::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--pog-cyan);
+  box-shadow: 0 0 6px var(--pog-cyan), inset 0 0 6px var(--pog-cyan);
+  pointer-events: none;
+}
+
+.pog-action {
+  color: var(--pog-yellow);
+  text-shadow: 0 0 6px var(--pog-yellow);
+  font-family: 'VT323', monospace;
+  font-size: 22px;
+  font-weight: bold;
+}
+
 /* Flipped pog - flannel pattern back */
 .flipped-pog-component {
   width: 100px;

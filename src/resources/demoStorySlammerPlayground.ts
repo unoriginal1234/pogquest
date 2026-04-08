@@ -17,6 +17,8 @@ import turtlerSlammerAbility from "../slammerResources/turtlerSlammerAbility";
 // import beefTurtSlammer from "../slammerResources/beefTurtSlammer";
 import masterDemoSlammer from "../slammerResources/masterDemoSlammer";
 
+import { createActionPogByInput } from "./pilotDemo_001";
+
 function createButtPog(index: number) {
     return new CombatPog(`Butt Pog ${index}`, index, index, Math.floor(index * 1.2));
 }
@@ -37,7 +39,8 @@ function createDemoFloorDebuggerStory() {
             new Chapter("Second Chapter", ["Second chapter description 1.", "Second chapter description 2.", "Second chapter description 3."], 
                 new Shop("Shop 1", "This is a demo shop.", 
                     [new Item("Participation Trophy", "1 Participation Award", 55)], 
-                    [createButtPog(11),
+                    [createActionPogByInput({name: "Crunch", action: 'double_attack', description: 'Doubles the next attack.'}),
+                        createActionPogByInput({name: "Hide", action: 'double_defense', description: 'Doubles your current defense.'}),
                         createLuckyPog(1),
                         createRadicalPog(1),
                         createRadicalPog(1),

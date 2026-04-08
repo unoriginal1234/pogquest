@@ -4,10 +4,12 @@ export type Action = "double_defense" | "double_attack"
 
 export default class ActionPog extends Pog {
     action: Action;
+    description: string;
 
-    constructor(name: string, gold: number, action: Action) {
+    constructor(name: string, gold: number, action: Action, description: string) {
         super(name, gold);
         this.action = action;
+        this.description = description;
     }
 
     setAction(action: Action) {
@@ -18,7 +20,11 @@ export default class ActionPog extends Pog {
         return this.action;
     }
 
+    getDescription(): string {
+        return this.description;
+    }
+
     clone(): ActionPog {
-        return new ActionPog(this.name, this.gold, this.action);
+        return new ActionPog(this.name, this.gold, this.action, this.description);
     }
 }

@@ -26,11 +26,11 @@ const Pog: React.FC<PogProps> = ({ pog, isSelected, isBaddiePog, onClick, isFlip
       // TO DO: boons should add to the pogs ability and be a different color
 
     tooltipText = `⚔️: ${pog.getStrength()}
-  🛡️: ${pog.getDefense()}
-  🪙: ${pog.getGold()}`;
+🛡️: ${pog.getDefense()}
+🪙: ${pog.getGold()}`;
   } else if (pog instanceof ActionPog) {
-    tooltipText = `💥: ${pog.getAction()}
-    🪙: ${pog.getGold()}`;
+    tooltipText = `${pog.getDescription()}
+🪙: ${pog.getGold()}`;
   }
 
   if (isFlippedUp) {
@@ -60,15 +60,18 @@ const Pog: React.FC<PogProps> = ({ pog, isSelected, isBaddiePog, onClick, isFlip
     return (
       <PogToolTip tooltipText={tooltipText}>
         <div 
-          className={`pog-component ${isSelected ? 'selected' : ''} ${isBaddiePog ? 'baddie-pog' : ''} `} 
+          className={`pog-component action-pog ${isSelected ? 'selected' : ''} ${isBaddiePog ? 'baddie-pog' : ''} `} 
           onClick={onClick}
         >
-          <div className="pog-stat pog-action">{pog.getAction() || ''}</div>
           <div className="pog-name">{pog.getName()}</div>
           <div className="pog-ability">{
               pog.getAbility() === 'lucky' ? '🍀' : 
               ''}</div>
-          <div className="pog-gold">{pog.getGold() || ''}</div>
+          <div className="pog-action">{
+            pog.getAction() === 'double_attack' ? '💥' : 
+            pog.getAction() === 'double_defense' ? '🛡️' : 
+            ''
+            }</div>
         </div>
       </PogToolTip>
     );
