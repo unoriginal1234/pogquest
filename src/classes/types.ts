@@ -1,5 +1,5 @@
 export type Boon = {
-    name: 'beefer' | 'turtler';
+    name: 'beefer' | 'turtler' | 'cruncher';
     description: string;
     value: number;
     duration: number;
