@@ -70,6 +70,8 @@ const Pog: React.FC<PogProps> = ({ pog, isSelected, isBaddiePog, onClick, isFlip
           <div className="pog-action">{
             pog.getAction() === 'double_attack' ? '💥' : 
             pog.getAction() === 'double_defense' ? '🛡️' : 
+            pog.getAction() === 'pizza_5' ? '🍕5' :
+            pog.getAction() === 'pizza_10' ? '🍕10' :
             ''
             }</div>
         </div>

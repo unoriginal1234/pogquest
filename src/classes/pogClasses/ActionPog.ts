@@ -1,6 +1,6 @@
 import Pog from "../Pog";
 
-export type Action = "double_defense" | "double_attack"
+export type Action = "double_defense" | "double_attack" | "pizza_5" | "pizza_10"
 
 export default class ActionPog extends Pog {
     action: Action;

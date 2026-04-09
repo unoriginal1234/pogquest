@@ -95,6 +95,10 @@ export default class Match {
                 };
             }
             this.player.setBoons({...boons});
+        } else if (pog.getAction() === 'pizza_5') {
+            this.player.addHealth(5);
+        } else if (pog.getAction() === 'pizza_10') {
+            this.player.addHealth(10);
         }
     }
 

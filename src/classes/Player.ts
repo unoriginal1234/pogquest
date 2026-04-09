@@ -259,4 +259,11 @@ export default class Player {
     this.level = this._getLevelFromExperiencePoints(this.getExperiencePoints());
   }
 
+  addHealth(health: number) {
+    this.currentHitpoints += health;
+    if (this.currentHitpoints > this.hitpoints) {
+      this.currentHitpoints = this.hitpoints;
+    }
+  }
+
 }
