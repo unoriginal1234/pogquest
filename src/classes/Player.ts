@@ -5,7 +5,7 @@ import Item from './Item';
 import Archetype from './Archetype';
 import Slammer from './Slammer';
 
-import type { Boon } from './types'
+import type { Boon, Nerf } from './types'
 
 
 
@@ -20,7 +20,7 @@ export default class Player {
   level: number;
   _id: string;
   boons: { [key: string]: Boon };
-  // nerfs: Nerf[];
+  nerfs: { [key: string]: Nerf };
   defense: number;
   gold: number;
   experiencePoints: number;
@@ -43,6 +43,7 @@ export default class Player {
     this.equippedSlammer = this.slammers[0];
     this.leveUpPerksReceived = 1;
     this.boons = {};
+    this.nerfs = {};
   } 
 
 
