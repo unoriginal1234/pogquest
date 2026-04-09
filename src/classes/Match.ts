@@ -80,25 +80,30 @@ export default class Match {
     }
 
     applyAction(pog: ActionPog) {
-        if (pog.getAction() === 'double_defense') {
-            this.player.setDefense(this.player.getDefense() * 2);
-        } else if (pog.getAction() === 'double_attack') {
-            const boons = this.player.getBoons();
-            if (boons['cruncher']) {
-                boons['cruncher'].value++;
-            } else {
-                boons['cruncher'] = {
-                    name: 'cruncher',
-                    description: 'Doubles the next attack.',
-                    value: 1,
-                    duration: 1,
-                };
-            }
-            this.player.setBoons({...boons});
-        } else if (pog.getAction() === 'pizza_5') {
-            this.player.addHealth(5);
-        } else if (pog.getAction() === 'pizza_10') {
-            this.player.addHealth(10);
+        switch (pog.getAction()) {
+            case 'double_defense':
+                this.player.setDefense(this.player.getDefense() * 2);
+                break;
+            case 'double_attack':
+                this.player.setDefense(this.player.getDefense() * 2);
+                break;
+            case 'pizza_5':
+                this.player.addHealth(5);
+                break;
+            case 'pizza_10':
+                this.player.addHealth(10);
+                break;
+        }
+    }
+
+    applyBaddieAction(pog: ActionPog) {
+        switch (pog.getAction()) {
+            case 'pizza_5':
+                this.baddie.addHealth(5);
+                break;
+            case 'pizza_10':
+                this.baddie.addHealth(10);
+                break;
         }
     }
 
@@ -273,7 +278,10 @@ export default class Match {
         const currentInPlayPogs = this.inPlayPogs.slice();
 
         for (const pog of currentInPlayPogs) {
-            if (this.pogOwners.get(pog.getId()) === this.baddie.getId()) {
+            if (pog instanceof ActionPog) {
+                this.applyBaddieAction(pog);
+                this.removePogFromPlay(pog);
+            } else if (this.pogOwners.get(pog.getId()) === this.baddie.getId()) {
                 if (pog instanceof CombatPog) {
                     this.baddie.setDefense(this.baddie.getDefense() + pog.getDefense());
                     // hard coded that baddies don't get boons
@@ -281,6 +289,7 @@ export default class Match {
                     this.removePogFromPlay(pog);
                 }
             } else if (!this.flippedPogIds.includes(pog.getId())) {
+                // I have three remove pog from plays and can DRY this
                 this.removePogFromPlay(pog);
             }
         }

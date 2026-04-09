@@ -65,7 +65,7 @@ function createDemoFloorDebuggerStory() {
                 new Adventure("Lucky Adventure", "This is a description of the lucky adventure.", "lucky")), 
             new Chapter("First Chapter", ["First chapter description 1.", "First chapter description 2.", "First chapter description 3."], 
                 new Baddie("Baddie 1", 
-                    [createRadicalPog(1), createRadicalPog(1), createRadicalPog(1)], 
+                    [createRadicalPog(1), createRadicalPog(1), createRadicalPog(1), createActionPogByInput({name: "Nom Nom", gold: 30, action: 'pizza_10', description: 'Adds 10 health.'})], 
                         100, 1)),
                         new Chapter("Second Chapter", ["Second chapter description 1.", "Second chapter description 2.", "Second chapter description 3."], 
                             new Shop("Shop 1", "This is a demo shop.", 
