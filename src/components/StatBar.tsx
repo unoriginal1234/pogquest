@@ -1,4 +1,4 @@
-const SCALE_MAX = 300;
+const SCALE_MAX = 250;
 
 interface StatBarProps {
     current: number;
