@@ -1836,3 +1836,210 @@ main {
   color: var(--pog-electric-blue);
   text-shadow: 0 0 6px var(--pog-electric-blue);
 }
+
+/* ═══════════════════════════════════════════
+   Tutorial Page
+   ═══════════════════════════════════════════ */
+
+.tutorial-container {
+  padding: 2rem 1rem;
+  max-width: 740px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tutorial-container > .subtitle {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.tutorial-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tutorial-section h2 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.tutorial-section p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.tutorial-section ul,
+.tutorial-section ol {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.tutorial-section li {
+  margin-bottom: 0.4rem;
+  line-height: 1.5;
+}
+
+.tutorial-divider {
+  height: 2px;
+  margin: 1.5rem 0;
+  background: linear-gradient(90deg, transparent, var(--pog-electric-blue), transparent);
+  box-shadow: 0 0 8px var(--pog-electric-blue);
+}
+
+.tutorial-card {
+  padding: var(--pog-panel-inset);
+  border: 2px solid var(--pog-electric-blue);
+  background: rgba(0, 255, 255, 0.04);
+  box-shadow:
+    0 0 8px rgba(0, 255, 255, 0.15),
+    inset 0 0 8px rgba(0, 255, 255, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.tutorial-card h3 {
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+.tutorial-card p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.tutorial-card--victory {
+  border-color: var(--pog-lime-green);
+  background: rgba(57, 255, 20, 0.05);
+  box-shadow:
+    0 0 8px rgba(57, 255, 20, 0.2),
+    inset 0 0 8px rgba(57, 255, 20, 0.05);
+}
+
+.tutorial-card--defeat {
+  border-color: var(--pog-red);
+  background: rgba(255, 0, 0, 0.05);
+  box-shadow:
+    0 0 8px rgba(255, 0, 0, 0.2),
+    inset 0 0 8px rgba(255, 0, 0, 0.05);
+}
+
+.tutorial-archetype-row,
+.tutorial-outcome-row,
+.tutorial-abilities-row,
+.tutorial-boons-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.tutorial-adventures-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.tutorial-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-left: 1.5rem;
+}
+
+.tutorial-optional {
+  font-size: 0.85em;
+  color: var(--pog-gray);
+}
+
+.tutorial-pog-types {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.tutorial-pog-type {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tutorial-pog-type h3 {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.tutorial-pog-example {
+  display: flex;
+  justify-content: center;
+}
+
+.tutorial-pog-example .pog-component {
+  cursor: default;
+}
+
+.tutorial-pog-example .pog-component:hover {
+  transform: none;
+}
+
+.tutorial-stat-attack {
+  color: var(--pog-neon-pink);
+  text-shadow: 0 0 6px var(--pog-neon-pink);
+}
+
+.tutorial-stat-defense {
+  color: var(--pog-electric-blue);
+  text-shadow: 0 0 6px var(--pog-electric-blue);
+}
+
+.tutorial-slammer-example {
+  display: flex;
+  justify-content: center;
+}
+
+.tutorial-slammer-example .slammer-component {
+  cursor: default;
+}
+
+.tutorial-slammer-example .slammer-component:hover {
+  transform: none;
+}
+
+.tutorial-boon-icon {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0;
+}
+
+.tutorial-gold {
+  color: var(--pog-yellow);
+  text-shadow: 0 0 6px var(--pog-yellow);
+}
+
+.tutorial-footer {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .tutorial-pog-types {
+    flex-direction: column;
+  }
+
+  .tutorial-archetype-row,
+  .tutorial-outcome-row,
+  .tutorial-abilities-row,
+  .tutorial-boons-row {
+    flex-direction: column;
+  }
+
+  .tutorial-adventures-grid {
+    grid-template-columns: 1fr;
+  }
+}
