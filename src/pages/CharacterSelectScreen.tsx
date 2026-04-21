@@ -72,11 +72,11 @@ function CharacterSelectScreen() {
                   setPlayer(new Player(nameGenerator(), CharacterSelect.getSkater()));
                   }}>Skater</button>
 
-                <button onClick={() => {
+                <button disabled onClick={() => {
                   
                   setPlayer(new Player(nameGenerator(), CharacterSelect.getFireworker()));
                   setSelectedButton(CharacterSelect.getFireworker().type);
-                  }}>Fireworker</button>
+                  }}>🔒 Fireworker</button>
               </div>
             </section>   
 

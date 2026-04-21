@@ -25,6 +25,7 @@ function MainMenuScreen() {
                 }}>Continue</button></Link> : 
                 <button disabled>Continue</button>}
                 <Link to="/settings"><button>Settings</button></Link>
+                <Link to="/tutorial"><button>Tutorial</button></Link>
             </div>
             
         </div>

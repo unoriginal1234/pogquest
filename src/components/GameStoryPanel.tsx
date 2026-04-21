@@ -247,7 +247,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
                 showButton={chapterDescriptionIndex < currentChapter.getDescription().length - 1}
             />
 
-            {chapterDescriptionIndex === 0 ? <ChapterNavigator /> : null}
+            {chapterDescriptionIndex === 0 ? ChapterNavigator() : null}
 
             {/* I like this but might want to not check for development purposes */}
             {isLastChapterDescription ? <>
@@ -265,7 +265,9 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
             
             {isAdmin ? 
             <button onClick={handleCompleteStory}>DEV: End Game</button> : null}
-            <CompletionTypeComponent /> </> : null}
+            {/* Called as a function, not <CompletionTypeComponent />, so React
+               preserves child state across parent re-renders (e.g. opening a menu). */}
+            {CompletionTypeComponent()} </> : null}
         </section>
     );
 

@@ -6,7 +6,7 @@ import FinalChapter from "../classes/FinalChapter";
 import Shop from "../classes/Shop";
 import Adventure from "../classes/Adventure";
 import Item from "../classes/Item";
-import Pog from "../classes/Pog";
+import CombatPog from "../classes/pogClasses/CombatPog";
 import Slammer from "../classes/Slammer";
 import Floor from "../classes/Floor";
 import Story from "../classes/Story";
@@ -18,7 +18,7 @@ import Story from "../classes/Story";
 import masterDemoSlammer from "../slammerResources/masterDemoSlammer";
 
 function createButtPog(index: number) {
-    return new Pog(`Butt Pog ${index}`, index, index, Math.floor(index * 1.2), index);
+    return new CombatPog(`Butt Pog ${index}`, index, index, Math.floor(index * 1.2));
 }
 
 function createDemoFloorDebuggerStory() {

@@ -266,6 +266,27 @@ main {
     inset 0 0 15px rgba(255, 102, 0, 0.3);
 }
 
+.pog-component.action-pog::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--pog-cyan);
+  box-shadow: 0 0 6px var(--pog-cyan), inset 0 0 6px var(--pog-cyan);
+  pointer-events: none;
+}
+
+.pog-action {
+  color: var(--pog-yellow);
+  text-shadow: 0 0 6px var(--pog-yellow);
+  font-family: 'VT323', monospace;
+  font-size: 22px;
+  font-weight: bold;
+}
+
 /* Flipped pog - flannel pattern back */
 .flipped-pog-component {
   width: 100px;
@@ -353,6 +374,96 @@ main {
   min-height: 80vh;
   gap: 16px;
   width: 100%;
+}
+
+.combatant-panel-row {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+  width: 100%;
+}
+
+.combatant-panel {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ═══════════════════════════════════════════
+   Boon / Nerf Box
+   ═══════════════════════════════════════════ */
+
+.boon-nerf-box {
+  display: flex;
+  gap: 0;
+  min-width: 225px;
+  border: 2px solid var(--pog-electric-blue);
+  background: rgba(0, 255, 255, 0.03);
+  box-shadow:
+    0 0 10px rgba(0, 255, 255, 0.2),
+    inset 0 0 10px rgba(0, 255, 255, 0.05);
+  font-size: 0.9em;
+}
+
+.boon-nerf-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.5rem;
+}
+
+.boon-nerf-divider {
+  width: 2px;
+  background: var(--pog-electric-blue);
+  opacity: 0.4;
+}
+
+.boon-nerf-header {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.25rem;
+}
+
+.boon-header {
+  color: var(--pog-neon-pink);
+  text-shadow: 0 0 6px var(--pog-neon-pink);
+}
+
+.nerf-header {
+  color: var(--pog-orange);
+  text-shadow: 0 0 6px var(--pog-orange);
+}
+
+.boon-nerf-none {
+  font-family: 'VT323', monospace;
+  font-size: 0.9rem;
+  color: var(--pog-gray);
+  opacity: 0.5;
+}
+
+.boon-nerf-entry {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  font-family: 'VT323', monospace;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.boon-nerf-name {
+  color: var(--pog-yellow);
+}
+
+.boon-nerf-value {
+  color: var(--pog-lime-green);
+  font-weight: bold;
+}
+
+.boon-nerf-duration {
+  font-size: 0.8rem;
 }
 
 .match-stack {
@@ -1634,4 +1745,301 @@ main {
 .forge-button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
+}
+
+/* ═══════════════════════════════════════════
+   Stat Bar – Elden Ring-style HP / Defense
+   ═══════════════════════════════════════════ */
+
+.stat-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.stat-bar-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--pog-yellow);
+  text-shadow: 0 0 4px var(--pog-yellow);
+  min-width: 3rem;
+  flex-shrink: 0;
+}
+
+.stat-bar-value {
+  font-family: 'VT323', monospace;
+  font-size: 1.2rem;
+  min-width: 2rem;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.stat-bar-ruler {
+  flex: 1;
+  height: 16px;
+  position: relative;
+  background: transparent;
+}
+
+.stat-bar-track {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid;
+  background: rgba(0, 0, 0, 0.6);
+  transition: width 0.3s ease-out;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: width 0.3s ease-out;
+}
+
+/* HP variant */
+.stat-bar--hp {
+  border-color: rgba(255, 0, 0, 0.6);
+  box-shadow:
+    0 0 6px rgba(255, 0, 0, 0.3),
+    inset 0 0 6px rgba(255, 0, 0, 0.1);
+}
+
+.stat-bar--hp .stat-bar-fill {
+  background: linear-gradient(180deg, #e33, #a00);
+  box-shadow: inset 0 1px 0 rgba(255, 120, 120, 0.4);
+}
+
+.stat-bar--hp + .stat-bar-value {
+  color: var(--pog-red);
+  text-shadow: 0 0 6px var(--pog-red);
+}
+
+/* Defense variant */
+.stat-bar--defense {
+  border-color: rgba(0, 255, 255, 0.5);
+  box-shadow:
+    0 0 6px rgba(0, 255, 255, 0.25),
+    inset 0 0 6px rgba(0, 255, 255, 0.08);
+}
+
+.stat-bar--defense .stat-bar-fill {
+  background: linear-gradient(180deg, var(--pog-cyan), #007a99);
+  box-shadow: inset 0 1px 0 rgba(0, 255, 255, 0.4);
+}
+
+.stat-bar--defense + .stat-bar-value {
+  color: var(--pog-electric-blue);
+  text-shadow: 0 0 6px var(--pog-electric-blue);
+}
+
+/* ═══════════════════════════════════════════
+   Tutorial Page
+   ═══════════════════════════════════════════ */
+
+.tutorial-container {
+  padding: 2rem 1rem;
+  max-width: 740px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tutorial-container > .subtitle {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.tutorial-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tutorial-section h2 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.tutorial-section p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.tutorial-section ul,
+.tutorial-section ol {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.tutorial-section li {
+  margin-bottom: 0.4rem;
+  line-height: 1.5;
+}
+
+.tutorial-divider {
+  height: 2px;
+  margin: 1.5rem 0;
+  background: linear-gradient(90deg, transparent, var(--pog-electric-blue), transparent);
+  box-shadow: 0 0 8px var(--pog-electric-blue);
+}
+
+.tutorial-card {
+  padding: var(--pog-panel-inset);
+  border: 2px solid var(--pog-electric-blue);
+  background: rgba(0, 255, 255, 0.04);
+  box-shadow:
+    0 0 8px rgba(0, 255, 255, 0.15),
+    inset 0 0 8px rgba(0, 255, 255, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.tutorial-card h3 {
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+.tutorial-card p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.tutorial-card--victory {
+  border-color: var(--pog-lime-green);
+  background: rgba(57, 255, 20, 0.05);
+  box-shadow:
+    0 0 8px rgba(57, 255, 20, 0.2),
+    inset 0 0 8px rgba(57, 255, 20, 0.05);
+}
+
+.tutorial-card--defeat {
+  border-color: var(--pog-red);
+  background: rgba(255, 0, 0, 0.05);
+  box-shadow:
+    0 0 8px rgba(255, 0, 0, 0.2),
+    inset 0 0 8px rgba(255, 0, 0, 0.05);
+}
+
+.tutorial-archetype-row,
+.tutorial-outcome-row,
+.tutorial-abilities-row,
+.tutorial-boons-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.tutorial-adventures-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.tutorial-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-left: 1.5rem;
+}
+
+.tutorial-optional {
+  font-size: 0.85em;
+  color: var(--pog-gray);
+}
+
+.tutorial-pog-types {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.tutorial-pog-type {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tutorial-pog-type h3 {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.tutorial-pog-example {
+  display: flex;
+  justify-content: center;
+}
+
+.tutorial-pog-example .pog-component {
+  cursor: default;
+}
+
+.tutorial-pog-example .pog-component:hover {
+  transform: none;
+}
+
+.tutorial-stat-attack {
+  color: var(--pog-neon-pink);
+  text-shadow: 0 0 6px var(--pog-neon-pink);
+}
+
+.tutorial-stat-defense {
+  color: var(--pog-electric-blue);
+  text-shadow: 0 0 6px var(--pog-electric-blue);
+}
+
+.tutorial-slammer-example {
+  display: flex;
+  justify-content: center;
+}
+
+.tutorial-slammer-example .slammer-component {
+  cursor: default;
+}
+
+.tutorial-slammer-example .slammer-component:hover {
+  transform: none;
+}
+
+.tutorial-boon-icon {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0;
+}
+
+.tutorial-gold {
+  color: var(--pog-yellow);
+  text-shadow: 0 0 6px var(--pog-yellow);
+}
+
+.tutorial-footer {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .tutorial-pog-types {
+    flex-direction: column;
+  }
+
+  .tutorial-archetype-row,
+  .tutorial-outcome-row,
+  .tutorial-abilities-row,
+  .tutorial-boons-row {
+    flex-direction: column;
+  }
+
+  .tutorial-adventures-grid {
+    grid-template-columns: 1fr;
+  }
 }

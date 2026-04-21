@@ -58,12 +58,6 @@ export default function MatchComponent({
         }
     }, [isGameOver, setIsGameOver]);
 
-    useEffect(() => {
-        if (isVictoryScreenOpen && match.getStatus() !== 'completed') {
-            match.awardVictory();
-        }
-    }, [isVictoryScreenOpen, match]);
-
     function handlePlayClick(pog: PogClass) {
         playPog(pog.getId());
     }
@@ -73,6 +67,9 @@ export default function MatchComponent({
     }
 
     if (isVictoryScreenOpen) {
+        if (match.getStatus() !== 'completed') {
+            match.awardVictory();
+        }
         return (
             <VictoryScreen 
                 baddieGold={baddie.getGold()} 

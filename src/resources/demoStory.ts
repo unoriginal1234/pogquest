@@ -6,7 +6,7 @@ import FinalChapter from "../classes/FinalChapter";
 import Shop from "../classes/Shop";
 import Adventure from "../classes/Adventure";
 import Item from "../classes/Item";
-import Pog from "../classes/Pog";
+import CombatPog from "../classes/pogClasses/CombatPog";
 import Slammer from "../classes/Slammer";
 import Floor from "../classes/Floor";
 import Story from "../classes/Story";
@@ -19,7 +19,7 @@ import turtlerSlammerAbility from "../slammerResources/turtlerSlammerAbility";
 import beefTurtSlammer from "../slammerResources/beefTurtSlammer";
 
 function createButtPog(index: number) {
-    return new Pog(`Butt Pog ${index}`, index, index, Math.floor(index * 1.2), index);
+    return new CombatPog(`Butt Pog ${index}`, index, index, Math.floor(index * 1.2));
 }
 
 function createDemoStory() {
@@ -39,9 +39,9 @@ function createDemoStory() {
                 new Shop("Shop 1", "This is a demo shop.", 
                     [new Item("Participation Trophy", "1 Participation Award", 25), 
                     new Item("Participation Trophy", "1 Participation Award", 25)], 
-                    [new Pog("Big Pog City", 10, 1, 50, 1),
-                        new Pog("Big Honker", 10, 10, 250, 1),
-                    new Pog("Biiig Defense", 2, 10, 20, 1),], 
+                    [new CombatPog("Big Pog City", 10, 1, 50),
+                        new CombatPog("Big Honker", 10, 10, 250),
+                    new CombatPog("Biiig Defense", 2, 10, 20),], 
                     [new Slammer("Hot Pocket", "Flips up 4 pogs.", 1, 10, demoSlammerAbility2),
                         new Slammer("Premier Beefer", "1 Beefer for 1 turn.", 1, 20, beeferSlammerAbilityByInput(1, 1), 'beefer'),
                         new Slammer("Shell Shield", "1 Turtler for 1 turn.", 1, 20, turtlerSlammerAbility(1, 1), 'turtler')
@@ -63,7 +63,7 @@ function createDemoStory() {
             new Chapter("A chill gnome", ["\"You like pogs?\"", "\"I got pogs.\"", "\"Don't touch my hat\"."], 
                 new Shop("Gnome shop", "\"I like the big ones.\"", 
                     [new Item("Participation Trophy", "1 Participation Award", 35)], 
-                    [createButtPog(1), createButtPog(2), new Pog("The funky chicken", 10, 10, 250, 1), new Pog("Banana Sam", 7, 7, 25, 1)], 
+                    [createButtPog(1), createButtPog(2), new CombatPog("The funky chicken", 10, 10, 250), new CombatPog("Banana Sam", 7, 7, 25)], 
                     [new Slammer("Ripper", "Flips up 5 pogs.", 1, 25, demoSlammerAbilityByN(3)),
                     new Slammer("Beefaroni", "3 Beefer for 2 turns.", 1, 20, beeferSlammerAbilityByInput(3, 2), 'beefer'),
                     new Slammer("Shellaplooza", "5 Turtler for 2 turns.", 1, 20, turtlerSlammerAbility(1, 2), 'turtler')
@@ -74,17 +74,17 @@ function createDemoStory() {
                 new Baddie("Skeleton Accountant", 
                     [createButtPog(1), 
                         createButtPog(2), 
-                        new Pog("Big Honker", 10, 10, 250, 1), 
-                        new Pog("Biiig Defense", 2, 10, 20, 1), 
-                        new Pog("Big Honker", 10, 10, 250, 1), 
+                        new CombatPog("Big Honker", 10, 10, 250), 
+                        new CombatPog("Biiig Defense", 2, 10, 20), 
+                        new CombatPog("Big Honker", 10, 10, 250), 
                         createButtPog(8)], 
                         100, 3)),
             new Chapter("The Broom Closet", ["A glimmer of light bounces off the mop water.", "A will-o-the-wisp dances.", "\"Like what I got?\""], 
                 new Shop("Will-o-the-Wisp Shop", "I got bills to pay.", 
                     [new Item("Participation Trophy", "1 Participation Award", 45)], 
             [createButtPog(9),
-                new Pog("Tale of Jonny Pizza", 5, 3, 20, 1),
-                new Pog("Welcome to Space", 2, 5, 12, 1),
+                new CombatPog("Tale of Jonny Pizza", 5, 3, 20),
+                new CombatPog("Welcome to Space", 2, 5, 12),
                 createButtPog(3),
                 createButtPog(4),
                 createButtPog(5),
@@ -102,9 +102,9 @@ function createDemoStory() {
             new FinalChapter("The Elevator King", 
                 ["It's time to face the Elevator King.", "\"You cannot descend!\"", "You shove him into the elevator, and hit the DOWN button."], 
                 new SuperBaddie("Final Baddie", [
-                    new Pog("Big Honker", 10, 10, 250, 1),
-                    new Pog("Pog Mania", 15, 10, 300, 1),
-                    new Pog("Biiig Defense", 2, 10, 20, 1),
+                    new CombatPog("Big Honker", 10, 10, 250),
+                    new CombatPog("Pog Mania", 15, 10, 300),
+                    new CombatPog("Biiig Defense", 2, 10, 20),
                     createButtPog(1),
                     createButtPog(2),
                     createButtPog(3),
@@ -120,24 +120,24 @@ function createDemoStory() {
             new Chapter("Criminee Bajins", ["\"Let's see how our pogs stack up?\"", "You turn and run, but he's on you..", "Gotta pog the pog."], 
                 new Baddie("Criminee Bajins", 
                     [createButtPog(1), createButtPog(2),
-                        new Pog("Big Honker", 10, 10, 250, 1),
-                        new Pog("Tale of Jonny Pizza", 5, 3, 35, 1),
-                        new Pog("Welcome to Space", 2, 5, 12, 1),
-                        new Pog("Gumby", 3, 3, 10, 1),
-                        new Pog("Super Mario Bros", 4, 4, 15, 1),
-                        new Pog("The Legend of Zelda", 5, 5, 20, 1),
-                        new Pog("Pac-Man", 6, 6, 25, 1),
-                        new Pog("Donkey Kong", 7, 7, 30, 1),
-                        new Pog("Mario Kart", 8, 8, 35, 1),
-                        new Pog("Biiig Defense", 2, 10, 20, 1), 
+                        new CombatPog("Big Honker", 10, 10, 250),
+                        new CombatPog("Tale of Jonny Pizza", 5, 3, 35),
+                        new CombatPog("Welcome to Space", 2, 5, 12),
+                        new CombatPog("Gumby", 3, 3, 10),
+                        new CombatPog("Super Mario Bros", 4, 4, 15),
+                        new CombatPog("The Legend of Zelda", 5, 5, 20),
+                        new CombatPog("Pac-Man", 6, 6, 25),
+                        new CombatPog("Donkey Kong", 7, 7, 30),
+                        new CombatPog("Mario Kart", 8, 8, 35),
+                        new CombatPog("Biiig Defense", 2, 10, 20), 
                         createButtPog(10)], 100, 6)),
             new Chapter("Death's Griffon", ["\"You have come too far.\"", "Pogs glide from the Griffon's feathers in spiraling formation. ", "You ready your pogs."], 
                 new Shop("Death's Griffon Shop", "\"You want a soda?\"", 
                     [new Item("Participation Trophy", "1 Participation Award", 55)], 
                     [createButtPog(11),
-                        new Pog("Big Honker", 10, 10, 250, 1),
-                        new Pog("Pog Mania", 15, 10, 300, 1),
-                        new Pog("Biiig Defense", 2, 10, 20, 1),
+                        new CombatPog("Big Honker", 10, 10, 250),
+                        new CombatPog("Pog Mania", 15, 10, 300),
+                        new CombatPog("Biiig Defense", 2, 10, 20),
                     ], 
                     [new Slammer("8 Ball", "Flips up 8 pogs.", 1, 75, demoSlammerAbilityByN(6)),
                     new Slammer("Beef Strogonoff", "2 Beefer and 2 Turtler for 3 turns.", 1, 20, beefTurtSlammer(2, 2), 'beeferturtler'),
@@ -160,9 +160,9 @@ function createDemoStory() {
                         createButtPog(7),],
                     100, 7),)    
         ], new FinalChapter("CEO's Private Living Quarteres", ["The Devil CEO turns from drinking a child's blood..", "\"Looks like I'll have to deal with you myself.\"", "Hope you got the right pogs..."], 
-            new SuperBaddie("Devil CEO", [new Pog("Big Honker", 10, 10, 250, 1),
-                new Pog("Pog Mania", 15, 10, 300, 1),
-                new Pog("Biiig Defense", 2, 10, 20, 1),
+            new SuperBaddie("Devil CEO", [new CombatPog("Big Honker", 10, 10, 250),
+                new CombatPog("Pog Mania", 15, 10, 300),
+                new CombatPog("Biiig Defense", 2, 10, 20),
                 createButtPog(1),
                 createButtPog(2),
                 createButtPog(3),
@@ -171,9 +171,9 @@ function createDemoStory() {
                 createButtPog(6),
                 createButtPog(7),
                 createButtPog(8),
-                createButtPog(9),new Pog("Big Honker", 10, 10, 250, 1),
-                new Pog("Pog Mania", 15, 10, 300, 1),
-                new Pog("Biiig Defense", 2, 10, 20, 1),
+                createButtPog(9),new CombatPog("Big Honker", 10, 10, 250),
+                new CombatPog("Pog Mania", 15, 10, 300),
+                new CombatPog("Biiig Defense", 2, 10, 20),
                 createButtPog(1),
                 createButtPog(2),
                 createButtPog(3),

@@ -1,5 +1,12 @@
 export type Boon = {
-    name: 'beefer' | 'turtler';
+    name: 'beefer' | 'turtler' | 'cruncher';
+    description: string;
+    value: number;
+    duration: number;
+  }
+
+export type Nerf = {
+    name: 'slo-mo' | 'freeze';
     description: string;
     value: number;
     duration: number;

@@ -1,33 +1,25 @@
 // Thinking through this - I want to either level up or use the Balatro method where you can 
 // put specific wrappers around the pog to give it bonuses, this way I don't have to worry about "leveling up" the pog.
+// export type Ability = "lucky" | "trick" | "radical";
+export type Ability = "lucky" | "radical";
 
 export default class Pog {
   _id: string;
   name: string;
-  strength: number;
-  defense: number;
   gold: number;
-  level: number;
-  startTime: Date;
   ownerId: string | undefined;
+  ability: Ability | undefined;
 
-  constructor(name: string, strength: number, defense: number, gold: number, level: number) {
+  constructor(name: string, gold: number, ability?: Ability) {
     this._id = crypto.randomUUID();
     this.name = name;
-    this.strength = strength;
-    this.defense = defense;
     this.gold = gold;
-    this.level = level;
-    this.startTime = new Date();
     this.ownerId = undefined;
+    this.ability = ability;
   }
 
   getName() {
     return this.name;
-  }
-
-  getStartTime() {
-    return this.startTime;
   }
 
   generateNewId() {
@@ -38,28 +30,19 @@ export default class Pog {
     return this._id;
   }
 
-  getStrength() {
-    return this.strength;
-  }
-  
-  getDefense() {
-    return this.defense;
-  }
-
   getGold() {
     return this.gold;
   }
 
-  getLevel() {
-    return this.level;
+  clone(): Pog {
+    return new Pog(this.name, this.gold, this.ability);
   }
 
-  levelUp() {
-    if (this.level < 3) {  // max level is 10
-    this.level++;
-    this.strength++;
-    this.defense++;
-    this.gold++;
-    }
+  setAbility(ability: Ability) {
+    this.ability = ability;
+  }
+
+  getAbility(): Ability | undefined {
+    return this.ability;
   }
 }

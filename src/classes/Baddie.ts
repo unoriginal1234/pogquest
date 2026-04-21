@@ -95,4 +95,11 @@ export default class Baddie {
     setDefense(defense: number) {
         this.defense = defense;
     }
+
+    addHealth(health: number) {
+        this.currentHitpoints += health;
+        if (this.currentHitpoints > this.maxHitpoints) {
+            this.currentHitpoints = this.maxHitpoints;
+        }
+    }
 }

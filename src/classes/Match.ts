@@ -1,8 +1,12 @@
 import Player from './Player';
 import Baddie from './Baddie';
 import Pog from './Pog';
+import CombatPog from './pogClasses/CombatPog';
+import ActionPog from './pogClasses/ActionPog';
 import shuffleArray from '../helperFunctions/shuffle';
 import type { Boon, Damageable } from './types';
+
+import type { Ability } from './Pog';
 
 export interface MatchSnapshot {
     baddieHitpoints: number;
@@ -75,16 +79,53 @@ export default class Match {
         };
     }
 
+    applyAction(pog: ActionPog) {
+        switch (pog.getAction()) {
+            case 'double_defense':
+                this.player.setDefense(this.player.getDefense() * 2);
+                break;
+            case 'double_attack':
+                this.player.setDefense(this.player.getDefense() * 2);
+                break;
+            case 'pizza_5':
+                this.player.addHealth(5);
+                break;
+            case 'pizza_10':
+                this.player.addHealth(10);
+                break;
+        }
+    }
+
+    applyBaddieAction(pog: ActionPog) {
+        switch (pog.getAction()) {
+            case 'pizza_5':
+                this.baddie.addHealth(5);
+                break;
+            case 'pizza_10':
+                this.baddie.addHealth(10);
+                break;
+        }
+    }
+
     private applyDamageToTarget(
         target: Damageable,
         strength: number,
         boons: { [key: string]: Boon } = {},
+        ability: Ability | undefined = undefined,
     ) {
         let remaining = strength;
         if (boons['beefer']) {
             remaining += boons['beefer'].value;
         }
-        if (target.getDefense() > 0) {
+        if (boons['cruncher']) {
+            remaining *= 2**boons['cruncher'].value;
+            boons['cruncher'].duration--;
+            if (boons['cruncher'].duration <= 0) {
+                delete boons['cruncher'];
+            }
+            this.player.setBoons({...boons});
+        }
+        if (ability !== 'radical' && target.getDefense() > 0) {
             let newDefense = target.getDefense() - remaining;
             if (newDefense < 0) {
                 remaining = -newDefense;
@@ -94,12 +135,17 @@ export default class Match {
             }
             target.setDefense(newDefense);
         }
+        
         target.setCurrentHitpoints(target.getCurrentHitpoints() - remaining);
     }
 
     private removePogFromPlay(pog: Pog) {
         this.addToPlayedPogs(pog);
         this.inPlayPogs = this.inPlayPogs.filter(p => p.getId() !== pog.getId());
+    }
+
+    private hasPlayablePogs() {
+        return this.inPlayPogs.some(pog => this.pogOwners.get(pog.getId()) === this.player.getId() && !this.flippedPogIds.includes(pog.getId()));
     }
 
     playAll() {
@@ -122,11 +168,19 @@ export default class Match {
 
     flipPog(pogId: string) {
         this.flippedPogIds = [...this.flippedPogIds, pogId];
+        if (!this.hasPlayablePogs()) {
+            this.setCanPlayAll(false);
+        }
+    }
+
+    findLuckyPog() {
+        return this.stack.find(pog => pog.getAbility() === 'lucky');
     }
 
     slam() {
+        
         this.canEndTurn = true;
-        this.setCanPlayAll(true);
+       
         this.flippedPogIds = [];
         if (!this.canSlam) return;
         this.canSlam = false;
@@ -135,7 +189,30 @@ export default class Match {
         const playerSlammer = this.player.getEquippedSlammer();
         if (!playerSlammer) return;
 
+        // adding the lucky pog to the stack
+        // there might be a need to build a more robust "slam with ability" but let's start with this
+        // I could even move the find luck pog logic after the slam to make this cleaner
+
+        const luckyPog = this.findLuckyPog();
+        // THIS IS THE NORMAL SLAM LOGIC
         const { flippedStack, remainingStack, boons } = playerSlammer.slam(this.stack);
+
+        // this is the lucky pog logic
+        let remainingStackWithoutLucky: Pog[] = [];
+        if (remainingStack.length > 0) {
+            if (luckyPog) {
+                if (!flippedStack.includes(luckyPog)) {
+                    remainingStackWithoutLucky = remainingStack.filter(pog => pog.getId() !== luckyPog.getId());
+                    flippedStack.unshift(luckyPog);
+                    if (flippedStack.length > 1) {
+                        const unluckyPog = flippedStack.pop();
+                        if (unluckyPog) {
+                            remainingStackWithoutLucky.unshift(unluckyPog);
+                        }
+                    }
+                }
+            }
+        }
 
         if (boons) {
             for (const boon in boons) {
@@ -145,7 +222,19 @@ export default class Match {
         }
 
         this.inPlayPogs = flippedStack;
-        this.stack = remainingStack;
+
+        // handles the LUCKY POG LOGIC
+        if (remainingStackWithoutLucky.length > 0) {
+            this.stack = remainingStackWithoutLucky;
+        } else {
+            this.stack = remainingStack;
+        }
+
+        if (this.hasPlayablePogs()) {
+            this.setCanPlayAll(true);
+        } else {
+            this.setCanPlayAll(false);
+        }
     }
 
     playPog(pogId: string) {
@@ -153,13 +242,21 @@ export default class Match {
         if (!pog) return;
 
         const boons = this.player.getBoons();
-        if (boons['turtler']) {
-            this.player.setDefense(this.player.getDefense() + boons['turtler'].value);
-        }
 
         this.removePogFromPlay(pog);
-        this.player.setDefense(this.player.getDefense() + pog.getDefense());
-        this.applyDamageToTarget(this.baddie, pog.getStrength(), this.player.getBoons());
+        if (pog instanceof CombatPog) {
+            if (boons['turtler']) {
+                this.player.setDefense(this.player.getDefense() + boons['turtler'].value);
+            }
+            this.player.setDefense(this.player.getDefense() + pog.getDefense());
+            this.applyDamageToTarget(this.baddie, pog.getStrength(), this.player.getBoons(), pog.getAbility());
+            
+        } else if (pog instanceof ActionPog) {
+            this.applyAction(pog);
+        }
+        if (!this.hasPlayablePogs()) {
+            this.setCanPlayAll(false);
+        }
     }
 
     restack() {
@@ -181,11 +278,18 @@ export default class Match {
         const currentInPlayPogs = this.inPlayPogs.slice();
 
         for (const pog of currentInPlayPogs) {
-            if (this.pogOwners.get(pog.getId()) === this.baddie.getId()) {
-                this.baddie.setDefense(this.baddie.getDefense() + pog.getDefense());
-                this.applyDamageToTarget(this.player, pog.getStrength());
+            if (pog instanceof ActionPog) {
+                this.applyBaddieAction(pog);
                 this.removePogFromPlay(pog);
+            } else if (this.pogOwners.get(pog.getId()) === this.baddie.getId()) {
+                if (pog instanceof CombatPog) {
+                    this.baddie.setDefense(this.baddie.getDefense() + pog.getDefense());
+                    // hard coded that baddies don't get boons
+                    this.applyDamageToTarget(this.player, pog.getStrength(), {}, pog.getAbility());
+                    this.removePogFromPlay(pog);
+                }
             } else if (!this.flippedPogIds.includes(pog.getId())) {
+                // I have three remove pog from plays and can DRY this
                 this.removePogFromPlay(pog);
             }
         }

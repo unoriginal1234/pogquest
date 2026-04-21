@@ -29,7 +29,10 @@ export default function InPlayPogsComponent({
     return (
         <div className="flex flex-wrap gap-4 justify-center">
             {inPlayPogs.map((pog) => (
-                <div key={pog.getId()} className="relative">
+                <div
+                    key={pog.getId()}
+                    className={`relative ${openMenuPogId === pog.getId() ? "z-[100]" : ""}`}
+                >
                     <Pog 
                         pog={pog} 
                         onClick={() => handleInPlayPogClick(pog)} 
@@ -38,7 +41,7 @@ export default function InPlayPogsComponent({
                     />
                     {openMenuPogId === pog.getId() && (
                         <div
-                            className="menu menu-sm rounded-box bg-base-200 shadow-lg absolute left-0 mt-2 z-20 p-2"
+                            className="menu menu-sm rounded-box bg-base-200 shadow-lg absolute left-0 mt-2 z-[100] p-2"
                             onClick={(event) => event.stopPropagation()}
                         >
                             <button
