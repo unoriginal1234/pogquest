@@ -6,6 +6,7 @@ import Settings from "./pages/Settings";
 
 import MainMenuScreen from './pages/MainMenuScreen';
 import GameScreen from './pages/GameScreen';
+import Tutorial from './pages/Tutorial';
 
 import { UserProvider } from './context/UserProvider';
 import { GameProvider } from './context/GameProvider';
@@ -26,6 +27,8 @@ function App() {
             <Route path="/character-select" element={<CharacterSelectScreen/>} />
             
             <Route path="/game" element={<GameScreen />}/>
+
+            <Route path="/tutorial" element={<Tutorial />} />
             
             <Route path="*" element={<h1>404 Not Found</h1>} />
           </Routes> 
