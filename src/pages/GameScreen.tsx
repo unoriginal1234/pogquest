@@ -17,6 +17,7 @@ export default function GameScreen() {
   const [menuScreen, setMenuScreen] = useState<string | null>(null);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
   const [didLose, setDidLose] = useState<boolean | null>(null);
+  const [sedrickMessage, setSedrickMessage] = useState<string | null>(null);
   
   const modalRef = useRef<HTMLDialogElement>(null);
 
@@ -57,7 +58,7 @@ export default function GameScreen() {
       {/* <h1>Game Screen</h1> */}
       <div className="game-body-row">
         <GameMenuButtons getMenuButtonSelection={openModal} />
-        <GameStoryPanel game={game} onEndGame={(didLose: boolean) => handleEndGame(didLose)} />
+        <GameStoryPanel game={game} onEndGame={(didLose: boolean) => handleEndGame(didLose)} onSedrickMessage={setSedrickMessage} />
       </div>
 
       <dialog ref={modalRef} className="modal">
@@ -69,7 +70,7 @@ export default function GameScreen() {
         </form>
       </dialog>
 
-      <Sedrick />
+      <Sedrick message={sedrickMessage} />
       <footer className="footer-wrapper">
         <Link to="/"><button>Main Menu</button></Link>
       </footer>

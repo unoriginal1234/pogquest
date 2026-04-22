@@ -2072,3 +2072,76 @@ main {
     grid-template-columns: 1fr;
   }
 }
+
+/* ═══════════════════════════════════════════
+   Sedrick – speech bubble
+   ═══════════════════════════════════════════ */
+
+.sedrick-container {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  pointer-events: none;
+}
+
+.sedrick-speech-bubble {
+  pointer-events: auto;
+  max-width: 320px;
+  padding: 0.75rem 1rem;
+  font-family: 'VT323', monospace;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  color: var(--pog-lime-green);
+  background: rgba(7, 17, 26, 0.92);
+  border: 2px solid var(--pog-electric-blue);
+  box-shadow:
+    0 0 10px rgba(0, 255, 255, 0.3),
+    inset 0 0 8px rgba(0, 255, 255, 0.08);
+  position: relative;
+  animation: sedrick-bubble-in 0.35s ease-out;
+}
+
+.sedrick-speech-bubble p {
+  margin: 0;
+}
+
+.sedrick-speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 14px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 8px 0 8px;
+  border-color: var(--pog-electric-blue) transparent transparent transparent;
+}
+
+.sedrick-speech-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  left: 15px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 7px 0 7px;
+  border-color: rgba(7, 17, 26, 0.92) transparent transparent transparent;
+  z-index: 1;
+}
+
+@keyframes sedrick-bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
