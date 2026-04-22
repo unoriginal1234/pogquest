@@ -1,19 +1,22 @@
 import SedrickIcon from '../icons/SedrickIcon';
 
-export default function Sedrick() {
+interface SedrickProps {
+  message?: string | null;
+  onDismiss?: () => void;
+}
+
+export default function Sedrick({ message, onDismiss }: SedrickProps) {
   return (
-    <div
-      style={{
-        position: 'fixed',
-        bottom: '1rem',
-        left: '1rem',
-        opacity: 0.65,
-        pointerEvents: 'none',
-        zIndex: 1,
-      }}
-      title="Sedrick"
-    >
-      <SedrickIcon size={56} />
+    <div className="sedrick-container" title="Sedrick">
+      {message && (
+        <div className="sedrick-speech-bubble">
+          <button className="sedrick-bubble-close" onClick={onDismiss} aria-label="Close">&times;</button>
+          <p>{message}</p>
+        </div>
+      )}
+      <div style={{ opacity: message ? 1 : 0.65 }}>
+        <SedrickIcon size={56} />
+      </div>
     </div>
   );
 }

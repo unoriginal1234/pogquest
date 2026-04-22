@@ -14,10 +14,14 @@ export default function PlayerComponent({ player, currentPlayerDefense, currentP
     return (
         <div className="combatant-panel-row">
             <div className="combatant-panel">
-                <h2>{player.getName()}</h2>
-                <p>Pogs: {player.getPogs().length}</p>
-                <StatBar current={currentPlayerDefense} max={currentPlayerDefense} label="DEF" variant="defense" />
-                <StatBar current={currentPlayerHitpoints} max={player.getHitpoints()} label="HP" variant="hp" />
+                <div className="combatant-identity">
+                    <span className="combatant-name">{player.getName()}</span>
+                    <span className="combatant-detail">Pogs: {player.getPogs().length}</span>
+                </div>
+                <div className="combatant-bars">
+                    <StatBar current={currentPlayerDefense} max={currentPlayerDefense} label="DEF" variant="defense" />
+                    <StatBar current={currentPlayerHitpoints} max={player.getHitpoints()} label="HP" variant="hp" />
+                </div>
             </div>
             <BoonNerfBox boons={playerBoons} nerfs={{}} />
         </div>

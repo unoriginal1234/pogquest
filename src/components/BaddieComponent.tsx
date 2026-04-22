@@ -14,11 +14,14 @@ export default function BaddieComponent({
     return (
         <div className="combatant-panel-row">
             <div className="combatant-panel">
-                {currentBaddieHitpoints > 0 ? <h2>{baddie.getName()}</h2> : <h2>Baddie Defeated</h2>}
-                {/* <p>Level: {baddie.getLevel()}</p> */}
-                <p>Pogs: {baddie.getPogs().length}</p>
-                <StatBar current={currentBaddieHitpoints} max={baddie.getMaxHitpoints()} label="HP" variant="hp" />
-                <StatBar current={currentBaddieDefense} max={currentBaddieDefense} label="DEF" variant="defense" />
+                <div className="combatant-identity">
+                    {currentBaddieHitpoints > 0 ? <span className="combatant-name">{baddie.getName()}</span> : <span className="combatant-name">Baddie Defeated</span>}
+                    <span className="combatant-detail">Pogs: {baddie.getPogs().length}</span>
+                </div>
+                <div className="combatant-bars">
+                    <StatBar current={currentBaddieHitpoints} max={baddie.getMaxHitpoints()} label="HP" variant="hp" />
+                    <StatBar current={currentBaddieDefense} max={currentBaddieDefense} label="DEF" variant="defense" />
+                </div>
             </div>
             <BoonNerfBox boons={{}} nerfs={{}} />
         </div>

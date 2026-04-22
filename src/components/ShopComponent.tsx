@@ -76,118 +76,119 @@ export default function ShopComponent({ shop, player, handleCanCloseChapter }: {
                 </div>
             </div>
 
-            <section className="shop-section">
-                <h2>Items</h2>
-                <div className="shop-grid">
-                    {inventory.length === 0 ? (
-                        <p className="empty-message">No items available</p>
-                    ) : (
-                        inventory.map((item: ItemClass) => (
-                            <div key={item.getId()} className="shop-card relative">
-                                <ItemComponent 
-                                    item={item} 
-                                    onClick={() => handleItemClick(item.getId())} 
-                                    isSelected={openMenuId === item.getId()} 
-                                />
-                                <div className="price-tag">
-                                    <span className="price-icon">🪙</span>
-                                    <span>{item.getValue()}</span>
-                                </div>
-                                {openMenuId === item.getId() && (
-                                    <div 
-                                        className="menu menu-sm rounded-box bg-base-200 shadow-lg absolute left-0 mt-2 z-20 p-2"
-                                        onClick={(e) => e.stopPropagation()}
-                                    >
-                                        <button
-                                            className="btn btn-ghost btn-sm justify-start"
-                                            onClick={() => handleBuyItem(item)}
-                                            disabled={!canAfford(item.getValue())}
-                                        >
-                                            Buy
-                                        </button>
+            <div className="shop-sections-row">
+                <section className="shop-section">
+                    <h2>Items</h2>
+                    <div className="shop-grid">
+                        {inventory.length === 0 ? (
+                            <p className="empty-message">No items available</p>
+                        ) : (
+                            inventory.map((item: ItemClass) => (
+                                <div key={item.getId()} className="shop-card relative">
+                                    <ItemComponent 
+                                        item={item} 
+                                        onClick={() => handleItemClick(item.getId())} 
+                                        isSelected={openMenuId === item.getId()} 
+                                    />
+                                    <div className="price-tag">
+                                        <span className="price-icon">🪙</span>
+                                        <span>{item.getValue()}</span>
                                     </div>
-                                )}
-                            </div>
-                        ))
-                    )}
-                </div>
-            </section>
+                                    {openMenuId === item.getId() && (
+                                        <div 
+                                            className="menu menu-sm rounded-box bg-base-200 shadow-lg absolute left-0 mt-2 z-20 p-2"
+                                            onClick={(e) => e.stopPropagation()}
+                                        >
+                                            <button
+                                                className="btn btn-ghost btn-sm justify-start"
+                                                onClick={() => handleBuyItem(item)}
+                                                disabled={!canAfford(item.getValue())}
+                                            >
+                                                Buy
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            ))
+                        )}
+                    </div>
+                </section>
 
-            <section className="shop-section">
-                <h2>Pogs</h2>
-                <div className="shop-grid">
-                    {pogs.length === 0 ? (
-                        <p className="empty-message">No pogs available</p>
-                    ) : (
-                        pogs.map((pog: PogClass) => (
-                            <div key={pog.getId()} className="shop-card relative">
-                                <PogComponent 
-                                    pog={pog} 
-                                    onClick={() => handleItemClick(pog.getId())} 
-                                    isSelected={openMenuId === pog.getId()} 
-                                    // need to add isFlippedUp
-                                    isFlippedUp={false}
-                                />
-                                <div className="price-tag">
-                                    <span className="price-icon">🪙</span>
-                                    <span>{pog.getGold()}</span>
-                                </div>
-                                {openMenuId === pog.getId() && (
-                                    <div 
-                                        className="menu menu-sm rounded-box bg-base-200 shadow-lg absolute left-0 mt-2 z-20 p-2"
-                                        onClick={(e) => e.stopPropagation()}
-                                    >
-                                        <button
-                                            className="btn btn-ghost btn-sm justify-start"
-                                            onClick={() => handleBuyPog(pog)}
-                                            disabled={!canAfford(pog.getGold())}
-                                        >
-                                            Buy
-                                        </button>
+                <section className="shop-section">
+                    <h2>Pogs</h2>
+                    <div className="shop-grid">
+                        {pogs.length === 0 ? (
+                            <p className="empty-message">No pogs available</p>
+                        ) : (
+                            pogs.map((pog: PogClass) => (
+                                <div key={pog.getId()} className="shop-card relative">
+                                    <PogComponent 
+                                        pog={pog} 
+                                        onClick={() => handleItemClick(pog.getId())} 
+                                        isSelected={openMenuId === pog.getId()} 
+                                        isFlippedUp={false}
+                                    />
+                                    <div className="price-tag">
+                                        <span className="price-icon">🪙</span>
+                                        <span>{pog.getGold()}</span>
                                     </div>
-                                )}
-                            </div>
-                        ))
-                    )}
-                </div>
-            </section>
+                                    {openMenuId === pog.getId() && (
+                                        <div 
+                                            className="menu menu-sm rounded-box bg-base-200 shadow-lg absolute left-0 mt-2 z-20 p-2"
+                                            onClick={(e) => e.stopPropagation()}
+                                        >
+                                            <button
+                                                className="btn btn-ghost btn-sm justify-start"
+                                                onClick={() => handleBuyPog(pog)}
+                                                disabled={!canAfford(pog.getGold())}
+                                            >
+                                                Buy
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            ))
+                        )}
+                    </div>
+                </section>
 
-            <section className="shop-section">
-                <h2>Slammers</h2>
-                <div className="shop-grid">
-                    {slammers.length === 0 ? (
-                        <p className="empty-message">No slammers available</p>
-                    ) : (
-                        slammers.map((slammer: SlammerClass) => (
-                            <div key={slammer.getId()} className="shop-card relative">
-                                <SlammerComponent 
-                                    slammer={slammer} 
-                                    onClick={() => handleItemClick(slammer.getId())} 
-                                    isSelected={openMenuId === slammer.getId()} 
-                                />
-                                <div className="price-tag">
-                                    <span className="price-icon">🪙</span>
-                                    <span>{slammer.getGold()}</span>
-                                </div>
-                                {openMenuId === slammer.getId() && (
-                                    <div 
-                                        className="menu menu-sm rounded-box bg-base-200 shadow-lg absolute left-0 mt-2 z-20 p-2"
-                                        onClick={(e) => e.stopPropagation()}
-                                    >
-                                        <button
-                                            className="btn btn-ghost btn-sm justify-start"
-                                            onClick={() => handleBuySlammer(slammer)}
-                                            disabled={!canAfford(slammer.getGold())}
-                                        >
-                                            Buy
-                                        </button>
+                <section className="shop-section">
+                    <h2>Slammers</h2>
+                    <div className="shop-grid">
+                        {slammers.length === 0 ? (
+                            <p className="empty-message">No slammers available</p>
+                        ) : (
+                            slammers.map((slammer: SlammerClass) => (
+                                <div key={slammer.getId()} className="shop-card relative">
+                                    <SlammerComponent 
+                                        slammer={slammer} 
+                                        onClick={() => handleItemClick(slammer.getId())} 
+                                        isSelected={openMenuId === slammer.getId()} 
+                                    />
+                                    <div className="price-tag">
+                                        <span className="price-icon">🪙</span>
+                                        <span>{slammer.getGold()}</span>
                                     </div>
-                                )}
-                            </div>
-                        ))
-                    )}
-                </div>
-            </section>
+                                    {openMenuId === slammer.getId() && (
+                                        <div 
+                                            className="menu menu-sm rounded-box bg-base-200 shadow-lg absolute left-0 mt-2 z-20 p-2"
+                                            onClick={(e) => e.stopPropagation()}
+                                        >
+                                            <button
+                                                className="btn btn-ghost btn-sm justify-start"
+                                                onClick={() => handleBuySlammer(slammer)}
+                                                disabled={!canAfford(slammer.getGold())}
+                                            >
+                                                Buy
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
+                            ))
+                        )}
+                    </div>
+                </section>
+            </div>
         </div>
     );
 }

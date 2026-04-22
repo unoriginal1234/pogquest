@@ -80,21 +80,22 @@ function CharacterSelectScreen() {
               </div>
             </section>   
 
-            <main>
+            <main style={{ flex: 1, minHeight: 0, overflowY: 'auto' }}>
             {selectedButton !== null && (
               <div className="message-box pog-border">
-                <section className="pog-glow-yellow">
-                  <h2>{selectedButton}</h2>
-                  <p>{player?.getArchetype().description}</p>
-                </section>
-
-                <OpenCollection />
-                
-                {player ? <Link to="/game"><button onClick={() => {
-                  startGame(player, currentStory!);
-                }}>Start Game</button></Link> : <button disabled>Start Game</button>}
-                <button onClick={() => setSelectedButton(null)}>Close</button>
-
+                <div className="char-select-row">
+                  <OpenCollection />
+                  <section className="char-select-info">
+                    <section className="pog-glow-yellow">
+                      <h2>{selectedButton}</h2>
+                      <p>{player?.getArchetype().description}</p>
+                    </section>
+                    {player ? <Link to="/game"><button onClick={() => {
+                      startGame(player, currentStory!);
+                    }}>Start Game</button></Link> : <button disabled>Start Game</button>}
+                    <button onClick={() => setSelectedButton(null)}>Close</button>
+                  </section>
+                </div>
               </div>
             )}
           </main>

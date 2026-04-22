@@ -27,9 +27,10 @@ import matchFactory from "../resources/matchFactory";
 interface GameStoryPanelProps {
     game: Game;
     onEndGame: (didLose: boolean) => void;
+    onSedrickMessage?: (message: string | null) => void;
 }
 
-export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps) {
+export default function GameStoryPanel({ game, onEndGame, onSedrickMessage }: GameStoryPanelProps) {
 
     const user = useContext<User | null>(UserContext);
     const isAdmin = user?.getRole() === "admin";
@@ -106,6 +107,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
     }
 
     function handleChapterClick(chapterNumber: number) {
+        onSedrickMessage?.(null);
         currentFloor.setCurrentChapter(chapterNumber);
         const nextChapter = currentFloor.getChapter(chapterNumber);
         setCurrentChapter(nextChapter);
@@ -118,6 +120,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
     }
 
     function handleCloseCurrentChapter() {
+        onSedrickMessage?.(null);
         currentFloor.closeChapter();
         const canPlayerGetToFinalChapter = currentFloor.canGetToFinalChapter();
         setCanGetToFinalChapter(canPlayerGetToFinalChapter);  
@@ -146,7 +149,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
     }
 
     function handleNextFloor() {     
-        
+        onSedrickMessage?.(null);
         story.setCurrentFloorByIndex(story.getCurrentFloorIndex() + 1);
         const nextFloor = story.getCurrentFloor();
         setCurrentFloor(nextFloor);
@@ -165,6 +168,7 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
     }
 
     function handleEnterFinalChapterClick() {
+        onSedrickMessage?.(null);
         setShowFinalChapter(true);
     }
 
@@ -187,6 +191,14 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
     const isLastFloor = story.getCurrentFloorIndex() === story.getFloorCount() - 1;
     const isLastChapterDescription = chapterDescriptionIndex === currentChapter.getDescription().length - 1;
     
+
+    useEffect(() => {
+        if (isLastChapterDescription) {
+            onSedrickMessage?.(chapterDescription);
+        } else {
+            onSedrickMessage?.(null);
+        }
+    }, [isLastChapterDescription, chapterDescription, onSedrickMessage]);
 
     // TODO : Unbreak this in a second
     useEffect(() => {
@@ -234,18 +246,20 @@ export default function GameStoryPanel({ game, onEndGame }: GameStoryPanelProps)
         <section className="demo-section pog-border">
             {/* <h2>{story.getTitle()}</h2>
             <p className="pog-glow-blue">{currentFloor.getDescription()}</p> */}
-            <ChapterDescription
-                key={`${chapterNumber}-${chapterDescriptionIndex}`}
-                chapterTitle={chapterDescriptionIndex === 0 ? chapterTitle : undefined}
-                description={chapterDescription}
-                buttonLabel={chapterDescriptionIndex > 0 ? "Next" : "Enter"}
-                onProceed={() => {
-                    const nextIndex = chapterDescriptionIndex + 1;
-                    setChapterDescriptionIndex(nextIndex);
-                    setChapterDescription(currentChapter.getDescription()[nextIndex]);
-                }}
-                showButton={chapterDescriptionIndex < currentChapter.getDescription().length - 1}
-            />
+            {!isLastChapterDescription && (
+                <ChapterDescription
+                    key={`${chapterNumber}-${chapterDescriptionIndex}`}
+                    chapterTitle={chapterDescriptionIndex === 0 ? chapterTitle : undefined}
+                    description={chapterDescription}
+                    buttonLabel={chapterDescriptionIndex > 0 ? "Next" : "Enter"}
+                    onProceed={() => {
+                        const nextIndex = chapterDescriptionIndex + 1;
+                        setChapterDescriptionIndex(nextIndex);
+                        setChapterDescription(currentChapter.getDescription()[nextIndex]);
+                    }}
+                    showButton={chapterDescriptionIndex < currentChapter.getDescription().length - 1}
+                />
+            )}
 
             {chapterDescriptionIndex === 0 ? ChapterNavigator() : null}
 
