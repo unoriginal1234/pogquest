@@ -99,6 +99,22 @@ main {
   }
 }
 
+.char-select-row {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.char-select-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  flex: 1;
+  text-align: center;
+}
+
 .message-box p {
   margin: 0;
   font-size: 1.3em;
