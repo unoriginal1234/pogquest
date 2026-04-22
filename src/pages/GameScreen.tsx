@@ -70,7 +70,7 @@ export default function GameScreen() {
         </form>
       </dialog>
 
-      <Sedrick message={sedrickMessage} />
+      <Sedrick message={sedrickMessage} onDismiss={() => setSedrickMessage(null)} />
       <footer className="footer-wrapper">
         <Link to="/"><button>Main Menu</button></Link>
       </footer>
