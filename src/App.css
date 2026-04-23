@@ -1220,22 +1220,22 @@ main {
 
 /* Level Up Screen */
 .level-up-container {
-    padding: 1.5rem;
+    padding: 1rem;
     max-width: 500px;
     margin: 0 auto;
     text-align: center;
 }
 
 .level-up-header {
-    margin-bottom: 2rem;
+    margin-bottom: 0.75rem;
 }
 
 .level-up-header h1 {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 }
 
 .level-up-header p {
-    margin: 0.5rem 0;
+    margin: 0.15rem 0;
 }
 
 /* Settings Page */

@@ -53,6 +53,19 @@ export default function VictoryScreen({
         }
     }, [playerNeedsToLevelUp, handleCanCloseChapter, onLevelUpComplete]);
 
+    if (levelUp) {
+        return (
+            <LevelUpScreen 
+                levelUpOptions={levelUpOptions} 
+                newLevel={playerLevel + 1} 
+                setLevelUp={setLevelUp}
+                setPlayerLevel={setPlayerLevel}
+                player={player}
+                setPlayerNeedsToLevelUp={setPlayerNeedsToLevelUp}
+            />
+        );
+    }
+
     return (
         <div>
             <h1>Victory</h1>
@@ -62,8 +75,6 @@ export default function VictoryScreen({
             <p>You had {playerXPBeforeVictory} XP before victory</p>
             <p>You gained {awardXP} XP</p>
 
-            
-
             {!playerNeedsToLevelUp ? 
                 <button onClick={() => 
                     {
@@ -72,17 +83,6 @@ export default function VictoryScreen({
                     }
                 }
                 >Level Up to {playerLevel + 1}</button> : null}
-            
-            
-            {levelUp && 
-                <LevelUpScreen 
-                    levelUpOptions={levelUpOptions} 
-                    newLevel={playerLevel + 1} 
-                    setLevelUp={setLevelUp}
-                    setPlayerLevel={setPlayerLevel}
-                    player={player}
-                    setPlayerNeedsToLevelUp={setPlayerNeedsToLevelUp}
-                />}
         </div>
     );
 }
