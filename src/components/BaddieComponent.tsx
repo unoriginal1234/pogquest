@@ -20,7 +20,7 @@ export default function BaddieComponent({
                 </div>
                 <div className="combatant-bars">
                     <StatBar current={currentBaddieHitpoints} max={baddie.getMaxHitpoints()} label="HP" variant="hp" />
-                    <StatBar current={currentBaddieDefense} max={currentBaddieDefense} label="DEF" variant="defense" />
+                    <StatBar current={currentBaddieDefense} max={baddie.getMaxHitpoints()} label="DEF" variant="defense" />
                 </div>
             </div>
             <BoonNerfBox boons={{}} nerfs={{}} />

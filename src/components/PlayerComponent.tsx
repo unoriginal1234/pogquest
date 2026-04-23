@@ -19,7 +19,7 @@ export default function PlayerComponent({ player, currentPlayerDefense, currentP
                     <span className="combatant-detail">Pogs: {player.getPogs().length}</span>
                 </div>
                 <div className="combatant-bars">
-                    <StatBar current={currentPlayerDefense} max={currentPlayerDefense} label="DEF" variant="defense" />
+                    <StatBar current={currentPlayerDefense} max={player.getHitpoints()} label="DEF" variant="defense" />
                     <StatBar current={currentPlayerHitpoints} max={player.getHitpoints()} label="HP" variant="hp" />
                 </div>
             </div>
