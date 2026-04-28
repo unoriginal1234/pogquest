@@ -34,6 +34,10 @@ export default class Pog {
     return this.gold;
   }
 
+  setGold(gold: number) {
+    this.gold = gold;
+  }
+
   clone(): Pog {
     return new Pog(this.name, this.gold, this.ability);
   }

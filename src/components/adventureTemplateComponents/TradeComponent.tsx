@@ -14,7 +14,9 @@ export default function TradeComponent({
         player: PlayerClass, 
         tradePog: PogClass }) {
 
-    const pogs = player.getPogs();
+    const eligiblePogs = player.getPogs().filter(
+        (pog: PogClass) => pog.getGold() >= tradePog.getGold()
+    );
     const [selectedPog, setSelectedPog] = useState<PogClass | null>(null);
 
     function handlePogClick(pog: PogClass) {
@@ -22,43 +24,46 @@ export default function TradeComponent({
     }
 
     return (
-        <div>
-        <h2>{adventure.getName()}</h2>
-        <p>{adventure.getDescription()}</p>
-        <p>{adventure.getTemplateDescription()}</p>
-        {
-            !selectedPog || (selectedPog && selectedPog.getGold() < tradePog.getGold()) ? (
-                
-                <div className='tooltip' data-tip={`Pick a pog worth trading`} >
-                <button 
-                    className='tooltip' 
-                        disabled={true}>No Trade!
-                    </button>
+        <div className="trade-component">
+            <div className="trade-header">
+                <h2>{adventure.getName()}</h2>
+                <p>{adventure.getDescription()}</p>
+                <p>{adventure.getTemplateDescription()}</p>
+            </div>
+            <div className="trade-layout">
+                <div className="trade-offer-section">
+                    <div className="trade-pog-container">
+                        <PogComponent pog={tradePog} isFlippedUp={false} onClick={() => {}} />
+                    </div>
+                    {
+                        !selectedPog ? (
+                            <div className='tooltip' data-tip={`Pick a pog worth trading`}>
+                                <button disabled={true}>No Trade!</button>
+                            </div>
+                        ) : (
+                            <div className='tooltip' data-tip={`Trade your selected pog to get the trade pog.`}>
+                                <button
+                                    onClick={() => trade(selectedPog!)}
+                                    disabled={isTradeCompleted}>{isTradeCompleted ? 'Trading...' : 'Trade'}
+                                </button>
+                            </div>
+                        )
+                    }
                 </div>
-            ) : (
-                <div className='tooltip' data-tip={`Trade your selected pog to get the trade pog.`} >
-                    <button 
-                        onClick={() => trade(selectedPog!)} 
-                        disabled={isTradeCompleted}>{isTradeCompleted ? 'Trading...' : 'Trade'}
-                    </button>
+                <div className="player-trade-pog-container">
+                    <h2>Your Pogs ({eligiblePogs.length})</h2>
+                    {eligiblePogs.length === 0 ? (
+                        <p className="trade-no-pogs">No pogs valuable enough to trade.</p>
+                    ) : (
+                        <div className="pog-grid">
+                            {eligiblePogs.map((pog: PogClass) => (
+                                <PogComponent key={pog.getId()} pog={pog} isFlippedUp={false} onClick={() => handlePogClick(pog)}
+                                    isSelected={selectedPog?.getId() === pog.getId()} />
+                            ))}
+                        </div>
+                    )}
                 </div>
-            )
-        }
-        <div className="trade-pog-container">
-            <PogComponent pog={tradePog} isFlippedUp={false} onClick={() => {}} />
-        </div>
-        <div className="player-trade-pog-container">
-            <h2>Your Pogs</h2>
-            <div className="pog-grid">
-                {pogs.map((pog: PogClass) => (
-                    <PogComponent key={pog.getId()} pog={pog} isFlippedUp={false} onClick={() => handlePogClick(pog)} 
-                    isSelected={selectedPog?.getId() === pog.getId()}/>
-                ))}
             </div>
         </div>
-
-        
-       
-    </div>
     );
 }
