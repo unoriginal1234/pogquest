@@ -30,7 +30,9 @@ export default function AdventureComponent({ adventure, player, handleCanCloseCh
     const [isTradeCompleted, setIsTradeCompleted] = useState(false);
     const [isForgeCompleted, setIsForgeCompleted] = useState(false);
     const [isLuckyCompleted, setIsLuckyCompleted] = useState(false);
-    const tradePog = createRandomPog();
+    
+    const tradePog = createRandomPog()
+    tradePog.setGold(Math.floor(tradePog.getGold()*.65));
 
     useEffect(() => {
         if (template === 'campfire' && isComplete) {

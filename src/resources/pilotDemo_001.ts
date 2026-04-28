@@ -191,6 +191,8 @@ function createDemoStory() {
                 ], 60, 4, "Final Super Power"))),
 
         new Floor("Deep Below the Lobby", "A pulse fills your ears as you exit the elevator.", [
+            new Chapter("Creglor", ["A small cube.", "The cube's eyes spring to life.", "It's looking right at you!"], 
+                new Adventure("Creglor's Trade", "\"I love some of your stuff, not all...\".", "trade")),
             new Chapter("Criminee Bajins lvl 4", ["\"Let's see how our pogs stack up?\"", "You turn and run, but he's on you..", "Gotta pog the pog."], 
                 new Baddie("Criminee Bajins", 
                     [createCombatPogByInput({name: "Banjo Kapow", strength: 6, defense: 2}), 
